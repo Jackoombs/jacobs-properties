@@ -6,8 +6,6 @@ export default function PropertySearchBar() {
   const [isFocused, setIsFocused] = useState(false);
   const [toggle, setToggle] = useState("BUY");
 
-  console.log(isFocused);
-
   return (
     <div className="flex w-[90%] flex-col items-center gap-3 lg:flex-row">
       <BuyRentToggle {...{ toggle, setToggle }} />
