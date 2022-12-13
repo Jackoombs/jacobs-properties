@@ -2,7 +2,11 @@ import { MdOutlineArrowForwardIos } from "react-icons/md/index.js";
 import { useSwiper } from "swiper/react";
 import clsx from "clsx";
 
-export default function SwiperNavBtn() {
+interface Props {
+  isStartOrEnd: string;
+}
+
+export default function SwiperNavBtn({ isStartOrEnd }: Props) {
   const swiper = useSwiper();
 
   return (
@@ -13,7 +17,9 @@ export default function SwiperNavBtn() {
             <MdOutlineArrowForwardIos
               className={clsx(
                 "rotate-180 duration-75",
-                swiper.isBeginning ? "text-secondary-100" : "text-primary-100"
+                isStartOrEnd === "start" || swiper.isBeginning
+                  ? "text-secondary-100"
+                  : "text-primary-100"
               )}
             />
           </button>
@@ -21,7 +27,9 @@ export default function SwiperNavBtn() {
             <MdOutlineArrowForwardIos
               className={clsx(
                 "duration-75",
-                swiper.isEnd ? "text-secondary-100" : "text-primary-100"
+                isStartOrEnd === "end"
+                  ? "text-secondary-100"
+                  : "text-primary-100"
               )}
             />
           </button>
