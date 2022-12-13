@@ -27,3 +27,22 @@ const { title } = Astro.props;
     <slot />
   </body>
 </html>
+
+<style is:global>
+  /* Unscoped, delivered as-is to the browser.
+     Applies to all <h1> tags on your site. */
+  h1 {
+    color: red;
+  }
+
+  @media only screen and (min-width: 1900px) {
+    body,
+    html {
+      font-size: 0.85vw;
+    }
+  }
+
+  .overflow-really-visible {
+    overflow: visible !important;
+  }
+</style>
