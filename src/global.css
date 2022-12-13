@@ -1,10 +1,16 @@
-@media only screen and (min-width: 1900px) {
-  body,
-  html {
-    font-size: 0.85vw;
-  }
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.swiper {
-  overflow: visible !important;
+@layer base {
+  @media only screen and (min-width: 1900px) {
+    body,
+    html {
+      font-size: 0.85vw;
+    }
+  }
+
+  .overflow-really-visible {
+    overflow: visible !important;
+  }
 }
