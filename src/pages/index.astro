@@ -1,0 +1,61 @@
+---
+import Link from "../components/General/Link.astro";
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header/Header.astro";
+import Banner from "../components/General/Banner.astro";
+import PropertySearchBar from "../components/General/PropertySearchBar";
+import Church from "../assets/images/home1.jpg";
+import SubLabel from "../components/General/SubLabel.astro";
+import SubHeader from "../components/General/SubHeader.astro";
+import SubParagraph from "../components/General/SubParagraph.astro";
+import HowCanWeHelp from "../components/General/HowCanWeHelp";
+---
+
+<Layout title="Welcome to Astro.">
+  <Header />
+  <main>
+    <Banner />
+    <section class="hidden justify-center bg-primary-200 py-36 md:flex">
+      <div class="flex max-w-container-lg flex-col items-center gap-16">
+        <h3
+          class="max-w-lg text-center text-5xl font-semibold text-primary-100 lg:max-w-none"
+        >
+          Your property search starts here.
+        </h3>
+        <PropertySearchBar client:visible />
+      </div>
+    </section>
+    <section class="bg-white pt-4 pb-14 md:py-section">
+      <div
+        class="mx-auto grid max-w-container-lg gap-12 md:grid-cols-2 md:flex-row"
+      >
+        <img
+          class="aspect-square h-auto w-full flex-1 justify-self-end rounded-xl object-cover md:order-1 md:aspect-rect-sm md:max-w-2xl"
+          src={Church}
+          alt="church"
+        />
+        <div
+          class="flex flex-1 flex-col gap-3 md:max-w-md md:justify-center lg:gap-8"
+        >
+          <SubLabel text="About" />
+          <SubHeader text="People first. Property second" />
+          <SubParagraph
+            text="Meet Team Jacobs. We're a friendly bunch of property experts who put people first. Since 1999, we've been helping the people of Basingstoke get on the property ladder, find their forever home, sell up and move on, downsize, upsize, rightsize - whatever your property needs we've got your back."
+          />
+          <Link
+            classes="hidden md:flex"
+            text="Meet the Team"
+            link="/"
+            type="secondary"
+            size="md"
+          />
+        </div>
+      </div>
+    </section>
+    <section class="bg-primary-200 py-14 md:py-section">
+      <div class="mx-auto flex max-w-container-lg flex-col gap-8">
+        <HowCanWeHelp client:load />
+      </div>
+    </section>
+  </main>
+</Layout>
