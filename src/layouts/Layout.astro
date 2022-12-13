@@ -3,7 +3,6 @@ export interface Props {
   title: string;
 }
 const { title } = Astro.props;
-import globalCss from "../global.css";
 ---
 
 <!DOCTYPE html>
@@ -20,7 +19,7 @@ import globalCss from "../global.css";
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href={globalCss} />
+    <link rel="stylesheet" href="src/global.css" />
     <meta name="generator" content={Astro.generator} />
     <title>Jacobs Properties</title>
   </head>
