@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { MdOutlineArrowForwardIos } from "react-icons/md";
+import { MdOutlineArrowForwardIos } from "react-icons/md/index.js";
 import Image1 from "../../assets/images/how_help_1.jpg";
 import clsx from "clsx";
 
