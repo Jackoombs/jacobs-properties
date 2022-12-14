@@ -6,7 +6,7 @@ import SwiperNavBtns from "../General/SwiperNavBtns";
 import { useState } from "react";
 
 export default function HowCanWeHelp() {
-  const [isStartOrEnd, setIsStartOrEnd] = useState("");
+  const [isStartOrEnd, setIsStartOrEnd] = useState("start");
 
   const handleSlideChange = (e: SwiperType) => {
     if (e.isBeginning) setIsStartOrEnd("start");
@@ -50,7 +50,7 @@ export default function HowCanWeHelp() {
   return (
     <>
       <Swiper
-        className="overflow-really-visible flex flex-col gap-8"
+        className="overflow-really-visible flex flex-col gap-8 md:gap-16"
         slidesPerView={1.1}
         spaceBetween={20}
         onSlideChange={handleSlideChange}

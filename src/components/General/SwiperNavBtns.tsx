@@ -11,7 +11,7 @@ export default function SwiperNavBtn({ isStartOrEnd }: Props) {
 
   return (
     <>
-      {!swiper.isLocked && (
+      {isStartOrEnd !== "lock" && (
         <div className="flex gap-3 text-3xl">
           <button onClick={() => swiper.slidePrev()}>
             <MdOutlineArrowForwardIos
