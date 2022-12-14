@@ -2,13 +2,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
 import "swiper/css";
 import Image1 from "../../assets/images/how_help_1.jpg";
-import SwiperNavBtns from "./SwiperNavBtns";
-import React, { useState } from "react";
+import SwiperNavBtns from "../General/SwiperNavBtns";
+import { useState } from "react";
 
 export default function HowCanWeHelp() {
   const [isStartOrEnd, setIsStartOrEnd] = useState("");
-
-  console.log(isStartOrEnd);
 
   const handleSlideChange = (e: SwiperType) => {
     if (e.isBeginning) setIsStartOrEnd("start");
