@@ -17,7 +17,7 @@ export default function SwiperNavBtn({ isStartOrEnd }: Props) {
             <MdOutlineArrowForwardIos
               className={clsx(
                 "rotate-180 duration-75",
-                isStartOrEnd === "start" || swiper.isBeginning
+                isStartOrEnd === "start"
                   ? "text-secondary-100"
                   : "text-primary-100"
               )}
