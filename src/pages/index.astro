@@ -2,13 +2,16 @@
 import Link from "../components/General/Link.astro";
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header/Header.astro";
-import Banner from "../components/General/Banner.astro";
+import Banner from "../components/Home/Banner.astro";
 import PropertySearchBar from "../components/General/PropertySearchBar";
-import Church from "../assets/images/home1.jpg";
+import Home1 from "../assets/images/home_1.jpg";
+import Home2 from "../assets/images/home_2.jpg";
 import SubLabel from "../components/General/SubLabel.astro";
 import SubHeader from "../components/General/SubHeader.astro";
 import SubParagraph from "../components/General/SubParagraph.astro";
-import HowCanWeHelp from "../components/General/HowCanWeHelp";
+import HowCanWeHelp from "../components/Home/HowCanWeHelp";
+import Video from "../components/General/Video";
+import RecentlySoldLet from "../components/Home/RecentlySoldLet";
 ---
 
 <Layout title="Welcome to Astro.">
@@ -31,13 +34,13 @@ import HowCanWeHelp from "../components/General/HowCanWeHelp";
       >
         <img
           class="aspect-square h-auto w-full flex-1 justify-self-end rounded-xl object-cover md:order-1 md:aspect-rect-sm md:max-w-2xl"
-          src={Church}
-          alt="church"
+          src={Home1}
+          alt="St Michael's Church Basingstoke"
         />
         <div
           class="flex flex-1 flex-col gap-3 md:max-w-md md:justify-center lg:gap-8"
         >
-          <SubLabel text="About" />
+          <SubLabel text="About" classes="md:text-primary-300" />
           <SubHeader text="People first. Property second" />
           <SubParagraph
             text="Meet Team Jacobs. We're a friendly bunch of property experts who put people first. Since 1999, we've been helping the people of Basingstoke get on the property ladder, find their forever home, sell up and move on, downsize, upsize, rightsize - whatever your property needs we've got your back."
@@ -52,10 +55,67 @@ import HowCanWeHelp from "../components/General/HowCanWeHelp";
         </div>
       </div>
     </section>
-    <section class="bg-primary-200 py-14 md:py-section">
+    <section class="overflow-hidden bg-primary-200 py-14 md:py-section">
       <div class="mx-auto max-w-container-lg">
         <HowCanWeHelp client:visible />
       </div>
     </section>
+    <section class="bg-white py-14 md:py-section">
+      <div
+        id="targetTake"
+        class="mx-auto flex h-auto max-w-container-lg flex-col gap-8 md:items-center md:gap-16"
+      >
+        <SubHeader
+          classes="max-w-[17rem] sm:max-w-none"
+          text="Let's put some faces to our names"
+        />
+        <Video client:idle />
+      </div>
+    </section>
+    <section
+      class="relative flex flex-col gap-8 bg-secondary-100 pb-14 md:flex-row md:gap-0 md:pb-0"
+    >
+      <img
+        class="aspect-square h-auto w-full flex-1 object-cover object-left md:order-1 md:w-[50vw]"
+        src={Home2}
+        alt=""
+      />
+      <div id="targetGive" class="flex max-w-container-lg flex-1 gap-8">
+        <div
+          class="flex flex-1 flex-col gap-3 pr-3 md:max-w-md md:justify-center lg:gap-8"
+        >
+          <SubLabel text="Valuation" />
+          <SubHeader text="Find out how much your property is worth" />
+          <SubParagraph
+            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor lorem, eleifend pharetra nibh ut, blandit placerat massa. Mauris maximus ligula placerat ligula viverra gravida. Cras sed neque vitae tortor varius accumsan. Nunc accumsan ex in commodo viverra."
+          />
+          <div class="flex flex-col gap-3 md:flex-row">
+            <Link text="Instant Valuation" link="/" type="white" size="md" />
+            <Link text="Expert Valuation" link="/" type="primary" size="md" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="overflow-hidden bg-white py-14 md:py-section">
+      <div class="mx-auto max-w-container-lg">
+        <RecentlySoldLet client:idle />
+      </div>
+    </section>
   </main>
 </Layout>
+
+<script>
+  const updateMargin = () => {
+    const divToTake = document.querySelector("#targetTake");
+    const divMargin = window.getComputedStyle(divToTake!);
+    updateDiv(divMargin.marginLeft);
+  };
+
+  const updateDiv = (divMargin: string) => {
+    (<HTMLElement>document.querySelector("#targetGive")).style.marginLeft =
+      divMargin;
+  };
+
+  updateMargin();
+  window.addEventListener("resize", updateMargin);
+</script>
