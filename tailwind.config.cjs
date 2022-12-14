@@ -9,6 +9,7 @@ module.exports = {
       },
       maxWidth: {
         "container-lg": "min(92%, 87.5rem)",
+        "container-md": "min(96%, 48.75rem)",
       },
       colors: {
         "primary-100": "#00274e",
@@ -19,10 +20,14 @@ module.exports = {
       padding: {
         section: "5.75rem",
       },
+      gap: {
+        section: "5.75rem",
+      },
       aspectRatio: {
         "rect-sm": "1.27 / 1",
+        property: "3 / 2",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };
