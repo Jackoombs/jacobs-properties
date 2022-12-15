@@ -19,16 +19,10 @@ export default function Video({ videoId, thumbnailPath }: Props) {
         width: "full",
         videoId: `${videoId}`,
         events: {
-          onReady: onPlayerReady,
           onStateChange: onPlayerStateChange,
         },
       });
     });
-
-    function onPlayerReady(event: any) {
-      event.target.playVideo();
-      player = event.target;
-    }
 
     function onPlayerStateChange(event: any) {
       if (event.data === 1) setPlayVideo(true);
