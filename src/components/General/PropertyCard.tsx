@@ -3,6 +3,7 @@ interface Props {
   Address1: string;
   Address2: string;
   PriceString: string;
+  toggle: string;
 }
 
 export default function PropertyCard({
@@ -10,6 +11,7 @@ export default function PropertyCard({
   Address1,
   Address2,
   PriceString,
+  toggle,
 }: Props) {
   return (
     <a
@@ -34,7 +36,7 @@ export default function PropertyCard({
           </div>
         </div>
         <p className="duration-10 flex h-10 w-20 items-center justify-center rounded-lg bg-secondary-100 text-xs font-semibold uppercase">
-          Sold
+          {toggle === "SOLD" ? "Sold" : "Let"}
         </p>
       </div>
     </a>
