@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { useSwiper } from "swiper/react";
 
 interface Props {
   toggle: string;
@@ -6,11 +7,18 @@ interface Props {
 }
 
 export default function BuyRentToggle({ toggle, setToggle }: Props) {
+  const swiper = useSwiper();
+
+  const handleClick = (newState: string) => {
+    setToggle(newState);
+    swiper.slideTo(0, 0);
+  };
+
   return (
     <div className="text-xs font-semibold">
       <div className="relative flex h-[3.625rem] w-[10.75rem] items-center rounded-lg bg-primary-200">
         <button
-          onClick={() => setToggle("SOLD")}
+          onClick={() => handleClick("SOLD")}
           className={clsx(
             "relative z-10 h-full flex-1 bg-transparent uppercase duration-500",
             toggle === "SOLD" ? "text-white" : "text-primary-100"
@@ -19,7 +27,7 @@ export default function BuyRentToggle({ toggle, setToggle }: Props) {
           Sold
         </button>
         <button
-          onClick={() => setToggle("LET")}
+          onClick={() => handleClick("LET")}
           className={clsx(
             "relative z-10 h-full flex-1 bg-transparent uppercase duration-500",
             toggle === "LET" ? "text-white" : "text-primary-100"
