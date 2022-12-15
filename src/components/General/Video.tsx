@@ -1,28 +1,58 @@
+import { useEffect } from "react";
 import Thumbnail from "../../assets/images/thumbnail.jpg";
-import YouTube, { YouTubeProps } from "react-youtube";
 import { FaPlay } from "react-icons/fa/index.js";
 import { useState } from "react";
 
-export default function Video() {
+interface Props {
+  videoId: string;
+  thumbnailPath: string;
+}
+
+export default function Video({ videoId, thumbnailPath }: Props) {
   const [playVideo, setPlayVideo] = useState(false);
 
-  const onStateChange: YouTubeProps["onStateChange"] = (e) => {
-    if (e.target.getPlayerState() === 1) setPlayVideo(true);
+  var player;
+  const loadVideo = () => {
+    window.YT.ready(function () {
+      new window.YT.Player("player", {
+        height: "full",
+        width: "full",
+        videoId: `${videoId}`,
+        events: {
+          onReady: onPlayerReady,
+          onStateChange: onPlayerStateChange,
+        },
+      });
+    });
+
+    function onPlayerReady(event: any) {
+      event.target.playVideo();
+      player = event.target;
+    }
+
+    function onPlayerStateChange(event: any) {
+      if (event.data === 1) setPlayVideo(true);
+    }
   };
 
-  const opts: YouTubeProps["opts"] = {
-    height: "100%",
-    width: "100%",
+  const useYoutube = (callback: any) => {
+    useEffect(() => {
+      if (!window.YT) {
+        var tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName("script")[0];
+        firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+        tag.onload = callback;
+      } else {
+        callback();
+      }
+    }, []);
   };
+  useYoutube(loadVideo);
 
   return (
     <div className="relative aspect-video h-auto w-full overflow-hidden rounded-xl bg-slate-700">
-      <YouTube
-        videoId="Xsao1lF-6fQ"
-        opts={opts}
-        className="aspect-video h-full w-full"
-        onStateChange={onStateChange}
-      />
+      <div className="h-full w-full" id="player"></div>
       {!playVideo && (
         <button
           className="pointer-events-none absolute top-0 flex h-full w-full items-center justify-center"
@@ -30,7 +60,7 @@ export default function Video() {
         >
           <img
             className="absolute top-0 h-full w-full object-cover object-top brightness-[.65]"
-            src={Thumbnail}
+            src={thumbnailPath}
             alt=""
           />
           <div className="absolute flex aspect-square h-2/6 items-center justify-center rounded-full bg-white opacity-80"></div>
