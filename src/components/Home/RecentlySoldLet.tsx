@@ -80,7 +80,9 @@ export default function RecentlySoldLet() {
           {[...(toggle === "SOLD" ? recentlySold : recentlyLet)].map(
             ({ Address1, Address2, ID, PriceString }: Property, index) => (
               <SwiperSlide key={index}>
-                <PropertyCard {...{ Address1, Address2, ID, PriceString }} />
+                <PropertyCard
+                  {...{ toggle, Address1, Address2, ID, PriceString }}
+                />
               </SwiperSlide>
             )
           )}
