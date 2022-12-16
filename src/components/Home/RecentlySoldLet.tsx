@@ -15,7 +15,6 @@ export default function RecentlySoldLet() {
   const [toggle, setToggle] = useState("SOLD");
 
   const handleSlideChange = (e: SwiperType) => {
-    console.log(e.isBeginning, e.isEnd, e.isLocked);
     if (e.isBeginning) setIsStartOrEnd("start");
     else if (e.isEnd) setIsStartOrEnd("end");
     else setIsStartOrEnd("");
