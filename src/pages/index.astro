@@ -6,6 +6,7 @@ import Banner from "../components/Home/Banner.astro";
 import PropertySearchBar from "../components/General/PropertySearchBar";
 import Home1 from "../assets/images/home_1.jpg";
 import Home2 from "../assets/images/home_2.jpg";
+import Home3 from "../assets/images/home_3.jpg";
 import SubLabel from "../components/General/SubLabel.astro";
 import SubHeader from "../components/General/SubHeader.astro";
 import SubParagraph from "../components/General/SubParagraph.astro";
@@ -13,6 +14,7 @@ import HowCanWeHelp from "../components/Home/HowCanWeHelp";
 import Video from "../components/General/Video";
 import RecentlySoldLet from "../components/Home/RecentlySoldLet";
 import Thumbnail from "../assets/images/thumbnail.jpg";
+import BrochureForm from "../components/Home/BrochureForm";
 ---
 
 <Layout title="Welcome to Astro.">
@@ -29,18 +31,15 @@ import Thumbnail from "../assets/images/thumbnail.jpg";
         <PropertySearchBar client:visible />
       </div>
     </section>
+
     <section class="bg-white pt-4 pb-14 md:py-section">
-      <div
-        class="mx-auto grid max-w-container-lg gap-12 md:grid-cols-2 md:flex-row"
-      >
+      <div class="mx-auto grid max-w-container-lg gap-12 md:grid-cols-2">
         <img
-          class="aspect-square h-auto w-full flex-1 justify-self-end rounded-xl object-cover md:order-1 md:aspect-rect-sm md:max-w-2xl"
+          class="aspect-square h-auto w-full justify-self-end rounded-xl object-cover md:order-1 md:aspect-rect-sm md:max-w-2xl"
           src={Home1}
           alt="St Michael's Church Basingstoke"
         />
-        <div
-          class="flex flex-1 flex-col gap-3 md:max-w-md md:justify-center lg:gap-8"
-        >
+        <div class="flex flex-col gap-3 md:max-w-md md:justify-center lg:gap-8">
           <SubLabel text="About" classes="md:text-primary-300" />
           <SubHeader text="People first. Property second" />
           <SubParagraph
@@ -56,6 +55,7 @@ import Thumbnail from "../assets/images/thumbnail.jpg";
         </div>
       </div>
     </section>
+
     <section class="overflow-hidden bg-primary-200 py-14 md:py-section">
       <div class="mx-auto max-w-container-lg">
         <HowCanWeHelp client:visible />
@@ -73,11 +73,12 @@ import Thumbnail from "../assets/images/thumbnail.jpg";
         <Video videoId="dQw4w9WgXcQ" thumbnailPath={Thumbnail} client:idle />
       </div>
     </section>
+
     <section
       class="relative flex flex-col gap-8 bg-secondary-100 pb-14 md:flex-row md:gap-0 md:pb-0"
     >
       <img
-        class="aspect-square h-auto w-full flex-1 object-cover object-left md:order-1 md:w-[50vw]"
+        class="aspect-5/4 h-auto w-full flex-1 object-cover object-left md:order-1 md:w-[50vw]"
         src={Home2}
         alt=""
       />
@@ -97,9 +98,35 @@ import Thumbnail from "../assets/images/thumbnail.jpg";
         </div>
       </div>
     </section>
+
     <section class="overflow-hidden bg-white py-14 md:py-section">
       <div class="mx-auto max-w-container-lg">
         <RecentlySoldLet client:idle />
+      </div>
+    </section>
+
+    <section
+      class="relative flex flex-col gap-8 bg-primary-200 pb-14 md:flex-row md:gap-0 md:py-section"
+    >
+      <img
+        class="aspect-5/4 h-auto w-full flex-1 object-cover object-left md:order-1 md:hidden md:w-[50vw]"
+        src={Home3}
+        alt=""
+      />
+      <div class="mx-auto grid max-w-container-lg gap-8 md:grid-cols-2">
+        <div class="flex flex-col gap-3 pr-3 md:max-w-lg md:justify-center">
+          <SubLabel text="Sales Brochure" />
+          <SubHeader text="First time selling a property?" />
+          <SubParagraph
+            text="We understand how daunting it can be. That's why we've compiled a FREE guide of pro tips to help make your experience as stress-free as possible."
+          />
+          <BrochureForm client:load />
+        </div>
+        <img
+          class="hidden aspect-[1.42_/_1] h-auto w-full max-w-2xl flex-1 self-center rounded-xl object-cover object-left md:order-1 md:inline"
+          src={Home3}
+          alt=""
+        />
       </div>
     </section>
   </main>
