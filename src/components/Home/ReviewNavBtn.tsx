@@ -1,6 +1,5 @@
 import clsx from "clsx";
-import { IoArrowForwardOutline } from "react-icons/io5";
-import type { Swiper } from "swiper/types";
+import { IoArrowForwardOutline } from "react-icons/io5/index.js";
 
 interface Props {
   isReverse: boolean;

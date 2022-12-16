@@ -1,4 +1,4 @@
-import { BsStarFill } from "react-icons/bs";
+import { BsStarFill } from "react-icons/bs/index.js";
 
 interface Props {
   text: string;
