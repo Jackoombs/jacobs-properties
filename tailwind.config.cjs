@@ -12,9 +12,10 @@ module.exports = {
         "container-md": "min(96%, 48.75rem)",
       },
       colors: {
-        "primary-100": "#00274e",
+        "primary-100": "#002855",
         "primary-200": "#f2fbff",
         "primary-300": "#90a2b5",
+        "primary-400": "#003952",
         "secondary-100": "#bfd730",
         placeholder: "#8094aa",
       },
