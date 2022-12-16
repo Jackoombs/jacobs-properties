@@ -16,6 +16,7 @@ module.exports = {
         "primary-200": "#f2fbff",
         "primary-300": "#90a2b5",
         "secondary-100": "#bfd730",
+        placeholder: "#8094aa",
       },
       padding: {
         section: "5.75rem",
@@ -25,6 +26,7 @@ module.exports = {
       },
       aspectRatio: {
         "rect-sm": "1.27 / 1",
+        "5/4": "5 / 4",
         property: "3 / 2",
       },
     },
