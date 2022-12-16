@@ -15,6 +15,7 @@ import Video from "../components/General/Video";
 import RecentlySoldLet from "../components/Home/RecentlySoldLet";
 import Thumbnail from "../assets/images/thumbnail.jpg";
 import BrochureForm from "../components/Home/BrochureForm";
+import Reviews from "../components/Home/Reviews";
 ---
 
 <Layout title="Welcome to Astro.">
@@ -99,7 +100,7 @@ import BrochureForm from "../components/Home/BrochureForm";
       </div>
     </section>
 
-    <section class="overflow-hidden bg-white py-14 md:py-section">
+    <section class="bg-white py-14 md:py-section">
       <div class="mx-auto max-w-container-lg">
         <RecentlySoldLet client:idle />
       </div>
@@ -127,6 +128,13 @@ import BrochureForm from "../components/Home/BrochureForm";
           src={Home3}
           alt=""
         />
+      </div>
+    </section>
+
+    <section class="bg-white py-14 md:items-center md:gap-16 md:py-section">
+      <div class="mx-auto flex max-w-container-lg flex-col gap-8 md:gap-16">
+        <SubHeader text="Hear from our customers" />
+        <Reviews client:idle />
       </div>
     </section>
   </main>
