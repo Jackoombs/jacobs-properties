@@ -16,6 +16,7 @@ import RecentlySoldLet from "../components/Home/RecentlySoldLet";
 import Thumbnail from "../assets/images/thumbnail.jpg";
 import BrochureForm from "../components/Home/BrochureForm";
 import Reviews from "../components/Home/Reviews";
+import FAQs from "../components/Home/FAQs";
 ---
 
 <Layout title="Welcome to Astro.">
@@ -59,7 +60,7 @@ import Reviews from "../components/Home/Reviews";
 
     <section class="overflow-hidden bg-primary-200 py-14 md:py-section">
       <div class="mx-auto max-w-container-lg">
-        <HowCanWeHelp client:visible />
+        <HowCanWeHelp client:idle />
       </div>
     </section>
     <section class="bg-white py-14 md:py-section">
@@ -71,7 +72,7 @@ import Reviews from "../components/Home/Reviews";
           classes="max-w-[17rem] sm:max-w-none"
           text="Let's put some faces to our names"
         />
-        <Video videoId="dQw4w9WgXcQ" thumbnailPath={Thumbnail} client:idle />
+        <Video videoId="dQw4w9WgXcQ" thumbnailPath={Thumbnail} client:visible />
       </div>
     </section>
 
@@ -121,7 +122,7 @@ import Reviews from "../components/Home/Reviews";
           <SubParagraph
             text="We understand how daunting it can be. That's why we've compiled a FREE guide of pro tips to help make your experience as stress-free as possible."
           />
-          <BrochureForm client:load />
+          <BrochureForm client:visible />
         </div>
         <img
           class="hidden aspect-[1.42_/_1] h-auto w-full max-w-2xl flex-1 self-center rounded-xl object-cover object-left md:order-1 md:inline"
@@ -134,7 +135,17 @@ import Reviews from "../components/Home/Reviews";
     <section class="bg-white py-14 md:items-center md:gap-16 md:py-section">
       <div class="mx-auto flex max-w-container-lg flex-col gap-8 md:gap-16">
         <SubHeader text="Hear from our customers" />
-        <Reviews client:idle />
+        <Reviews client:visible />
+      </div>
+    </section>
+    <section
+      class="bg-primary-200 py-14 md:items-center md:gap-16 md:py-section"
+    >
+      <div
+        class="mx-auto flex max-w-container-lg flex-col gap-8 md:justify-center md:gap-16"
+      >
+        <SubHeader text="Frequently asked questions" classes="md:text-center" />
+        <FAQs client:visible />
       </div>
     </section>
   </main>
