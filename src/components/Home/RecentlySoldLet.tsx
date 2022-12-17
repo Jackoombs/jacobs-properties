@@ -66,11 +66,11 @@ export default function RecentlySoldLet() {
               spaceBetween: 50,
             },
           }}
-          className="md:16 flex flex-col gap-8"
+          className="md:16 overflow-really-visible-mobile flex flex-col gap-8"
           onSwiper={handleSlideChange}
         >
           <div slot="container-start" className="flex justify-between">
-            <h3 className="flex items-center gap-6 text-2xl font-semibold text-primary-100 lg:text-3xl">
+            <h3 className="flex items-center gap-1 text-2xl font-semibold text-primary-100 md:gap-6 lg:text-3xl">
               Recently {<SoldLetToggle {...{ toggle, setToggle }} />}
               <p className="hidden md:inline">Properties</p>
             </h3>
