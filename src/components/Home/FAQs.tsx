@@ -5,7 +5,7 @@ export default function FAQs() {
   const [currentIndex, setCurrentIndex] = useState(-1);
 
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col items-center gap-[5px] md:gap-4">
       <FAQCard
         index={1}
         question="How long will it take to sell my property?"

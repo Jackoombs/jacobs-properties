@@ -32,7 +32,7 @@ export default function FAQCard({
         gap: currentIndex === index ? "1.2rem" : 0,
         transition: { duration: 0.4 },
       }}
-      className="flex w-full max-w-4xl flex-col gap-4 bg-white py-8 px-6 text-left md:px-9"
+      className="flex w-full max-w-4xl flex-col gap-4 rounded-lg bg-white py-8 px-6 text-left md:px-9"
     >
       <div className="flex items-center justify-between gap-8 md:gap-12">
         <div>
