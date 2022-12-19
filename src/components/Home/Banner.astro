@@ -1,11 +1,11 @@
 ---
 import Background from "../../assets/images/background.jpg";
-import Link from "../General/Link.astro";
+import Link from "../General/Link";
 ---
 
 <section
   style={{
-    backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${Background})`,
+    backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${Background.src})`,
   }}
   class="top-0 -z-10 flex h-screen w-screen flex-col justify-end bg-slate-400 bg-cover bg-center lg:justify-center"
 >

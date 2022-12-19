@@ -3,6 +3,7 @@ import type { Swiper as SwiperType } from "swiper/types";
 import "swiper/css";
 import Image1 from "../../assets/images/how_help_1.jpg";
 import SwiperNavBtns from "../General/SwiperNavBtns";
+import SubHeader from "../General/SubHeader";
 import { useState } from "react";
 
 export default function HowCanWeHelp() {
@@ -68,9 +69,7 @@ export default function HowCanWeHelp() {
         }}
       >
         <div slot="container-start" className="flex justify-between">
-          <h3 className="text-2xl font-semibold text-primary-100 lg:text-3xl">
-            How can we help?
-          </h3>
+          <SubHeader text="How can we help?" />
           <SwiperNavBtns isStartOrEnd={isStartOrEnd} />
         </div>
 
@@ -80,7 +79,7 @@ export default function HowCanWeHelp() {
               <a
                 href={link}
                 style={{
-                  backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${bgSrc})`,
+                  backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${bgSrc.src})`,
                 }}
                 className="block h-full w-full bg-cover bg-bottom duration-100 hover:scale-105"
               >
