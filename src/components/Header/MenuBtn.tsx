@@ -3,7 +3,7 @@ import { useState } from "react";
 import Menu from "./Menu";
 
 export default function MenuBtn({ color }: { color: string }) {
-  const [menuOpen, setMenuOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <>
