@@ -55,7 +55,7 @@ export default function RecentlySoldLet() {
           onLock={() => setIsStartOrEnd("lock")}
           onUnlock={() => setIsStartOrEnd("start")}
           slidesPerView={1.1}
-          spaceBetween={20}
+          spaceBetween={30}
           onSlideChange={handleSlideChange}
           breakpoints={{
             768: {
