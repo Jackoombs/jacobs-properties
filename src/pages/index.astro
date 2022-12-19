@@ -1,15 +1,15 @@
 ---
-import Link from "../components/General/Link.astro";
+import Link from "../components/General/Link";
 import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header/Header.astro";
+import HomeHeader from "../components/Header/HomeHeader";
 import Banner from "../components/Home/Banner.astro";
 import PropertySearchBar from "../components/General/PropertySearchBar";
 import Home1 from "../assets/images/home_1.jpg";
 import Home2 from "../assets/images/home_2.jpg";
 import Home3 from "../assets/images/home_3.jpg";
-import SubLabel from "../components/General/SubLabel.astro";
-import SubHeader from "../components/General/SubHeader.astro";
-import SubParagraph from "../components/General/SubParagraph.astro";
+import SubLabel from "../components/General/SubLabel";
+import SubHeader from "../components/General/SubHeader";
+import SubParagraph from "../components/General/SubParagraph";
 import HowCanWeHelp from "../components/Home/HowCanWeHelp";
 import Video from "../components/General/Video";
 import RecentlySoldLet from "../components/Home/RecentlySoldLet";
@@ -20,7 +20,7 @@ import FAQs from "../components/Home/FAQs";
 ---
 
 <Layout title="Welcome to Astro.">
-  <Header />
+  <HomeHeader client:load />
   <main>
     <Banner />
     <section class="hidden justify-center bg-primary-200 py-36 md:flex">
@@ -38,7 +38,7 @@ import FAQs from "../components/Home/FAQs";
       <div class="mx-auto grid max-w-container-lg gap-12 md:grid-cols-2">
         <img
           class="aspect-square h-auto w-full justify-self-end rounded-xl object-cover md:order-1 md:aspect-rect-sm md:max-w-2xl"
-          src={Home1}
+          src={Home1.src}
           alt="St Michael's Church Basingstoke"
         />
         <div class="flex flex-col gap-3 md:max-w-md md:justify-center lg:gap-8">
@@ -74,7 +74,7 @@ import FAQs from "../components/Home/FAQs";
         />
         <Video
           videoId="dQw4w9WgXcQ"
-          thumbnailPath={Thumbnail}
+          thumbnailPath={Thumbnail.src}
           origin={Astro.url}
           client:visible
         />
@@ -86,7 +86,7 @@ import FAQs from "../components/Home/FAQs";
     >
       <img
         class="aspect-5/4 h-auto w-full flex-1 object-cover object-left md:order-1 md:w-[50vw]"
-        src={Home2}
+        src={Home2.src}
         alt=""
       />
       <div id="targetGive" class="flex max-w-container-lg flex-1 gap-8">
@@ -117,7 +117,7 @@ import FAQs from "../components/Home/FAQs";
     >
       <img
         class="aspect-5/4 h-auto w-full flex-1 object-cover object-left md:order-1 md:hidden md:w-[50vw]"
-        src={Home3}
+        src={Home3.src}
         alt=""
       />
       <div class="mx-auto grid max-w-container-lg gap-8 md:grid-cols-2">
@@ -131,7 +131,7 @@ import FAQs from "../components/Home/FAQs";
         </div>
         <img
           class="hidden aspect-[1.42_/_1] h-auto w-full max-w-2xl flex-1 self-center rounded-xl object-cover object-left md:order-1 md:inline"
-          src={Home3}
+          src={Home3.src}
           alt=""
         />
       </div>
