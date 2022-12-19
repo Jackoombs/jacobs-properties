@@ -20,6 +20,7 @@ export default function PropertyCard({
     >
       <div className="overflow-hidden rounded-xl">
         <img
+          loading="lazy"
           className="aspect-property h-full w-full object-cover duration-200 ease-in-out hover:scale-110"
           src={`https://jacobs-server.onrender.com/images/${ID}-resized.jpg`}
           alt={Address1 + Address2}

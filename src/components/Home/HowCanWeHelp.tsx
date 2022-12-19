@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
 import "swiper/css";
-import Image1 from "../../assets/images/how_help_1.jpg";
+import Image1 from "../../assets/images/how_help_1.webp";
 import SwiperNavBtns from "../General/SwiperNavBtns";
 import SubHeader from "../General/SubHeader";
 import { useState } from "react";
