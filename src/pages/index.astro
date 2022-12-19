@@ -72,7 +72,12 @@ import FAQs from "../components/Home/FAQs";
           classes="max-w-[17rem] sm:max-w-none"
           text="Let's put some faces to our names"
         />
-        <Video videoId="dQw4w9WgXcQ" thumbnailPath={Thumbnail} client:visible />
+        <Video
+          videoId="dQw4w9WgXcQ"
+          thumbnailPath={Thumbnail}
+          origin={Astro.url}
+          client:visible
+        />
       </div>
     </section>
 
@@ -101,7 +106,7 @@ import FAQs from "../components/Home/FAQs";
       </div>
     </section>
 
-    <section class="bg-white py-14 md:py-section">
+    <section class="overflow-hidden bg-white py-14 md:py-section">
       <div class="mx-auto max-w-container-lg">
         <RecentlySoldLet client:idle />
       </div>

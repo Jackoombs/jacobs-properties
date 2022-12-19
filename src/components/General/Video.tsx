@@ -6,9 +6,10 @@ import { useState } from "react";
 interface Props {
   videoId: string;
   thumbnailPath: string;
+  origin: URL;
 }
 
-export default function Video({ videoId, thumbnailPath }: Props) {
+export default function Video({ videoId, thumbnailPath, origin }: Props) {
   const [playVideo, setPlayVideo] = useState(false);
 
   var player;
@@ -21,6 +22,7 @@ export default function Video({ videoId, thumbnailPath }: Props) {
         events: {
           onStateChange: onPlayerStateChange,
         },
+        origin: origin,
       });
     });
 
