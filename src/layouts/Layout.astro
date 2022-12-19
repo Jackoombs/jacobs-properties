@@ -3,6 +3,7 @@ export interface Props {
   title: string;
 }
 const { title } = Astro.props;
+import Semibold from "../assets/fonts/Montserrat-SemiBold.woff2";
 ---
 
 <!DOCTYPE html>
@@ -11,14 +12,14 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" /><link
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" /><link
       rel="preconnect"
       href="https://fonts.gstatic.com"
       crossorigin
     /><link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;600;700;800;900&display=swap"
       rel="stylesheet"
-    />
+    /> -->
     <meta name="generator" content={Astro.generator} />
     <title>Jacobs Properties</title>
   </head>
@@ -43,5 +44,34 @@ const { title } = Astro.props;
     .overflow-really-visible-mobile {
       overflow: visible !important;
     }
+  }
+
+  @font-face {
+    font-family: "Montserrat";
+    src: url("src/assets/fonts/Montserrat-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Montserrat";
+    src: url("src/assets/fonts/Montserrat-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Montserrat";
+    src: url("src/assets/fonts/Montserrat-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Montserrat";
+    src: url("src/assets/fonts/Montserrat-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
   }
 </style>
