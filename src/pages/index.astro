@@ -1,6 +1,6 @@
 ---
 import Link from "../components/General/Link";
-import Layout from "../layouts/Layout.astro";
+import Layout from "../layouts/HomeLayout.astro";
 import HomeHeader from "../components/Header/HomeHeader";
 import Banner from "../components/Home/Banner.astro";
 import PropertySearchBar from "../components/General/PropertySearchBar";
@@ -19,7 +19,7 @@ import Reviews from "../components/Home/Reviews";
 import FAQs from "../components/Home/FAQs";
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Welcome to Jacobs Properties.">
   <HomeHeader client:load />
   <main>
     <Banner />
@@ -147,6 +147,7 @@ import FAQs from "../components/Home/FAQs";
         <Reviews client:visible />
       </div>
     </section>
+
     <section
       class="bg-primary-200 py-14 md:items-center md:gap-16 md:py-section"
     >

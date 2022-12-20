@@ -1,14 +1,16 @@
 ---
-import Logo from "../../assets/images/logo.png";
-import Link from "../General/Link.astro";
+import LogoBlue from "../../assets/images/logo_blue.png";
+import Link from "../General/Link";
 import Phone from "../../assets/images/phone.svg";
 import MenuBtn from "./MenuBtn";
 import clsx from "clsx";
+import { Picture } from "@astrojs/image/components";
+import ContactBtn from "./ContactBtn";
 ---
 
 <header
   class={clsx(
-    "absolute top-0 flex flex-col justify-center items-center max-h-44 h-full w-full text-white duration-100"
+    "absolute top-0 flex flex-col justify-center items-center h-full w-full duration-100 max-h-20 bg-white text-primary-100 md:max-h-[6.5rem]"
   )}
 >
   <div
@@ -21,8 +23,8 @@ import clsx from "clsx";
   >
     <a class="flex items-center" href="/">
       <img
-        class="h-20 w-auto xl:h-[6.625rem]"
-        src={Logo}
+        class="h-20 w-auto scale-75 xl:h-[6.625rem]"
+        src={LogoBlue.src}
         alt="Jacobs Properties Logo"
       />
     </a>
@@ -52,16 +54,17 @@ import clsx from "clsx";
         </ul>
       </nav>
       <div class="hidden items-center gap-3 xl:flex">
-        <Link link="/" text="Property Search" type="transparent" size="lg" />
+        <Link
+          link="/"
+          text="Property Search"
+          type="transparent-blue"
+          size="lg"
+        />
         <Link link="/" text="Book a valuation" type="secondary" size="lg" />
       </div>
       <div class="flex items-center gap-3">
-        <img
-          class="h-6 scale-x-[-1] fill-white text-white"
-          src={Phone}
-          alt="Mobile Phone"
-        />
-        <MenuBtn />
+        <ContactBtn />
+        <MenuBtn color="primary-100" />
       </div>
     </div>
   </div>
