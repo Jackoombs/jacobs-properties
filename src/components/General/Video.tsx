@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Thumbnail from "../../assets/images/thumbnail.jpg";
 import { FaPlay } from "react-icons/fa/index.js";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 interface Props {
   videoId: string;
@@ -12,22 +12,28 @@ interface Props {
 export default function Video({ videoId, thumbnailPath, origin }: Props) {
   const [playVideo, setPlayVideo] = useState(false);
 
-  var player;
+  var player: any;
+  console.log(player);
   const loadVideo = () => {
     window.YT.ready(function () {
-      new window.YT.Player("player", {
+      player = new window.YT.Player("player", {
         height: "full",
         width: "full",
         videoId: `${videoId}`,
         events: {
-          onStateChange: onPlayerStateChange,
+          onReady: onPlayerReady,
         },
         origin: origin,
       });
     });
 
-    function onPlayerStateChange(event: any) {
-      if (event.data === 1) setPlayVideo(true);
+    function onPlayerReady(event: any) {
+      console.log("ready");
+      const button = document.getElementById("button");
+      button?.addEventListener("click", () => {
+        player.playVideo();
+        setPlayVideo(true);
+      });
     }
   };
 
@@ -51,8 +57,9 @@ export default function Video({ videoId, thumbnailPath, origin }: Props) {
       <div className="h-full w-full" id="player"></div>
       {!playVideo && (
         <button
-          className="pointer-events-none absolute top-0 flex h-full w-full items-center justify-center"
-          onClick={() => setPlayVideo(true)}
+          id="button"
+          className="absolute top-0 flex h-full w-full items-center justify-center"
+          onClick={() => {}}
         >
           <img
             className="absolute top-0 h-full w-full object-cover object-top brightness-[.65]"
