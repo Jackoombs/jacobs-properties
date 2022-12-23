@@ -5,10 +5,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
+        sans: ["ProximaNova", ...defaultTheme.fontFamily.sans],
       },
       maxWidth: {
-        "container-lg": "min(92%, 87.5rem)",
+        "container-lg": "min(92%, 100rem)",
         "container-md": "min(96%, 48.75rem)",
       },
       colors: {
@@ -20,9 +20,17 @@ module.exports = {
         placeholder: "#8094aa",
       },
       padding: {
+        sm: "2rem",
+        lg: "5rem",
+        md: "3rem",
+        xl: "7.75rem",
         section: "5.75rem",
       },
       gap: {
+        sm: "2rem",
+        lg: "5rem",
+        md: "3rem",
+        xl: "7.75rem",
         section: "5.75rem",
       },
       aspectRatio: {
