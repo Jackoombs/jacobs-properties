@@ -16,7 +16,7 @@ export default function Link({ link, text, type, size, classes }: Props) {
   return (
     <a
       className={clsx(
-        "flex h-16 w-full items-center justify-center rounded-lg text-xs font-semibold uppercase duration-100 md:h-[2.75rem]",
+        "flex h-14 w-full items-center justify-center rounded-lg text-[0.875rem] font-semibold uppercase tracking-[1.4px] duration-100",
         classes,
         type === "primary" && "bg-primary-100 text-white hover:brightness-110",
         type === "secondary" &&
@@ -28,7 +28,7 @@ export default function Link({ link, text, type, size, classes }: Props) {
           "border-2 border-primary-100 bg-transparent text-primary-100 hover:bg-primary-100 hover:text-white",
         size === "sm" && "md:w-16",
         size === "md" && "md:w-40",
-        size === "lg" && "md:w-[11.25rem]"
+        size === "lg" && "md:w-52"
       )}
       href={link}
     >
