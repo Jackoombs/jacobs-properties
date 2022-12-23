@@ -13,6 +13,7 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="src/global.css" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
@@ -21,3 +22,51 @@ const { title } = Astro.props;
     <slot />
   </body>
 </html>
+
+<style is:global>
+  @media only screen and (min-width: 1900px) {
+    body,
+    html {
+      font-size: 0.85vw;
+    }
+  }
+
+  .overflow-really-visible {
+    overflow: visible !important;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .overflow-really-visible-mobile {
+      overflow: visible !important;
+    }
+  }
+
+  @font-face {
+    font-family: "ProximaNova";
+    src: url("src/assets/fonts/ProximaNova-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "ProximaNova";
+    src: url("src/assets/fonts/ProximaNova-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "ProximaNova";
+    src: url("src/assets/fonts/ProximaNova-Semibold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "ProximaNova";
+    src: url("src/assets/fonts/ProximaNova-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+</style>
