@@ -1,5 +1,5 @@
-import LogoBlue from "../../assets/images/logo_blue.png";
-import LogoGreen from "../../assets/images/logo_green.png";
+import LogoBlue from "../../assets/images/logo_blue.svg";
+import LogoGreen from "../../assets/images/logo_green.svg";
 import Link from "../General/Link";
 import MenuBtn from "./MenuBtn";
 import clsx from "clsx";
@@ -24,58 +24,66 @@ export default function HomeHeader() {
   return (
     <header
       className={clsx(
-        "fixed top-0 z-40 flex h-full w-full flex-col items-center justify-center duration-100",
-        isSticky
-          ? "max-h-20 bg-white text-primary-100 md:max-h-[6.5rem]"
-          : "max-h-44 text-white"
+        "fixed top-0 z-40 flex w-full flex-col items-center leading-[1.1] duration-100",
+        isSticky ? "bg-white text-primary-100" : "text-white"
       )}
     >
       {!isSticky && (
-        <div className="flex h-11 w-full items-center justify-center bg-primary-100 text-xs font-semibold uppercase text-white xl:hidden">
-          Book a Valuation
+        <div className="flex h-12 w-full items-center justify-center bg-primary-100 md:hidden">
+          <p className="text-[0.75rem] font-semibold uppercase tracking-[1.4px] text-white md:text-[0.875rem]">
+            Book a Valuation
+          </p>
         </div>
       )}
-      <div className="mx-auto my-auto flex w-full max-w-container-lg items-center justify-between text-xs font-semibold uppercase">
-        <a className="flex items-center" href="/">
+      <div className="flex w-full max-w-container-lg items-center justify-between text-xs font-semibold uppercase">
+        <a
+          className={clsx(
+            "flex items-center",
+            isSticky ? "py-3 lg:py-5" : "py-5 lg:py-md"
+          )}
+          href="/"
+        >
           <img
             className={clsx(
-              "h-20 w-auto xl:h-[6.625rem]",
-              isSticky && "scale-75"
+              "h-auto ",
+              isSticky
+                ? "w-[9rem] lg:w-[12rem]"
+                : "w-[10.625rem] lg:w-[12rem] 2xl:w-[16.25rem]"
             )}
-            src={isSticky ? LogoBlue.src : LogoGreen.src}
+            src={isSticky ? LogoBlue : LogoGreen}
             alt="Jacobs Properties Logo"
           />
         </a>
-        <div className="flex items-center gap-4 lg:gap-8">
-          <nav className="hidden sm:block">
-            <ul className="flex items-center gap-3 text-[10px] xl:gap-6 xl:text-xs">
-              <li>
+        <div className="flex items-center gap-6 2xl:gap-md">
+          <nav className="hidden xl:block">
+            <ul className="flex items-center gap-6 text-[0.875rem] font-semibold tracking-[1.4px] 2xl:gap-md">
+              <li className="hover:text-secondary-100">
                 <a
-                  className="rounded-xl p-2 duration-100 hover:bg-primary-100 hover:text-white"
+                  className="rounded-xl py-3 leading-[1.1] duration-100"
                   href=""
                 >
                   Buyers
                 </a>
               </li>
-              <li>
+              <li className="hover:text-secondary-100">
                 <a
-                  className="rounded-xl p-2 duration-100 hover:bg-primary-100 hover:text-white"
+                  className="rounded-xl py-3 leading-[1.1] duration-100"
                   href=""
                 >
                   Sellers
                 </a>
               </li>
-              <li>
+              <li className="hover:text-secondary-100">
                 <a
-                  className="rounded-xl p-2 duration-100 hover:bg-primary-100 hover:text-white"
+                  className="rounded-xl py-3 leading-[1.1] duration-100"
                   href=""
                 >
                   Landlords
                 </a>
               </li>
-              <li>
+              <li className="hover:text-secondary-100">
                 <a
-                  className="rounded-xl p-2 duration-100 hover:bg-primary-100 hover:text-white"
+                  className="rounded-xl py-3 leading-[1.1] duration-100"
                   href=""
                 >
                   Tenants
@@ -83,7 +91,7 @@ export default function HomeHeader() {
               </li>
             </ul>
           </nav>
-          <div className="hidden items-center gap-3 xl:flex">
+          <div className=" hidden items-center gap-4 md:flex">
             <Link
               link="/"
               text="Property Search"
@@ -94,11 +102,11 @@ export default function HomeHeader() {
           </div>
           <div
             className={clsx(
-              "flex items-center gap-3",
+              "flex items-center gap-6",
               isSticky ? "text-primary-100" : "text-white"
             )}
           >
-            <BsTelephoneFill className="scale-x-[-1] text-2xl" />
+            <BsTelephoneFill className="scale-x-[-1] text-[1.75rem]" />
             <MenuBtn color={isSticky ? "primary-100" : "white"} />
           </div>
         </div>
