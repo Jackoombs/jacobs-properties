@@ -4,6 +4,7 @@ import "swiper/css";
 import Image1 from "../../assets/images/how_help_1.webp";
 import SwiperNavBtns from "../General/SwiperNavBtns";
 import SectionHeader from "../General/Text/SectionHeader";
+import SectionSubHeader from "../General/Text/SectionSubHeader";
 import { useState } from "react";
 
 export default function HowCanWeHelp() {
@@ -56,15 +57,23 @@ export default function HowCanWeHelp() {
         spaceBetween={20}
         onSlideChange={handleSlideChange}
         breakpoints={{
-          768: {
+          640: {
             slidesPerView: 2,
+          },
+          768: {
+            slidesPerView: 3,
           },
           1280: {
             slidesPerView: 3,
-            spaceBetween: 50,
+            spaceBetween: 40,
+          },
+          1700: {
+            slidesPerView: 3,
+            spaceBetween: 64,
           },
           2000: {
             slidesPerView: 4,
+            spaceBetween: 64,
           },
         }}
       >
@@ -75,7 +84,7 @@ export default function HowCanWeHelp() {
 
         {slides.map(({ title, bgSrc, link }, index) => (
           <SwiperSlide key={index}>
-            <div className="relative h-80 overflow-hidden rounded-xl lg:h-96 ">
+            <div className="relative aspect-[1.17/1] overflow-hidden rounded-big">
               <a
                 href={link}
                 style={{
@@ -83,9 +92,12 @@ export default function HowCanWeHelp() {
                 }}
                 className="block h-full w-full bg-cover bg-bottom duration-100 hover:scale-105"
               >
-                <h4 className="absolute bottom-10 left-8 text-3xl font-semibold text-white">
-                  {title}
-                </h4>
+                <SectionSubHeader
+                  size="lg"
+                  text={title}
+                  textColor="text-white"
+                  addClasses="absolute bottom-10 left-8"
+                />
               </a>
             </div>
           </SwiperSlide>
