@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
-import { Controller } from "swiper";
 import Review from "./Review";
 import ReviewNavBtn from "./ReviewNavBtn";
 
