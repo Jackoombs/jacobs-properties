@@ -16,7 +16,7 @@ export default function Link({ link, text, type, size, classes }: Props) {
   return (
     <a
       className={clsx(
-        "flex h-14 w-full items-center justify-center rounded-lg text-[0.875rem] font-semibold uppercase tracking-[1.4px] duration-100",
+        "flex h-14 w-full items-center justify-center rounded-big text-[0.875rem] font-semibold uppercase tracking-[1.4px] duration-100",
         classes,
         type === "primary" && "bg-primary-100 text-white hover:brightness-110",
         type === "secondary" &&
