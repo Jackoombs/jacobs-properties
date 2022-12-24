@@ -38,6 +38,9 @@ module.exports = {
         "5/4": "5 / 4",
         property: "3 / 2",
       },
+      borderRadius: {
+        big: "0.625rem",
+      },
     },
   },
   plugins: [require("@tailwindcss/line-clamp")],
