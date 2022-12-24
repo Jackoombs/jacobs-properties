@@ -11,6 +11,18 @@ import ContactBtn from "./ContactBtn";
     "sticky top-0 z-40 flex w-full flex-col items-center leading-[1.1] duration-100 bg-white text-primary-100"
   )}
 >
+  <a
+    id="header-target"
+    href="/"
+    class="flex h-12 w-full items-center justify-center bg-secondary-100 duration-100 md:hidden"
+  >
+    <p
+      class="text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100"
+    >
+      Book a Valuation
+    </p>
+  </a>
+
   <div
     class="flex w-full max-w-container-lg items-center justify-between text-xs font-semibold uppercase"
   >
@@ -64,3 +76,17 @@ import ContactBtn from "./ContactBtn";
     </div>
   </div>
 </header>
+
+<script>
+  const header = document.getElementById("header-target");
+  document.addEventListener("scroll", function () {
+    let scrollPos = window.pageYOffset;
+    if (scrollPos > 100) {
+      header!.classList.remove("flex");
+      header!.classList.add("hidden");
+    } else {
+      header!.classList.remove("hidden");
+      header!.classList.add("flex");
+    }
+  });
+</script>
