@@ -25,7 +25,7 @@ import Display from "../components/General/Text/Display";
   <main>
     <Banner client:load />
     <section
-      class="justify-center bg-primary-200 pt-7 pb-11 md:flex md:pb-40 md:pt-28"
+      class="justify-center bg-primary-200 py-10 md:flex md:pb-40 md:pt-28"
     >
       <div
         class="mx-auto flex max-w-container-lg flex-col items-center gap-[34px]"
@@ -35,11 +35,11 @@ import Display from "../components/General/Text/Display";
       </div>
     </section>
 
-    <section class="bg-white pt-4 pb-14 md:py-section">
-      <div class="mx-auto grid max-w-container-lg gap-5 md:grid-cols-2">
+    <section class="bg-white py-10 md:py-28">
+      <div class="mx-auto grid max-w-container-lg gap-5 lg:grid-cols-2">
         <img
           loading="lazy"
-          class="aspect-square h-auto w-full justify-self-end rounded-xl object-cover md:order-1 md:aspect-rect-sm md:max-w-2xl"
+          class="h-auto w-full justify-self-end rounded-xl object-cover md:aspect-hero lg:order-1"
           src={Home1.src}
           alt="St Michael's Church Basingstoke"
         />
@@ -61,7 +61,7 @@ import Display from "../components/General/Text/Display";
       </div>
     </section>
 
-    <section class="overflow-hidden bg-primary-200 py-14 md:py-section">
+    <section class="overflow-hidden bg-primary-200 pb-14 pt-10 md:py-section">
       <div class="mx-auto max-w-container-lg">
         <HowCanWeHelp client:idle />
       </div>

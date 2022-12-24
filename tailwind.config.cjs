@@ -24,7 +24,7 @@ module.exports = {
         lg: "5rem",
         md: "3rem",
         xl: "7.75rem",
-        section: "5.75rem",
+        section: "6.875rem",
       },
       gap: {
         sm: "2rem",
@@ -34,7 +34,7 @@ module.exports = {
         section: "5.75rem",
       },
       aspectRatio: {
-        "rect-sm": "1.27 / 1",
+        hero: "14 / 11",
         "5/4": "5 / 4",
         property: "3 / 2",
       },
