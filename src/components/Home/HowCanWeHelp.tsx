@@ -3,7 +3,7 @@ import type { Swiper as SwiperType } from "swiper/types";
 import "swiper/css";
 import Image1 from "../../assets/images/how_help_1.webp";
 import SwiperNavBtns from "../General/SwiperNavBtns";
-import SubHeader from "../General/SubHeader";
+import SectionHeader from "../General/Text/SectionHeader";
 import { useState } from "react";
 
 export default function HowCanWeHelp() {
@@ -69,7 +69,7 @@ export default function HowCanWeHelp() {
         }}
       >
         <div slot="container-start" className="flex justify-between">
-          <SubHeader text="How can we help?" />
+          <SectionHeader text="How can we help?" />
           <SwiperNavBtns isStartOrEnd={isStartOrEnd} />
         </div>
 
