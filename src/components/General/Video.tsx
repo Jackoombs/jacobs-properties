@@ -52,21 +52,25 @@ export default function Video({ videoId, thumbnailPath, origin }: Props) {
   useYoutube(loadVideo);
 
   return (
-    <div className="relative aspect-video h-auto w-full overflow-hidden rounded-xl bg-slate-700">
-      <div className="h-full w-full" id="player"></div>
+    <div className="relative flex aspect-video h-auto w-full items-center justify-center">
+      <div
+        className="h-full w-full overflow-hidden rounded-xl"
+        id="player"
+      ></div>
       {!playVideo && (
         <button
           id="button"
-          className="absolute top-0 flex h-full w-full items-center justify-center"
+          className="absolute top-0 flex h-full w-full items-center justify-center overflow-y-scroll duration-150 ease-in-out hover:w-screen"
           onClick={() => {}}
         >
           <img
-            className="absolute top-0 h-full w-full object-cover object-top brightness-[.65]"
+            className="absolute top-0 h-full w-full rounded-xl object-cover object-top brightness-[.65]"
             src={thumbnailPath}
             alt=""
           />
-          <div className="absolute flex aspect-square h-2/6 items-center justify-center rounded-full bg-white opacity-80"></div>
-          <FaPlay className="absolute ml-1 text-3xl text-primary-100 opacity-100 sm:text-5xl md:text-[400%] lg:ml-4 lg:text-[600%]" />
+          <div className="flex aspect-square h-2/6 w-auto items-center justify-center rounded-full bg-white text-xl opacity-80">
+            <FaPlay className="absolute ml-1 text-[6vw] text-primary-100 opacity-100 md:ml-3 2xl:ml-6 2xl:text-8xl" />
+          </div>
         </button>
       )}
     </div>
