@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import Thumbnail from "../../assets/images/thumbnail.jpg";
 import { FaPlay } from "react-icons/fa/index.js";
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 interface Props {
   videoId: string;
