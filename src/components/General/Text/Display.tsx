@@ -2,8 +2,8 @@ import clsx from "clsx";
 
 interface Props {
   text: string;
-  textColor: string;
-  addClasses: string;
+  textColor?: string;
+  addClasses?: string;
 }
 
 export default function Display({
@@ -14,7 +14,7 @@ export default function Display({
   return (
     <h2
       className={clsx(
-        "text-[3.25rem] font-bold leading-[1.1] md:text-[4rem]",
+        "text-[2.25rem] font-bold leading-[1.1] md:text-[4rem]",
         textColor,
         addClasses
       )}
