@@ -1,59 +1,54 @@
 ---
-import LogoBlue from "../../assets/images/logo_blue.png";
+import LogoBlue from "../../assets/images/logo_blue.svg";
 import Link from "../General/Link";
-import Phone from "../../assets/images/phone.svg";
 import MenuBtn from "./MenuBtn";
 import clsx from "clsx";
-import { Picture } from "@astrojs/image/components";
 import ContactBtn from "./ContactBtn";
 ---
 
 <header
   class={clsx(
-    "absolute top-0 flex flex-col justify-center items-center h-full w-full duration-100 max-h-20 bg-white text-primary-100 md:max-h-[6.5rem]"
+    "sticky top-0 z-40 flex w-full flex-col items-center leading-[1.1] duration-100 bg-white text-primary-100"
   )}
 >
   <div
-    class="flex h-11 w-full items-center justify-center bg-primary-100 text-xs font-semibold uppercase text-white xl:hidden"
+    class="flex w-full max-w-container-lg items-center justify-between text-xs font-semibold uppercase"
   >
-    Book a Valuation
-  </div>
-  <div
-    class="mx-auto my-auto flex w-full max-w-container-lg items-center justify-between text-xs font-semibold uppercase"
-  >
-    <a class="flex items-center" href="/">
+    <a class={clsx("flex items-center py-3 lg:py-5")} href="/">
       <img
-        class="h-20 w-auto scale-75 xl:h-[6.625rem]"
-        src={LogoBlue.src}
+        class={clsx("h-auto w-[9rem] lg:w-[12rem]")}
+        src={LogoBlue}
         alt="Jacobs Properties Logo"
       />
     </a>
-    <div class="flex items-center gap-4 lg:gap-8">
-      <nav class="hidden sm:block">
-        <ul class="flex items-center gap-3 text-[10px] xl:gap-6 xl:text-xs">
-          <li>
-            <a class="rounded-lg p-2 duration-100 hover:bg-primary-100" href=""
-              >Buyers</a
-            >
+    <div class="flex items-center gap-6 2xl:gap-md">
+      <nav class="hidden xl:block">
+        <ul
+          class="flex items-center gap-6 text-[0.875rem] font-semibold tracking-[1.4px] 2xl:gap-md"
+        >
+          <li class="hover:text-secondary-100">
+            <a class="rounded-xl py-3 leading-[1.1] duration-100" href="">
+              Buyers
+            </a>
           </li>
-          <li>
-            <a class="rounded-lg p-2 duration-100 hover:bg-primary-100" href=""
-              >Sellers</a
-            >
+          <li class="hover:text-secondary-100">
+            <a class="rounded-xl py-3 leading-[1.1] duration-100" href="">
+              Sellers
+            </a>
           </li>
-          <li>
-            <a class="rounded-lg p-2 duration-100 hover:bg-primary-100" href=""
-              >Landlords</a
-            >
+          <li class="hover:text-secondary-100">
+            <a class="rounded-xl py-3 leading-[1.1] duration-100" href="">
+              Landlords
+            </a>
           </li>
-          <li>
-            <a class="rounded-lg p-2 duration-100 hover:bg-primary-100" href=""
-              >Tenants</a
-            >
+          <li class="hover:text-secondary-100">
+            <a class="rounded-xl py-3 leading-[1.1] duration-100" href="">
+              Tenants
+            </a>
           </li>
         </ul>
       </nav>
-      <div class="hidden items-center gap-3 xl:flex">
+      <div class="hidden items-center gap-4 md:flex">
         <Link
           link="/"
           text="Property Search"
@@ -62,27 +57,10 @@ import ContactBtn from "./ContactBtn";
         />
         <Link link="/" text="Book a valuation" type="secondary" size="lg" />
       </div>
-      <div class="flex items-center gap-3">
+      <div class={clsx("flex items-center gap-6 text-primary-100")}>
         <ContactBtn />
         <MenuBtn color="primary-100" />
       </div>
     </div>
   </div>
 </header>
-
-<script>
-  let header = document.querySelector("header");
-
-  document.addEventListener("scroll", function () {
-    if (!header) return;
-    let scrollPos = window.pageYOffset;
-
-    if (scrollPos > 100) {
-      header.classList.remove("bg-transparent");
-      header.classList.add("bg-white", "max-h-36");
-    } else {
-      header.classList.remove("bg-white");
-      header.classList.add("bg-transparent");
-    }
-  });
-</script>
