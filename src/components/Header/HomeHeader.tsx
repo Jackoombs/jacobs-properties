@@ -35,12 +35,16 @@ export default function HomeHeader() {
           </p>
         </div>
       )}
-      <div className="flex w-full max-w-container-lg items-center justify-between text-xs font-semibold uppercase">
+      <div
+        className={clsx(
+          "flex w-full max-w-container-lg items-center justify-between text-xs font-semibold uppercase",
+          isSticky
+            ? "h-[5.625rem] md:lg:h-[7.75rem]"
+            : "h-[6.75rem] lg:h-[8rem] 2xl:h-[10.5rem]"
+        )}
+      >
         <a
-          className={clsx(
-            "flex items-center",
-            isSticky ? "py-3 lg:py-5" : "py-5 lg:py-md"
-          )}
+          className={clsx("flex items-center self-end", isSticky ? "pb-2" : "")}
           href="/"
         >
           <img
