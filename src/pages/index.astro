@@ -7,10 +7,8 @@ import PropertySearchBar from "../components/General/PropertySearchBar";
 import Home1 from "../assets/images/home_1.webp";
 import Home2 from "../assets/images/home_2.webp";
 import Home3 from "../assets/images/home_3.webp";
-import PageHeader from "../components/General/Text/PageHeader";
 import SectionLabel from "../components/General/Text/SectionLabel";
 import SectionHeader from "../components/General/Text/SectionHeader";
-import SectionSubHeader from "../components/General/Text/SectionSubHeader";
 import Copy from "../components/General/Text/Copy";
 import HowCanWeHelp from "../components/Home/HowCanWeHelp";
 import Video from "../components/General/Video";
@@ -19,19 +17,18 @@ import Thumbnail from "../assets/images/thumbnail.webp";
 import BrochureForm from "../components/Home/BrochureForm";
 import Reviews from "../components/Home/Reviews";
 import FAQs from "../components/Home/FAQs";
+import Display from "../components/General/Text/Display";
 ---
 
 <Layout title="Welcome to Jacobs Properties.">
   <HomeHeader client:load />
   <main>
     <Banner client:load />
-    <section class="hidden justify-center bg-primary-200 py-36 md:flex">
-      <div class="flex max-w-container-lg flex-col items-center gap-16">
-        <h3
-          class="max-w-lg text-center text-5xl font-semibold text-primary-100 lg:max-w-none"
-        >
-          Your property search starts here.
-        </h3>
+    <section class="justify-center bg-primary-200 py-36 md:flex">
+      <div
+        class="mx-auto flex max-w-container-lg flex-col items-center gap-[34px]"
+      >
+        <Display text="Your property search starts here." />
         <PropertySearchBar client:visible />
       </div>
     </section>

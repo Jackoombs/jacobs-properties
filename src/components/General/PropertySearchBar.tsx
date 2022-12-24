@@ -7,23 +7,23 @@ export default function PropertySearchBar() {
   const [toggle, setToggle] = useState("BUY");
 
   return (
-    <div className="flex w-[90%] flex-col items-center gap-3 lg:flex-row">
+    <div className="flex w-full flex-col items-center gap-[18px] lg:flex-row">
       <BuyRentToggle {...{ toggle, setToggle }} />
       <form
         action=""
         className={clsx(
-          "box-border flex h-[3.875rem] w-full flex-1 items-center rounded-lg border-primary-100 bg-white",
+          "box-border flex h-[4.875rem] w-full flex-1 items-center gap-2 rounded-big border-primary-100 bg-white px-[5%] md:px-8",
           isFocused ? "outline outline-2 outline-primary-100" : ""
         )}
       >
         <input
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          className=" w-full bg-transparent px-7 py-4 text-xs font-semibold text-primary-100 placeholder:text-primary-100 focus:outline-none"
+          className=" w-full bg-transparent text-base font-medium text-primary-100 placeholder:text-primary-100 focus:outline-none"
           type="text"
-          placeholder="Begin your search by town or postcode... i.e BA3"
+          placeholder="Begin your search by town or postcode..."
         />
-        <button type="submit" className="block px-7 py-4">
+        <button type="submit" className="block py-4">
           <div className="-rotate-45 ">
             <span className="text-2xl font-bold text-primary-100">&#9906;</span>
           </div>
