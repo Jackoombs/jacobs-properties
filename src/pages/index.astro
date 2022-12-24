@@ -2,14 +2,16 @@
 import Link from "../components/General/Link";
 import Layout from "../layouts/HomeLayout.astro";
 import HomeHeader from "../components/Header/HomeHeader";
-import Banner from "../components/Home/Banner.astro";
+import Banner from "../components/Home/Banner/Banner";
 import PropertySearchBar from "../components/General/PropertySearchBar";
 import Home1 from "../assets/images/home_1.webp";
 import Home2 from "../assets/images/home_2.webp";
 import Home3 from "../assets/images/home_3.webp";
-import SubLabel from "../components/General/SubLabel";
-import SubHeader from "../components/General/SubHeader";
-import SubParagraph from "../components/General/SubParagraph";
+import PageHeader from "../components/General/Text/PageHeader";
+import SectionLabel from "../components/General/Text/SectionLabel";
+import SectionHeader from "../components/General/Text/SectionHeader";
+import SectionSubHeader from "../components/General/Text/SectionSubHeader";
+import Copy from "../components/General/Text/Copy";
 import HowCanWeHelp from "../components/Home/HowCanWeHelp";
 import Video from "../components/General/Video";
 import RecentlySoldLet from "../components/Home/RecentlySoldLet";
@@ -22,7 +24,7 @@ import FAQs from "../components/Home/FAQs";
 <Layout title="Welcome to Jacobs Properties.">
   <HomeHeader client:load />
   <main>
-    <Banner />
+    <Banner client:load />
     <section class="hidden justify-center bg-primary-200 py-36 md:flex">
       <div class="flex max-w-container-lg flex-col items-center gap-16">
         <h3
@@ -42,10 +44,11 @@ import FAQs from "../components/Home/FAQs";
           src={Home1.src}
           alt="St Michael's Church Basingstoke"
         />
-        <div class="flex flex-col gap-3 md:max-w-md md:justify-center lg:gap-8">
-          <SubLabel text="About" classes="md:text-primary-300" />
-          <SubHeader text="People first. Property second" />
-          <SubParagraph
+        <div class="flex flex-col gap-3 md:justify-center lg:max-w-xl lg:gap-8">
+          <SectionLabel text="About" />
+          <SectionHeader text="People first. Property second" />
+          <Copy
+            size="lg"
             text="Meet Team Jacobs. We're a friendly bunch of property experts who put people first. Since 1999, we've been helping the people of Basingstoke get on the property ladder, find their forever home, sell up and move on, downsize, upsize, rightsize - whatever your property needs we've got your back."
           />
           <Link
@@ -53,7 +56,7 @@ import FAQs from "../components/Home/FAQs";
             text="Meet the Team"
             link="/"
             type="secondary"
-            size="md"
+            size="lg"
           />
         </div>
       </div>
@@ -69,8 +72,8 @@ import FAQs from "../components/Home/FAQs";
         id="targetTake"
         class="mx-auto flex h-auto max-w-container-lg flex-col gap-8 md:items-center md:gap-16"
       >
-        <SubHeader
-          classes="max-w-[17rem] sm:max-w-none"
+        <SectionHeader
+          addClasses="max-w-[17rem] sm:max-w-none"
           text="Let's put some faces to our names"
         />
         <Video
@@ -95,9 +98,10 @@ import FAQs from "../components/Home/FAQs";
         <div
           class="flex flex-1 flex-col gap-3 pr-3 md:max-w-md md:justify-center lg:gap-8"
         >
-          <SubLabel text="Valuation" />
-          <SubHeader text="Find out how much your property is worth" />
-          <SubParagraph
+          <SectionLabel text="Valuation" />
+          <SectionHeader text="Find out how much your property is worth" />
+          <Copy
+            size="md"
             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor lorem, eleifend pharetra nibh ut, blandit placerat massa. Mauris maximus ligula placerat ligula viverra gravida. Cras sed neque vitae tortor varius accumsan. Nunc accumsan ex in commodo viverra."
           />
           <div class="flex flex-col gap-3 md:flex-row">
@@ -125,9 +129,10 @@ import FAQs from "../components/Home/FAQs";
       />
       <div class="mx-auto grid max-w-container-lg gap-8 md:grid-cols-2">
         <div class="flex flex-col gap-3 pr-3 md:max-w-lg md:justify-center">
-          <SubLabel text="Sales Brochure" />
-          <SubHeader text="First time selling a property?" />
-          <SubParagraph
+          <SectionLabel text="Sales Brochure" />
+          <SectionHeader text="First time selling a property?" />
+          <Copy
+            size="md"
             text="We understand how daunting it can be. That's why we've compiled a FREE guide of pro tips to help make your experience as stress-free as possible."
           />
           <BrochureForm client:visible />
@@ -143,7 +148,7 @@ import FAQs from "../components/Home/FAQs";
 
     <section class="bg-white py-14 md:items-center md:gap-16 md:py-section">
       <div class="mx-auto flex max-w-container-lg flex-col gap-8 md:gap-16">
-        <SubHeader text="Hear from our customers" />
+        <SectionHeader text="Hear from our customers" />
         <Reviews client:visible />
       </div>
     </section>
@@ -154,7 +159,10 @@ import FAQs from "../components/Home/FAQs";
       <div
         class="mx-auto flex max-w-container-lg flex-col gap-8 md:justify-center md:gap-16"
       >
-        <SubHeader text="Frequently asked questions" classes="md:text-center" />
+        <SectionHeader
+          text="Frequently asked questions"
+          addClasses="md:text-center"
+        />
         <FAQs client:visible />
       </div>
     </section>
