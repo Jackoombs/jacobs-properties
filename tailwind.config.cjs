@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["ProximaNova", ...defaultTheme.fontFamily.sans],
+        harm: ["HarmoniaSans", "system-ui"],
       },
       maxWidth: {
         "container-lg": "min(92%, 100rem)",

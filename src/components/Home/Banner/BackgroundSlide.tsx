@@ -6,7 +6,6 @@ interface Props {
 }
 
 export default function BackgroundSlide({ backgroundSrc, objectFit }: Props) {
-  console.log(objectFit);
   return (
     <div
       className={clsx("h-screen w-screen bg-cover")}

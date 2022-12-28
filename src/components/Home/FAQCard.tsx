@@ -34,16 +34,16 @@ export default function FAQCard({
       }}
       className="flex w-full max-w-4xl flex-col gap-4 rounded-lg bg-white py-8 px-6 text-left md:px-9"
     >
-      <div className="flex items-center justify-between gap-8 md:gap-12">
+      <div className="flex items-center justify-between gap-8 lg:gap-14">
         <div>
-          <IoMdChatbubbles className="text-2xl text-secondary-100 md:text-4xl" />
+          <IoMdChatbubbles className="text-xl text-secondary-100 lg:text-[2.5rem]" />
         </div>
-        <h3 className="w-full text-base font-semibold text-primary-400 md:text-xl">
+        <h3 className="w-full flex-1 text-lg font-medium text-primary-400 lg:text-[1.75rem]">
           {question}
         </h3>
         <motion.div
           animate={{
-            rotate: currentIndex === index ? "-90deg" : "0deg",
+            rotateX: currentIndex === index ? "-180deg" : "0deg",
             transition: { duration: 0.4 },
           }}
         >
@@ -64,7 +64,7 @@ export default function FAQCard({
               height: 0,
               transition: { duration: 0.4, opacity: { duration: 0.15 } },
             }}
-            className="row-start-2 text-sm text-primary-100"
+            className="row-start-2 text-base  text-primary-100 lg:pl-[calc(3.5rem+2.5rem)] lg:pr-[calc(3.5rem+1.5rem)]"
           >
             {answer}
           </motion.p>

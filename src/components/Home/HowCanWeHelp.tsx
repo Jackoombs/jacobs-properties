@@ -52,7 +52,7 @@ export default function HowCanWeHelp() {
   return (
     <>
       <Swiper
-        className="overflow-really-visible flex flex-col gap-8 md:gap-16"
+        className="overflow-really-visible flex flex-col gap-9 lg:gap-[4.5rem]"
         slidesPerView={1.1}
         spaceBetween={20}
         onSlideChange={handleSlideChange}

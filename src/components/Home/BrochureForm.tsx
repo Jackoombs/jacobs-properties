@@ -2,6 +2,7 @@ import Input from "../Form/Input";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import Button from "../General/Button";
 
 export default function BrochureForm() {
   const messages = {
@@ -38,7 +39,7 @@ export default function BrochureForm() {
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col"
       >
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 pb-5">
           <Input
             id="fullName"
             type="text"
@@ -58,18 +59,19 @@ export default function BrochureForm() {
             errors={errors}
           />
         </div>
-        <p className="pt-3 pb-8 text-[10px] font-semibold text-primary-100">
+        <p className="pb-8 font-harm text-[0.625rem] text-primary-100 lg:text-[0.75rem]">
           {"By pressing 'Download' you are agreeing to our "}
           <a className=" pt-3 pb-7 underline" href="/" target="_blank">
             privacy policy
           </a>
         </p>
-        <button
-          className="flex h-16 w-full items-center justify-center rounded-xl bg-secondary-100 text-xs font-semibold uppercase text-primary-100 duration-100 hover:brightness-110 md:h-[2.75rem]"
-          type="submit"
-        >
-          Download Guide
-        </button>
+        <Button
+          text="Download Guide"
+          type="secondary"
+          size="lg"
+          buttonType="submit"
+          callback={onSubmit}
+        />
       </form>
     </div>
   );

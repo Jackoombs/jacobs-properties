@@ -54,7 +54,7 @@ export default function Video({ videoId, thumbnailPath, origin }: Props) {
   return (
     <div className="relative flex aspect-video h-auto w-full items-center justify-center">
       <div
-        className="h-full w-full overflow-hidden rounded-xl"
+        className="h-full w-full overflow-hidden rounded-big"
         id="player"
       ></div>
       {!playVideo && (
@@ -64,7 +64,7 @@ export default function Video({ videoId, thumbnailPath, origin }: Props) {
           onClick={() => {}}
         >
           <img
-            className="absolute top-0 h-full w-full rounded-xl object-cover object-top brightness-[.65]"
+            className="absolute top-0 h-full w-full rounded-big object-cover object-top brightness-[.65]"
             src={thumbnailPath}
             alt=""
           />

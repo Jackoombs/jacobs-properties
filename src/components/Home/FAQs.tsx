@@ -5,11 +5,11 @@ export default function FAQs() {
   const [currentIndex, setCurrentIndex] = useState(-1);
 
   return (
-    <div className="flex flex-col items-center gap-[5px] md:gap-4">
+    <div className="flex flex-col items-center gap-2 md:gap-5">
       <FAQCard
         index={1}
         question="How long will it take to sell my property?"
-        answer="In around 3-4 buissness weeks we will have your property sold."
+        answer="In around 3-4 buissness weeks we will have your property sold ."
         {...{ currentIndex, setCurrentIndex }}
       />
       <FAQCard

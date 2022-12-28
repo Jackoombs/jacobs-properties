@@ -13,10 +13,12 @@ export default function Review({ text, author }: Props) {
           <BsStarFill />
         ))}
       </div>
-      <p className="text-xl font-semibold text-white md:max-w-2xl md:text-center md:text-2xl">
+      <p className="text-[1.5rem] font-medium leading-10 text-white md:max-w-[51.25rem] md:text-center lg:text-[2rem]">
         {text}
       </p>
-      <p className="text-sm text-white">{author}</p>
+      <p className="font-harm text-base text-white lg:text-[1.25rem]">
+        {author}
+      </p>
     </div>
   );
 }

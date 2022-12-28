@@ -18,7 +18,7 @@ export default function PropertyCard({
       className="flex flex-col gap-6 text-primary-100"
       href={`/properties/${ID}`}
     >
-      <div className="overflow-hidden rounded-xl">
+      <div className="overflow-hidden rounded-big">
         <img
           loading="lazy"
           className="aspect-property h-full w-full object-cover duration-200 ease-in-out hover:scale-110"

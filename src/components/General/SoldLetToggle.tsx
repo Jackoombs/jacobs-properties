@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { useSwiper } from "swiper/react";
 
 interface Props {
   toggle: string;
@@ -7,38 +6,31 @@ interface Props {
 }
 
 export default function BuyRentToggle({ toggle, setToggle }: Props) {
-  const swiper = useSwiper();
-
-  const handleClick = (newState: string) => {
-    setToggle(newState);
-    swiper.slideTo(0, 0);
-  };
-
   return (
-    <div className="text-xs font-semibold">
-      <div className="relative flex h-[3.625rem] w-[10.75rem] items-center rounded-lg bg-primary-200">
+    <div className=" w-[10.625rem] text-[0.875rem] lg:w-56">
+      <div className="relative flex h-16 w-full items-center rounded-big bg-primary-200 lg:h-[4.625rem]">
         <button
-          onClick={() => handleClick("SOLD")}
+          onClick={() => setToggle("SOLD")}
           className={clsx(
-            "relative z-10 h-full flex-1 bg-transparent uppercase duration-500",
+            "relative z-10 h-full w-1/2 flex-1 bg-transparent font-semibold uppercase tracking-[1.4px] duration-300",
             toggle === "SOLD" ? "text-white" : "text-primary-100"
           )}
         >
           Sold
         </button>
         <button
-          onClick={() => handleClick("LET")}
+          onClick={() => setToggle("LET")}
           className={clsx(
-            "relative z-10 h-full flex-1 bg-transparent uppercase duration-500",
-            toggle === "LET" ? "text-white" : "text-primary-100"
+            "relative z-10 h-full w-1/2 flex-1 bg-transparent font-semibold uppercase tracking-[1.4px] duration-300",
+            toggle === "SOLD" ? "text-primary-100" : "text-white"
           )}
         >
           Let
         </button>
         <div
           className={clsx(
-            "absolute top-[0.313rem] h-[3rem] w-[4.75rem] rounded-lg bg-primary-100 duration-500 ease-in-out",
-            toggle === "SOLD" ? "left-[0.313rem]" : "left-[5.688rem]"
+            "absolute top-[5px] h-[calc(100%-10px)] w-[calc(50%-10px)] rounded-lg bg-primary-100 duration-300 ease-in-out",
+            toggle === "SOLD" ? "left-[5px]" : "left-[calc(50%+5px)]"
           )}
         ></div>
       </div>

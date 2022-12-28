@@ -63,7 +63,7 @@ export default function HomeHeader() {
             <ul className="flex items-center gap-6 text-[0.875rem] font-semibold tracking-[1.4px] 2xl:gap-md">
               <li className="hover:text-secondary-100">
                 <a
-                  className="rounded-xl py-3 leading-[1.1] duration-100"
+                  className="rounded-big py-3 leading-[1.1] duration-100"
                   href=""
                 >
                   Buyers
@@ -71,7 +71,7 @@ export default function HomeHeader() {
               </li>
               <li className="hover:text-secondary-100">
                 <a
-                  className="rounded-xl py-3 leading-[1.1] duration-100"
+                  className="rounded-big py-3 leading-[1.1] duration-100"
                   href=""
                 >
                   Sellers
@@ -79,7 +79,7 @@ export default function HomeHeader() {
               </li>
               <li className="hover:text-secondary-100">
                 <a
-                  className="rounded-xl py-3 leading-[1.1] duration-100"
+                  className="rounded-big py-3 leading-[1.1] duration-100"
                   href=""
                 >
                   Landlords
@@ -87,7 +87,7 @@ export default function HomeHeader() {
               </li>
               <li className="hover:text-secondary-100">
                 <a
-                  className="rounded-xl py-3 leading-[1.1] duration-100"
+                  className="rounded-big py-3 leading-[1.1] duration-100"
                   href=""
                 >
                   Tenants
