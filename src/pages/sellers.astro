@@ -12,6 +12,8 @@ import Display from "../components/General/Text/Display";
 import ProcessSlider from "../components/General/ProcessSlider";
 import BrochureForm from "../components/Home/BrochureForm";
 import PropertySlider from "../components/Property/PropertySlider";
+import Reviews from "../components/Home/Reviews";
+import FAQs from "../components/Home/FAQs";
 import type { Property } from "../env";
 
 const res = await fetch(`https://jacobs-server.onrender.com/properties/sales`);
@@ -191,6 +193,35 @@ const processSlides = {
           header="Your property could be one of them"
           properties={data}
         />
+      </div>
+    </section>
+
+    <section class="bg-white py-10 md:items-center md:py-28">
+      <div class="mx-auto flex max-w-container-lg flex-col">
+        <SectionHeader
+          addClasses="md:text-center"
+          text="Hear from our customers"
+          padding="misc"
+        />
+        <Reviews client:visible />
+      </div>
+    </section>
+
+    <section
+      class="bg-primary-200 py-14 md:items-center md:gap-16 md:py-section"
+    >
+      <div
+        class="mx-auto flex max-w-container-lg flex-col gap-8 md:justify-center md:gap-16"
+      >
+        <SectionHeader
+          text="Frequently asked questions"
+          addClasses="md:text-center"
+        />
+        <FAQs client:visible />
+        <a
+          class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
+          href="/">See All Our Faqs</a
+        >
       </div>
     </section>
   </main>
