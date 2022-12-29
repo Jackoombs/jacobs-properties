@@ -10,6 +10,7 @@ import PageHeader from "../components/General/Text/PageHeader";
 import Copy from "../components/General/Text/Copy";
 import Display from "../components/General/Text/Display";
 import ProcessSlider from "../components/General/ProcessSlider";
+import BrochureForm from "../components/Home/BrochureForm";
 
 const processSlides = {
   header: "Our selling process at a glance",
@@ -108,12 +109,72 @@ const processSlides = {
       </div>
     </section>
 
-    <section class="bg-primary-200 py-10 md:py-28">
+    <section class="overflow-hidden bg-primary-200 py-10 md:py-28">
       <div class="mx-auto max-w-container-lg">
         <ProcessSlider
           header={processSlides.header}
           slides={processSlides.slides}
           client:idle
+        />
+      </div>
+    </section>
+
+    <section class="bg-white py-10 md:py-28">
+      <div
+        class="mx-auto grid max-w-container-lg items-center gap-12 lg:gap-16 xl:grid-cols-2"
+      >
+        <img
+          class="aspect-[1.27/1] w-full rounded-big object-cover object-center"
+          src={Home3.src}
+          alt=""
+        />
+        <div class="max-w-2xl 2xl:pl-20">
+          <SectionLabel text="About" padding="hero-md" />
+          <SectionHeader
+            text="Proven recipe to sell your home for the best price"
+            padding="hero"
+            addClasses="lg:max-w-lg"
+          />
+          <Copy
+            text="We don’t just take a few pictures and stick your property on Rightmove. That’s simply not our style. And it won’t help you achieve the best sale price for your home. We bring the story of your property to life and design a winning strategy to really make your home stand out. Then, we implement a custom marketing plan across a wide variety of the latest technologies including social, online, in print, direct mail and in person. We like to get to know you and your property. Trust us, this makes a difference to the final outcome and the price you can achieve when selling your home."
+            size="lg"
+            padding="hero-md"
+          />
+          <Link text="Meet the Team" link="/" type="secondary" size="md" />
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="relative flex flex-col gap-12 bg-primary-200 pb-10 md:pb-28 lg:flex-row lg:gap-0 lg:py-28"
+    >
+      <img
+        loading="lazy"
+        class="aspect-5/4 h-auto w-full flex-1 object-cover object-left lg:order-1 lg:hidden lg:w-[50vw]"
+        src={Home3.src}
+        alt=""
+      />
+      <div class="mx-auto grid max-w-container-lg gap-7 lg:grid-cols-2">
+        <div>
+          <div class="flex flex-col lg:max-w-xl lg:justify-center">
+            <SectionLabel addClasses="pb-3" text="Sales Brochure" />
+            <SectionHeader
+              addClasses="pb-4"
+              text="First time selling a property?"
+            />
+            <Copy
+              addClasses="pb-5"
+              size="md"
+              text="We understand how daunting it can be. That's why we've compiled a FREE guide of pro tips to help make your experience as stress-free as possible."
+            />
+            <BrochureForm client:visible />
+          </div>
+        </div>
+        <img
+          loading="lazy"
+          class="hidden aspect-[1.42_/_1] h-auto w-full flex-1 self-center rounded-big object-cover object-left lg:order-1 lg:inline"
+          src={Home3.src}
+          alt=""
         />
       </div>
     </section>

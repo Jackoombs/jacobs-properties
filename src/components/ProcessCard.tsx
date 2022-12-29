@@ -10,7 +10,7 @@ interface Props {
 
 export default function ProcessCard({ title, text, index }: Props) {
   return (
-    <div className="aspect-[2/1] rounded-big bg-primary-100 p-11">
+    <div className="h-full rounded-big bg-primary-100 p-11">
       <SectionLabel
         text={`step ${index + 1}`}
         padding="hero-lg"

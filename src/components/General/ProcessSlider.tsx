@@ -33,13 +33,10 @@ export default function ProcessSlider({ header, slides }: Props) {
         spaceBetween={20}
         onSlideChange={handleSlideChange}
         breakpoints={{
-          640: {
+          1024: {
             slidesPerView: 2,
           },
-          768: {
-            slidesPerView: 3,
-          },
-          1280: {
+          1400: {
             slidesPerView: 3,
             spaceBetween: 40,
           },
@@ -58,7 +55,7 @@ export default function ProcessSlider({ header, slides }: Props) {
           <SwiperNavBtns isStartOrEnd={isStartOrEnd} />
         </div>
         {slides.map(({ title, text }, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide className="h-full" key={index}>
             <ProcessCard {...{ title, text, index }} />
           </SwiperSlide>
         ))}
