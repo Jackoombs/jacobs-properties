@@ -11,6 +11,11 @@ import Copy from "../components/General/Text/Copy";
 import Display from "../components/General/Text/Display";
 import ProcessSlider from "../components/General/ProcessSlider";
 import BrochureForm from "../components/Home/BrochureForm";
+import PropertySlider from "../components/Property/PropertySlider";
+import type { Property } from "../env";
+
+const res = await fetch(`https://jacobs-server.onrender.com/properties/sales`);
+const data: Property[] = await res.json();
 
 const processSlides = {
   header: "Our selling process at a glance",
@@ -175,6 +180,16 @@ const processSlides = {
           class="hidden aspect-[1.42_/_1] h-auto w-full flex-1 self-center rounded-big object-cover object-left lg:order-1 lg:inline"
           src={Home3.src}
           alt=""
+        />
+      </div>
+    </section>
+
+    <section class="bg-white py-10 md:py-28">
+      <div class="mx-auto max-w-container-lg">
+        <PropertySlider
+          client:idle
+          header="Your property could be one of them"
+          properties={data}
         />
       </div>
     </section>
