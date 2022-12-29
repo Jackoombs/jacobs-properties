@@ -27,13 +27,16 @@ export default function Stats() {
   return (
     <>
       <Swiper
-        className="flex flex-col gap-8 md:gap-16"
+        className="flex flex-col"
         slidesPerView={1}
         spaceBetween={20}
         onSlideChange={handleSlideChange}
         breakpoints={{
           768: {
             slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
           },
           1280: {
             slidesPerView: 4,
@@ -44,8 +47,16 @@ export default function Stats() {
           // },
         }}
       >
-        <div slot="container-start" className="flex justify-between">
-          <SectionHeader text="We're letting the numbers speak" />
+        <div
+          slot="container-start"
+          className="flex items-start justify-between"
+        >
+          <SectionHeader
+            padding="misc"
+            text="We're letting the numbers speak"
+          />
+        </div>
+        <div slot="container-end">
           <SwiperNavBtns isStartOrEnd={isStartOrEnd} />
         </div>
 

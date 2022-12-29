@@ -14,7 +14,7 @@ export default function Display({
   return (
     <h2
       className={clsx(
-        "text-[2.25rem] font-bold leading-[1.1] md:text-[4rem]",
+        "text-[2.25rem] font-bold leading-[1.1] lg:text-[4rem]",
         textColor,
         addClasses
       )}

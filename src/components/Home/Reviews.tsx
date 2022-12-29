@@ -14,7 +14,7 @@ export default function Reviews() {
     else setIsStartOrEnd("");
   };
   return (
-    <div className="flex items-center gap-4 rounded bg-primary-100 py-8 px-4 md:rounded-lg md:py-section lg:px-[4.5rem]">
+    <div className="flex items-center gap-4 rounded bg-primary-100 py-8 px-4 md:rounded-lg md:py-28 lg:px-[4.5rem]">
       <ReviewNavBtn
         isStartOrEnd={isStartOrEnd}
         swiper={swiper}

@@ -6,36 +6,54 @@ import Stats from "../components/General/Stats";
 import Dropdown from "../components/General/Dropdown";
 import SectionLabel from "../components/General/Text/SectionLabel";
 import SectionHeader from "../components/General/Text/SectionHeader";
+import PageHeader from "../components/General/Text/PageHeader";
+import Copy from "../components/General/Text/Copy";
+import Display from "../components/General/Text/Display";
+import ProcessSlider from "../components/General/ProcessSlider";
+
+const processSlides = {
+  header: "Our selling process at a glance",
+  slides: [
+    {
+      title: "Get the price right",
+      text: "We will give you an accurate and up-to-date valuation of your property, based on data including current market values and recent sales in your area,",
+    },
+    {
+      title: "Prepare marketing materials",
+      text: "We will take professional photos of your property as well as create floor plans and videos to give it the best chance of standing out in the market and attracting leads.",
+    },
+    {
+      title: "List your property",
+      text: "We will advertise your property on leading property portals, social media and our website, as well as contact our database of registered buyers.",
+    },
+    {
+      title: "Arrange viewings",
+      text: "One of our team members will be on hand to carry out accompanied viewings at a time and day that works for you and your prospective buyers.",
+    },
+  ],
+};
 ---
 
 <StandardLayout title="Sellers">
   <main>
-    <section
-      class="relative flex flex-col gap-8 bg-primary-200 py-14 md:flex-row md:gap-0 md:py-section"
-    >
+    <section class="bg-primary-200 py-10 md:py-28">
       <div
-        class="mx-auto grid max-w-container-lg items-center gap-8 md:grid-cols-2"
+        class="mx-auto grid max-w-container-lg items-center gap-7 lg:grid-cols-2"
       >
         <img
           loading="lazy"
-          class="aspect-[1.42_/_1] h-auto w-full max-w-2xl flex-1 self-center rounded-big object-cover object-left md:order-1 md:inline"
+          class="aspect-[1.42_/_1] h-auto w-full self-center rounded-big object-cover object-left lg:order-1"
           src={Home3.src}
           alt=""
         />
-        <div
-          class="mx-auto flex flex-col gap-8 text-primary-100 md:mx-0 md:max-w-lg"
-        >
-          <SectionLabel text="Sellers" />
-          <h1
-            class="text-3xl font-bold md:max-w-md md:text-[3.25rem] md:leading-tight"
-          >
-            Sell your home in Basingstoke
-          </h1>
-          <p class="text-sm md:text-base">
-            There's a lot to consider when selling your home, that's why you
-            need a reliable estate agent by your side. Luckily for you, our
-            people-centric agents are here to help.
-          </p>
+        <div class="flex flex-col text-primary-100 md:max-w-lg">
+          <SectionLabel text="Sellers" padding="hero-lg" />
+          <PageHeader text="Sell your home in Basingstoke" padding="hero" />
+          <Copy
+            text="There's a lot to consider when selling your home, that's why you need a reliable estate agent by your side. Luckily for you, our people-centric agents are here to help."
+            padding="hero-lg"
+            size="lg"
+          />
           <div
             class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
           >
@@ -51,44 +69,52 @@ import SectionHeader from "../components/General/Text/SectionHeader";
       </div>
     </section>
 
-    <section class="w-full py-14 text-center text-primary-100 md:py-32">
-      <div class="mx-auto flex max-w-container-lg flex-col items-center gap-8">
-        <h2
-          class="w-full text-3xl font-bold md:text-[3.25rem] md:leading-tight"
+    <section class="w-full py-10 text-primary-100 md:py-28">
+      <div
+        class="mx-auto flex max-w-container-lg flex-col gap-8 lg:items-center lg:text-center"
+      >
+        <Display text="On a mission to sell your home." />
+        <h3
+          class="max-w-xl text-[1.5rem] font-semibold leading-7 lg:max-w-[51rem] lg:text-[2rem] lg:leading-10"
         >
-          On a mission to sell your home.
-        </h2>
-        <p class="hidden text-2xl font-semibold md:block">
-          Our focus is to get a broader exposure for your property,<br
-          />negotiate a better deal and make sure the process is<br />smooth and
-          stress free all the way.
-        </p>
-        <p class="text-lg font-semibold md:hidden">
           Our focus is to get a broader exposure for your property, negotiate a
           better deal and make sure the process is smooth and stress free all
           the way.
-        </p>
+        </h3>
       </div>
     </section>
 
-    <section class="py-14md:pt-[4.375rem] bg-primary-200 md:pb-section">
+    <section class="bg-primary-200 py-10 md:pb-28">
       <div class="mx-auto max-w-container-lg">
         <Stats client:visible />
       </div>
     </section>
 
-    <section class="bg-white py-14 md:py-section">
-      <div class="mx-auto flex max-w-container-lg flex-col gap-8">
-        <SectionHeader text="Four reasons you should let with us" />
-        <div class="grid gap-12 md:grid-cols-2">
+    <section class="bg-white py-10 md:py-28">
+      <div class="mx-auto max-w-container-lg">
+        <SectionHeader
+          text="Four reasons you should let with us"
+          padding="misc"
+        />
+        <div class="grid gap-12 md:grid-cols-2 lg:gap-16">
           <img
             src={Home3.src}
             loading="lazy"
-            class="aspect-[1.42_/_1] h-auto w-full max-w-2xl flex-1 self-center rounded-big object-cover"
+            class="aspect-[6/5] h-auto w-full flex-1 self-center rounded-big object-cover"
             alt=""
           />
           <Dropdown client:visible />
         </div>
+      </div>
+    </section>
+
+    <section class="bg-primary-200 py-10 md:py-28">
+      <div class="mx-auto max-w-container-lg">
+        <ProcessSlider
+          header={processSlides.header}
+          slides={processSlides.slides}
+          client:idle
+        />
       </div>
     </section>
   </main>

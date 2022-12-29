@@ -64,7 +64,7 @@ export default function FAQCard({
               height: 0,
               transition: { duration: 0.4, opacity: { duration: 0.15 } },
             }}
-            className="row-start-2 text-base  text-primary-100 lg:pl-[calc(3.5rem+2.5rem)] lg:pr-[calc(3.5rem+1.5rem)]"
+            className="row-start-2 text-base text-primary-100 lg:pl-[calc(3.5rem+2.5rem)] lg:pr-[calc(3.5rem+1.5rem)]"
           >
             {answer}
           </motion.p>

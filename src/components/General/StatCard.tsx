@@ -29,17 +29,14 @@ export default function StatCard({ index, text, value, isPercent }: Props) {
   return (
     <div
       className={clsx(
-        "flex flex-col justify-between rounded-lg p-12",
-        index % 2 === 0
-          ? "bg-primary-100 text-white"
-          : "bg-secondary-100 text-primary-100"
+        "flex flex-col justify-between rounded-lg pb-12 text-primary-100"
       )}
     >
-      <div className="flex h-full flex-col justify-center gap-7">
-        <p className="text-6xl font-bold">{`${Math.round(statValue)}${
-          isPercent ? "%" : ""
-        }`}</p>
-        <p className="text-base font-medium">{text}</p>
+      <div className="flex h-full flex-col justify-center">
+        <p className="text-[7.25rem] font-bold leading-[6rem]">{`${Math.round(
+          statValue
+        )}${isPercent ? "%" : ""}`}</p>
+        <p className="font-harm text-[1.25rem] font-medium">{text}</p>
       </div>
     </div>
   );

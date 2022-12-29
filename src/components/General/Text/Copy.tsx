@@ -22,7 +22,7 @@ export default function Copy({
         addClasses,
         textColor,
         size === "sm" && "text-[0.75rem]",
-        size === "md" && "text-[1rem] lg:text-[1.25rem]",
+        size === "md" && "text-[0.875rem] lg:text-[1rem]",
         size === "lg" && "text-[1.125rem] lg:text-[1.25rem]",
         padding === "hero-md" && "pb-6 lg:pb-7",
         padding === "hero-lg" && "pb-6 lg:pb-11"
