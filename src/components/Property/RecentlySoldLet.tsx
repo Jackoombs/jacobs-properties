@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import SwiperNavBtns from "../General/SwiperNavBtns";
-import PropertyCard from "../General/PropertyCard";
-import SoldLetToggle from "../General/SoldLetToggle";
+import PropertyCard from "./PropertyCard";
+import SoldLetToggle from "./SoldLetToggle";
 
 import type { Swiper as SwiperType } from "swiper/types";
 import type { Property } from "../../env";

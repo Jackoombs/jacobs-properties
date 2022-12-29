@@ -1,12 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
 import "swiper/css";
-import Image1 from "../../assets/images/how_help_1.webp";
 import SwiperNavBtns from "../General/SwiperNavBtns";
 import SectionHeader from "../General/Text/SectionHeader";
-import SectionSubHeader from "../General/Text/SectionSubHeader";
 import { useState } from "react";
-import ProcessCard from "../ProcessCard";
+import ProcessCard from "./ProcessCard";
 
 interface Props {
   header: string;
@@ -33,19 +31,11 @@ export default function ProcessSlider({ header, slides }: Props) {
         spaceBetween={20}
         onSlideChange={handleSlideChange}
         breakpoints={{
-          1024: {
+          786: {
             slidesPerView: 2,
           },
-          1400: {
+          1280: {
             slidesPerView: 3,
-            spaceBetween: 40,
-          },
-          1700: {
-            slidesPerView: 3,
-            spaceBetween: 40,
-          },
-          2000: {
-            slidesPerView: 4,
             spaceBetween: 40,
           },
         }}
@@ -55,7 +45,7 @@ export default function ProcessSlider({ header, slides }: Props) {
           <SwiperNavBtns isStartOrEnd={isStartOrEnd} />
         </div>
         {slides.map(({ title, text }, index) => (
-          <SwiperSlide className="h-full" key={index}>
+          <SwiperSlide className="swiper-same-height" key={index}>
             <ProcessCard {...{ title, text, index }} />
           </SwiperSlide>
         ))}
