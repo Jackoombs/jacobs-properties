@@ -40,6 +40,29 @@ const processSlides = {
     },
   ],
 };
+
+const dropdownCards = [
+  {
+    question: "We’re never corporate",
+    answer:
+      "Forget everything you think you know about estate agents. Being a local, independent and family-run business, we believe we’re best-placed to give you the friendly and personable service you deserve.",
+  },
+  {
+    question: "Guided sales progression",
+    answer:
+      "Forget everything you think you know about estate agents. Being a local, independent and family-run business, we believe we’re best-placed to give you the friendly and personable service you deserve.",
+  },
+  {
+    question: "End-to-end services",
+    answer:
+      "Forget everything you think you know about estate agents. Being a local, independent and family-run business, we believe we’re best-placed to give you the friendly and personable service you deserve.",
+  },
+  {
+    question: "People precedes properties",
+    answer:
+      "Forget everything you think you know about estate agents. Being a local, independent and family-run business, we believe we’re best-placed to give you the friendly and personable service you deserve.",
+  },
+];
 ---
 
 <StandardLayout title="Sellers">
@@ -101,17 +124,17 @@ const processSlides = {
     <section class="bg-white py-10 md:py-28">
       <div class="mx-auto max-w-container-lg">
         <SectionHeader
-          text="Four reasons you should let with us"
+          text="Four reasons you should sell with us"
           padding="misc"
         />
-        <div class="grid gap-12 md:grid-cols-2 lg:gap-16">
+        <div class="flex flex-col gap-6 md:grid md:grid-cols-2 lg:gap-16">
           <img
             src={Home3.src}
             loading="lazy"
-            class="aspect-[6/5] h-auto w-full flex-1 self-center rounded-big object-cover"
+            class="order-1 aspect-[6/5] h-auto w-full self-center rounded-big object-cover"
             alt=""
           />
-          <Dropdown client:visible />
+          <Dropdown dropdownCards={dropdownCards} client:visible />
         </div>
       </div>
     </section>
