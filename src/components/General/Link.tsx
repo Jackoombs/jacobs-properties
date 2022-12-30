@@ -27,8 +27,8 @@ export default function Link({ link, text, type, size, classes }: Props) {
         type === "transparent-blue" &&
           "border-2 border-primary-100 bg-transparent text-primary-100 hover:bg-primary-100 hover:text-white",
         size === "sm" && "md:w-16",
-        size === "md" && "md:w-40",
-        size === "lg" && "md:w-52"
+        size === "md" && "md:w-auto md:min-w-[10rem]",
+        size === "lg" && "md:w-auto md:min-w-[13rem]"
       )}
       href={link}
     >
