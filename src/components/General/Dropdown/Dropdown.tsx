@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DropdownCard from "../General/DropdownCard";
+import DropdownCard from "./DropdownCard";
 
 export default function Dropdown() {
   const [currentIndex, setCurrentIndex] = useState(-1);

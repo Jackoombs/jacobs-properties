@@ -2,7 +2,6 @@ import type React from "react";
 import { IoMdChatbubbles } from "react-icons/io/index.js";
 import { FaChevronDown } from "react-icons/fa/index.js";
 import { motion, AnimatePresence } from "framer-motion";
-import clsx from "clsx";
 
 interface Props {
   question: string;

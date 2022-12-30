@@ -15,8 +15,8 @@ import Video from "../components/General/Video";
 import RecentlySoldLet from "../components/Property/RecentlySoldLet";
 import Thumbnail from "../assets/images/thumbnail.webp";
 import BrochureForm from "../components/Home/BrochureForm";
-import Reviews from "../components/Home/Reviews";
-import FAQs from "../components/Home/FAQs";
+import Reviews from "../components/General/Reviews/Reviews";
+import FAQs from "../components/General/FAQs/FAQs";
 import Display from "../components/General/Text/Display";
 ---
 
@@ -137,7 +137,9 @@ import Display from "../components/General/Text/Display";
         src={Home3.src}
         alt=""
       />
-      <div class="mx-auto grid max-w-container-lg gap-7 lg:grid-cols-2">
+      <div
+        class="mx-auto grid w-full max-w-container-lg items-center gap-7 lg:grid-cols-2"
+      >
         <div>
           <div class="flex flex-col lg:max-w-xl lg:justify-center">
             <SectionLabel addClasses="pb-3" text="Sales Brochure" />

@@ -1,6 +1,4 @@
-import SectionLabel from "./Text/SectionLabel";
-import SectionSubHeader from "./Text/SectionSubHeader";
-import Copy from "./Text/Copy";
+import SectionSubHeader from "../Text/SectionSubHeader";
 
 interface Props {
   title: string;
