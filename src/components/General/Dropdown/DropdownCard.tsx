@@ -31,7 +31,7 @@ export default function DropdownCard({
       }}
       className="relative flex w-full max-w-4xl flex-col gap-4 rounded-big bg-primary-200 py-8 px-2 text-left md:px-9"
     >
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex w-full items-start justify-between gap-2">
         <h3 className="w-full flex-1 text-lg font-semibold leading-[1.25] text-primary-400 lg:text-[1.5rem] xl:text-[2rem]">
           {question}
         </h3>
