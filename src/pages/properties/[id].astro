@@ -45,7 +45,6 @@ const res2 = await fetch(
 );
 const data = await res2.json();
 const location: GoogleMapProps["center"] = data.results[0].geometry.location;
-console.log(location);
 ---
 
 <StandardLayout title={Address1}>
