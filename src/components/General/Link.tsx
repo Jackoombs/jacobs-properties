@@ -8,11 +8,17 @@ interface Props {
     | "white"
     | "transparent-white"
     | "transparent-blue";
-  size: "sm" | "md" | "lg";
+  size?: "default" | "sm" | "md" | "lg";
   classes?: string;
 }
 
-export default function Link({ link, text, type, size, classes }: Props) {
+export default function Link({
+  link,
+  text,
+  type,
+  size = "default",
+  classes,
+}: Props) {
   return (
     <a
       className={clsx(
