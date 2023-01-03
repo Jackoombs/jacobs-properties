@@ -42,6 +42,7 @@ module.exports = {
       borderRadius: {
         big: "0.625rem",
       },
+      appearance: "textfield",
     },
   },
   plugins: [require("@tailwindcss/line-clamp")],

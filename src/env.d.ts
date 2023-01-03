@@ -10,8 +10,11 @@ export interface Property {
   PriceString: string;
   TotalBedrooms: number;
   Bathrooms: number;
+  ReceptionRooms: number;
   InternalLettingStatus?: string;
   InternalSaleStatus?: string;
+  EPC?: Image;
+  Floorplan?: Image;
   TimeAmended: Date;
 }
 
