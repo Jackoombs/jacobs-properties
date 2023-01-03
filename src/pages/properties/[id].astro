@@ -1,0 +1,115 @@
+---
+import ImageSlider from "../../components/General/ImageCarousel/ImageSlider";
+import Link from "../../components/General/Link";
+import Copy from "../../components/General/Text/Copy";
+import SectionHeader from "../../components/General/Text/SectionHeader";
+import PropertyDetails from "../../components/Property/PropertyDetails";
+import StandardLayout from "../../layouts/StandardLayout.astro";
+
+import type { Property } from "../../env";
+import type { GoogleMapProps } from "@react-google-maps/api";
+import StampDutyCalc from "../../components/General/Calculators/StampDutyCalc";
+
+export async function getStaticPaths() {
+  const res = await fetch("https://jacobs-server.onrender.com/properties");
+  const propertyList = await res.json();
+  return propertyList.map((property: Property) => ({
+    params: {
+      id: property.ID,
+    },
+    props: {
+      property,
+    },
+  }));
+}
+
+const {
+  ID,
+  Description,
+  Image,
+  Address1,
+  Address2,
+  Status,
+  PriceString,
+  TotalBedrooms,
+  ReceptionRooms,
+  Bathrooms,
+  Floorplan,
+  EPC,
+  InternalLettingStatus,
+  InternalSaleStatus,
+}: Property = Astro.props.property;
+
+const res2 = await fetch(
+  `https://maps.googleapis.com/maps/api/geocode/json?address=${Address1}%20${Address2}&key=AIzaSyBxWEpPYewtC2ceNcOMkffocrfaDisHXM0`
+);
+const data = await res2.json();
+const location: GoogleMapProps["center"] = data.results[0].geometry.location;
+console.log(location);
+---
+
+<StandardLayout title={Address1}>
+  <section class="py-10 md:pb-28">
+    <div
+      class="mx-auto flex w-full max-w-container-lg flex-col gap-4 xl:flex-row xl:justify-between xl:gap-16"
+    >
+      <ImageSlider
+        client:load
+        images={Image.map((e) => e.Filepath)}
+        description="hi"
+      />
+      <div class="grid flex-1 sm:max-w-[34rem] xl:grid-rows-[1fr_auto_1fr]">
+        <a
+          class="hidden w-max pb-6 text-[0.75rem] font-semibold uppercase leading-[1.1] tracking-[2.8px] text-primary-100 duration-100 hover:text-secondary-100 lg:text-[0.875rem] xl:block"
+          href="">Back to properties</a
+        >
+        <div class="flex flex-col gap-2 lg:gap-5">
+          <p
+            class="mb-2 flex h-10 w-max items-center justify-center rounded-md bg-secondary-100 px-7 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 lg:h-14"
+          >
+            For sale
+          </p>
+          <ul class="flex gap-7 text-primary-100">
+            <li
+              class="text-[0.875rem] font-semibold uppercase tracking-[1.4px]"
+            >
+              {`${TotalBedrooms} Bed`}
+            </li>
+            <div class="h-3 self-center border-l-2 border-secondary-100"></div>
+            <li
+              class="text-[0.875rem] font-semibold uppercase tracking-[1.4px]"
+            >
+              {`${Bathrooms} Bath`}
+            </li>
+          </ul>
+          <div class="pb-4 lg:pb-0">
+            <SectionHeader
+              addClasses={"lg:pb-2"}
+              text={`${Address1}, ${Address2}`}
+            />
+            <SectionHeader text={PriceString} />
+          </div>
+          <Copy
+            addClasses="hidden lg:block"
+            text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore."
+            size="lg"
+          />
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <Link text="Book a viewing" size="lg" link="/" type="primary" />
+            <Link text="Share property" size="lg" link="/" type="secondary" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <SectionHeader text="Stamp duty calculator" padding="misc" />
+    <StampDutyCalc client:visible />
+  </section>
+
+  <PropertyDetails
+    {...{ Description, Floorplan, EPC, location }}
+    client:visible
+  />
+</StandardLayout>
