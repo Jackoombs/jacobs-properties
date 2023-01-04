@@ -7,7 +7,7 @@ interface Props {
 
 export default function PropertyMap({ location }: Props) {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyBxWEpPYewtC2ceNcOMkffocrfaDisHXM0",
+    googleMapsApiKey: import.meta.env.PUBLIC_GOOGLE_MAPS_KEY,
   });
 
   if (!isLoaded) return <div>Is Loading</div>;

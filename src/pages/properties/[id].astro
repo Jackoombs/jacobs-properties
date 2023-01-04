@@ -42,7 +42,9 @@ const {
 }: Property = Astro.props.property;
 
 const res2 = await fetch(
-  `https://maps.googleapis.com/maps/api/geocode/json?address=${Address1}%20${Address2}&key=AIzaSyBxWEpPYewtC2ceNcOMkffocrfaDisHXM0`
+  `https://maps.googleapis.com/maps/api/geocode/json?address=${Address1}%20${Address2}&key=${
+    import.meta.env.PUBLIC_GOOGLE_MAPS_KEY
+  }`
 );
 const data = await res2.json();
 const location: GoogleMapProps["center"] = data.results[0].geometry.location;
