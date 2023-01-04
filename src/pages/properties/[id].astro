@@ -9,6 +9,7 @@ import StandardLayout from "../../layouts/StandardLayout.astro";
 import type { Property } from "../../env";
 import type { GoogleMapProps } from "@react-google-maps/api";
 import StampDutyCalc from "../../components/General/Calculators/StampDutyCalc";
+import MortgageCalc from "../../components/General/Calculators/MortgageCalc";
 
 export async function getStaticPaths() {
   const res = await fetch("https://jacobs-server.onrender.com/properties");
@@ -102,9 +103,12 @@ const location: GoogleMapProps["center"] = data.results[0].geometry.location;
     </div>
   </section>
 
-  <section>
-    <SectionHeader text="Stamp duty calculator" padding="misc" />
-    <StampDutyCalc client:visible />
+  <section class="bg-primary-200 py-10 md:py-28">
+    <div class="mx-auto max-w-container-lg">
+      <SectionHeader text="Stamp duty calculator" padding="misc" />
+      <StampDutyCalc client:visible />
+      <MortgageCalc client:visible />
+    </div>
   </section>
 
   <PropertyDetails
