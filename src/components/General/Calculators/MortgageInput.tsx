@@ -21,10 +21,13 @@ export default function MortgageInput({
 }: Props) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { value } = e.currentTarget;
-    let pattern = /^[\d]*\.?[\d]*$/;
+    let pattern = /^\d+(\.\d{1,2})?$/;
     const valueNoSign = getNumber(value);
     const formattedValue = formatNumber(valueNoSign);
 
+    if (/\d+\.$/.test(value.replace(/[^\d.]/g, "")) && id === "interestRate") {
+      return setValue(`${value.replace(/[^\d.]/g, "")}%`);
+    }
     if (pattern.test(valueNoSign.toString())) {
       setValue(formattedValue);
     }

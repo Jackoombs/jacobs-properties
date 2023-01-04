@@ -105,16 +105,18 @@ const location: GoogleMapProps["center"] = data.results[0].geometry.location;
     </div>
   </section>
 
-  <section class="bg-primary-200 py-10 md:py-28">
-    <div class="mx-auto max-w-container-lg">
-      <SectionHeader text="Stamp duty calculator" padding="misc" />
-      <StampDutyCalc client:visible />
-      <MortgageCalc client:visible />
-    </div>
-  </section>
-
   <PropertyDetails
     {...{ Description, Floorplan, EPC, location }}
     client:visible
   />
+
+  <section class="bg-primary-200 py-10 md:py-28">
+    <div class="mx-auto max-w-container-lg">
+      <SectionHeader text="Stamp duty calculator" padding="misc" />
+      <div class="flex w-full flex-col gap-7 lg:flex-row xl:gap-16">
+        <StampDutyCalc client:visible />
+        <MortgageCalc client:visible />
+      </div>
+    </div>
+  </section>
 </StandardLayout>

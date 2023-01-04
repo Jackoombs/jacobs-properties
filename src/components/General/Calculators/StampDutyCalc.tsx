@@ -71,7 +71,7 @@ export default function StampDutyCalc() {
   };
 
   return (
-    <div className="w-full rounded-big bg-primary-100 p-8 lg:p-12">
+    <div className="w-full rounded-big bg-primary-100 px-3 py-8 md:px-8 lg:p-12">
       <form>
         <SectionSubHeader
           addClasses="pb-9"

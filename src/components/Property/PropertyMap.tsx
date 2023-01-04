@@ -16,7 +16,7 @@ export default function PropertyMap({ location }: Props) {
     <GoogleMap
       zoom={14}
       center={location}
-      mapContainerClassName="w-full aspect-property h-auto min-h-[20rem] rounded-big"
+      mapContainerClassName="w-full aspect-property h-auto min-h-[12rem] rounded-big"
     >
       {location !== undefined && (
         <Marker

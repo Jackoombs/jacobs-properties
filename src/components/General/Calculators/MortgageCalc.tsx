@@ -55,11 +55,15 @@ export default function MortgageCalc() {
       loanAmount *
       (monthlyInterestRate /
         (1 - Math.pow(1 + monthlyInterestRate, -loanLengthMonths)));
-    return formatPrice(monthlyPayment);
+    if (monthlyPayment < 0 || monthlyPayment === Infinity) {
+      return formatPrice(0);
+    } else {
+      return formatPrice(monthlyPayment);
+    }
   };
 
   return (
-    <div className="w-full rounded-big bg-primary-100 p-8 lg:p-12">
+    <div className="w-full rounded-big bg-primary-100 px-3 py-8 md:px-8 lg:p-12">
       <form>
         <SectionSubHeader
           addClasses="pb-9"
@@ -67,8 +71,8 @@ export default function MortgageCalc() {
           size="lg"
           text="Stamp duty calculator"
         />
-        <div className="flex flex-col gap-5 pb-9">
-          <div className="flex justify-between gap-6">
+        <div className="flex flex-col gap-3 pb-9">
+          <div className="flex flex-col justify-between gap-3 md:flex-row md:gap-6">
             <MortgageInput
               id="price"
               label="Property Price"
@@ -88,7 +92,7 @@ export default function MortgageCalc() {
               getNumber={getNumber}
             />
           </div>
-          <div className="flex justify-between gap-6">
+          <div className="flex flex-col justify-between gap-3 md:flex-row md:gap-6">
             <MortgageInput
               id="loanLength"
               label="Loan length"
