@@ -1,6 +1,5 @@
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import type { GoogleMapProps } from "@react-google-maps/api";
-import LocationDot from "../../assets/images/location-dot-solid.svg";
 
 interface Props {
   location: GoogleMapProps["center"];
