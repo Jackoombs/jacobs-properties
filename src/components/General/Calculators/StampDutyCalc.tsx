@@ -71,7 +71,7 @@ export default function StampDutyCalc() {
   };
 
   return (
-    <div className="rounded-big bg-primary-100 p-8 lg:p-12">
+    <div className="w-full rounded-big bg-primary-100 p-8 lg:p-12">
       <form>
         <SectionSubHeader
           addClasses="pb-9"
@@ -107,17 +107,14 @@ export default function StampDutyCalc() {
             <label className="font-harm text-xs text-white" htmlFor="price">
               Property Price
             </label>
-            <div className="relative flex items-center justify-center">
-              <input
-                id="price"
-                type="text"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                value={price}
-                onChange={handleChange}
-                className="relative w-full rounded-big bg-white px-6 py-4  text-primary-100 text-opacity-70"
-              />
-            </div>
+            <input
+              id="price"
+              type="text"
+              inputMode="numeric"
+              value={price}
+              onChange={handleChange}
+              className="relative w-full rounded-big bg-white px-6 py-4  text-primary-100 text-opacity-70"
+            />
           </div>
         </div>
         <div className="text-white">
