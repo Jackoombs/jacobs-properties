@@ -48,6 +48,23 @@ const res2 = await fetch(
 );
 const data = await res2.json();
 const location: GoogleMapProps["center"] = data.results[0].geometry.location;
+
+let salesStatus = "";
+InternalLettingStatus ? (salesStatus = "lettings") : "sales";
+
+const res3 = await fetch(
+  `https://jacobs-server.onrender.com/properties/${salesStatus}`
+);
+const similarProperties: Property[] = await res3.json();
+const similarPropertiesFiltered = similarProperties.filter(
+  (property) => property.ID !== ID
+  // ((property.InternalLettingStatus === InternalLettingStatus &&
+  //   salesStatus === "lettings") ||
+  //   (property.InternalSaleStatus === InternalSaleStatus &&
+  //     salesStatus === "sales"))
+);
+
+console.log(similarPropertiesFiltered.length);
 ---
 
 <StandardLayout title={Address1}>
