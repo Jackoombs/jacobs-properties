@@ -3,7 +3,7 @@ interface Props {
   Address1: string;
   Address2: string;
   PriceString: string;
-  toggle: string;
+  status: string | undefined;
 }
 
 export default function PropertyCard({
@@ -11,8 +11,38 @@ export default function PropertyCard({
   Address1,
   Address2,
   PriceString,
-  toggle,
+  status,
 }: Props) {
+  const statusString = () => {
+    if (
+      status === "Under offer - Available" ||
+      status === "Sold STC - Available" ||
+      status === "Sold STC - Unavailable"
+    ) {
+      return "SSTC";
+    } else if (status === "Exchanged" || status === "Completed") {
+      return "Sold";
+    } else if (status === "For Sale - Available") {
+      return "Available";
+    }
+
+    if (
+      status === "To Let - Available" ||
+      status === "Tenancy Current - Available"
+    ) {
+      return "To Let";
+    } else if (
+      status === "Tenancy Current - Unavailable" ||
+      status === "Under Offer - Available" ||
+      status === "Arranging Tenancy - Available" ||
+      status === "Tenancy Finished"
+    ) {
+      return "Let";
+    }
+
+    return "N/A";
+  };
+
   return (
     <a
       className="flex flex-col gap-4 text-primary-100"
@@ -38,8 +68,8 @@ export default function PropertyCard({
             </p>
           </div>
         </div>
-        <p className="flex h-10 w-20 items-center justify-center rounded-lg bg-secondary-100 text-xs font-bold uppercase tracking-[2.4px] lg:text-[0.875rem]">
-          {toggle}
+        <p className="flex h-10 min-w-[5rem] items-center justify-center rounded-lg bg-secondary-100 text-xs font-bold uppercase tracking-[2.4px] lg:text-[0.875rem]">
+          {statusString()}
         </p>
       </div>
     </a>

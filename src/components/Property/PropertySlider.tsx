@@ -47,10 +47,24 @@ export default function PropertySlider({ header, properties }: Props) {
           <SwiperNavBtns isStartOrEnd={isStartOrEnd} />
         </div>
         {properties.map(
-          ({ Address1, Address2, ID, PriceString }: Property, index) => (
+          (
+            {
+              Address1,
+              Address2,
+              ID,
+              PriceString,
+              InternalLettingStatus,
+              InternalSaleStatus,
+            }: Property,
+            index
+          ) => (
             <SwiperSlide key={index}>
               <PropertyCard
-                toggle="SOLD"
+                status={
+                  InternalLettingStatus
+                    ? InternalLettingStatus
+                    : InternalSaleStatus
+                }
                 {...{ Address1, Address2, ID, PriceString }}
               />
             </SwiperSlide>
