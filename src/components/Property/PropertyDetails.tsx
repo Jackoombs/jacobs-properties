@@ -75,7 +75,7 @@ export default function PropertyDetails({
                 <Link text="Get Directions" type="primary" link="/" />
                 <Link text="Download Brochure" type="primary" link="/" />
               </div>
-              <div className="flex w-full flex-col gap-5 rounded-big bg-secondary-100 p-11 text-primary-100">
+              <div className="flex w-full flex-col gap-5 rounded-big bg-secondary-100 px-3 py-8 text-primary-100 md:px-8 lg:p-12">
                 <SectionHeader text="Interested in this property?" />
                 <Copy
                   text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore."
