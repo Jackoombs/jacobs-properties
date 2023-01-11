@@ -33,7 +33,7 @@ export default function PropertyDetailMobileMenu({
           <button
             onClick={() => setCurrentMenuItem(item)}
             className={clsx(
-              "flex h-14 w-full items-center justify-center rounded-big rounded-b-none text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 md:min-w-[8rem] md:text-black lg:min-w-[14rem]",
+              "flex h-14 w-full items-center justify-center rounded-big text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 md:min-w-[8rem] md:rounded-b-none md:text-black lg:min-w-[14rem]",
               item === currentMenuItem
                 ? "bg-secondary-100 md:bg-primary-200"
                 : "bg-white"
