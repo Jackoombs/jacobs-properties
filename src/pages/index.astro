@@ -18,6 +18,32 @@ import BrochureForm from "../components/Home/BrochureForm";
 import Reviews from "../components/General/Reviews/Reviews";
 import FAQs from "../components/General/FAQs/FAQs";
 import Display from "../components/General/Text/Display";
+import type { Property } from "../env";
+
+const filterProperties = (properties: Property[]) => {
+  return properties
+    .filter(
+      (property) =>
+        property.InternalSaleStatus !== "For Sale - Available" &&
+        property.InternalLettingStatus !== "To Let - Available"
+    )
+    .sort(function (a: Property, b: Property) {
+      return (
+        (new Date(b.TimeAmended) as any) - (new Date(a.TimeAmended) as any)
+      );
+    });
+};
+const salesRes = await fetch(
+  "https://jacobs-server.onrender.com/properties/sales"
+);
+const salesData: Property[] = await salesRes.json();
+const salesProperties = filterProperties(salesData);
+
+const lettingsRes = await fetch(
+  "https://jacobs-server.onrender.com/properties/lettings"
+);
+const lettingsData: Property[] = await lettingsRes.json();
+const lettingsProperties = filterProperties(lettingsData);
 ---
 
 <Layout title="Welcome to Jacobs Properties.">
@@ -124,7 +150,10 @@ import Display from "../components/General/Text/Display";
 
     <section class="overflow-hidden bg-white py-10 md:py-28">
       <div class="mx-auto max-w-container-lg">
-        <RecentlySoldLet client:idle />
+        <RecentlySoldLet
+          {...{salesProperties, lettingsProperties}}
+          client:idle
+        />
       </div>
     </section>
 
