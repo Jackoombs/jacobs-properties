@@ -23,7 +23,7 @@ export default function PropertyCard({
     } else if (status === "Exchanged" || status === "Completed") {
       return "Sold";
     } else if (status === "For Sale - Available") {
-      return "Available";
+      return "For Sale";
     }
 
     if (
@@ -68,7 +68,7 @@ export default function PropertyCard({
             </p>
           </div>
         </div>
-        <p className="flex h-10 min-w-[5rem] items-center justify-center rounded-lg bg-secondary-100 text-xs font-bold uppercase tracking-[2.4px] lg:text-[0.875rem]">
+        <p className="flex h-10 min-w-[5rem] items-center justify-center rounded-lg bg-secondary-100 px-2 text-xs font-bold uppercase tracking-[2.4px] lg:text-[0.875rem]">
           {statusString()}
         </p>
       </div>
