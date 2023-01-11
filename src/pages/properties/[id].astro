@@ -10,6 +10,7 @@ import type { Property } from "../../env";
 import type { GoogleMapProps } from "@react-google-maps/api";
 import StampDutyCalc from "../../components/General/Calculators/StampDutyCalc";
 import MortgageCalc from "../../components/General/Calculators/MortgageCalc";
+import PropertySlider from "../../components/Property/PropertySlider";
 
 export async function getStaticPaths() {
   const res = await fetch("https://jacobs-server.onrender.com/properties");
@@ -49,22 +50,38 @@ const res2 = await fetch(
 const data = await res2.json();
 const location: GoogleMapProps["center"] = data.results[0].geometry.location;
 
-let salesStatus = "";
-InternalLettingStatus ? (salesStatus = "lettings") : "sales";
+let salesStatus = InternalLettingStatus ? "lettings" : "sales";
+
+const priceStringToPriceNumber = (price: string): number => {
+  return +price.split(" ")[0].replace(/[^0-9.]/g, "");
+};
+
+const findSimilarllyPricedProperties = (
+  propertyList: Property[],
+  propertyPrice: string
+) => {
+  const value = priceStringToPriceNumber(propertyPrice);
+
+  propertyList.sort((a, b) => {
+    const priceA = priceStringToPriceNumber(a.PriceString);
+    const priceB = priceStringToPriceNumber(b.PriceString);
+    const differenceA = priceA > value ? priceA - value : value - priceA;
+    const differenceB = priceB > value ? priceB - value : value - priceB;
+
+    return differenceA > differenceB ? 1 : -1;
+  });
+
+  return propertyList;
+};
 
 const res3 = await fetch(
   `https://jacobs-server.onrender.com/properties/${salesStatus}`
 );
 const similarProperties: Property[] = await res3.json();
-const similarPropertiesFiltered = similarProperties.filter(
-  (property) => property.ID !== ID
-  // ((property.InternalLettingStatus === InternalLettingStatus &&
-  //   salesStatus === "lettings") ||
-  //   (property.InternalSaleStatus === InternalSaleStatus &&
-  //     salesStatus === "sales"))
-);
-
-console.log(similarPropertiesFiltered.length);
+const similarPropertiesFilteredSorted = findSimilarllyPricedProperties(
+  similarProperties,
+  PriceString
+).filter((property) => property.ID !== ID);
 ---
 
 <StandardLayout title={Address1}>
@@ -134,6 +151,16 @@ console.log(similarPropertiesFiltered.length);
         <StampDutyCalc client:visible />
         <MortgageCalc client:visible />
       </div>
+    </div>
+  </section>
+
+  <section class="bg-primary-200 py-10 md:py-28">
+    <div class="mx-auto max-w-container-lg">
+      <PropertySlider
+        client:idle
+        header="Similar Properties"
+        properties={similarPropertiesFilteredSorted}
+      />
     </div>
   </section>
 </StandardLayout>
