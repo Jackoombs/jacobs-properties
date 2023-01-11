@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function StampDutyCalc() {
   const [buyerStatus, setBuyerStatus] = useState("first");
-  const [price, setPrice] = useState("£");
+  const [price, setPrice] = useState("£300,000");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
