@@ -1,0 +1,12 @@
+---
+import StandardLayout from "../layouts/StandardLayout.astro";
+import PropertySearch from "../components/Form/PropertySearch";
+import type { Property } from "../env";
+
+const res = await fetch("https://jacobs-server.onrender.com/properties");
+const properties: Property[] = await res.json();
+---
+
+<StandardLayout title="Property Search">
+  <PropertySearch {...{properties}} client:load />
+</StandardLayout>
