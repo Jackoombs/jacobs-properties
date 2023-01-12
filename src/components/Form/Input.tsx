@@ -22,7 +22,7 @@ export default function Input({
       <input
         className="flex h-16 w-full items-center rounded-big px-5 text-primary-100 outline-none outline-offset-0 placeholder:text-placeholder focus:outline-primary-100"
         {...register(id)}
-        {...{ type, placeholder }}
+        {...{ type, placeholder, name }}
       />
       {errors[id]?.message && (
         <p className="pt-1 text-xs text-red-600">{errors[id]?.message}</p>
