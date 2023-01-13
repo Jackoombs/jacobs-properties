@@ -1,6 +1,7 @@
 import SelectInput from "./SelectInput";
 import { motion, AnimatePresence } from "framer-motion";
 import { BsCheck } from "react-icons/bs/index.js";
+import { priceNumberToPriceString } from "../../utils";
 import clsx from "clsx";
 
 interface Props {
@@ -36,14 +37,6 @@ export default function PropertySearchMenu({
   excludeSoldOffer,
   setExcludeSoldOffer,
 }: Props) {
-  const formatPrice = (number: number) => {
-    return new Intl.NumberFormat("en-GB", {
-      style: "currency",
-      currency: "GBP",
-      minimumFractionDigits: 0,
-    }).format(number);
-  };
-
   const generatePriceOptions = (
     minPrice: number,
     maxPrice: number,
@@ -55,7 +48,7 @@ export default function PropertySearchMenu({
       values.push(minPrice + currentValue);
       currentValue += interval;
     }
-    return values.map((value) => formatPrice(value));
+    return values.map((value) => priceNumberToPriceString(value));
   };
 
   return (
