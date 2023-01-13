@@ -6,13 +6,14 @@ import React, { useEffect, useState } from "react";
 import PropertySearchBar from "./PropertySearchBar";
 import clsx from "clsx";
 import PropertySearchMenu from "./PropertySearchMenu";
-import type { SearchData } from "./PropertySearch";
+import type { SearchCriteria } from "./PropertySearch";
 
 interface Props {
-  setData: React.Dispatch<React.SetStateAction<SearchData | undefined>>;
+  setSearchCriteria: React.Dispatch<React.SetStateAction<SearchCriteria>>;
 }
 
-export default function PropertySearchForm({ setData }: Props) {
+export default function PropertySearchForm({ setSearchCriteria }: Props) {
+  const [mouseDown, setMouseDown] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isBuyRent, setIsBuyRent] = useState(false);
   const [location, setLocation] = useState("");
@@ -64,6 +65,16 @@ export default function PropertySearchForm({ setData }: Props) {
 
     const data = {
       isBuyRent,
+      location,
+      minBeds,
+      minPrice,
+      maxPrice,
+      propertyType,
+      excludeSoldOffer,
+    };
+
+    const searchCriteria = {
+      isBuyRent,
       location: location ? location : undefined,
       minBeds: minBeds !== "Min Beds" ? minBeds : undefined,
       minPrice: getNumber(minPrice),
@@ -71,8 +82,9 @@ export default function PropertySearchForm({ setData }: Props) {
       propertyType: propertyType !== "Property Type" ? propertyType : undefined,
       excludeSoldOffer,
     };
+
     localStorage.setItem("data", JSON.stringify(data));
-    setData(data);
+    setSearchCriteria(searchCriteria);
   };
 
   return (
@@ -119,7 +131,7 @@ export default function PropertySearchForm({ setData }: Props) {
           </AnimatePresence>
         </button>
         <PropertySearchMenu
-          addClasses="lg:hidden"
+          addClasses="lg-invisible"
           {...{
             menuOpen,
             minBeds,
@@ -137,9 +149,12 @@ export default function PropertySearchForm({ setData }: Props) {
       </div>
 
       <button
+        onMouseDown={() => setMouseDown(true)}
+        onMouseUp={() => setMouseDown(false)}
         type="submit"
         className={clsx(
-          "flex h-[3.5rem] w-full min-w-[10rem] items-center justify-center gap-2 rounded-big bg-secondary-100 px-3 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 lg:h-[4.625rem]"
+          "flex h-[3.5rem] w-full min-w-[10rem] items-center justify-center gap-2 rounded-big bg-secondary-100 px-3 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 lg:h-[4.625rem]",
+          mouseDown && "bg-primary-100 text-secondary-100"
         )}
       >
         Search <IoIosSearch className="text-xl" />
