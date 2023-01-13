@@ -2,11 +2,10 @@
 
 export interface Property {
   ID: string;
-  Description: string;
-  Image: Array<Image>;
+  Description?: string;
+  Image: Image[];
   Address1: string;
   Address2: string;
-  Status: string;
   PriceString: string;
   TotalBedrooms: number;
   Bathrooms: number;
@@ -14,10 +13,14 @@ export interface Property {
   InternalLettingStatus?: string;
   InternalSaleStatus?: string;
   EPC?: Image;
-  Floorplan?: Image;
-  TimeAmended: Date;
+  Floorplan?: Image | Image[];
+  TimeAmended: string;
 }
 
 interface Image {
   Filepath: string;
+  Caption: string;
+  TimeAmended: string;
+  Width?: number;
+  Height?: number;
 }
