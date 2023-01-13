@@ -16,7 +16,7 @@ export default function SectionHeader({
   return (
     <h2
       className={clsx(
-        "text-[1.75rem] font-semibold leading-[1.25] lg:text-[2.375rem]",
+        "lg:2rem text-[1.75rem] font-semibold leading-[1.25] xl:text-[2.375rem]",
         padding === "hero" && "pb-3 lg:pb-6",
         padding === "misc" && "pb-9 lg:pb-[4.5rem]",
         textColor,
