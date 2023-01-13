@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Display from "../General/Text/Display";
 import PropertySearchForm from "./PropertySearchForm";
 import type { Property } from "../../env";
@@ -7,7 +7,6 @@ import Fuse from "fuse.js";
 import PropertyGridView from "../Property/PropertyGridView";
 import PropertyListView from "../Property/PropertyListView";
 import { ViewToggle } from "../Property/ViewToggle";
-import useWindowWide from "../General/useWindowWide";
 import Copy from "../General/Text/Copy";
 
 interface Props {
@@ -25,8 +24,18 @@ export interface SearchCriteria {
 }
 
 export default function PropertySearch({ properties }: Props) {
-  const wide = useWindowWide(1024);
-  const [viewType, setViewType] = useState<"list" | "grid" | "map">("grid");
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setWidth(window.innerWidth);
+    });
+  }, []);
+
+  const [viewType, setViewType] = useState<"list" | "grid" | "map">(
+    width < 1024 ? "grid" : "list"
+  );
+
   const [searchCriteria, setSearchCriteria] = useState<SearchCriteria>({
     isBuyRent: false,
     location: undefined,
@@ -36,8 +45,6 @@ export default function PropertySearch({ properties }: Props) {
     propertyType: undefined,
     excludeSoldOffer: false,
   });
-
-  console.log(wide);
 
   const filterProperties = (
     properties: Property[],
@@ -121,14 +128,14 @@ export default function PropertySearch({ properties }: Props) {
             size="lg"
             text={`${filterProperties.length} properties`}
           />
-          {!wide && (
+          {width < 1024 && (
             <ViewToggle
               state={viewType}
               setState={setViewType}
               isMobile={true}
             />
           )}
-          {wide && (
+          {width > 1023 && (
             <ViewToggle
               state={viewType}
               setState={setViewType}

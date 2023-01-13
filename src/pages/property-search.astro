@@ -8,5 +8,5 @@ const properties: Property[] = await res.json();
 ---
 
 <StandardLayout title="Property Search">
-  <PropertySearch {...{properties}} client:load />
+  <PropertySearch {...{properties}} client:only />
 </StandardLayout>
