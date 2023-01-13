@@ -2,9 +2,13 @@ import { useState } from "react";
 import Display from "../General/Text/Display";
 import PropertySearchForm from "./PropertySearchForm";
 import type { Property } from "../../env";
-import PropertyCard from "../Property/PropertyCard";
 import { priceStringToPriceNumber } from "../../utils";
 import Fuse from "fuse.js";
+import PropertyGridView from "../Property/PropertyGridView";
+import PropertyListView from "../Property/PropertyListView";
+import { ViewToggle } from "../Property/ViewToggle";
+import useWindowWide from "../General/useWindowWide";
+import Copy from "../General/Text/Copy";
 
 interface Props {
   properties: Property[];
@@ -21,6 +25,8 @@ export interface SearchCriteria {
 }
 
 export default function PropertySearch({ properties }: Props) {
+  const wide = useWindowWide(1024);
+  const [viewType, setViewType] = useState<"list" | "grid" | "map">("grid");
   const [searchCriteria, setSearchCriteria] = useState<SearchCriteria>({
     isBuyRent: false,
     location: undefined,
@@ -30,6 +36,8 @@ export default function PropertySearch({ properties }: Props) {
     propertyType: undefined,
     excludeSoldOffer: false,
   });
+
+  console.log(wide);
 
   const filterProperties = (
     properties: Property[],
@@ -83,15 +91,12 @@ export default function PropertySearch({ properties }: Props) {
       };
       const fuse = new Fuse(result, options);
       const fuseResult = fuse.search(searchCriteria.location);
-      console.log(
-        fuseResult.map(
-          (result) => `${result.item.Address1}, ${result.item.Address2}`
-        )
-      );
       return fuseResult.map((result) => result.item);
     }
     return result;
   };
+
+  const filteredProperties = filterProperties(properties, searchCriteria);
 
   return (
     <>
@@ -109,25 +114,34 @@ export default function PropertySearch({ properties }: Props) {
         </div>
       </section> */}
 
-      <section className="justify-center py-10 md:flex md:pb-28">
-        <div className="mx-auto grid w-full max-w-container-lg grid-cols-1 gap-x-5 gap-y-10 md:grid-cols-2 lg:grid-cols-3 xl:gap-16">
-          {filterProperties(properties, searchCriteria).map(
-            ({
-              ID,
-              Address1,
-              Address2,
-              PriceString,
-              InternalLettingStatus,
-              InternalSaleStatus,
-            }) => (
-              <PropertyCard
-                key={ID}
-                {...{ ID, Address1, Address2, PriceString }}
-                status={InternalLettingStatus || InternalSaleStatus}
-              />
-            )
+      <section className="overflow-hidden py-10 md:pb-28">
+        <div className="mx-auto flex w-full max-w-container-lg items-center justify-between pb-8 lg:pb-10">
+          <Copy
+            addClasses="order-1 lg:order-none"
+            size="lg"
+            text={`${filterProperties.length} properties`}
+          />
+          {!wide && (
+            <ViewToggle
+              state={viewType}
+              setState={setViewType}
+              isMobile={true}
+            />
+          )}
+          {wide && (
+            <ViewToggle
+              state={viewType}
+              setState={setViewType}
+              isMobile={false}
+            />
           )}
         </div>
+        {viewType === "grid" && (
+          <PropertyGridView properties={filteredProperties} />
+        )}
+        {viewType === "list" && (
+          <PropertyListView properties={filteredProperties} />
+        )}
       </section>
     </>
   );
