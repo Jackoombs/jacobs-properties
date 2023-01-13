@@ -14,7 +14,6 @@ interface Props {
 export default function ImageSlider({ images, description }: Props) {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLoop, setIsLoop] = useState(false);
 
   const imageW = useRef<null | HTMLDivElement>(null);
 
@@ -22,12 +21,6 @@ export default function ImageSlider({ images, description }: Props) {
     setSwiper(e);
     setCurrentIndex(getSlideDataIndex(e));
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoop(true);
-    }, 200);
-  }, []);
 
   const getSlideDataIndex = (e: SwiperType) => {
     let activeIndex = e.activeIndex;
@@ -61,8 +54,9 @@ export default function ImageSlider({ images, description }: Props) {
       />
       <Swiper loop={true} onSlideChange={handleSwiper} onSwiper={handleSwiper}>
         {images.map((image, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide className="overflow-hidden" key={index}>
             <img
+              loading="lazy"
               src={image}
               className={clsx(
                 "z-10 aspect-property h-auto w-full bg-blue-100 object-cover object-center",
