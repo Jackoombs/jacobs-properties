@@ -84,7 +84,7 @@ import ContactBtn from "./ContactBtn";
     if (scrollPos > 100) {
       header!.classList.remove("flex");
       header!.classList.add("hidden");
-    } else {
+    } else if (scrollPos === 0) {
       header!.classList.remove("hidden");
       header!.classList.add("flex");
     }
