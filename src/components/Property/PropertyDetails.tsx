@@ -9,9 +9,9 @@ import PropertyMap from "./PropertyMap";
 import Link from "../General/Link";
 
 interface Props {
-  Description: string;
+  Description?: string;
   location: GoogleMapProps["center"];
-  Floorplan?: Image;
+  Floorplan: Image | Image[];
   EPC?: Image;
 }
 
@@ -40,7 +40,7 @@ export default function PropertyDetails({
               {currentMenuItem === "Description" && (
                 <>
                   <SectionHeader text="Full property description" />
-                  <Copy size="md" text={Description} />
+                  {Description && <Copy size="md" text={Description} />}
                 </>
               )}
               {currentMenuItem === "Floorplan" && (
