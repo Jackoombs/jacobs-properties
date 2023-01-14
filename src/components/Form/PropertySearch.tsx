@@ -126,7 +126,7 @@ export default function PropertySearch({ properties }: Props) {
           <Copy
             addClasses="order-1 lg:order-none"
             size="lg"
-            text={`${filterProperties.length} properties`}
+            text={`${filteredProperties.length} properties`}
           />
           {width < 1024 && (
             <ViewToggle
