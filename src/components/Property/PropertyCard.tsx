@@ -52,7 +52,7 @@ export default function PropertyCard({
         <img
           loading="lazy"
           className="aspect-property h-full w-full object-cover duration-200 ease-in-out hover:scale-110"
-          src={`https://jacobs-server.onrender.com/images/${ID}-thumbnail.webp`}
+          src={`https://jacobs-server.onrender.com/images/${ID}/thumbnail.webp`}
           alt={Address1 + Address2}
         />
       </div>

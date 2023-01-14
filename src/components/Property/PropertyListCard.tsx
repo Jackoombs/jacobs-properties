@@ -59,6 +59,7 @@ export default function PropertyListCard({
       <ImageSlider
         images={Image.map((image) => image.Filepath)}
         description="hi"
+        ID={ID}
       />
       <div className="order-2 flex flex-col gap-2 xl:gap-5">
         <p className="mb-2 flex h-10 w-max items-center justify-center rounded-md bg-secondary-100 px-7 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 lg:h-14">

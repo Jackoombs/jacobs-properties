@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
 import "swiper/css";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import ImageSliderNavBtn from "./ImageSliderNavBtn";
 import clsx from "clsx";
 import ImageIndexCount from "./ImageIndexCount";
@@ -9,9 +9,10 @@ import ImageIndexCount from "./ImageIndexCount";
 interface Props {
   images: string[];
   description: string;
+  ID: string;
 }
 
-export default function ImageSlider({ images, description }: Props) {
+export default function ImageSlider({ images, description, ID }: Props) {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -57,7 +58,7 @@ export default function ImageSlider({ images, description }: Props) {
           <SwiperSlide className="overflow-hidden" key={index}>
             <img
               loading="lazy"
-              src={image}
+              src={`https://jacobs-server.onrender.com/images/${ID}/${index}.webp`}
               className={clsx(
                 "z-10 aspect-property h-auto w-full bg-blue-100 object-cover object-center",
                 `w-[${imageW.current?.style.width}px]`
