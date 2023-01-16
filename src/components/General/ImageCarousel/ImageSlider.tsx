@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
 import "swiper/css";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import ImageSliderNavBtn from "./ImageSliderNavBtn";
 import clsx from "clsx";
 import ImageIndexCount from "./ImageIndexCount";
@@ -15,8 +15,6 @@ interface Props {
 export default function ImageSlider({ images, description, ID }: Props) {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const imageW = useRef<null | HTMLDivElement>(null);
 
   const handleSwiper = (e: SwiperType) => {
     setSwiper(e);
@@ -44,8 +42,7 @@ export default function ImageSlider({ images, description, ID }: Props) {
   return (
     <div
       id="target"
-      ref={imageW}
-      className="relative flex w-full items-center self-stretch justify-self-end overflow-hidden rounded-big xl:order-1 xl:max-w-[58rem]"
+      className="relative flex h-min w-full items-center justify-self-end overflow-hidden rounded-big xl:order-1 xl:max-w-[58rem]"
     >
       <ImageSliderNavBtn swiper={swiper} isReverse={true} />
       <ImageSliderNavBtn swiper={swiper} isReverse={false} />
@@ -53,15 +50,18 @@ export default function ImageSlider({ images, description, ID }: Props) {
         currentIndex={currentIndex}
         numberOfImages={images.length}
       />
-      <Swiper loop={true} onSlideChange={handleSwiper} onSwiper={handleSwiper}>
+      <Swiper
+        spaceBetween={2}
+        onSlideChange={handleSwiper}
+        onSwiper={handleSwiper}
+      >
         {images.map((image, index) => (
           <SwiperSlide className="overflow-hidden" key={index}>
             <img
               loading="lazy"
-              src={`https://jacobs-server.onrender.com/images/${ID}/${index}.webp`}
+              src={`https://ik.imagekit.io/wd8wdr96s/tr:w-825,h-550/${ID}/${index}.webp`}
               className={clsx(
-                "z-10 aspect-property h-auto w-full bg-blue-100 object-cover object-center",
-                `w-[${imageW.current?.style.width}px]`
+                "z-10 aspect-property h-full w-full bg-secondary-100 object-cover object-center text-primary-100 hover:brightness-110"
               )}
             ></img>
           </SwiperSlide>
