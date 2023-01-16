@@ -31,7 +31,6 @@ const {
   Image,
   Address1,
   Address2,
-  Status,
   PriceString,
   TotalBedrooms,
   ReceptionRooms,
@@ -91,8 +90,9 @@ const similarPropertiesFilteredSorted = findSimilarllyPricedProperties(
     >
       <ImageSlider
         client:load
-        images={Image.map((e) => e.Filepath)}
+        images={Image.map((image) => image.Filepath)}
         description="hi"
+        ID={ID}
       />
       <div class="grid flex-1 sm:max-w-[34rem] xl:grid-rows-[1fr_auto_1fr]">
         <a
