@@ -56,7 +56,7 @@ export default function PropertyCard({
           alt={Address1 + Address2}
         />
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2">
         <div>
           <h3 className="text-ellipsis pb-2 text-[1.25rem] font-semibold leading-[25px] line-clamp-2 lg:text-[1.5rem] lg:leading-[30px]">{`${Address1}, ${Address2}`}</h3>
           <div className="flex items-center gap-4">
@@ -68,7 +68,7 @@ export default function PropertyCard({
             </p>
           </div>
         </div>
-        <p className="flex h-10 min-w-[5rem] items-center justify-center rounded-lg bg-secondary-100 px-2 text-xs font-semibold uppercase tracking-[2.4px] lg:text-[0.875rem]">
+        <p className="flex h-10 w-max min-w-[5rem] items-center justify-center rounded-lg bg-secondary-100 px-2 text-xs font-semibold uppercase tracking-[2.4px] lg:text-[0.875rem]">
           {statusString()}
         </p>
       </div>
