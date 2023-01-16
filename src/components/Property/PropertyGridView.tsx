@@ -28,12 +28,14 @@ export default function PropertyGridView({ properties }: Props) {
             />
           )
         )}
-      <button
-        className="col-span-full mx-auto flex h-14 w-full items-center justify-center rounded-big bg-secondary-100 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 hover:brightness-110 md:w-auto md:min-w-[10rem]"
-        onClick={() => setMaxProperties((value) => (value += 12))}
-      >
-        Load More
-      </button>
+      {maxProperties < properties.length && (
+        <button
+          className="col-span-full mx-auto flex h-14 w-full items-center justify-center rounded-big bg-secondary-100 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 hover:brightness-110 md:w-auto md:min-w-[10rem]"
+          onClick={() => setMaxProperties((value) => (value += 12))}
+        >
+          Load More
+        </button>
+      )}
     </div>
   );
 }
