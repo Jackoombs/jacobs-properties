@@ -15,6 +15,7 @@ export interface Property {
   EPC?: Image;
   Floorplan?: Image | Image[];
   TimeAmended: string;
+  Location?: google.maps.LatLng | google.maps.LatLngLiteral | undefined;
 }
 
 interface Image {

@@ -8,8 +8,6 @@ interface Props {
 export default function PropertyListView({ properties }: Props) {
   const [maxProperties, setMaxProperties] = useState(10);
 
-  console.log(properties.length);
-
   return (
     <div className="mx-auto flex w-full max-w-container-lg flex-col gap-16">
       {properties

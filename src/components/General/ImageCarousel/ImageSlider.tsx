@@ -58,7 +58,6 @@ export default function ImageSlider({ images, description, ID }: Props) {
         {images.map((image, index) => (
           <SwiperSlide className="overflow-hidden" key={index}>
             <img
-              loading="lazy"
               src={`https://ik.imagekit.io/wd8wdr96s/tr:w-825,h-550/${ID}/${index}.webp`}
               className={clsx(
                 "z-10 aspect-property h-full w-full bg-secondary-100 object-cover object-center text-primary-100 hover:brightness-110"

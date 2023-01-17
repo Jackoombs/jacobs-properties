@@ -8,9 +8,12 @@ import PropertyGridView from "../Property/PropertyGridView";
 import PropertyListView from "../Property/PropertyListView";
 import { ViewToggle } from "../Property/ViewToggle";
 import Copy from "../General/Text/Copy";
+import PropertyMap from "../Property/PropertyMap";
+import PropertyMapCard from "../Property/PropertyMapCard";
 
 interface Props {
   properties: Property[];
+  center: google.maps.LatLng | google.maps.LatLngLiteral | undefined;
 }
 
 export interface SearchCriteria {
@@ -23,8 +26,11 @@ export interface SearchCriteria {
   excludeSoldOffer: boolean;
 }
 
-export default function PropertySearch({ properties }: Props) {
+export default function PropertySearch({ properties, center }: Props) {
   const [width, setWidth] = useState(window.innerWidth);
+  const [currMapCardLocation, setCurrMapCardLocation] = useState<
+    google.maps.LatLng | google.maps.LatLngLiteral | undefined
+  >(undefined);
 
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -33,7 +39,8 @@ export default function PropertySearch({ properties }: Props) {
   }, []);
 
   const [viewType, setViewType] = useState<"list" | "grid" | "map">(
-    width < 1024 ? "grid" : "list"
+    // width < 1024 ? "grid" : "list"
+    "map"
   );
 
   const [searchCriteria, setSearchCriteria] = useState<SearchCriteria>({
@@ -104,6 +111,9 @@ export default function PropertySearch({ properties }: Props) {
   };
 
   const filteredProperties = filterProperties(properties, searchCriteria);
+  const currentMapProperty = filteredProperties.find(
+    (property) => property.Location === currMapCardLocation
+  );
 
   return (
     <>
@@ -148,6 +158,24 @@ export default function PropertySearch({ properties }: Props) {
         )}
         {viewType === "list" && (
           <PropertyListView properties={filteredProperties} />
+        )}
+        {viewType === "map" && (
+          <div className="mx-auto max-w-container-lg">
+            <PropertyMap
+              zoom={12}
+              markers={filteredProperties.map((property) => property.Location)}
+              location={center}
+              state={currMapCardLocation}
+              setState={setCurrMapCardLocation}
+            >
+              {currentMapProperty && (
+                <PropertyMapCard
+                  setState={setCurrMapCardLocation}
+                  property={currentMapProperty}
+                />
+              )}
+            </PropertyMap>
+          </div>
         )}
       </section>
     </>
