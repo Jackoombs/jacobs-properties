@@ -98,11 +98,14 @@ export default function HomeHeader() {
           <div className=" hidden items-center gap-4 md:flex">
             <Link
               link="/"
-              text="Property Search"
               type={isSticky ? "transparent-blue" : "transparent-white"}
               size="lg"
-            />
-            <Link link="/" text="Book a valuation" type="secondary" size="lg" />
+            >
+              Property Search
+            </Link>
+            <Link link="/" type="secondary" size="lg">
+              Book a valuation
+            </Link>
           </div>
           <div
             className={clsx(

@@ -1,17 +1,17 @@
 import clsx from "clsx";
 
 interface Props {
-  text: string;
+  children: string;
   textColor?: string;
   size: "sm" | "lg";
-  addClasses?: string;
+  className?: string;
 }
 
 export default function SectionSubHeader({
-  text,
+  children,
   textColor = "text-primary-100",
   size,
-  addClasses,
+  className,
 }: Props) {
   return (
     <>
@@ -20,10 +20,10 @@ export default function SectionSubHeader({
           className={clsx(
             "text-[1.625rem] font-semibold leading-[1.33] md:text-[2rem]",
             textColor,
-            addClasses
+            className
           )}
         >
-          {text}
+          {children}
         </h3>
       )}
       {size === "sm" && (
@@ -31,10 +31,10 @@ export default function SectionSubHeader({
           className={clsx(
             "text-[1.25rem] font-semibold leading-[1.5] md:text-[1.5rem]",
             textColor,
-            addClasses
+            className
           )}
         >
-          {text}
+          {children}
         </h4>
       )}
     </>

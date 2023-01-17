@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 
 interface Props {
   index: number;
-  text: string;
+  children: string;
   value: number;
   isPercent: boolean;
 }
 
-export default function StatCard({ index, text, value, isPercent }: Props) {
+export default function StatCard({ index, children, value, isPercent }: Props) {
   const [statValue, setStatValue] = useState(0);
 
   const duration = 2000;
@@ -36,7 +36,7 @@ export default function StatCard({ index, text, value, isPercent }: Props) {
         <p className="text-[7.25rem] font-bold leading-[6rem]">{`${Math.round(
           statValue
         )}${isPercent ? "%" : ""}`}</p>
-        <p className="font-harm text-[1.25rem] font-medium">{text}</p>
+        <p className="font-harm text-[1.25rem] font-medium">{children}</p>
       </div>
     </div>
   );

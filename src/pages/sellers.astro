@@ -78,23 +78,18 @@ const dropdownCards = [
           alt=""
         />
         <div class="flex flex-col text-primary-100 md:max-w-lg">
-          <SectionLabel text="Sellers" padding="hero-lg" />
-          <PageHeader text="Sell your home in Basingstoke" padding="hero" />
-          <Copy
-            text="There's a lot to consider when selling your home, that's why you need a reliable estate agent by your side. Luckily for you, our people-centric agents are here to help."
-            padding="hero-lg"
-            size="lg"
-          />
+          <SectionLabel padding="hero-lg">Sellers</SectionLabel>
+          <PageHeader padding="hero">Sell your home in Basingstoke</PageHeader>
+          <Copy padding="hero-lg" size="lg"
+            >There's a lot to consider when selling your home, that's why you
+            need a reliable estate agent by your side. Luckily for you, our
+            people-centric agents are here to help.</Copy
+          >
           <div
             class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
           >
-            <Link link="/" text="Expert Valuation" type="primary" size="lg" />
-            <Link
-              link="/"
-              text="Instant Valuation"
-              type="secondary"
-              size="lg"
-            />
+            <Link link="/" type="primary" size="lg">Expert Valuation</Link>
+            <Link link="/" type="secondary" size="lg">Instant Valuation</Link>
           </div>
         </div>
       </div>
@@ -104,7 +99,7 @@ const dropdownCards = [
       <div
         class="mx-auto flex max-w-container-lg flex-col gap-8 lg:items-center lg:text-center"
       >
-        <Display text="On a mission to sell your home." />
+        <Display>On a mission to sell your home.</Display>
         <h3
           class="max-w-xl text-[1.5rem] font-semibold leading-7 lg:max-w-[51rem] lg:text-[2rem] lg:leading-10"
         >
@@ -123,10 +118,9 @@ const dropdownCards = [
 
     <section class="bg-white py-10 md:py-28">
       <div class="mx-auto max-w-container-lg">
-        <SectionHeader
-          text="Four reasons you should sell with us"
-          padding="misc"
-        />
+        <SectionHeader padding="misc"
+          >Four reasons you should sell with us</SectionHeader
+        >
         <div class="flex flex-col gap-6 md:grid md:grid-cols-2 lg:gap-16">
           <img
             src={Home3.src}
@@ -159,18 +153,22 @@ const dropdownCards = [
           alt=""
         />
         <div class="max-w-2xl 2xl:pl-20">
-          <SectionLabel text="About" padding="hero-md" />
-          <SectionHeader
-            text="Proven recipe to sell your home for the best price"
-            padding="hero"
-            addClasses="lg:max-w-lg"
-          />
-          <Copy
-            text="We don’t just take a few pictures and stick your property on Rightmove. That’s simply not our style. And it won’t help you achieve the best sale price for your home. We bring the story of your property to life and design a winning strategy to really make your home stand out. Then, we implement a custom marketing plan across a wide variety of the latest technologies including social, online, in print, direct mail and in person. We like to get to know you and your property. Trust us, this makes a difference to the final outcome and the price you can achieve when selling your home."
-            size="lg"
-            padding="hero-md"
-          />
-          <Link text="Meet the Team" link="/" type="secondary" size="md" />
+          <SectionLabel padding="hero-md">About</SectionLabel>
+          <SectionHeader padding="hero" className="lg:max-w-lg"
+            >Proven recipe to sell your home for the best price</SectionHeader
+          >
+          <Copy size="lg" padding="hero-md"
+            >We don’t just take a few pictures and stick your property on
+            Rightmove. That’s simply not our style. And it won’t help you
+            achieve the best sale price for your home. We bring the story of
+            your property to life and design a winning strategy to really make
+            your home stand out. Then, we implement a custom marketing plan
+            across a wide variety of the latest technologies including social,
+            online, in print, direct mail and in person. We like to get to know
+            you and your property. Trust us, this makes a difference to the
+            final outcome and the price you can achieve when selling your home.</Copy
+          >
+          <Link link="/" type="secondary" size="md">Meet the Team</Link>
         </div>
       </div>
     </section>
@@ -189,16 +187,15 @@ const dropdownCards = [
       >
         <div>
           <div class="flex flex-col lg:max-w-xl lg:justify-center">
-            <SectionLabel addClasses="pb-3" text="Sales Brochure" />
-            <SectionHeader
-              addClasses="pb-4"
-              text="First time selling a property?"
-            />
-            <Copy
-              addClasses="pb-5"
-              size="md"
-              text="We understand how daunting it can be. That's why we've compiled a FREE guide of pro tips to help make your experience as stress-free as possible."
-            />
+            <SectionLabel className="pb-3">Sales Brochure</SectionLabel>
+            <SectionHeader className="pb-4"
+              >First time selling a property?</SectionHeader
+            >
+            <Copy className="pb-5" size="md"
+              >We understand how daunting it can be. That's why we've compiled a
+              FREE guide of pro tips to help make your experience as stress-free
+              as possible.</Copy
+            >
             <BrochureForm client:visible />
           </div>
         </div>
@@ -223,11 +220,9 @@ const dropdownCards = [
 
     <section class="bg-white py-10 md:items-center md:py-28">
       <div class="mx-auto flex max-w-container-lg flex-col">
-        <SectionHeader
-          addClasses="md:text-center"
-          text="Hear from our customers"
-          padding="misc"
-        />
+        <SectionHeader className="md:text-center" padding="misc"
+          >Hear from our customers</SectionHeader
+        >
         <Reviews client:visible />
       </div>
     </section>
@@ -238,10 +233,9 @@ const dropdownCards = [
       <div
         class="mx-auto flex max-w-container-lg flex-col gap-8 md:justify-center md:gap-16"
       >
-        <SectionHeader
-          text="Frequently asked questions"
-          addClasses="md:text-center"
-        />
+        <SectionHeader className="md:text-center"
+          >Frequently asked questions</SectionHeader
+        >
         <FAQs client:visible />
         <a
           class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"

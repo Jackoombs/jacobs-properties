@@ -66,12 +66,13 @@ export default function BrochureForm() {
           </a>
         </p>
         <Button
-          text="Download Guide"
           type="secondary"
           size="lg"
           buttonType="submit"
           callback={onSubmit}
-        />
+        >
+          Download Guide
+        </Button>
       </form>
     </div>
   );

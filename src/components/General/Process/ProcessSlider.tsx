@@ -41,7 +41,7 @@ export default function ProcessSlider({ header, slides }: Props) {
         }}
       >
         <div slot="container-start" className="flex justify-between">
-          <SectionHeader text={header} padding="misc" />
+          <SectionHeader padding="misc">{header}</SectionHeader>
           <SwiperNavBtns isStartOrEnd={isStartOrEnd} />
         </div>
         {slides.map(({ title, text }, index) => (

@@ -1,17 +1,17 @@
 import clsx from "clsx";
 
 interface Props {
-  text: string;
+  children: string;
   textColor?: string;
   padding?: "none" | "hero" | "misc";
-  addClasses?: string;
+  className?: string;
 }
 
 export default function SectionHeader({
-  text,
+  children,
   textColor = "text-primary-100",
   padding = "none",
-  addClasses,
+  className,
 }: Props) {
   return (
     <h2
@@ -20,10 +20,10 @@ export default function SectionHeader({
         padding === "hero" && "pb-3 lg:pb-6",
         padding === "misc" && "pb-9 lg:pb-[4.5rem]",
         textColor,
-        addClasses
+        className
       )}
     >
-      {text}
+      {children}
     </h2>
   );
 }

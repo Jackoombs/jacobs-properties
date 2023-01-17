@@ -1,25 +1,25 @@
 import clsx from "clsx";
 
 interface Props {
-  text: string;
+  children: string;
   textColor?: string;
-  addClasses?: string;
+  className?: string;
 }
 
 export default function Display({
-  text,
+  children,
   textColor = "text-primary-100",
-  addClasses,
+  className,
 }: Props) {
   return (
     <h2
       className={clsx(
         "text-[2.25rem] font-bold leading-[1.1] lg:text-[4rem]",
         textColor,
-        addClasses
+        className
       )}
     >
-      {text}
+      {children}
     </h2>
   );
 }

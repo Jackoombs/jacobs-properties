@@ -1,17 +1,17 @@
 import clsx from "clsx";
 
 interface Props {
-  text: string;
+  children: string;
   textColor?: string;
   padding?: "none" | "hero";
-  addClasses?: string;
+  className?: string;
 }
 
 export default function PageHeader({
-  text,
+  children,
   textColor = "text-primary-100",
   padding = "none",
-  addClasses,
+  className,
 }: Props) {
   return (
     <h1
@@ -19,10 +19,10 @@ export default function PageHeader({
         "text-[2.375rem] font-bold leading-[1.1] lg:text-[4.5rem]",
         textColor,
         padding === "hero" && "pb-3 lg:pb-7",
-        addClasses
+        className
       )}
     >
-      {text}
+      {children}
     </h1>
   );
 }

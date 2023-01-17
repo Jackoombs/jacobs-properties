@@ -52,18 +52,17 @@ export default function PropertyMapCard({
         {...{ ID, Address1, Address2, PriceString }}
         status={InternalLettingStatus || InternalSaleStatus}
       />
-      <Copy
-        size="md"
-        text={Description || ""}
-        addClasses="line-clamp-5 overflow-x-hidden my-5"
-      />
+      <Copy size="md" className="my-5 overflow-x-hidden line-clamp-5">
+        {Description || ""}
+      </Copy>
       <Link
-        text="View Property"
         size="lg"
         link={`properties/${ID}`}
         type="primary"
-        classes="md:max-w-[6rem]"
-      />
+        className="md:max-w-[6rem]"
+      >
+        View Property
+      </Link>
     </motion.div>
   );
 }

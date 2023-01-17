@@ -65,12 +65,9 @@ export default function MortgageCalc() {
   return (
     <div className="w-full rounded-big bg-primary-100 px-3 py-8 md:px-8 lg:p-12">
       <form>
-        <SectionSubHeader
-          addClasses="pb-9"
-          textColor="text-white"
-          size="lg"
-          text="Stamp duty calculator"
-        />
+        <SectionSubHeader className="pb-9" textColor="text-white" size="lg">
+          Stamp duty calculator
+        </SectionSubHeader>
         <div className="flex flex-col gap-3 pb-9">
           <div className="flex flex-col justify-between gap-3 md:flex-row md:gap-6">
             <MortgageInput

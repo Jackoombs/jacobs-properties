@@ -1,25 +1,25 @@
 import clsx from "clsx";
 
 interface Props {
-  text: string;
+  children: string;
   textColor?: string;
   size: "sm" | "md" | "lg";
-  addClasses?: string;
+  className?: string;
   padding?: "none" | "hero-md" | "hero-lg";
 }
 
 export default function Copy({
-  text,
+  children,
   textColor = "text-primary-100",
   size,
-  addClasses,
+  className,
   padding = "none",
 }: Props) {
   return (
     <p
       className={clsx(
         "font-normal leading-[1.5]",
-        addClasses,
+        className,
         textColor,
         size === "sm" && "text-[0.75rem]",
         size === "md" && "text-[0.875rem] lg:text-[1rem]",
@@ -28,7 +28,7 @@ export default function Copy({
         padding === "hero-lg" && "pb-6 lg:pb-11"
       )}
     >
-      {text}
+      {children}
     </p>
   );
 }

@@ -1,17 +1,17 @@
 import clsx from "clsx";
 
 interface Props {
-  text: string;
+  children: string;
   textColor?: string;
   padding?: "none" | "hero-md" | "hero-lg";
-  addClasses?: string;
+  className?: string;
 }
 
 export default function SectionLabel({
-  text,
+  children,
   textColor = "text-primary-100",
   padding = "none",
-  addClasses,
+  className,
 }: Props) {
   return (
     <p
@@ -20,10 +20,10 @@ export default function SectionLabel({
         textColor,
         padding === "hero-md" && "pb-2 lg:pb-6",
         padding === "hero-lg" && "pb-2",
-        addClasses
+        className
       )}
     >
-      {text}
+      {children}
     </p>
   );
 }

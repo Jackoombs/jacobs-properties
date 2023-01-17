@@ -119,7 +119,7 @@ export default function PropertySearch({ properties, center }: Props) {
     <>
       <section className="justify-center py-10 md:flex md:py-28">
         <div className="mx-auto flex w-full max-w-container-lg flex-col items-center gap-[34px]">
-          <Display text="Start your search" />
+          <Display>Start your search</Display>
           <PropertySearchForm {...{ setSearchCriteria }} />
         </div>
       </section>
@@ -134,10 +134,9 @@ export default function PropertySearch({ properties, center }: Props) {
       <section className="overflow-hidden py-10 md:pb-28">
         <div className="mx-auto flex w-full max-w-container-lg items-center justify-between pb-8 lg:pb-10">
           <Copy
-            addClasses="order-1 lg:order-none"
+            className="order-1 lg:order-none"
             size="lg"
-            text={`${filteredProperties.length} properties`}
-          />
+          >{`${filteredProperties.length} properties`}</Copy>
           {width < 1024 && (
             <ViewToggle
               state={viewType}

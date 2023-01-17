@@ -27,22 +27,22 @@ export default function Reviews() {
         onSlideChange={handleSlideChange}
       >
         <SwiperSlide>
-          <Review
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor lorem, eleifend pharetra nibh ut, blandit placerat massa."
-            author="Example name"
-          />
+          <Review author="Example name">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor
+            lorem, eleifend pharetra nibh ut, blandit placerat massa.
+          </Review>
         </SwiperSlide>
         <SwiperSlide>
-          <Review
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor lorem, eleifend pharetra nibh ut, blandit placerat massa."
-            author="Example name"
-          />
+          <Review author="Example name">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor
+            lorem, eleifend pharetra nibh ut, blandit placerat massa.
+          </Review>
         </SwiperSlide>
         <SwiperSlide>
-          <Review
-            text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor lorem, eleifend pharetra nibh ut, blandit placerat massa."
-            author="Example name"
-          />
+          <Review author="Example name">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor
+            lorem, eleifend pharetra nibh ut, blandit placerat massa.
+          </Review>
         </SwiperSlide>
       </Swiper>
       <ReviewNavBtn

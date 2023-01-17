@@ -1,6 +1,6 @@
 import clsx from "clsx";
 interface Props {
-  text: string;
+  children: string;
   type:
     | "primary"
     | "secondary"
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export default function Button({
-  text,
+  children,
   type,
   size,
   classes,
@@ -41,7 +41,7 @@ export default function Button({
         size === "lg" && "md:w-52"
       )}
     >
-      {text}
+      {children}
     </button>
   );
 }

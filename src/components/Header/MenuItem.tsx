@@ -3,7 +3,7 @@ import clsx from "clsx";
 interface Props {
   index: number;
   arrayLength: number;
-  text: string;
+  children: string;
   link: string;
   size: "sm" | "lg";
 }
@@ -11,7 +11,7 @@ interface Props {
 export default function MenuItem({
   index,
   arrayLength,
-  text,
+  children,
   link,
   size,
 }: Props) {
@@ -27,7 +27,7 @@ export default function MenuItem({
         )}
         href={link}
       >
-        {text}
+        {children}
       </a>
       {index === arrayLength - 1 && (
         <hr className="hidden border-secondary-100 md:inline" />

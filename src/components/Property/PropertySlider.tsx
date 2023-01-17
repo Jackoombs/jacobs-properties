@@ -43,7 +43,7 @@ export default function PropertySlider({ header, properties }: Props) {
         onSwiper={handleSlideChange}
       >
         <div slot="container-start" className="flex justify-between">
-          <SectionHeader text={header} />
+          <SectionHeader>{header}</SectionHeader>
           <SwiperNavBtns isStartOrEnd={isStartOrEnd} />
         </div>
         {properties.map(

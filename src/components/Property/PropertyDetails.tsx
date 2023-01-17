@@ -39,13 +39,13 @@ export default function PropertyDetails({
             <div className="flex flex-col gap-9 md:gap-12 lg:max-w-3xl">
               {currentMenuItem === "Description" && (
                 <>
-                  <SectionHeader text="Full property description" />
-                  {Description && <Copy size="md" text={Description} />}
+                  <SectionHeader>Full property description</SectionHeader>
+                  {Description && <Copy size="md">Description</Copy>}
                 </>
               )}
               {currentMenuItem === "Floorplan" && (
                 <>
-                  <SectionHeader text="Floorplan" />
+                  <SectionHeader>Floorplan</SectionHeader>
                   {Floorplan ? (
                     <img
                       className="max-w-2xl self-center rounded-big object-cover"
@@ -53,13 +53,13 @@ export default function PropertyDetails({
                       alt=""
                     />
                   ) : (
-                    <Copy text="The floorplan will be coming soon!" size="lg" />
+                    <Copy size="lg">The floorplan will be coming soon</Copy>
                   )}
                 </>
               )}
               {currentMenuItem === "EPC" && (
                 <>
-                  <SectionHeader text="Energy performance certificate" />
+                  <SectionHeader>Energy performance certificate</SectionHeader>
                   <img
                     className="max-w-2xl self-center rounded-big object-cover"
                     src={EPC?.Filepath}
@@ -69,26 +69,29 @@ export default function PropertyDetails({
               )}
             </div>
             <div>
-              <SectionHeader addClasses="pb-9 md:pb-12" text="Location" />
+              <SectionHeader className="pb-9 md:pb-12">Location</SectionHeader>
               <PropertyMap location={location} />
               <div className="flex flex-col gap-5 py-7 md:flex-row">
-                <Link text="Get Directions" type="primary" link="/" />
-                <Link text="Download Brochure" type="primary" link="/" />
+                <Link type="primary" link="/">
+                  Get Directions
+                </Link>
+                <Link type="primary" link="/">
+                  Download Brochure
+                </Link>
               </div>
               <div className="flex w-full flex-col gap-5 rounded-big bg-secondary-100 px-3 py-8 text-primary-100 md:px-8 lg:p-12">
-                <SectionHeader text="Interested in this property?" />
-                <Copy
-                  text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore."
-                  size="lg"
-                />
+                <SectionHeader>Interested in this property?</SectionHeader>
+                <Copy size="lg">
+                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+                  diam nonumy eirmod tempor invidunt ut labore et dolore.
+                </Copy>
                 <div className="flex flex-col gap-4 md:flex-row">
-                  <Link text="Book a viewing" link="/" type="white" size="lg" />
-                  <Link
-                    text="Make an offer"
-                    link="/"
-                    type="primary"
-                    size="lg"
-                  />
+                  <Link link="/" type="white" size="lg">
+                    Book a viewing
+                  </Link>
+                  <Link link="/" type="primary" size="lg">
+                    Make an offer
+                  </Link>
                 </div>
                 <div className="font-harms">
                   <p className="text-lg lg:text-xl">

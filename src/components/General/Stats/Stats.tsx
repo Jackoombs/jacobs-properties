@@ -50,10 +50,9 @@ export default function Stats() {
           slot="container-start"
           className="flex items-start justify-between"
         >
-          <SectionHeader
-            padding="misc"
-            text="We're letting the numbers speak"
-          />
+          <SectionHeader padding="misc">
+            We're letting the numbers speak
+          </SectionHeader>
         </div>
         <div slot="container-end">
           <SwiperNavBtns isStartOrEnd={isStartOrEnd} />
@@ -61,7 +60,7 @@ export default function Stats() {
 
         {stats.map(({ text, value, isPercent }, index) => (
           <SwiperSlide key={index}>
-            <StatCard {...{ index, text, value, isPercent }} />
+            <StatCard {...{ index, value, isPercent }}>{text}</StatCard>
           </SwiperSlide>
         ))}
       </Swiper>

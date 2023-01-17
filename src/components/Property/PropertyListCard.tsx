@@ -76,28 +76,23 @@ export default function PropertyListCard({
         </ul>
         <div className="pb-4 lg:pb-0">
           <SectionHeader
-            addClasses={"lg:pb-2"}
-            text={`${Address1}, ${Address2}`}
-          />
+            className={"lg:pb-2"}
+          >{`${Address1}, ${Address2}`}</SectionHeader>
           <span className="flex items-center gap-4">
-            <SectionHeader text={PriceString} />
+            <SectionHeader>{PriceString}</SectionHeader>
             <p className="text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100">
               Guide Price
             </p>
           </span>
         </div>
-        <Copy
-          addClasses="hidden lg:block"
-          text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore."
-          size="lg"
-        />
+        <Copy className="hidden lg:block" size="lg">
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+          nonumy eirmod tempor invidunt ut labore et dolore.
+        </Copy>
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Link
-            text="View Property"
-            size="lg"
-            link={`properties/${ID}`}
-            type="primary"
-          />
+          <Link size="lg" link={`properties/${ID}`} type="primary">
+            View Property
+          </Link>
         </div>
       </div>
     </div>

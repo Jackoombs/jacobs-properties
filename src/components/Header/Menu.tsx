@@ -89,8 +89,10 @@ export default function Menu({ menuOpen, setMenuOpen }: Props) {
                   <MenuItem
                     arrayLength={array.length}
                     size="lg"
-                    {...{ index, text, link }}
-                  />
+                    {...{ index, link }}
+                  >
+                    {text}
+                  </MenuItem>
                 ))}
               </ul>
             </section>
@@ -102,8 +104,10 @@ export default function Menu({ menuOpen, setMenuOpen }: Props) {
                   <MenuItem
                     arrayLength={array.length}
                     size="sm"
-                    {...{ index, text, link }}
-                  />
+                    {...{ index, link }}
+                  >
+                    {text}
+                  </MenuItem>
                 ))}
               </ul>
             </section>
@@ -115,8 +119,10 @@ export default function Menu({ menuOpen, setMenuOpen }: Props) {
                   <MenuItem
                     arrayLength={array.length}
                     size="sm"
-                    {...{ index, text, link }}
-                  />
+                    {...{ index, link }}
+                  >
+                    {text}
+                  </MenuItem>
                 ))}
               </ul>
             </section>
