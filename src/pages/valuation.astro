@@ -1,0 +1,135 @@
+---
+import Copy from "../components/General/Text/Copy";
+import PageHeader from "../components/General/Text/PageHeader";
+import StandardLayout from "../layouts/StandardLayout.astro";
+import ValuationLink from "../components/General/ValuationLink";
+import SectionHeader from "../components/General/Text/SectionHeader";
+import Valuation from "../assets/images/valuation.webp";
+import Dropdown from "../components/Dropdown/Dropdown";
+import Link from "../components/General/Link";
+import SectionLabel from "../components/General/Text/SectionLabel";
+import ValuationHero from "../assets/images/valuation-hero.webp";
+import Reviews from "../components/Reviews/Reviews";
+import FAQs from "../components/FAQs/FAQs";
+
+const dropdownCards = [
+  {
+    question: "Backed by data",
+    answer:
+      "We calculate the value of your home based on data, not whims. We use market-leading sources of information and up-to-date house prices from Sprift, Zoopla, Rightmove and several other sources to give you an accurate estimate of your home’s value.",
+  },
+  {
+    question: "Local knowledge",
+    answer:
+      "We calculate the value of your home based on data, not whims. We use market-leading sources of information and up-to-date house prices from Sprift, Zoopla, Rightmove and several other sources to give you an accurate estimate of your home’s value.",
+  },
+  {
+    question: "Accurate is key",
+    answer:
+      "We calculate the value of your home based on data, not whims. We use market-leading sources of information and up-to-date house prices from Sprift, Zoopla, Rightmove and several other sources to give you an accurate estimate of your home’s value.",
+  },
+  {
+    question: "We understand you",
+    answer:
+      "We calculate the value of your home based on data, not whims. We use market-leading sources of information and up-to-date house prices from Sprift, Zoopla, Rightmove and several other sources to give you an accurate estimate of your home’s value.",
+  },
+];
+---
+
+<StandardLayout title="Valuation">
+  <section class="bg-primary-100 py-10 md:py-28">
+    <div
+      class="mx-auto grid w-full max-w-container-lg gap-7 lg:grid-cols-2 xl:gap-16"
+    >
+      <div class="flex max-w-[45.5rem] flex-col justify-center">
+        <PageHeader textColor="text-white" padding="hero"
+          >Find out how much your property is worth</PageHeader
+        >
+        <Copy size="lg" textColor="text-white"
+          >Selling your home? The first step is determining its current value.
+          Our friendly team of property experts offer a free, no-obligation
+          valuation service that will give you the best idea of how much your
+          home is worth.</Copy
+        >
+      </div>
+      <div class="flex flex-col gap-10 xl:gap-16">
+        <ValuationLink
+          client:idle
+          backgroundColor="bg-white"
+          className="max-w-[16rem] sm:max-w-[36rem]"
+          link=""
+          >Book an in-person valuation at a time that suits you.</ValuationLink
+        >
+        <ValuationLink client:idle backgroundColor="bg-secondary-100" link=""
+          >Get a free and instant estimate of your home’s value in just a few
+          clicks.</ValuationLink
+        >
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-secondary-200 py-10 md:py-28">
+    <div class="mx-auto max-w-container-lg">
+      <SectionHeader padding="misc"
+        >Why choose us to value your home</SectionHeader
+      >
+      <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
+        <img src={Valuation.src} alt="Woman relaxing in kitchen" />
+        <Dropdown client:visible dropdownCards={dropdownCards} />
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="relative flex flex-col justify-center gap-6 bg-secondary-100 pb-10 lg:aspect-[12/5] lg:pb-0"
+  >
+    <img
+      loading="lazy"
+      class="right-0 top-0 mx-auto aspect-[6/5] h-auto w-full object-cover object-left lg:absolute lg:order-1 lg:w-[50vw]"
+      src={ValuationHero.src}
+      alt=""
+    />
+    <div class="mx-auto w-full max-w-container-lg">
+      <div class="flex flex-1 flex-col pr-3 lg:justify-center">
+        <SectionLabel padding="hero-md">Valuation</SectionLabel>
+        <SectionHeader className="lg:max-w-lg" padding="hero"
+          >Find out how much your property is worth</SectionHeader
+        >
+        <Copy className="lg:max-w-md xl:max-w-xl" padding="hero-md" size="lg"
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor
+          lorem, eleifend pharetra nibh ut, blandit placerat massa. Mauris
+          maximus ligula placerat ligula viverra gravida. Cras sed neque vitae
+          tortor varius accumsan. Nunc accumsan ex in commodo viverra.</Copy
+        >
+        <div class="flex flex-col gap-3 md:flex-row">
+          <Link link="/" type="white" size="lg">Instant Valuation</Link>
+          <Link link="/" type="primary" size="lg">Expert Valuation</Link>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-10 md:items-center md:py-28">
+    <div class="mx-auto flex max-w-container-lg flex-col">
+      <SectionHeader className="md:text-center" padding="misc"
+        >Hear from our customers</SectionHeader
+      >
+      <Reviews client:load />
+    </div>
+  </section>
+
+  <section class="bg-primary-200 py-14 md:items-center md:gap-16 md:py-section">
+    <div
+      class="mx-auto flex max-w-container-lg flex-col gap-8 md:justify-center md:gap-16"
+    >
+      <SectionHeader className="md:text-center"
+        >Frequently asked questions</SectionHeader
+      >
+      <FAQs client:visible />
+      <a
+        class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
+        href="/">See All Our Faqs</a
+      >
+    </div>
+  </section>
+</StandardLayout>
