@@ -1,4 +1,4 @@
-import SectionSubHeader from "../Text/SectionSubHeader";
+import SectionSubHeader from "../General/Text/SectionSubHeader";
 import { FaChevronDown } from "react-icons/fa/index.js";
 import { useState } from "react";
 

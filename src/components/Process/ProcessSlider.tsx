@@ -1,8 +1,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
 import "swiper/css";
-import SwiperNavBtns from "../../General/SwiperNavBtns";
-import SectionHeader from "../../General/Text/SectionHeader";
+import SwiperNavBtns from "../General/SwiperNavBtns";
+import SectionHeader from "../General/Text/SectionHeader";
 import { useState } from "react";
 import ProcessCard from "./ProcessCard";
 

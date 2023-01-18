@@ -1,5 +1,5 @@
 import type { Image } from "../../env";
-import ImageSlider from "../General/ImageCarousel/ImageSlider";
+import ImageSlider from "../ImageCarousel/ImageSlider";
 import SectionHeader from "../General/Text/SectionHeader";
 import Copy from "../General/Text/Copy";
 import Link from "../General/Link";

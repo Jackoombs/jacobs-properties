@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 import type { Swiper as SwiperType } from "swiper/types";
 import Review from "./Review";
 import ReviewNavBtn from "./ReviewNavBtn";
@@ -22,7 +23,6 @@ export default function Reviews() {
       />
       <Swiper
         onSwiper={setSwiper}
-        className="flex flex-col lg:flex-row"
         slidesPerView={1}
         onSlideChange={handleSlideChange}
       >

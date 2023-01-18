@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SectionSubHeader from "../Text/SectionSubHeader";
+import SectionSubHeader from "../General/Text/SectionSubHeader";
 import MortgageInput from "./MortgageInput";
 
 export default function MortgageCalc() {

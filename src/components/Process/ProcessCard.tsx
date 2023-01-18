@@ -1,4 +1,4 @@
-import SectionSubHeader from "../Text/SectionSubHeader";
+import SectionSubHeader from "../General/Text/SectionSubHeader";
 
 interface Props {
   title: string;

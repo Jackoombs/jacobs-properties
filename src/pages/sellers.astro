@@ -2,18 +2,18 @@
 import StandardLayout from "../layouts/StandardLayout.astro";
 import Link from "../components/General/Link";
 import Home3 from "../assets/images/home_3.webp";
-import Stats from "../components/General/Stats/Stats";
-import Dropdown from "../components/General/Dropdown/Dropdown";
+import Stats from "../components/Stats/Stats";
+import Dropdown from "../components/Dropdown/Dropdown";
 import SectionLabel from "../components/General/Text/SectionLabel";
 import SectionHeader from "../components/General/Text/SectionHeader";
 import PageHeader from "../components/General/Text/PageHeader";
 import Copy from "../components/General/Text/Copy";
 import Display from "../components/General/Text/Display";
-import ProcessSlider from "../components/General/Process/ProcessSlider";
+import ProcessSlider from "../components/Process/ProcessSlider";
 import BrochureForm from "../components/Form/BrochureForm";
 import PropertySlider from "../components/Property/PropertySlider";
-import Reviews from "../components/General/Reviews/Reviews";
-import FAQs from "../components/General/FAQs/FAQs";
+import Reviews from "../components/Reviews/Reviews";
+import FAQs from "../components/FAQs/FAQs";
 import type { Property } from "../env";
 
 const res = await fetch(`https://jacobs-server.onrender.com/properties/sales`);

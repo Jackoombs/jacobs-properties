@@ -1,0 +1,24 @@
+---
+import Link from "../components/General/Link";
+import Copy from "../components/General/Text/Copy";
+import PageHeader from "../components/General/Text/PageHeader";
+import StandardLayout from "../layouts/StandardLayout.astro";
+---
+
+<StandardLayout title="About">
+  <section class="bg-primary-200 py-10 md:py-28">
+    <div
+      class="mx-auto grid w-full max-w-container-lg items-center gap-6 lg:grid-cols-[4fr_3fr] lg:gap-16"
+    >
+      <PageHeader padding="hero" className=" max-w-md lg:max-w-[56rem]"
+        >Get to know your friendly local property experts</PageHeader
+      >
+      <div class="flex flex-col">
+        <Copy size="lg" padding="hero-md"
+          >Independent and proud, we keep things local at Jacobs Properties.</Copy
+        >
+        <Link link="/" type="secondary" size="lg">Get in touch</Link>
+      </div>
+    </div>
+  </section>
+</StandardLayout>
