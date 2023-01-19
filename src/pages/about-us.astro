@@ -2,7 +2,47 @@
 import Link from "../components/General/Link";
 import Copy from "../components/General/Text/Copy";
 import PageHeader from "../components/General/Text/PageHeader";
+import HeroSection from "../components/Layout/HeroSection.astro";
 import StandardLayout from "../layouts/StandardLayout.astro";
+import Image from "../assets/images/valuation.webp";
+import SectionHeader from "../components/General/Text/SectionHeader";
+import SectionLabel from "../components/General/Text/SectionLabel";
+import MiscSection from "../components/Layout/MiscSection.astro";
+import TeamSlider from "../components/Team/TeamSlider";
+import Dropdown from "../components/Dropdown/Dropdown";
+import NewsSlider from "../components/News/NewsSlider";
+import Reviews from "../components/Reviews/Reviews";
+import FAQs from "../components/FAQs/FAQs";
+
+const news = await Astro.glob("./news/**.md");
+const newsTemplate = news.map((post) => {
+  const { title, category, date, image } = post.frontmatter;
+  return { title, category, date, image };
+});
+console.log(newsTemplate);
+
+const dropdownCards = [
+  {
+    question: "We’re never corporate",
+    answer:
+      "Forget everything you think you know about estate agents. Being a local, independent and family-run business, we believe we’re best-placed to give you the friendly and personable service you deserve.",
+  },
+  {
+    question: "Guided sales progression",
+    answer:
+      "Forget everything you think you know about estate agents. Being a local, independent and family-run business, we believe we’re best-placed to give you the friendly and personable service you deserve.",
+  },
+  {
+    question: "End-to-end services",
+    answer:
+      "Forget everything you think you know about estate agents. Being a local, independent and family-run business, we believe we’re best-placed to give you the friendly and personable service you deserve.",
+  },
+  {
+    question: "People precedes properties",
+    answer:
+      "Forget everything you think you know about estate agents. Being a local, independent and family-run business, we believe we’re best-placed to give you the friendly and personable service you deserve.",
+  },
+];
 ---
 
 <StandardLayout title="About">
@@ -21,4 +61,104 @@ import StandardLayout from "../layouts/StandardLayout.astro";
       </div>
     </div>
   </section>
+
+  <HeroSection
+    bgColor="bg-white"
+    image={{
+      path: Image.src,
+      position: false,
+      alt: "",
+      aspectRatio: "aspect-[1.27: 1]",
+    }}
+  >
+    <div class="max-w-3xl 2xl:pl-20">
+      <SectionLabel padding="hero-md">About</SectionLabel>
+      <SectionHeader padding="hero" className="lg:max-w-lg"
+        >How it started, how it’s going</SectionHeader
+      >
+      <Copy size="lg" padding="hero-md">
+        <>
+          Jacobs Properties is born out of Founding Director Jon Coombs’
+          experience in managing Basingstoke’s first HMO in 1999. From there,
+          Jon went on to purchase another HMO and organically built up his
+          portfolio of properties. <br /><br /> After amassing close to two decades’
+          worth of expertise in letting and managing properties in Basingstoke, Jon
+          established Jacobs Properties in 2018 with a fully fledged sales and lettings
+          department. The motto was to help people at every stage of the property
+          journey through a warm and friendly approach. Since then, we have slowly
+          but surely grown into who we are today: Basingstoke’s leading estate agent.
+        </>
+      </Copy>
+    </div>
+  </HeroSection>
+
+  <HeroSection
+    bgColor="white"
+    disablePt={true}
+    image={{
+      path: Image.src,
+      position: true,
+      alt: "",
+      aspectRatio: "aspect-[1.27: 1]",
+    }}
+  >
+    <div class="max-w-xl">
+      <SectionLabel padding="hero-md">About</SectionLabel>
+      <SectionHeader padding="hero" className="lg:max-w-lg"
+        >What makes us different?</SectionHeader
+      >
+      <Copy size="md" padding="hero-md">
+        <>
+          All estate agents will say they are friendly and fair; but when you
+          are an independent, family-run business like us, you really do take
+          pride in real feedback you receive from the community you work in, the
+          relationships you build and the referrals you get through word of
+          mouth.<br /><br />When we combine our sound knowledge of Basingstoke
+          and its surrounding areas with our expertise in property, we ensure
+          our clients have the best property experience – whether you’re a
+          seller, a first-time buyer, a landlord, a tenant or a growing family.
+          And that’s exactly how we’ve established Jacobs Properties and
+          cemented our place in Basingstoke, and we don’t intend to stop.
+        </>
+      </Copy>
+    </div>
+  </HeroSection>
+
+  <MiscSection bgColor="bg-primary-200">
+    <TeamSlider client:load />
+    <Link link="/" type="secondary" size="lg" className="mx-auto mt-16"
+      >View full team</Link
+    >
+  </MiscSection>
+
+  <MiscSection>
+    <SectionHeader padding="misc">What we stand for</SectionHeader>
+    <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
+      <img
+        src={Image.src}
+        loading="lazy"
+        class="order-1 aspect-[6/5] h-auto w-full self-center rounded-big object-cover lg:order-none"
+        alt=""
+      />
+      <Dropdown dropdownCards={dropdownCards} client:idle />
+    </div>
+  </MiscSection>
+
+  <MiscSection bgColor="bg-primary-200">
+    <NewsSlider newsTemplate={newsTemplate} client:idle />
+  </MiscSection>
+
+  <MiscSection>
+    <SectionHeader padding="misc" className="md:text-center"
+      >Our customers said</SectionHeader
+    >
+    <Reviews client:idle />
+  </MiscSection>
+
+  <MiscSection bgColor="bg-primary-200">
+    <SectionHeader padding="misc" className="md:text-center"
+      >Frequently asked questions</SectionHeader
+    >
+    <FAQs client:visible />
+  </MiscSection>
 </StandardLayout>
