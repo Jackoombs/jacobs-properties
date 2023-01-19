@@ -18,11 +18,11 @@ export default function Copy({
   return (
     <p
       className={clsx(
-        "font-normal leading-[1.5]",
+        "font-normal leading-[1.25]",
         className,
         textColor,
         size === "sm" && "text-[0.75rem]",
-        size === "md" && "text-[0.875rem] lg:text-[1rem]",
+        size === "md" && "text-[1rem] lg:text-[1.15rem] xl:text-[1.25rem]",
         size === "lg" && "text-[1.125rem] lg:text-[1.2rem] xl:text-[1.375rem]",
         padding === "hero-md" && "pb-6 lg:pb-7",
         padding === "hero-lg" && "pb-6 lg:pb-11"
