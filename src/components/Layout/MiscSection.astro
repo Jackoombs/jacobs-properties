@@ -1,0 +1,31 @@
+---
+import clsx from "clsx";
+
+interface Props {
+  bgColor?: string;
+  disablePb?: boolean;
+  disablePt?: boolean;
+  overflowVisible?: boolean;
+}
+
+const {
+  bgColor = "bg-white",
+  overflowVisible = false,
+  disablePb = false,
+  disablePt = false,
+}: Props = Astro.props;
+---
+
+<section
+  class={clsx(
+    "py-10 md:py-28",
+    overflowVisible ? "overflow-x-visible" : "overflow-x-hidden",
+    bgColor,
+    disablePb && "pb-0 md:pb-0",
+    disablePt && "pt-0 md:pt-0"
+  )}
+>
+  <div class="mx-auto w-full max-w-container-lg">
+    <slot />
+  </div>
+</section>

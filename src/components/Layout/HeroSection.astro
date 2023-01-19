@@ -1,0 +1,47 @@
+---
+import clsx from "clsx";
+
+interface Props {
+  image: Image;
+  bgColor?: string;
+  disablePb?: boolean;
+  disablePt?: boolean;
+}
+
+interface Image {
+  path: string;
+  position: boolean;
+  aspectRatio: string;
+  alt: string;
+}
+const {
+  image,
+  bgColor = "bg-white",
+  disablePb = false,
+  disablePt = false,
+}: Props = Astro.props;
+---
+
+<section
+  class={clsx(
+    "py-10 md:py-28",
+    bgColor,
+    disablePb && "pb-0 md:pb-0",
+    disablePt && "pt-0 md:pt-0"
+  )}
+>
+  <div
+    class="mx-auto grid w-full max-w-container-lg items-center gap-6 lg:grid-cols-2 lg:gap-16"
+  >
+    <img
+      class={clsx(
+        "h-auto w-full justify-self-end rounded-big object-cover",
+        image.aspectRatio,
+        image.position && "lg:order-1"
+      )}
+      src={image.path}
+      alt={image.path}
+    />
+    <slot />
+  </div>
+</section>
