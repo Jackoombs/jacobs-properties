@@ -29,7 +29,7 @@ export default function SectionSubHeader({
       {size === "sm" && (
         <h4
           className={clsx(
-            "text-[1.25rem] font-semibold leading-[1.5] lg:text-[1.35rem] xl:text-[1.5rem]",
+            "text-[1.25rem] font-semibold leading-[1.2] lg:text-[1.35rem] xl:text-[1.5rem]",
             textColor,
             className
           )}
