@@ -1,7 +1,5 @@
 import Background from "../../../assets/images/background.webp";
 import Background2 from "../../../assets/images/background_2.webp";
-import Home1 from "../../../assets/images/home_1.webp";
-import Home2 from "../../../assets/images/home_2.webp";
 import Link from "../../General/Link";
 import Copy from "../../General/Text/Copy";
 import PageHeader from "../../General/Text/PageHeader";
@@ -38,21 +36,26 @@ export default function Banner() {
     <section className="top-0 -z-10 grid h-screen w-screen grid-rows-[1fr_auto_auto] lg:grid-rows-[1fr_auto_1fr]">
       <div className="row-start-2 mx-auto w-full max-w-container-lg self-center pb-11 lg:pb-0">
         <div className="mx-auto flex flex-col text-white md:mx-0 lg:max-w-[44rem]">
-          <PageHeader
-            text="A people-first estate agent in Basingstoke"
-            textColor="text-white"
-            padding="hero"
-          />
+          <PageHeader textColor="text-white" padding="hero">
+            A people-first estate agent in Basingstoke
+          </PageHeader>
           <Copy
-            text="Jacobs Properties is a family-run estate and letting agency in Basingstoke, helping people in and around the area with all things property."
             size="lg"
             textColor="text-white"
-            addClasses="pb-8"
+            className="pb-8"
             padding="hero-lg"
-          />
+          >
+            Jacobs Properties is a family-run estate and letting agency in
+            Basingstoke, helping people in and around the area with all things
+            property.
+          </Copy>
           <div className="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start">
-            <Link link="/" text="Instant Valuation" type="white" size="lg" />
-            <Link link="/" text="Expert Valuation" type="secondary" size="lg" />
+            <Link link="/" type="white" size="lg">
+              Instant Valuation
+            </Link>
+            <Link link="/" type="secondary" size="lg">
+              Expert Valuation
+            </Link>
           </div>
         </div>
       </div>
