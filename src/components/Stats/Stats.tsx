@@ -20,7 +20,7 @@ export default function Stats() {
     { text: "Success rate", value: 73, isPercent: true },
     { text: "Average days to sell", value: 34, isPercent: false },
     { text: "Sale price achieved", value: 97, isPercent: true },
-    { text: "Number of gangster employers", value: 0, isPercent: false },
+    { text: "Gangster employees", value: 0, isPercent: false },
   ];
 
   return (
