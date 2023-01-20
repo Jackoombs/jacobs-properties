@@ -10,7 +10,7 @@ export default function TeamCard({
   linkedInLink,
 }: TeamCardType) {
   return (
-    <div className="flex w-full flex-col gap-6">
+    <div className="flex flex-col gap-6">
       <div className="relative overflow-hidden rounded-big">
         <img
           className="aspect-square duration-300 hover:scale-110"
@@ -18,7 +18,7 @@ export default function TeamCard({
           alt={`${name}, ${role}`}
         />
         <a className="absolute right-0 top-0 p-5" href={linkedInLink}>
-          <BsLinkedin className="bg-transparent text-white" />
+          <BsLinkedin className="bg-primary-100 text-lg text-white" />
         </a>
       </div>
       <div className="flex flex-col gap-2 text-primary-100">

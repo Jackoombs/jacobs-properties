@@ -13,7 +13,7 @@ export default function NewsCard({
     <div className="flex w-full flex-col gap-6">
       <div className="relative overflow-hidden rounded-big">
         <img
-          className="aspect-square duration-300 hover:scale-110"
+          className="hover:scale-120 aspect-square duration-300"
           src={image}
           alt=""
         />
@@ -25,7 +25,7 @@ export default function NewsCard({
         </SectionSubHeader>
         <a
           href="/"
-          className="text-sm font-semibold uppercase tracking-[1.4px]"
+          className="text-sm font-semibold uppercase tracking-[1.4px] decoration-primary-100 decoration-2 underline-offset-4 hover:underline"
         >
           Read More
         </a>
