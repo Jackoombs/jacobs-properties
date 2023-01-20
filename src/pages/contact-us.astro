@@ -1,0 +1,87 @@
+---
+import StandardLayout from "../layouts/StandardLayout.astro";
+import PageHeader from "../components/General/Text/PageHeader";
+import Copy from "../components/General/Text/Copy";
+import Link from "../components/General/Link";
+import MiscSection from "../components/Layout/MiscSection.astro";
+import HeroSection from "../components/Layout/HeroSection.astro";
+import Reviews from "../components/Reviews/Reviews";
+import WorthingHouse from "../assets/images/worting-house.webp";
+import SectionLabel from "../components/General/Text/SectionLabel";
+import SectionHeader from "../components/General/Text/SectionHeader";
+import ContactItem from "../components/General/ContactItem";
+import type { GoogleMapProps } from "@react-google-maps/api";
+import PropertyMap from "../components/Property/PropertyMap";
+
+const res = await fetch(
+  `https://maps.googleapis.com/maps/api/geocode/json?address=WortingHouse%20ChurchLane&key=${
+    import.meta.env.PUBLIC_GOOGLE_MAPS_KEY
+  }`
+);
+const data = await res.json();
+const location: GoogleMapProps["center"] = data.results[0].geometry.location;
+---
+
+<StandardLayout title="Contact Us">
+  <section class="bg-primary-200 py-10 md:py-28">
+    <div
+      class="mx-auto grid w-full max-w-container-lg grid-cols-1 items-center gap-6 md:grid-cols-1/2 lg:gap-16 xl:grid-cols-[4fr_3fr]"
+    >
+      <PageHeader padding="hero" className="max-w-sm lg:max-w-[56rem]"
+        >Contact us</PageHeader
+      >
+      <div class="col-start-2 flex flex-col">
+        <Copy size="lg" padding="hero-md"
+          >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+          ipsum dolor.</Copy
+        >
+        <Link link="/" type="secondary" size="lg">Get in touch</Link>
+      </div>
+    </div>
+  </section>
+
+  <HeroSection
+    image={{
+      path: WorthingHouse.src,
+      position: false,
+      alt: "/",
+      aspectRatio: "aspect-hero",
+    }}
+  >
+    <div class="max-w-3xl 2xl:pl-20">
+      <SectionLabel padding="hero-md">Contact</SectionLabel>
+      <SectionHeader padding="hero">Branch details</SectionHeader>
+      <div class="pb-10">
+        <ContactItem className="pb-3" icon="phone" link="/"
+          >01256 363683</ContactItem
+        >
+        <ContactItem className="pb-7" icon="mail" link="/"
+          >info@jacobs.properties</ContactItem
+        >
+        <ContactItem icon="pin" link="/">
+          <>Worting House, Church Lane,<br />Basingstoke, RG23 8PY</>
+        </ContactItem>
+      </div>
+      <Link link="/" type="secondary" size="lg">Get Directions</Link>
+    </div>
+  </HeroSection>
+
+  <MiscSection disablePb={true} disablePt={true}>
+    <PropertyMap
+      client:idle
+      location={location}
+      markers={[location]}
+      zoom={15}
+    />
+  </MiscSection>
+
+  <MiscSection>
+    <SectionHeader padding="misc" className="md:text-center"
+      >Hear from our customers</SectionHeader
+    >
+    <Reviews color="alt" client:visible />
+  </MiscSection>
+</StandardLayout>
