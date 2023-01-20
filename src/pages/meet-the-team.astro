@@ -1,0 +1,35 @@
+---
+import StandardLayout from "../layouts/StandardLayout.astro";
+import PageHeader from "../components/General/Text/PageHeader";
+import Copy from "../components/General/Text/Copy";
+import Link from "../components/General/Link";
+import MiscSection from "../components/Layout/MiscSection.astro";
+import TeamGrid from "../components/Team/TeamGrid";
+import Reviews from "../components/Reviews/Reviews";
+---
+
+<StandardLayout title="Meet the Team">
+  <section class="bg-primary-200 py-10 md:py-28">
+    <div
+      class="mx-auto grid w-full max-w-container-lg items-center gap-6 lg:grid-cols-[4fr_3fr] lg:gap-16"
+    >
+      <PageHeader padding="hero" className=" max-w-md lg:max-w-[56rem]"
+        >Meet your team of local property experts</PageHeader
+      >
+      <div class="flex flex-col">
+        <Copy size="lg" padding="hero-md"
+          >Independent and proud, we keep things local at Jacobs Properties.</Copy
+        >
+        <Link link="/" type="secondary" size="lg">Get in touch</Link>
+      </div>
+    </div>
+  </section>
+
+  <MiscSection>
+    <TeamGrid client:load />
+  </MiscSection>
+
+  <MiscSection disablePt={true}>
+    <Reviews client:visible color="alt" />
+  </MiscSection>
+</StandardLayout>
