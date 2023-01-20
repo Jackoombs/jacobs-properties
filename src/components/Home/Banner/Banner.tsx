@@ -1,5 +1,7 @@
 import Background from "../../../assets/images/background.webp";
 import Background2 from "../../../assets/images/background_2.webp";
+import Background3 from "../../../assets/images/background_3.webp";
+import Background4 from "../../../assets/images/background_4.webp";
 import Link from "../../General/Link";
 import Copy from "../../General/Text/Copy";
 import PageHeader from "../../General/Text/PageHeader";
@@ -28,12 +30,20 @@ export default function Banner() {
     },
     {
       backgroundSrc: Background2,
-      objectFit: "80% 0%",
+      objectFit: "80% 0",
+    },
+    {
+      backgroundSrc: Background3,
+      objectFit: "85% 0",
+    },
+    {
+      backgroundSrc: Background4,
+      objectFit: "78% 0",
     },
   ];
 
   return (
-    <section className="top-0 -z-10 grid h-screen w-screen grid-rows-[1fr_auto_auto] lg:grid-rows-[1fr_auto_1fr]">
+    <section className="top-0 -z-10 grid h-[100svh] w-screen grid-rows-[1fr_auto_auto] lg:grid-rows-[1fr_auto_1fr]">
       <div className="row-start-2 mx-auto w-full max-w-container-lg self-center pb-11 lg:pb-0">
         <div className="mx-auto flex flex-col text-white md:mx-0 lg:max-w-[44rem]">
           <PageHeader textColor="text-white" padding="hero">
@@ -64,7 +74,7 @@ export default function Banner() {
         swiper={swiper}
         imageLength={backGrounds.length}
       />
-      <div className="absolute top-0  right-0 -z-10 h-screen w-screen">
+      <div className="absolute top-0  right-0 -z-10 h-[100svh] w-screen">
         <Swiper
           onSwiper={(e) => setSwiper(e)}
           onSlideChange={(e) => setActiveIndex(e.activeIndex)}
