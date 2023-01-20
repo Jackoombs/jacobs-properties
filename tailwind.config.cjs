@@ -39,6 +39,9 @@ module.exports = {
         "5/4": "5 / 4",
         property: "3 / 2",
       },
+      gridTemplateColumns: {
+        "1/2": "1fr 2fr",
+      },
       borderRadius: {
         big: "0.625rem",
       },
