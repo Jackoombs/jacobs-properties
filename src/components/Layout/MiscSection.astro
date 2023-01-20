@@ -2,6 +2,7 @@
 import clsx from "clsx";
 
 interface Props {
+  className?: string;
   bgColor?: string;
   disablePb?: boolean;
   disablePt?: boolean;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const {
+  className,
   bgColor = "bg-white",
   overflowVisible = false,
   disablePb = false,
@@ -25,7 +27,7 @@ const {
     disablePt && "pt-0 md:pt-0"
   )}
 >
-  <div class="mx-auto w-full max-w-container-lg">
+  <div class={clsx("mx-auto w-full max-w-container-lg", className)}>
     <slot />
   </div>
 </section>
