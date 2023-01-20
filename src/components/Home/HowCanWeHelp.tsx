@@ -53,7 +53,7 @@ export default function HowCanWeHelp() {
   return (
     <>
       <div className="flex items-start justify-between">
-        <SectionHeader padding="misc">The latest property news</SectionHeader>
+        <SectionHeader padding="misc">How can we Help?</SectionHeader>
         <CarouselNavBtns swiper={swiper} slideStatus={slideStatus} />
       </div>
       <Swiper
