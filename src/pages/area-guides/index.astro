@@ -1,0 +1,112 @@
+---
+import StandardLayout from "../../layouts/StandardLayout.astro";
+import PageHeader from "../../components/General/Text/PageHeader";
+import Copy from "../../components/General/Text/Copy";
+import Link from "../../components/General/Link";
+import MiscSection from "../../components/Layout/MiscSection.astro";
+import SectionHeader from "../../components/General/Text/SectionHeader";
+import SectionLabel from "../../components/General/Text/SectionLabel";
+import Reviews from "../../components/Reviews/Reviews";
+import ValuationHero from "../../assets/images/valuation-hero.webp";
+---
+
+<StandardLayout title="Area Guides">
+  <section class="bg-primary-200 py-10 md:py-28">
+    <div
+      class="mx-auto flex w-full max-w-container-lg grid-cols-1 flex-col items-center gap-6 md:grid md:grid-cols-1/2 lg:gap-16 xl:grid-cols-[4fr_3fr]"
+    >
+      <PageHeader padding="hero" className="max-w-sm lg:max-w-[56rem]"
+        >Area guides</PageHeader
+      >
+      <div class="col-start-2 flex flex-col">
+        <Copy size="lg" padding="hero-md"
+          >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+          ipsum dolor.</Copy
+        >
+        <Link link="/" type="secondary" size="lg">Get in touch</Link>
+      </div>
+    </div>
+  </section>
+
+  <MiscSection className="grid lg:grid-cols-2 gap-6 lg:gap-16" disablePb={true}>
+    <a
+      href="/area-guides/basingstoke"
+      class="basingstoke relative aspect-property w-full rounded-big bg-cover bg-center"
+    >
+      <div
+        class="absolute bottom-0 mt-auto flex h-full max-h-14 w-full items-center rounded-b-big bg-[#001129] bg-opacity-[0.95] duration-300 ease-in-out md:max-h-24"
+      >
+        <SectionHeader className="pl-10" textColor="text-white"
+          >Basingstoke</SectionHeader
+        >
+      </div>
+    </a>
+    <a
+      href="/area-guides/oakley"
+      class="oakley relative aspect-property w-full rounded-big bg-cover bg-center"
+    >
+      <div
+        class="absolute bottom-0 mt-auto flex h-full max-h-14 w-full items-center rounded-b-big bg-[#001129] bg-opacity-[0.95] duration-300 ease-in-out md:max-h-24"
+      >
+        <SectionHeader className="pl-10" textColor="text-white"
+          >Oakley</SectionHeader
+        >
+      </div>
+    </a>
+  </MiscSection>
+
+  <MiscSection>
+    <SectionHeader padding="misc" className="md:text-center"
+      >Hear from our customers</SectionHeader
+    >
+    <Reviews color="alt" client:visible />
+  </MiscSection>
+</StandardLayout>
+
+<section
+  class="relative flex flex-col justify-center gap-6 bg-secondary-100 pb-10 lg:aspect-[12/5] lg:pb-0"
+>
+  <img
+    loading="lazy"
+    class="right-0 top-0 mx-auto aspect-[6/5] h-auto w-full object-cover object-left lg:absolute lg:order-1 lg:w-[50vw]"
+    src={ValuationHero.src}
+    alt=""
+  />
+  <div class="mx-auto w-full max-w-container-lg">
+    <div class="flex flex-1 flex-col pr-3 lg:justify-center">
+      <SectionLabel padding="hero-md">Valuation</SectionLabel>
+      <SectionHeader className="lg:max-w-lg" padding="hero"
+        >Find out how much your property is worth</SectionHeader
+      >
+      <Copy className="lg:max-w-md xl:max-w-xl" padding="hero-md" size="lg"
+        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor
+        lorem, eleifend pharetra nibh ut, blandit placerat massa. Mauris maximus
+        ligula placerat ligula viverra gravida. Cras sed neque vitae tortor
+        varius accumsan. Nunc accumsan ex in commodo viverra.</Copy
+      >
+      <div class="flex flex-col gap-3 md:flex-row">
+        <Link link="/" type="white" size="lg">Instant Valuation</Link>
+        <Link link="/" type="primary" size="lg">Expert Valuation</Link>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .basingstoke {
+    background-image: url("src/assets/images/area-guides/basingstoke.webp");
+  }
+  .oakley {
+    background-image: url("src/assets/images/area-guides/oakley.webp");
+  }
+
+  .basingstoke:hover *,
+  .oakley:hover * {
+    max-height: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+</style>

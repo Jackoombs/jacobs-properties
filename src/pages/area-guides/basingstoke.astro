@@ -1,0 +1,173 @@
+---
+import HeroSection from "../../components/Layout/HeroSection.astro";
+import StandardLayout from "../../layouts/StandardLayout.astro";
+import Basingstoke from "../../assets/images/area-guides/basingstoke.webp";
+import SectionLabel from "../../components/General/Text/SectionLabel";
+import SectionHeader from "../../components/General/Text/SectionHeader";
+import Display from "../../components/General/Text/Display";
+import PageHeader from "../../components/General/Text/PageHeader";
+import Copy from "../../components/General/Text/Copy";
+import Link from "../../components/General/Link";
+import MiscSection from "../../components/Layout/MiscSection.astro";
+import Activites from "../../assets/images/area-guides/activities.webp";
+import LocalAmenities from "../../assets/images/area-guides/local-amenities.webp";
+import TravelLinks from "../../assets/images/area-guides/travel-links.webp";
+import ValuationHero from "../../assets/images/valuation-hero.webp";
+import HowCanWeHelp from "../../components/Home/HowCanWeHelp";
+import Stats from "../../components/Stats/Stats";
+---
+
+<StandardLayout title="Basinsgstoke Area Guide">
+  <HeroSection
+    bgColor="bg-primary-200"
+    image={{
+      path: Basingstoke.src,
+      aspectRatio: "aspect-property",
+      alt: "Eastrop Park Basingstoke",
+      position: true,
+    }}
+  >
+    <div>
+      <SectionLabel padding="hero-lg">Area Guides</SectionLabel>
+      <PageHeader padding="hero">Welcome to Basingstoke</PageHeader>
+      <Copy size="lg" className="max-w-[38rem]">
+        <>
+          If you’re looking for an experienced, local estate agent in
+          Basingstoke, you’ve arrived at the right place. This really is home to
+          us here at Jacobs Properties - we’ve been selling, letting, buying and
+          renting Basingstoke properties since 1999.<br /><br />If you’re new to
+          the area or thinking about moving here, you’ve warmly welcomed. Read
+          on to discover local amenities, transport links and places to go in
+          our Basingstoke Area Guide, written by true locals.
+        </>
+      </Copy>
+    </div>
+  </HeroSection>
+
+  <MiscSection className="flex flex-col items-center gap-8">
+    <Display>A local guide to Basingstoke</Display>
+    <Copy size="lg" className="max-w-4xl text-center">
+      Basingstoke is the largest town in Hampshire, central southern England. It
+      has been an overspill town for London since the 1950s, steadily expanding
+      and proudly making its mark on the map as an important economic centre
+      with excellent transport links to London. As of 2021, Basingstoke and the
+      surrounding villages are home to 185,200 residents.
+    </Copy>
+  </MiscSection>
+
+  <HeroSection
+    bgColor="bg-primary-200"
+    image={{
+      path: Activites.src,
+      position: false,
+      aspectRatio: "aspect-hero",
+      alt: "art gallery",
+    }}
+  >
+    <div class="max-w-3xl 2xl:pl-20">
+      <SectionLabel padding="hero-md">Area Guide</SectionLabel>
+      <SectionHeader padding="hero">Activities and entertainment</SectionHeader>
+      <Copy size="lg" className="max-w-[38rem]"
+        >Basingstoke offers a wide variety of activities for individuals,
+        couples and families, including Milestones Museum, The Vyne, The Anvil
+        and Haymarket Theatres, and Willis Museum and Sainsbury Gallery. Not so
+        much a culture vulture; more of an adrenaline junkie? There’s a number
+        of escape rooms across town, Planet Ice skating rink and even indoor
+        skydiving at iFLY! Fancy a change of scenery? Take a direct train out to
+        the Big Smoke (it only takes 45 minutes) or the coast and enjoy a day by
+        the beach!</Copy
+      >
+    </div>
+  </HeroSection>
+
+  <HeroSection
+    disablePb={true}
+    disablePt={true}
+    bgColor="bg-primary-200"
+    image={{
+      path: LocalAmenities.src,
+      position: true,
+      aspectRatio: "aspect-hero",
+      alt: "swimmer",
+    }}
+  >
+    <div>
+      <SectionLabel padding="hero-md">Area Guide</SectionLabel>
+      <SectionHeader padding="hero">Local amenities</SectionHeader>
+      <Copy size="md" className="max-w-[35rem]"
+        >With a great selection of amenities, it’s easy to see why Basingstoke
+        is so popular amongst house hunters. Immerse yourself in the latest
+        blockbusters at Odeon or Vue, go for a swim or a spin at Basingstoke
+        Sports Centre, tee off at Weybrook Park Golf Club or shop till you drop
+        at Basing View – take your pick! Planning to put down roots in
+        Basingstoke? You’ll be glad to know that there are many primary and
+        secondary schools here, plus all London colleges and universities are
+        easily reached by train.</Copy
+      >
+    </div>
+  </HeroSection>
+
+  <HeroSection
+    bgColor="bg-primary-200"
+    image={{
+      path: TravelLinks.src,
+      position: false,
+      aspectRatio: "aspect-hero",
+      alt: "moving train",
+    }}
+  >
+    <div class="max-w-3xl 2xl:pl-20">
+      <SectionLabel padding="hero-md">Area Guide</SectionLabel>
+      <SectionHeader padding="hero">Travel links</SectionHeader>
+      <Copy size="lg" className="max-w-[38rem]"
+        >Not only is Basingstoke a 45-minute direct train ride from London
+        Waterloo, it is also well positioned along the M3 with transport links
+        to the M4 and M25, and in close proximity to Reading, Newbury,
+        Winchester and Southampton. The town and surrounding areas are also
+        accessible by bicycle and on foot. Finally, Southampton Airport is only
+        31 miles away, whilst Heathrow Airport and Gatwick Airport are 33.5 and
+        59.5 miles away respectively, perfect for weekend getaways and long-haul
+        holidays.</Copy
+      >
+    </div>
+  </HeroSection>
+
+  <MiscSection>Locrating?</MiscSection>
+
+  <MiscSection bgColor="bg-primary-200">
+    <HowCanWeHelp client:idle />
+  </MiscSection>
+
+  <MiscSection>
+    <Stats client:visible />
+  </MiscSection>
+
+  <section
+    class="relative flex flex-col justify-center gap-6 bg-secondary-100 pb-10 lg:aspect-[12/5] lg:pb-0"
+  >
+    <img
+      loading="lazy"
+      class="right-0 top-0 mx-auto aspect-[6/5] h-auto w-full object-cover object-left lg:absolute lg:order-1 lg:w-[50vw]"
+      src={ValuationHero.src}
+      alt=""
+    />
+    <div class="mx-auto w-full max-w-container-lg">
+      <div class="flex flex-1 flex-col pr-3 lg:justify-center">
+        <SectionLabel padding="hero-md">Valuation</SectionLabel>
+        <SectionHeader className="lg:max-w-lg" padding="hero"
+          >Find out how much your property is worth</SectionHeader
+        >
+        <Copy className="lg:max-w-md xl:max-w-xl" padding="hero-md" size="lg"
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor
+          lorem, eleifend pharetra nibh ut, blandit placerat massa. Mauris
+          maximus ligula placerat ligula viverra gravida. Cras sed neque vitae
+          tortor varius accumsan. Nunc accumsan ex in commodo viverra.</Copy
+        >
+        <div class="flex flex-col gap-3 md:flex-row">
+          <Link link="/" type="white" size="lg">Instant Valuation</Link>
+          <Link link="/" type="primary" size="lg">Expert Valuation</Link>
+        </div>
+      </div>
+    </div>
+  </section>
+</StandardLayout>
