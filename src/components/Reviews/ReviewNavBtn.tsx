@@ -5,15 +5,29 @@ interface Props {
   isReverse: boolean;
   swiper: any;
   isStartOrEnd: string;
+  color?: "standard" | "alt";
 }
 
 export default function ReviewNavBtn({
   isReverse,
   swiper,
   isStartOrEnd,
+  color = "standard",
 }: Props) {
   const handleClick = () => {
     isReverse ? swiper.slidePrev() : swiper.slideNext();
+  };
+
+  const buttonColor = () => {
+    if (color === "alt") return "text-primary-100";
+    if (
+      (isStartOrEnd === "start" && isReverse) ||
+      (isStartOrEnd === "end" && !isReverse)
+    ) {
+      return "text-white";
+    } else {
+      return "text-primary-100";
+    }
   };
 
   return (
@@ -31,12 +45,7 @@ export default function ReviewNavBtn({
       <IoArrowForwardOutline
         className={clsx(
           "text-2xl text-primary-100 duration-150",
-          isStartOrEnd === "start" && isReverse
-            ? "text-white"
-            : "text-primary-100",
-          isStartOrEnd === "end" && !isReverse
-            ? " text-white "
-            : "text-primary-100"
+          buttonColor()
         )}
       />
     </button>
