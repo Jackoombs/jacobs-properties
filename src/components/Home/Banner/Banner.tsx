@@ -1,7 +1,7 @@
-import Background from "../../../assets/images/background.webp";
-import Background2 from "../../../assets/images/background_2.webp";
-import Background3 from "../../../assets/images/background_3.webp";
-import Background4 from "../../../assets/images/background_4.webp";
+import Background from "../../../assets/images/home/background.webp";
+import Background2 from "../../../assets/images/home/background_2.webp";
+import Background3 from "../../../assets/images/home/background_3.webp";
+import Background4 from "../../../assets/images/home/background_4.webp";
 import Link from "../../General/Link";
 import Copy from "../../General/Text/Copy";
 import PageHeader from "../../General/Text/PageHeader";
@@ -30,7 +30,7 @@ export default function Banner() {
     },
     {
       backgroundSrc: Background2,
-      objectFit: "80% 0",
+      objectFit: "68% 0",
     },
     {
       backgroundSrc: Background3,

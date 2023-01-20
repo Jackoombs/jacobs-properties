@@ -1,5 +1,5 @@
-import LogoBlue from "../../assets/images/logo_blue.svg";
-import LogoGreen from "../../assets/images/logo_green.svg";
+import LogoBlue from "../../assets/images/header/logo_blue.svg";
+import LogoGreen from "../../assets/images/header/logo_green.svg";
 import Link from "../General/Link";
 import MenuBtn from "./MenuBtn";
 import clsx from "clsx";

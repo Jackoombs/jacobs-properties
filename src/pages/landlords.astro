@@ -1,7 +1,11 @@
 ---
 import StandardLayout from "../layouts/StandardLayout.astro";
 import Link from "../components/General/Link";
-import Home3 from "../assets/images/home_3.webp";
+import FirstTime from "../assets/images/landlords/first-time-3.webp";
+import LandlordHero from "../assets/images/landlords/landlord-hero.webp";
+import WhyLet from "../assets/images/landlords/why-let.webp";
+import LetOnly from "../assets/images/landlords/let-only.webp";
+import Home3 from "../assets/images/home/home_3.webp";
 import Stats from "../components/Stats/Stats";
 import Dropdown from "../components/Dropdown/Dropdown";
 import SectionLabel from "../components/General/Text/SectionLabel";
@@ -71,12 +75,11 @@ const dropdownCards = [
         class="mx-auto grid max-w-container-lg items-center gap-7 lg:grid-cols-2"
       >
         <img
-          loading="lazy"
           class="aspect-[1.42_/_1] h-auto w-full self-center rounded-big object-cover object-left lg:order-1"
-          src={Home3.src}
+          src={LandlordHero.src}
           alt=""
         />
-        <div class="flex flex-col text-primary-100 md:max-w-lg">
+        <div class="flex flex-col text-primary-100 md:max-w-xl">
           <SectionLabel padding="hero-lg">Landlords</SectionLabel>
           <PageHeader padding="hero"
             >Let your property in Basingstoke</PageHeader
@@ -112,7 +115,7 @@ const dropdownCards = [
         >
         <div class="flex flex-col gap-6 md:grid md:grid-cols-2 lg:gap-16">
           <img
-            src={Home3.src}
+            src={WhyLet.src}
             loading="lazy"
             class="md:order-0 order-1 aspect-[6/5] h-auto w-full flex-1 self-start rounded-big object-cover"
             alt=""
@@ -164,7 +167,7 @@ const dropdownCards = [
         >
           <img
             class="aspect-[1.27/1] w-full rounded-big object-cover object-center md:order-1"
-            src={Home3.src}
+            src={LetOnly.src}
             alt=""
           />
           <div class="md:max-w-lg">
@@ -191,7 +194,7 @@ const dropdownCards = [
         <img
           loading="lazy"
           class="aspect-5/4 h-auto w-full flex-1 object-cover object-left lg:order-1 lg:hidden lg:w-[50vw]"
-          src={Home3.src}
+          src={FirstTime.src}
           alt=""
         />
         <div
@@ -214,7 +217,7 @@ const dropdownCards = [
           <img
             loading="lazy"
             class="hidden aspect-[1.42_/_1] h-auto w-full flex-1 self-center rounded-big object-cover object-left lg:order-1 lg:inline"
-            src={Home3.src}
+            src={FirstTime.src}
             alt=""
           />
         </div>

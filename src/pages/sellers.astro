@@ -1,7 +1,10 @@
 ---
 import StandardLayout from "../layouts/StandardLayout.astro";
 import Link from "../components/General/Link";
-import Home3 from "../assets/images/home_3.webp";
+import FirstTime from "../assets/images/sellers/first-time-2.webp";
+import SellerHero from "../assets/images/sellers/seller-hero.webp";
+import WhySell from "../assets/images/sellers/why-sell.webp";
+import ProvenRecipe from "../assets/images/sellers/proven-recipe.webp";
 import Stats from "../components/Stats/Stats";
 import Dropdown from "../components/Dropdown/Dropdown";
 import SectionLabel from "../components/General/Text/SectionLabel";
@@ -74,7 +77,7 @@ const dropdownCards = [
         <img
           loading="lazy"
           class="aspect-[1.42_/_1] h-auto w-full self-center rounded-big object-cover object-left lg:order-1"
-          src={Home3.src}
+          src={SellerHero.src}
           alt=""
         />
         <div class="flex flex-col text-primary-100 md:max-w-lg">
@@ -123,7 +126,7 @@ const dropdownCards = [
         >
         <div class="flex flex-col gap-6 md:grid md:grid-cols-2 lg:gap-16">
           <img
-            src={Home3.src}
+            src={WhySell.src}
             loading="lazy"
             class="order-1 aspect-[6/5] h-auto w-full self-center rounded-big object-cover"
             alt=""
@@ -149,7 +152,7 @@ const dropdownCards = [
       >
         <img
           class="aspect-[1.27/1] w-full rounded-big object-cover object-center"
-          src={Home3.src}
+          src={ProvenRecipe.src}
           alt=""
         />
         <div class="max-w-2xl 2xl:pl-20">
@@ -179,7 +182,7 @@ const dropdownCards = [
       <img
         loading="lazy"
         class="aspect-5/4 h-auto w-full flex-1 object-cover object-left lg:order-1 lg:hidden lg:w-[50vw]"
-        src={Home3.src}
+        src={FirstTime.src}
         alt=""
       />
       <div
@@ -202,7 +205,7 @@ const dropdownCards = [
         <img
           loading="lazy"
           class="hidden aspect-[1.42_/_1] h-auto w-full flex-1 self-center rounded-big object-cover object-left lg:order-1 lg:inline"
-          src={Home3.src}
+          src={FirstTime.src}
           alt=""
         />
       </div>

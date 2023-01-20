@@ -1,7 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
 import "swiper/css";
-import Image1 from "../../assets/images/how_help_1.webp";
+import Buyers from "../../assets/images/home/buyers.webp";
+import Sellers from "../../assets/images/home/sellers.webp";
+import Landlords from "../../assets/images/home/landlords.webp";
+import Tenants from "../../assets/images/home/tenants.webp";
 import CarouselNavBtns from "../General/CarouselNavBtns";
 import SectionHeader from "../General/Text/SectionHeader";
 import SectionSubHeader from "../General/Text/SectionSubHeader";
@@ -23,31 +26,25 @@ export default function HowCanWeHelp() {
   const slides = [
     {
       title: "Buyers",
-      bgSrc: Image1,
+      bgSrc: Buyers,
       imageAlt: "",
       link: "/",
     },
     {
       title: "Sellers",
-      bgSrc: Image1,
+      bgSrc: Sellers,
       imageAlt: "",
       link: "/",
     },
     {
       title: "Landlords",
-      bgSrc: Image1,
+      bgSrc: Landlords,
       imageAlt: "",
       link: "/",
     },
     {
       title: "Tenants",
-      bgSrc: Image1,
-      imageAlt: "",
-      link: "/",
-    },
-    {
-      title: "Developers",
-      bgSrc: Image1,
+      bgSrc: Tenants,
       imageAlt: "",
       link: "/",
     },
