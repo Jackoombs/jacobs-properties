@@ -25,3 +25,8 @@ interface Image {
   Width?: number;
   Height?: number;
 }
+
+export interface FAQType {
+  question: string;
+  answer: string;
+}

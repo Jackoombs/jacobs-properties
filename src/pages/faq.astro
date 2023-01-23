@@ -1,0 +1,70 @@
+---
+import StandardLayout from "../layouts/StandardLayout.astro";
+import PageHeader from "../components/General/Text/PageHeader";
+import MiscSection from "../components/Layout/MiscSection.astro";
+import SectionHeader from "../components/General/Text/SectionHeader";
+import SectionLabel from "../components/General/Text/SectionLabel";
+import Copy from "../components/General/Text/Copy";
+import Link from "../components/General/Link";
+import FAQList from "../components/FAQs/FAQList";
+import ValuationHero from "../assets/images/valuation-hero.webp";
+import Reviews from "../components/Reviews/Reviews";
+---
+
+<StandardLayout title="FAQ's">
+  <MiscSection
+    bgColor="bg-primary-100"
+    className="flex flex-col md:grid grid-cols-1 items-center gap-6 md:grid-cols-1/2 lg:gap-16 xl:grid-cols-[4fr_3fr]"
+  >
+    <PageHeader textColor="text-white"
+      >Frequently asked questions at Jacobs</PageHeader
+    >
+    <div class="col-start-2 flex flex-col">
+      <Copy textColor="text-white" size="lg" padding="hero-md"
+        >Independent and proud, we keep things simple at Jacobs Properties.</Copy
+      >
+      <Link link="/" type="secondary" size="lg">Get in touch</Link>
+    </div>
+  </MiscSection>
+
+  <MiscSection>
+    <FAQList client:load />
+  </MiscSection>
+
+  <section
+    class="relative flex flex-col justify-center gap-6 bg-secondary-100 pb-10 lg:aspect-[12/5] lg:pb-0"
+  >
+    <img
+      loading="lazy"
+      class="right-0 top-0 mx-auto aspect-[6/5] h-auto w-full object-cover object-left lg:absolute lg:order-1 lg:w-[50vw]"
+      src={ValuationHero.src}
+      alt=""
+    />
+    <div class="mx-auto w-full max-w-container-lg">
+      <div class="flex flex-1 flex-col lg:justify-center">
+        <SectionLabel padding="hero-md">Get in touch</SectionLabel>
+        <SectionHeader className="lg:max-w-lg" padding="hero"
+          >Not found what you’re looking for?</SectionHeader
+        >
+        <Copy className="lg:max-w-md xl:max-w-xl" padding="hero-md" size="lg">
+          <>
+            If none of our FAQ have answered your questions, get in touch on
+            <strong class="font-semibold">01256 781300</strong> or fill out the form
+            below by clicking get in touch.
+          </>
+        </Copy>
+        <div class="flex flex-col gap-3 md:flex-row">
+          <Link link="/" type="white" size="lg">Instant Valuation</Link>
+          <Link link="/" type="primary" size="lg">Expert Valuation</Link>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <MiscSection>
+    <SectionHeader padding="misc" className="md:text-center"
+      >Hear from our customers</SectionHeader
+    >
+    <Reviews color="alt" client:visible />
+  </MiscSection>
+</StandardLayout>

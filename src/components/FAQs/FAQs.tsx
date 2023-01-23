@@ -1,29 +1,30 @@
 import { useState } from "react";
 import FAQCard from "./FAQCard";
+import type { FAQType } from "../../env";
 
-export default function FAQs() {
+interface Props {
+  bgColor?: string;
+  FAQTemplate: FAQType[];
+}
+
+export default function FAQs({ bgColor, FAQTemplate }: Props) {
   const [currentIndex, setCurrentIndex] = useState(-1);
 
   return (
-    <div className="flex flex-col items-center gap-2 md:gap-5">
-      <FAQCard
-        index={1}
-        question="How long will it take to sell my property?"
-        answer="In around 3-4 buissness weeks we will have your property sold ."
-        {...{ currentIndex, setCurrentIndex }}
-      />
-      <FAQCard
-        index={2}
-        question="How long will it take to sell my property?"
-        answer="In around 3-4 buissness weeks we will have your property sold."
-        {...{ currentIndex, setCurrentIndex }}
-      />
-      <FAQCard
-        index={3}
-        question="How long will it take to sell my property?"
-        answer="In around 3-4 buissness weeks we will have your property sold."
-        {...{ currentIndex, setCurrentIndex }}
-      />
-    </div>
+    <ul className="flex flex-col items-center gap-2 md:gap-5">
+      {FAQTemplate.map(({ question, answer }, index) => (
+        <FAQCard
+          key={index}
+          {...{
+            bgColor,
+            index,
+            question,
+            answer,
+            currentIndex,
+            setCurrentIndex,
+          }}
+        />
+      ))}
+    </ul>
   );
 }
