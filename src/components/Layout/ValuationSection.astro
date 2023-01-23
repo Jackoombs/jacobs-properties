@@ -1,0 +1,36 @@
+---
+import ValuationHero from "../../assets/images/valuation-hero.webp";
+import SectionLabel from "../General/Text/SectionLabel";
+import SectionHeader from "../General/Text/SectionHeader";
+import Copy from "../General/Text/Copy";
+import Link from "../General/Link";
+---
+
+<section
+  class="relative flex flex-col justify-center gap-6 bg-secondary-100 pb-10 lg:aspect-[12/5] lg:pb-0"
+>
+  <img
+    loading="lazy"
+    class="right-0 top-0 mx-auto aspect-[6/5] h-auto w-full object-cover object-left lg:absolute lg:order-1 lg:w-[50vw]"
+    src={ValuationHero.src}
+    alt=""
+  />
+  <div class="mx-auto w-full max-w-container-lg">
+    <div class="flex flex-1 flex-col lg:justify-center">
+      <SectionLabel padding="hero-md">Valuation</SectionLabel>
+      <SectionHeader className="lg:max-w-lg" padding="hero"
+        >Find out how much your property is worth</SectionHeader
+      >
+      <Copy className="lg:max-w-md xl:max-w-xl" padding="hero-md" size="lg"
+        >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor
+        lorem, eleifend pharetra nibh ut, blandit placerat massa. Mauris maximus
+        ligula placerat ligula viverra gravida. Cras sed neque vitae tortor
+        varius accumsan. Nunc accumsan ex in commodo viverra.</Copy
+      >
+      <div class="flex flex-col gap-3 md:flex-row">
+        <Link link="/" type="white" size="lg">Instant Valuation</Link>
+        <Link link="/" type="primary" size="lg">Expert Valuation</Link>
+      </div>
+    </div>
+  </div>
+</section>
