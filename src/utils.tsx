@@ -23,3 +23,7 @@ export const generatePriceOptions = (
   }
   return values.map((value) => priceNumberToPriceString(value));
 };
+
+export const removeArrayDuplicates = (array: string[]) => {
+  return Array.from(new Set(array));
+};

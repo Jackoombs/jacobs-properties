@@ -1,0 +1,47 @@
+---
+import PageHeader from "../../components/General/Text/PageHeader";
+import SectionHeader from "../../components/General/Text/SectionHeader";
+import SectionLabel from "../../components/General/Text/SectionLabel";
+import ValuationHero from "../../assets/images/valuation-hero.webp";
+import MiscSection from "../../components/Layout/MiscSection.astro";
+import StandardLayout from "../../layouts/StandardLayout.astro";
+import Copy from "../../components/General/Text/Copy";
+import Link from "../../components/General/Link";
+import NewsGrid from "../../components/News/NewsGrid";
+import Reviews from "../../components/Reviews/Reviews";
+import ValuationSection from "../../components/Layout/ValuationSection.astro";
+
+const news = await Astro.glob("./**.md");
+const newsTemplate = news.map((post) => {
+  const { title, category, date, image } = post.frontmatter;
+  return { title, category, date, image };
+});
+---
+
+<StandardLayout title="News">
+  <MiscSection
+    bgColor="bg-primary-200"
+    className="flex flex-col md:grid grid-cols-1 items-center gap-6 md:grid-cols-1/2 lg:gap-16 xl:grid-cols-[4fr_3fr]"
+  >
+    <PageHeader>Latest industry news</PageHeader>
+    <div class="col-start-2 flex flex-col">
+      <Copy size="lg" padding="hero-md"
+        >Keep up to date with the latest property updates.</Copy
+      >
+      <Link link="/" type="secondary" size="lg">Get in touch</Link>
+    </div>
+  </MiscSection>
+
+  <MiscSection>
+    <NewsGrid client:load newsTemplate={newsTemplate} />
+  </MiscSection>
+
+  <ValuationSection />
+
+  <MiscSection>
+    <SectionHeader className="md:text-center" padding="misc"
+      >Hear from our customers</SectionHeader
+    >
+    <Reviews color="alt" />
+  </MiscSection>
+</StandardLayout>
