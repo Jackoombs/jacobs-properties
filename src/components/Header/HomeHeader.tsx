@@ -64,7 +64,7 @@ export default function HomeHeader() {
               <li className="hover:text-secondary-100">
                 <a
                   className="rounded-big py-3 leading-[1.1] duration-100"
-                  href=""
+                  href="/buyers"
                 >
                   Buyers
                 </a>
@@ -72,7 +72,7 @@ export default function HomeHeader() {
               <li className="hover:text-secondary-100">
                 <a
                   className="rounded-big py-3 leading-[1.1] duration-100"
-                  href=""
+                  href="/sellers"
                 >
                   Sellers
                 </a>
@@ -80,7 +80,7 @@ export default function HomeHeader() {
               <li className="hover:text-secondary-100">
                 <a
                   className="rounded-big py-3 leading-[1.1] duration-100"
-                  href=""
+                  href="/landlords"
                 >
                   Landlords
                 </a>
@@ -88,7 +88,7 @@ export default function HomeHeader() {
               <li className="hover:text-secondary-100">
                 <a
                   className="rounded-big py-3 leading-[1.1] duration-100"
-                  href=""
+                  href="/tenants"
                 >
                   Tenants
                 </a>
@@ -97,13 +97,13 @@ export default function HomeHeader() {
           </nav>
           <div className=" hidden items-center gap-4 md:flex">
             <Link
-              link="/"
+              link="/property-search"
               type={isSticky ? "transparent-blue" : "transparent-white"}
               size="lg"
             >
               Property Search
             </Link>
-            <Link link="/" type="secondary" size="lg">
+            <Link link="/valuation" type="secondary" size="lg">
               Book a valuation
             </Link>
           </div>

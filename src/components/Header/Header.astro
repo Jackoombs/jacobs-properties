@@ -39,30 +39,46 @@ import ContactBtn from "./ContactBtn";
           class="flex items-center gap-6 text-[0.875rem] font-semibold tracking-[1.4px] 2xl:gap-md"
         >
           <li class="hover:text-secondary-100">
-            <a class="rounded-big py-3 leading-[1.1] duration-100" href="">
+            <a
+              class="rounded-big py-3 leading-[1.1] duration-100"
+              href="/buyers"
+            >
               Buyers
             </a>
           </li>
           <li class="hover:text-secondary-100">
-            <a class="rounded-big py-3 leading-[1.1] duration-100" href="">
+            <a
+              class="rounded-big py-3 leading-[1.1] duration-100"
+              href="/sellers"
+            >
               Sellers
             </a>
           </li>
           <li class="hover:text-secondary-100">
-            <a class="rounded-big py-3 leading-[1.1] duration-100" href="">
+            <a
+              class="rounded-big py-3 leading-[1.1] duration-100"
+              href="/landlords"
+            >
               Landlords
             </a>
           </li>
           <li class="hover:text-secondary-100">
-            <a class="rounded-big py-3 leading-[1.1] duration-100" href="">
+            <a
+              class="rounded-big py-3 leading-[1.1] duration-100"
+              href="/tenants"
+            >
               Tenants
             </a>
           </li>
         </ul>
       </nav>
       <div class="hidden items-center gap-4 md:flex">
-        <Link link="/" type="transparent-blue" size="lg">Property Search</Link>
-        <Link link="/" type="secondary" size="lg">Book a valuation</Link>
+        <Link link="/property-search" type="transparent-blue" size="lg"
+          >Property Search</Link
+        >
+        <Link link="/valuation" type="secondary" size="lg"
+          >Book a valuation</Link
+        >
       </div>
       <div class={clsx("flex items-center gap-6 text-primary-100")}>
         <ContactBtn />

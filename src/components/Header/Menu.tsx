@@ -12,49 +12,49 @@ export default function Menu({ menuOpen, setMenuOpen }: Props) {
   const quickLinks = [
     {
       text: "Find a home",
-      link: "/",
+      link: "/property-search",
     },
     {
       text: "Value my home",
-      link: "/",
+      link: "/valuation",
     },
   ];
 
   const ourServices = [
     {
       text: "Buyers",
-      link: "/",
+      link: "/buyers",
     },
     {
       text: "Sellers",
-      link: "/",
+      link: "/sellers",
     },
     {
       text: "Landlords",
-      link: "/",
+      link: "/landlords",
     },
     {
       text: "Tenants",
-      link: "/",
+      link: "/tenants",
     },
   ];
 
   const aboutUs = [
     {
       text: "About us",
-      link: "/",
+      link: "/about-us",
     },
     {
       text: "News",
-      link: "/",
+      link: "/news",
     },
     {
       text: "Area guides",
-      link: "/",
+      link: "/area-guides",
     },
     {
       text: "Contact us",
-      link: "/",
+      link: "/contact-us",
     },
   ];
 
