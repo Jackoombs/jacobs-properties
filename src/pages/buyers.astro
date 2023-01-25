@@ -1,0 +1,114 @@
+---
+import HeroSection from "../components/Layout/HeroSection.astro";
+import StandardLayout from "../layouts/StandardLayout.astro";
+import SectionLabel from "../components/General/Text/SectionLabel";
+import PageHeader from "../components/General/Text/PageHeader";
+import Copy from "../components/General/Text/Copy";
+import Link from "../components/General/Link";
+import BuyerHero from "../assets/images/buyers/buyer-hero.webp";
+import MiscSection from "../components/Layout/MiscSection.astro";
+import Display from "../components/General/Text/Display";
+import SectionHeader from "../components/General/Text/SectionHeader";
+import WhyBuy from "../assets/images/buyers/why-buy.webp";
+import Dropdown from "../components/Dropdown/Dropdown";
+import ProcessSlider from "../components/Process/ProcessSlider";
+import FAQs from "../components/FAQs/FAQs";
+import StampDutyCalc from "../components/Calculators/StampDutyCalc";
+import MortgageCalc from "../components/Calculators/MortgageCalc";
+import ValuationSection from "../components/Layout/ValuationSection.astro";
+
+const client = "buyers";
+---
+
+<StandardLayout title="Buy a Property in Basingstoke | Jacobs Properties">
+  <HeroSection
+    bgColor="bg-primary-200"
+    image={{
+      path: BuyerHero.src,
+      aspectRatio: "aspect-property",
+      alt: "Couple drinking coffee together",
+      position: true,
+    }}
+  >
+    <div class="flex flex-col text-primary-100 md:max-w-xl">
+      <SectionLabel padding="hero-lg">Buyers</SectionLabel>
+      <PageHeader padding="hero">Buy a property in Basingstoke</PageHeader>
+      <Copy padding="hero-lg" size="lg">
+        <>
+          Taking your first step on the property ladder? Looking for a new
+          property to add to your portfolio? We’ve got you covered.<br /><br /> We
+          offer a wide range of properties all across Basingstoke, so whether you’re
+          looking for a charming country home or a stylish studio apartment, there’s
+          something for you here.
+        </>
+      </Copy>
+      <div
+        class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
+      >
+        <Link link="/" type="primary" size="lg">Start searching</Link>
+        <Link link="/" type="secondary" size="lg">Ask us anything</Link>
+      </div>
+    </div>
+  </HeroSection>
+
+  <MiscSection
+    bgColor="bg-primary-200"
+    className="flex flex-col gap-8 text-center"
+    disablePt={true}
+  >
+    <Display>Find your dream home today</Display>
+    <h3
+      class="mx-auto max-w-xl text-[1.5rem] font-semibold leading-7 text-primary-100 lg:max-w-[51rem] lg:text-[2rem] lg:leading-10"
+    >
+      Our focus is to get a broader exposure for your property, negotiate a
+      better deal and make sure the process is smooth and stress free all the
+      way.
+    </h3>
+  </MiscSection>
+
+  <MiscSection>
+    <SectionHeader padding="misc">
+      Why buy a property with Jacobs?
+    </SectionHeader>
+    <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
+      <img
+        class="rounded-big"
+        src={WhyBuy.src}
+        alt="Woman relaxing in kitchen"
+      />
+      <Dropdown client={client} client:visible />
+    </div>
+  </MiscSection>
+
+  <MiscSection bgColor="bg-primary-200">
+    <ProcessSlider
+      header="8 steps to buying a home with us"
+      client={client}
+      client:idle
+    />
+  </MiscSection>
+
+  <MiscSection className="flex flex-col gap-8 md:justify-center md:gap-16">
+    <SectionHeader className="md:text-center"
+      >Frequently asked questions</SectionHeader
+    >
+    <FAQs bgColor="bg-primary-200" client={client} client:visible />
+    <a
+      class="max-auto text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
+      href="/">See All Our Faqs</a
+    >
+  </MiscSection>
+
+  <MiscSection bgColor="bg-primary-200">
+    <div class="grid w-full flex-col gap-6 lg:grid-cols-2 xl:gap-x-16">
+      <SectionHeader>Find out how much you could borrow</SectionHeader>
+      <SectionHeader
+        >Find out how much tax you will pay for your new home
+      </SectionHeader>
+      <StampDutyCalc client:visible />
+      <MortgageCalc client:visible />
+    </div>
+  </MiscSection>
+
+  <ValuationSection />
+</StandardLayout>

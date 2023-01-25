@@ -21,51 +21,7 @@ import type { Property } from "../env";
 
 const res = await fetch(`https://jacobs-server.onrender.com/properties/sales`);
 const data: Property[] = await res.json();
-
-const processSlides = {
-  header: "Our selling process at a glance",
-  slides: [
-    {
-      title: "Get the price right",
-      text: "We will give you an accurate and up-to-date valuation of your property, based on data including current market values and recent sales in your area,",
-    },
-    {
-      title: "Prepare marketing materials",
-      text: "We will take professional photos of your property as well as create floor plans and videos to give it the best chance of standing out in the market and attracting leads.",
-    },
-    {
-      title: "List your property",
-      text: "We will advertise your property on leading property portals, social media and our website, as well as contact our database of registered buyers.",
-    },
-    {
-      title: "Arrange viewings",
-      text: "One of our team members will be on hand to carry out accompanied viewings at a time and day that works for you and your prospective buyers.",
-    },
-  ],
-};
-
-const dropdownCards = [
-  {
-    question: "We’re never corporate",
-    answer:
-      "Forget everything you think you know about estate agents. Being a local, independent and family-run business, we believe we’re best-placed to give you the friendly and personable service you deserve.",
-  },
-  {
-    question: "Guided sales progression",
-    answer:
-      "Forget everything you think you know about estate agents. Being a local, independent and family-run business, we believe we’re best-placed to give you the friendly and personable service you deserve.",
-  },
-  {
-    question: "End-to-end services",
-    answer:
-      "Forget everything you think you know about estate agents. Being a local, independent and family-run business, we believe we’re best-placed to give you the friendly and personable service you deserve.",
-  },
-  {
-    question: "People precedes properties",
-    answer:
-      "Forget everything you think you know about estate agents. Being a local, independent and family-run business, we believe we’re best-placed to give you the friendly and personable service you deserve.",
-  },
-];
+const client = "sellers";
 ---
 
 <StandardLayout title="Sellers">
@@ -128,10 +84,10 @@ const dropdownCards = [
           <img
             src={WhySell.src}
             loading="lazy"
-            class="order-1 aspect-[6/5] h-auto w-full self-center rounded-big object-cover"
+            class="aspect-[6/5] h-auto w-full self-start rounded-big object-cover"
             alt=""
           />
-          <Dropdown dropdownCards={dropdownCards} client:visible />
+          <Dropdown client={client} client:visible />
         </div>
       </div>
     </section>
@@ -139,8 +95,8 @@ const dropdownCards = [
     <section class="overflow-hidden bg-primary-200 py-10 md:py-28">
       <div class="mx-auto max-w-container-lg">
         <ProcessSlider
-          header={processSlides.header}
-          slides={processSlides.slides}
+          client={client}
+          header="Our selling process at a glance"
           client:idle
         />
       </div>
@@ -239,7 +195,7 @@ const dropdownCards = [
         <SectionHeader className="md:text-center"
           >Frequently asked questions</SectionHeader
         >
-        <FAQs client:visible />
+        <FAQs client={client} client:visible />
         <a
           class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
           href="/">See All Our Faqs</a

@@ -1,20 +1,14 @@
 import { useEffect, useState } from "react";
+import type { Client } from "../../env";
 import FAQMenuItem from "./FAQMenuItem";
 import FAQs from "./FAQs";
 import FAQJson from "./FAQS.json";
 
-export type FAQCategory = "Buyers" | "Sellers" | "Landlords" | "Tenants";
-
 export default function FAQList() {
-  const [currentItem, setCurrentItem] = useState<FAQCategory>("Buyers");
+  const [currentItem, setCurrentItem] = useState<Client>("buyers");
   const [maxFAQs, setMaxFAQs] = useState(3);
 
-  const menuItems: FAQCategory[] = [
-    "Buyers",
-    "Sellers",
-    "Landlords",
-    "Tenants",
-  ];
+  const menuItems: Client[] = ["buyers", "sellers", "landlords", "tenants"];
 
   useEffect(() => {
     setMaxFAQs(3);
@@ -29,10 +23,7 @@ export default function FAQList() {
           </FAQMenuItem>
         ))}
       </ul>
-      <FAQs
-        FAQTemplate={FAQJson[currentItem].slice(0, maxFAQs)}
-        bgColor="bg-primary-200"
-      />
+      <FAQs category={currentItem} bgColor="bg-primary-200" maxFAQs={maxFAQs} />
       {maxFAQs < FAQJson[currentItem].length && (
         <button
           className="col-span-full mx-auto mt-6 flex h-14 w-full items-center justify-center rounded-big bg-secondary-100 px-6 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 hover:brightness-110 md:w-auto md:min-w-[10rem] xl:mt-16"

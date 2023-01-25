@@ -28,10 +28,7 @@ export default function FAQCard({
   return (
     <li
       onClick={handleClick}
-      className={clsx(
-        "w-full max-w-4xl rounded-[5px] py-8 px-6 md:px-9",
-        bgColor
-      )}
+      className={clsx("w-full max-w-4xl rounded-[5px]", bgColor)}
     >
       <motion.button
         initial={false}
@@ -40,7 +37,7 @@ export default function FAQCard({
           gap: currentIndex === index ? "1.2rem" : 0,
           transition: { duration: 0.4 },
         }}
-        className="flex w-full flex-col gap-4 text-left"
+        className="flex w-full flex-col gap-4 py-8 px-6 text-left md:px-9"
       >
         <div className="flex items-center justify-between gap-8 lg:gap-14">
           <div>

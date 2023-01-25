@@ -1,0 +1,122 @@
+{
+  "buyers": [
+    {
+      "title": "Take stock of your finances",
+      "text": "Before you start house-hunting, it’s a good idea to work out how much your monthly mortgage payments will likely cost and whether you can afford it."
+    },
+    {
+      "title": "Consult an estate agent",
+      "text": "We know how stressful house-hunting can be, that’s why we’re here to take the hassle out of the process. Remember, our services are all FREE with no obligation on your part."
+    },
+    {
+      "title": "View the property",
+      "text": "It’s important to see the property you like and get a feel for it in person. This will give you a better idea of its potential, which you can't always get from a screen."
+    },
+    {
+      "title": "Make the right offer",
+      "text": "Found a property that makes you tick? Fantastic. Now it’s time to make an offer – the right offer! – and we shall keep our fingers crossed for you."
+    },
+    {
+      "title": "Hire a surveyor and conveyancer",
+      "text": "Before you start house-hunting, it’s a good idea to work out how much your monthly mortgage payments will likely cost and whether you can afford it."
+    },
+    {
+      "title": "Finalise everything",
+      "text": "When the survey is complete, if you want to renegotiate the price of your new home, this is the time to instruct us to do so on your behalf before the deal is sealed."
+    },
+    {
+      "title": "Exchange contracts",
+      "text": "Once the terms are agreed and approved by all parties, you should receive the contract to sign and commit to the sale. Then, there’s just one thing left to do…"
+    },
+    {
+      "title": "Completion and move in",
+      "text": "On completion day, money will be transferred to the seller and you will receive the keys to your new home. It’s time to call that removal company – congratulations!"
+    }
+  ],
+  "sellers": [
+    {
+      "title": "Arrange an appraisal visit",
+      "text": "During the appraisal visit, we will have a tour around your property then provide an accurate rental value and make recommendations where we see fit."
+    },
+    {
+      "title": "Prepare your property",
+      "text": "Once we’re happy that all legalities are in place, we will prepare marketing materials to create a listing on leading property portals Rightmove and Zoopla, social media and our own website."
+    },
+    {
+      "title": "Find the right tenant",
+      "text": "We will invite suitable tenants for viewings. All subsequent offers and relevant information will be presented to you in writing, all you have to do is choose your best fit."
+    },
+    {
+      "title": "Referencing and deposits",
+      "text": "We will take a holding deposit from your tenant, send them more information and initiate a reference check in partnership with a professional company."
+    },
+    {
+      "title": "Contracts, payments and move-in",
+      "text": "When all referencing checks out, you and your tenant will sign the tenancy agreement, and you tenant will pay the first month’s rent and balance of deposit before moving in."
+    },
+    {
+      "title": "Property management",
+      "text": "Throughout the tenancy, our network of trusted contractors will carry out regular inspections and promptly respond to maintenance requests if needed."
+    },
+    {
+      "title": "Check-out and deposit settlement",
+      "text": "When the time comes for your tenant to move out, we will pay them a visit to ensure the property is returned in its original condition; and the search for the next tenant begins."
+    }
+  ],
+  "landlords": [
+    {
+      "title": "Arrange an appraisal visit",
+      "text": "During the appraisal visit, we will have a tour around your property then provide an accurate rental value and make recommendations where we see fit."
+    },
+    {
+      "title": "Prepare your property",
+      "text": "Once we’re happy that all legalities are in place, we will prepare marketing materials to create a listing on leading property portals Rightmove and Zoopla, social media and our own website."
+    },
+    {
+      "title": "Find the right tenant",
+      "text": "We will invite suitable tenants for viewings. All subsequent offers and relevant information will be presented to you in writing, all you have to do is choose your best fit."
+    },
+    {
+      "title": "Referencing and deposits",
+      "text": "We will take a holding deposit from your tenant, send them more information and initiate a reference check in partnership with a professional company."
+    },
+    {
+      "title": "Contracts, payments and move-in",
+      "text": "When all referencing checks out, you and your tenant will sign the tenancy agreement, and you tenant will pay the first month’s rent and balance of deposit before moving in."
+    },
+    {
+      "title": "Property management",
+      "text": "Throughout the tenancy, our network of trusted contractors will carry out regular inspections and promptly respond to maintenance requests if needed."
+    },
+    {
+      "title": "Check-out and deposit settlement",
+      "text": "When the time comes for your tenant to move out, we will pay them a visit to ensure the property is returned in its original condition; and the search for the next tenant begins."
+    }
+  ],
+  "tenants": [
+    {
+      "title": "Tell us what you want",
+      "text": "The more we know about your criteria for your rental property, the better equipped we will be at finding you an ideal home."
+    },
+    {
+      "title": "View the property",
+      "text": "When we identify a potential home for you, you’ll have the opportunity to view it and explore the surroundings for yourself."
+    },
+    {
+      "title": "Put a holding deposit down",
+      "text": "Found your perfect match? The rental market moves fast so if you see the perfect property, you must act quickly to secure it."
+    },
+    {
+      "title": "Perform background checks",
+      "text": "This process will include a credit search, employment check, previous landlord reference and right to rent check (if applicable)."
+    },
+    {
+      "title": "Seal the deal",
+      "text": "When you pass the background checks, it’s time for you and your landlord to put pen to paper and sign the tenancy agreement."
+    },
+    {
+      "title": "Get ready to move in",
+      "text": "Get excited because it’s move-in day! But before you do, move-in money must be paid and cleared, then you can move in."
+    }
+  ]
+}

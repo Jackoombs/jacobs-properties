@@ -1,18 +1,22 @@
 import { useState } from "react";
 import FAQCard from "./FAQCard";
-import type { FAQType } from "../../env";
+import FAQJson from "./FAQS.json";
+import type { Client } from "../../env";
 
 interface Props {
   bgColor?: string;
-  FAQTemplate: FAQType[];
+  client: Client;
+  maxFAQs?: number;
 }
 
-export default function FAQs({ bgColor, FAQTemplate }: Props) {
+export default function FAQs({ bgColor, client, maxFAQs }: Props) {
   const [currentIndex, setCurrentIndex] = useState(-1);
+
+  const FAQTemplate = FAQJson[client];
 
   return (
     <ul className="flex flex-col items-center gap-2 md:gap-5">
-      {FAQTemplate.map(({ question, answer }, index) => (
+      {FAQTemplate.slice(0, maxFAQs).map(({ question, answer }, index) => (
         <FAQCard
           key={index}
           {...{

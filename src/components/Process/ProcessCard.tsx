@@ -8,12 +8,12 @@ interface Props {
 
 export default function ProcessCard({ title, text, index }: Props) {
   return (
-    <div className="flex h-full flex-col gap-4 rounded-big bg-primary-100 p-6 md:p-11">
+    <div className="flex h-full flex-col gap-4 rounded-big bg-primary-100 px-4 py-8 md:px-8 lg:p-12">
       <p className="text-[0.875rem] font-semibold uppercase leading-[1.1] tracking-[2.8px] text-secondary-100">
         {`step ${index + 1}`}
       </p>
       <SectionSubHeader size="lg" textColor="text-white" className="font-bold">
-        title
+        {title}
       </SectionSubHeader>
       <p className="font-regular text-base leading-5 text-white">{text}</p>
     </div>

@@ -1,0 +1,164 @@
+---
+import HeroSection from "../components/Layout/HeroSection.astro";
+import MiscSection from "../components/Layout/MiscSection.astro";
+import StandardLayout from "../layouts/StandardLayout.astro";
+import SectionLabel from "../components/General/Text/SectionLabel";
+import SectionHeader from "../components/General/Text/SectionHeader";
+import Display from "../components/General/Text/Display";
+import PageHeader from "../components/General/Text/PageHeader";
+import Copy from "../components/General/Text/Copy";
+import Link from "../components/General/Link";
+import Dropdown from "../components/Dropdown/Dropdown";
+import TenantsHero from "../assets/images/tenants/tenants-hero.webp";
+import WhyRent from "../assets/images/tenants/why-rent.webp";
+import ReportRepair from "../assets/images/tenants/report-repair.webp";
+import StandardsRegulation from "../assets/images/tenants/standards-regulations.webp";
+import QuesitonRenting from "../assets/images/tenants/question-renting.webp";
+import FAQs from "../components/FAQs/FAQs";
+import ProcessSlider from "../components/Process/ProcessSlider";
+import Reviews from "../components/Reviews/Reviews";
+
+const client = "tenants";
+---
+
+<StandardLayout title="Rent a property in Basingstoke | Jacobs Properties">
+  <HeroSection
+    bgColor="bg-primary-200"
+    image={{
+      path: TenantsHero.src,
+      alt: "Woman at desk",
+      aspectRatio: "aspect-property",
+      position: true,
+    }}
+  >
+    <div class="flex flex-col text-primary-100 md:max-w-xl">
+      <SectionLabel padding="hero-lg">Tenants</SectionLabel>
+      <PageHeader padding="hero">Rent a property in Basingstoke</PageHeader>
+      <Copy padding="hero-lg" size="lg">
+        <>
+          Jacobs Properties is our name, high-quality rental properties is our
+          game. Whether you’re new to Basingstoke or a local looking for a
+          change, our letting agents can help you find the perfect rental home.
+        </>
+      </Copy>
+      <div
+        class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
+      >
+        <Link link="/" type="primary" size="lg">Get in touch</Link>
+        <Link link="/" type="secondary" size="lg">Report a repair</Link>
+      </div>
+    </div>
+  </HeroSection>
+
+  <MiscSection
+    bgColor="bg-primary-200"
+    className="flex flex-col gap-8 text-center"
+    disablePt={true}
+  >
+    <Display>Find a rental property here</Display>
+    <h3
+      class="mx-auto max-w-xl text-[1.5rem] font-semibold leading-7 text-primary-100 lg:max-w-[51rem] lg:text-[2rem] lg:leading-10"
+    >
+      Our focus is to get a broader exposure for your property, negotiate a
+      better deal and make sure the process is smooth and stress free all the
+      way.
+    </h3>
+  </MiscSection>
+
+  <MiscSection>
+    <SectionHeader padding="misc">
+      Why buy a property with Jacobs?
+    </SectionHeader>
+    <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
+      <img
+        class="rounded-big"
+        src={WhyRent.src}
+        alt="Two young woman easting pancakes watching iPad"
+      />
+      <Dropdown client={client} client:visible />
+    </div>
+  </MiscSection>
+
+  <MiscSection bgColor="bg-primary-200">
+    <SectionHeader className="md:text-center" padding="misc"
+      >Frequently asked questions</SectionHeader
+    >
+    <FAQs client={client} client:visible />
+  </MiscSection>
+
+  <MiscSection>
+    <ProcessSlider
+      header="Renting with us is easy – here’s how"
+      client={client}
+      client:idle
+    />
+  </MiscSection>
+
+  <HeroSection
+    bgColor="bg-primary-200"
+    image={{
+      path: ReportRepair.src,
+      alt: "Plumber fixing a sink",
+      aspectRatio: "aspect-hero",
+      position: true,
+    }}
+  >
+    <div class="max-w-2xl md:max-w-lg">
+      <SectionLabel padding="hero-md">Tenants</SectionLabel>
+      <SectionHeader padding="hero">Report a repair</SectionHeader>
+      <Copy size="lg" padding="hero-md"
+        >Any damages or issues with your rental property should be reported so
+        that they can be repaired. We offer 24/7 support and a member of our
+        in-house maintenance team will attend to your query as quickly as
+        possible.</Copy
+      >
+    </div>
+  </HeroSection>
+
+  <HeroSection
+    disablePt
+    disablePb
+    bgColor="bg-primary-200"
+    image={{
+      path: StandardsRegulation.src,
+      alt: "Pen pointing at sheet of regulations",
+      aspectRatio: "aspect-hero",
+      position: false,
+    }}
+  >
+    <div class="max-w-2xl lg:max-w-xl 2xl:pl-20">
+      <SectionLabel padding="hero-md">Tenants</SectionLabel>
+      <SectionHeader padding="hero">Standards and regulations</SectionHeader>
+      <Copy size="lg" padding="hero-md"
+        >As one of our tenants, you can rest assured that we’re fully compliant
+        with all lettings legislation which governs every task that we undertake
+        on your landlord’s behalf. From safeguarding your deposit to ensuring
+        the property undergoes an annual gas safety check, you’re protected from
+        every angle.</Copy
+      >
+    </div>
+  </HeroSection>
+
+  <HeroSection
+    bgColor="bg-primary-200"
+    image={{
+      path: QuesitonRenting.src,
+      alt: "Pen pointing at sheet of regulations",
+      aspectRatio: "aspect-hero",
+      position: true,
+    }}
+  >
+    <div class="max-w-2xl lg:max-w-xl">
+      <SectionLabel padding="hero-md">Tenants</SectionLabel>
+      <SectionHeader padding="hero"
+        >Have a question about renting?</SectionHeader
+      >
+      <Link type="secondary" link="/" size="lg">Ask us now</Link>
+    </div>
+  </HeroSection>
+
+  <MiscSection>
+    <SectionHeader padding="misc">Our customers are the best</SectionHeader>
+    <Reviews client:visible />
+  </MiscSection>
+</StandardLayout>

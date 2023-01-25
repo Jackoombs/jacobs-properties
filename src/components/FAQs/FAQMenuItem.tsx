@@ -1,10 +1,11 @@
 import clsx from "clsx";
+import type { Client } from "../../env";
 import type { FAQCategory } from "./FAQMenu";
 
 interface Props {
-  children: FAQCategory;
-  currentItem: FAQCategory;
-  setCurrentItem: React.Dispatch<React.SetStateAction<FAQCategory>>;
+  children: Client;
+  currentItem: Client;
+  setCurrentItem: React.Dispatch<React.SetStateAction<Client>>;
 }
 
 export default function FAQMenuItem({

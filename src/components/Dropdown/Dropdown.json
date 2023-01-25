@@ -1,0 +1,92 @@
+{
+  "buyers": [
+    {
+      "reason": "Local knowledge",
+      "text": "Basingstoke is our hometurf. It’s where we live and work; it’s the community we serve. When you work with us, you have direct access to a wealth of local knowledge to find the property that ticks all the boxes."
+    },
+    {
+      "reason": "Speedy service",
+      "text": "The Basingstoke housing market moves fast, but so do we. We strive to be as responsive and reactive as possible so you’ll never find yourself waiting around wondering where you’re up to with the buying process."
+    },
+    {
+      "reason": "Pride in property",
+      "text": "We take pride in what we do, and it shows. We love all aspects of estate agency and we’re not afraid to get our hands dirty so you don’t have to. The bottom line is we’re not happy unless you are, and that’s a promise."
+    },
+    {
+      "reason": "Advanced technology",
+      "text": "Beautiful photos, engaging videos, immersive virtual tours… We combine our personable approach and decades of experience with the latest technology to give you the most efficient and enjoyable house-hunting experience."
+    }
+  ],
+  "sellers": [
+    {
+      "reason": "We’re never corporate",
+      "text": "Forget everything you think you know about estate agents. Being a local, independent and family-run business, we believe we’re best-placed to give you the friendly and personable service you deserve."
+    },
+    {
+      "reason": "Guided sales progression",
+      "text": "We allocate a dedicated team member throughout the sales progression who will liaise with buyers and solicitors on your behalf, ensuring all paperwork is completed promptly to keep everything on track."
+    },
+    {
+      "reason": "End-to-end services",
+      "text": "From the first valuation appointment to the moment keys land in your buyer’s hand, we’re with you all the way. Not only that, we can also help with onward purchase and finding you a new home."
+    },
+    {
+      "reason": "People and properties",
+      "text": "For us, its all about people, and of course properties. We don’t treat our customers as a number but as real humans. And no, this is not just some marketing spiel; we mean it. Read our reviews to see what our customers say. "
+    }
+  ],
+  "landlords": [
+    {
+      "reason": "A range of letting services",
+      "text": "Only need us to find you a tenant? Happy to oblige. But if you’re a time-poor landlord who wants to let the professionals handle the business, you can entrust our in-house team to take care of your property management, maintenance and more under our Fully Managed service."
+    },
+    {
+      "reason": "Safe and compliant",
+      "text": "Compliance and regulation is of paramount importance for landlords and letting agents.  We stay on top of legislation relating to letting property in the UK to ensure that you, your tenant and your property are in safe hands.  "
+    },
+    {
+      "reason": "Decades worth of reputation",
+      "text": "A reputable, established letting agent who is also ARLA-registered is hard to come by… Good thing you’ve found one! That’s right, at Jacobs Properties, we are all of the above and then some. To top it all off, we do everything with a smile."
+    },
+    {
+      "reason": "Success is guaranteed",
+      "text": "The key to letting your property successfully is the right tenant, and we’ll help you find them. With years of experience and access to all the right channels, we know how to attract the right tenant and get your letting journey off to the best possible start."
+    }
+  ],
+  "tenants": [
+    {
+      "reason": "Fair and transparent",
+      "text": "You will pay a deposit at the start of your tenancy, which is protected in a government-backed tenancy deposit scheme. You will get it back in full when your tenancy ends, unless we have a reason to make deductions."
+    },
+    {
+      "reason": "Local knowledge",
+      "text": "We know Basingstoke inside out. And our extensive knowledge of the local area means we are the best people to guide you through your rental property search and find you the ideal home to move to."
+    },
+    {
+      "reason": "Rent with confidence",
+      "text": "When you rent with us, your money is safe and secure because you’re protected by Client Money Protection (CMP). That means should anything go wrong during your tenancy, you can claim for lost deposits or rent."
+    },
+    {
+      "reason": "Impeccable property management",
+      "text": "We take every tenant’s query very seriously. That’s why we work with a network of trusted local contractors, who are on standby to respond to your repair requests in a prompt and efficient manner."
+    }
+  ],
+  "valuation": [
+    {
+      "reason": "Backed by data",
+      "text": "We calculate the value of your home based on data, not whims. We use market-leading sources of information and up-to-date house prices from Sprift, Zoopla, Rightmove and several other sources to give you an accurate estimate of your home’s value."
+    },
+    {
+      "reason": "Local knowledge",
+      "text": "We know Basingstoke. We know the streets, types of houses on offer and how much they sell for. And our local property experts draw on this knowledge, along with local demand and recent sales, to provide the most accurate valuation."
+    },
+    {
+      "reason": "Accuracy is key",
+      "text": "The right valuation of your property is key to a successful sale. That’s why accuracy is paramount at Jacobs Properties. We don’t want to undervalue and cause you to lose out; equally, we don’t overvalue a property to get the listing. "
+    },
+    {
+      "reason": "We understand you",
+      "text": "Having served the community since 1999, we’ve come to know the people of Basingstoke. We know your story, your circumstances and your priorities; most importantly, we know how to match the right properties with the right people."
+    }
+  ]
+}

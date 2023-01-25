@@ -30,3 +30,5 @@ export interface FAQType {
   question: string;
   answer: string;
 }
+
+export type Client = "buyers" | "sellers" | "landlords" | "tenants";

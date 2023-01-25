@@ -204,7 +204,7 @@ const lettingsProperties = filterProperties(lettingsData);
         <SectionHeader className="md:text-center"
           >Frequently asked questions</SectionHeader
         >
-        <FAQs client:visible />
+        <FAQs maxFAQs={5} client="buyers" client:visible />
         <a
           class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
           href="/">See All Our Faqs</a

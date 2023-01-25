@@ -12,28 +12,7 @@ import ValuationHero from "../assets/images/valuation-hero.webp";
 import Reviews from "../components/Reviews/Reviews";
 import FAQs from "../components/FAQs/FAQs";
 
-const dropdownCards = [
-  {
-    question: "Backed by data",
-    answer:
-      "We calculate the value of your home based on data, not whims. We use market-leading sources of information and up-to-date house prices from Sprift, Zoopla, Rightmove and several other sources to give you an accurate estimate of your home’s value.",
-  },
-  {
-    question: "Local knowledge",
-    answer:
-      "We calculate the value of your home based on data, not whims. We use market-leading sources of information and up-to-date house prices from Sprift, Zoopla, Rightmove and several other sources to give you an accurate estimate of your home’s value.",
-  },
-  {
-    question: "Accurate is key",
-    answer:
-      "We calculate the value of your home based on data, not whims. We use market-leading sources of information and up-to-date house prices from Sprift, Zoopla, Rightmove and several other sources to give you an accurate estimate of your home’s value.",
-  },
-  {
-    question: "We understand you",
-    answer:
-      "We calculate the value of your home based on data, not whims. We use market-leading sources of information and up-to-date house prices from Sprift, Zoopla, Rightmove and several other sources to give you an accurate estimate of your home’s value.",
-  },
-];
+const client = "valuation";
 ---
 
 <StandardLayout title="Valuation">
@@ -75,7 +54,7 @@ const dropdownCards = [
       >
       <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
         <img src={Valuation.src} alt="Woman relaxing in kitchen" />
-        <Dropdown client:visible dropdownCards={dropdownCards} />
+        <Dropdown client:visible client={client} />
       </div>
     </div>
   </section>
@@ -125,7 +104,7 @@ const dropdownCards = [
       <SectionHeader className="md:text-center"
         >Frequently asked questions</SectionHeader
       >
-      <FAQs client:visible />
+      <FAQs client="sellers" client:visible />
       <a
         class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
         href="/">See All Our Faqs</a

@@ -1,24 +1,25 @@
 import { useState } from "react";
+import type { Client } from "../../env";
 import DropdownCard from "./DropdownCard";
+import DropdownJson from "./Dropdown.json";
 
 interface Props {
-  dropdownCards: {
-    question: string;
-    answer: string;
-  }[];
+  client: Client | "valuation";
+  color?: string;
 }
 
-export default function Dropdown({ dropdownCards }: Props) {
+export default function Dropdown({ color, client }: Props) {
   const [currentIndex, setCurrentIndex] = useState(-1);
+  const dropdownCards = DropdownJson[client];
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      {dropdownCards.map(({ question, answer }, index) => (
+    <ul className="flex flex-col items-center gap-2">
+      {dropdownCards.map(({ reason, text }, index) => (
         <DropdownCard
           key={index}
-          {...{ index, question, answer, currentIndex, setCurrentIndex }}
+          {...{ index, reason, text, currentIndex, setCurrentIndex, color }}
         />
       ))}
-    </div>
+    </ul>
   );
 }

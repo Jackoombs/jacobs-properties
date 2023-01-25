@@ -5,16 +5,15 @@ import SwiperNavBtns from "../General/SwiperNavBtns";
 import SectionHeader from "../General/Text/SectionHeader";
 import { useState } from "react";
 import ProcessCard from "./ProcessCard";
+import ProcessJson from "./Process.json";
+import type { Client } from "../../env";
 
 interface Props {
   header: string;
-  slides: {
-    title: string;
-    text: string;
-  }[];
+  client: Client;
 }
 
-export default function ProcessSlider({ header, slides }: Props) {
+export default function ProcessSlider({ header, client }: Props) {
   const [isStartOrEnd, setIsStartOrEnd] = useState("start");
 
   const handleSlideChange = (e: SwiperType) => {
@@ -22,6 +21,8 @@ export default function ProcessSlider({ header, slides }: Props) {
     else if (e.isEnd) setIsStartOrEnd("end");
     else setIsStartOrEnd("");
   };
+
+  const slides = ProcessJson[client];
 
   return (
     <>

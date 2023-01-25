@@ -21,51 +21,7 @@ import type { Property } from "../env";
 
 const res = await fetch(`https://jacobs-server.onrender.com/properties/sales`);
 const data: Property[] = await res.json();
-
-const processSlides = {
-  header: "Our lettings process at a glance",
-  slides: [
-    {
-      title: "Arrange an appraisal visit",
-      text: "During the appraisal visit, we will have a tour around your property then provide an accurate rental value and make recommendations where we see fit.",
-    },
-    {
-      title: "Prepare your property",
-      text: "Once we’re happy that all legalities are in place, we will prepare marketing materials to create a listing on leading property portals Rightmove and Zoopla, social media and our own website.",
-    },
-    {
-      title: "Find the right tenant",
-      text: "We will invite suitable tenants for viewings. All subsequent offers and relevant information will be presented to you in writing, all you have to do is choose your best fit.",
-    },
-    {
-      title: "Referencing and deposits",
-      text: "We will take a holding deposit from your tenant, send them more information and initiate a reference check in partnership with a professional company.",
-    },
-  ],
-};
-
-const dropdownCards = [
-  {
-    question: "A range of letting services",
-    answer:
-      "Only need us to find you a tenant? Happy to oblige. But if you’re a time-poor landlord who wants to let the professionals handle the business, you can entrust our in-house team to take care of your property management, maintenance and more under our Fully Managed service.",
-  },
-  {
-    question: "28 years of experience",
-    answer:
-      "Only need us to find you a tenant? Happy to oblige. But if you’re a time-poor landlord who wants to let the professionals handle the business, you can entrust our in-house team to take care of your property management, maintenance and more under our Fully Managed service.",
-  },
-  {
-    question: "The latest technology",
-    answer:
-      "Only need us to find you a tenant? Happy to oblige. But if you’re a time-poor landlord who wants to let the professionals handle the business, you can entrust our in-house team to take care of your property management, maintenance and more under our Fully Managed service.",
-  },
-  {
-    question: "A peace of mind",
-    answer:
-      "Only need us to find you a tenant? Happy to oblige. But if you’re a time-poor landlord who wants to let the professionals handle the business, you can entrust our in-house team to take care of your property management, maintenance and more under our Fully Managed service.",
-  },
-];
+const client = "landlords";
 ---
 
 <StandardLayout title="Landlords">
@@ -120,7 +76,7 @@ const dropdownCards = [
             class="md:order-0 order-1 aspect-[6/5] h-auto w-full flex-1 self-start rounded-big object-cover"
             alt=""
           />
-          <Dropdown dropdownCards={dropdownCards} client:visible />
+          <Dropdown client={client} client:visible />
         </div>
       </div>
     </section>
@@ -128,8 +84,8 @@ const dropdownCards = [
     <section class="overflow-hidden bg-primary-200 py-10 md:py-28">
       <div class="mx-auto max-w-container-lg">
         <ProcessSlider
-          header={processSlides.header}
-          slides={processSlides.slides}
+          header="Our lettings process at a glance"
+          client={client}
           client:idle
         />
       </div>
@@ -251,7 +207,7 @@ const dropdownCards = [
           <SectionHeader className="md:text-center"
             >Frequently asked questions</SectionHeader
           >
-          <FAQs client:visible />
+          <FAQs client={client} client:visible />
           <a
             class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
             href="/">See All Our Faqs</a
