@@ -88,5 +88,23 @@
       "reason": "We understand you",
       "text": "Having served the community since 1999, we’ve come to know the people of Basingstoke. We know your story, your circumstances and your priorities; most importantly, we know how to match the right properties with the right people."
     }
+  ],
+  "about-us": [
+    {
+      "reason": "Experience ",
+      "text": "Established since 1999, you can depend on Jacobs Properties to deliver what you need when selling, letting, buying or renting. A trusted, reputable estate agent, just what you need."
+    },
+    {
+      "reason": "Transparency",
+      "text": "As an independent local estate and letting agent offering a very personal service, we pride ourselves on being transparent, open, fair and honest. That includes our fees - we’ll never hide costs and deliver excellent value for money. No need to shop around. "
+    },
+    {
+      "reason": "High standards",
+      "text": "Since day one, we have continually focused on providing strong day-to-day management and unrivalled standards in property sales and management.  Propertymark and ARLA registered means we uphold professional, industry standards for your peace of mind."
+    },
+    {
+      "reason": "Professionalism",
+      "text": "We’re honoured that our customers entrust us with their property needs, that’s why we strive to provide professional advice and support to you. "
+    }
   ]
 }

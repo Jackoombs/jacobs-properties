@@ -4,7 +4,7 @@ import DropdownCard from "./DropdownCard";
 import DropdownJson from "./Dropdown.json";
 
 interface Props {
-  client: Client | "valuation";
+  client: Client | "valuation" | "about-us";
   color?: string;
 }
 

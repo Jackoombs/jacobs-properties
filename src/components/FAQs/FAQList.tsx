@@ -23,7 +23,7 @@ export default function FAQList() {
           </FAQMenuItem>
         ))}
       </ul>
-      <FAQs category={currentItem} bgColor="bg-primary-200" maxFAQs={maxFAQs} />
+      <FAQs client={currentItem} bgColor="bg-primary-200" maxFAQs={maxFAQs} />
       {maxFAQs < FAQJson[currentItem].length && (
         <button
           className="col-span-full mx-auto mt-6 flex h-14 w-full items-center justify-center rounded-big bg-secondary-100 px-6 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 hover:brightness-110 md:w-auto md:min-w-[10rem] xl:mt-16"
