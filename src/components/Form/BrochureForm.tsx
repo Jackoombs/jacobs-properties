@@ -3,8 +3,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Button from "../General/Button";
+import { useRef } from "react";
 
 export default function BrochureForm() {
+  const downloadRef = useRef<null | HTMLAnchorElement>(null);
+
   const messages = {
     required: "This is a required field",
     email: "Please enter a valid email address",
@@ -30,6 +33,9 @@ export default function BrochureForm() {
 
   const onSubmit: SubmitHandler<SchemaType> = async (data) => {
     console.log(data);
+    if (downloadRef.current) {
+      downloadRef.current.click();
+    }
   };
 
   return (
@@ -65,14 +71,15 @@ export default function BrochureForm() {
             privacy policy
           </a>
         </p>
-        <Button
-          type="secondary"
-          size="lg"
-          buttonType="submit"
-          callback={onSubmit}
-        >
+        <Button type="secondary" size="lg" buttonType="submit">
           Download Guide
         </Button>
+        <a
+          ref={downloadRef}
+          href="/"
+          download="dummy.pdf"
+          className="hidden"
+        ></a>
       </form>
     </div>
   );
