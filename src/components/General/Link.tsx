@@ -10,6 +10,7 @@ interface Props {
     | "transparent-blue";
   size?: "default" | "sm" | "md" | "lg";
   className?: string;
+  download?: boolean;
 }
 
 export default function Link({
@@ -18,9 +19,11 @@ export default function Link({
   type,
   size = "default",
   className,
+  download = false,
 }: Props) {
   return (
     <a
+      download={download}
       className={clsx(
         "flex h-14 w-full items-center justify-center rounded-big text-[0.875rem] font-semibold uppercase tracking-[1.4px] duration-100",
         className,
