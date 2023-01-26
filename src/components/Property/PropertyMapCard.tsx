@@ -28,8 +28,6 @@ export default function PropertyMapCard({
   },
   setState,
 }: Props) {
-  console.log(Location);
-
   return (
     <motion.div
       initial={{ opacity: 0 }}

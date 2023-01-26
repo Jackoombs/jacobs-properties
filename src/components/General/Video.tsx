@@ -12,7 +12,6 @@ export default function Video({ videoId, thumbnailPath, origin }: Props) {
   const [playVideo, setPlayVideo] = useState(false);
 
   var player: any;
-  console.log(player);
   const loadVideo = () => {
     window.YT.ready(function () {
       player = new window.YT.Player("player", {
@@ -27,7 +26,6 @@ export default function Video({ videoId, thumbnailPath, origin }: Props) {
     });
 
     function onPlayerReady(event: any) {
-      console.log("ready");
       const button = document.getElementById("button");
       button?.addEventListener("click", () => {
         player.playVideo();

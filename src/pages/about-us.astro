@@ -19,7 +19,6 @@ const newsTemplate = news.map((post) => {
   const { title, category, date, image } = post.frontmatter;
   return { title, category, date, image };
 });
-console.log(newsTemplate);
 
 const dropdownCards = [
   {
@@ -140,7 +139,7 @@ const dropdownCards = [
         class="order-1 aspect-[6/5] h-auto w-full self-center rounded-big object-cover lg:order-none"
         alt=""
       />
-      <Dropdown dropdownCards={dropdownCards} client:idle />
+      <Dropdown client="about-us" client:idle />
     </div>
   </MiscSection>
 
@@ -159,6 +158,6 @@ const dropdownCards = [
     <SectionHeader padding="misc" className="md:text-center"
       >Frequently asked questions</SectionHeader
     >
-    <FAQs client:visible />
+    <FAQs client="buyers" client:visible />
   </MiscSection>
 </StandardLayout>

@@ -9,7 +9,6 @@ interface Props {
 
 export default function CarouselNavBtn({ slideStatus, swiper }: Props) {
   const handleClick = (direction: "prev" | "next") => {
-    console.log("jssss");
     direction === "prev" ? swiper?.slidePrev() : swiper?.slideNext();
   };
 
