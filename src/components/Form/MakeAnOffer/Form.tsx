@@ -65,6 +65,13 @@ export default function Form({ address, setIsOpen }: Props) {
                 />
               )}
             </div>
+            <pre
+              className={
+                currentStep === steps ? "text-white" : "text-primary-100"
+              }
+            >
+              {JSON.stringify(watch(), null, 2)}
+            </pre>
           </FormWrapper>
         </FormProvider>
       </div>
