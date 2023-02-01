@@ -40,7 +40,7 @@ export default function PropertySearch({ properties, center }: Props) {
 
   const [viewType, setViewType] = useState<"list" | "grid" | "map">(
     // width < 1024 ? "grid" : "list"
-    "map"
+    "grid"
   );
 
   const [searchCriteria, setSearchCriteria] = useState<SearchCriteria>({
