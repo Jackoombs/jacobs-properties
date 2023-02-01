@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { SlClose } from "react-icons/sl";
+import { SlClose } from "react-icons/sl/index.js";
 import LogoBlue from "../../assets/images/header/logo_blue.svg";
 
 interface Props {
