@@ -49,7 +49,7 @@ export default function HomeHeader() {
         >
           <img
             className={clsx(
-              "h-auto ",
+              "aspect-[2.1] h-auto object-cover",
               isSticky
                 ? "w-[9rem] lg:w-[12rem]"
                 : "w-[10.625rem] lg:w-[12rem] 2xl:w-[16.25rem]"
