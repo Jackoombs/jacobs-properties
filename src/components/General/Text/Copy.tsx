@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
 interface Props {
-  children: string;
+  children: string | JSX.Element;
   textColor?: string;
   size: "sm" | "md" | "lg";
   className?: string;

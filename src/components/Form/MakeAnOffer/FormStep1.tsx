@@ -3,12 +3,14 @@ import SectionHeader from "../../General/Text/SectionHeader";
 import Copy from "../../General/Text/Copy";
 import InputsWrapper from "../ReactHook/InputsWrapper";
 
-export default function FormStep2() {
+export default function FormStep1() {
   return (
     <>
       <div className="text-center">
-        <SectionHeader className="w-full pb-3">Contact details</SectionHeader>
-        <Copy size="lg">Please fill out all of the fields below.</Copy>
+        <SectionHeader className="w-full pb-3">Submit an offer</SectionHeader>
+        <Copy size="lg">
+          Provide your contact details so we can get in touch.
+        </Copy>
       </div>
       <InputsWrapper>
         <TextInput

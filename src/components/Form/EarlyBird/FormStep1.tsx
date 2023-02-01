@@ -7,8 +7,8 @@ import { generatePriceOptions } from "../../../utils";
 import { Controller, useFormContext } from "react-hook-form";
 import BuyRentToggle from "../ReactHook/BuyRentToggle";
 
-export default function FormStage1() {
-  const { control, watch, setValue } = useFormContext();
+export default function FormStep1() {
+  const { control, watch } = useFormContext();
   const buyOrRent = watch("buyOrRent");
 
   const priceOptions =
@@ -54,7 +54,7 @@ export default function FormStage1() {
         />
         <SelectInput
           name="radius"
-          label="radius"
+          label="Radius"
           placeholder="This area only"
           options={[1, 2, 5, 10, 15, 20]}
         />

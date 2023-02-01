@@ -1,8 +1,30 @@
 ---
 import EarlyBirdButton from "../components/Form/EarlyBird/Button";
+import MakeAnOfferButton from "../components/Form/MakeAnOffer/Button";
+import GetInTouchButton from "../components/Form/GetInTouch/Button";
 import StandardLayout from "../layouts/StandardLayout.astro";
+import BookAViewingButton from "../components/Form/BookAViewing/Button";
+import ExpertValuationButton from "../components/Form/ExpertValuation/Button";
+import InstantValuationButton from "../components/Form/InstantValuation/Button";
+import MiscSection from "../components/Layout/MiscSection.astro";
 ---
 
 <StandardLayout title="Form Test">
-  <EarlyBirdButton client:load />
+  <MiscSection>
+    <div class="mx-auto grid w-max gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <EarlyBirdButton client:load />
+      <MakeAnOfferButton
+        address={"123 Test Street, Example Area"}
+        client:load
+      />
+      <GetInTouchButton client:load />
+      <BookAViewingButton
+        price="£475,000"
+        address="Meadow Court, Ravenstone, MK46"
+        client:load
+      />
+      <ExpertValuationButton client:load />
+      <InstantValuationButton client:load />
+    </div>
+  </MiscSection>
 </StandardLayout>

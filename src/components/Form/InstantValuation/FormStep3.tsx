@@ -3,7 +3,7 @@ import SectionHeader from "../../General/Text/SectionHeader";
 import Copy from "../../General/Text/Copy";
 import InputsWrapper from "../ReactHook/InputsWrapper";
 
-export default function FormStep2() {
+export default function FormStep3() {
   return (
     <>
       <div className="text-center">

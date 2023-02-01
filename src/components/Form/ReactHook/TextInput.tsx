@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { RegisterOptions, useFormContext } from "react-hook-form";
+import Error from "./Error";
 
 export type Props = {
   name: string;
@@ -9,6 +10,7 @@ export type Props = {
   colSpanFull?: boolean;
   required?: boolean;
   type?: "text" | "email" | "tel";
+  isNumber?: boolean;
 };
 
 export default function TextInput({
@@ -19,6 +21,7 @@ export default function TextInput({
   colSpanFull = false,
   required = false,
   type = "text",
+  isNumber = false,
 }: Props) {
   const {
     register,
@@ -34,14 +37,20 @@ export default function TextInput({
       pattern: {
         value:
           /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-        message: "Must be a valid email address",
+        message: "Please enter a valid email address",
       },
     }),
     ...(type === "tel" && {
       pattern: {
         value:
           /^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$/,
-        message: "Must be a valid phone number",
+        message: "Please enter a valid phone number",
+      },
+    }),
+    ...(isNumber && {
+      pattern: {
+        value: /[0-9]+/,
+        message: "Please enter a number",
       },
     }),
   };
@@ -62,18 +71,17 @@ export default function TextInput({
       >
         {label}
       </label>
-      <input
-        type={type}
-        {...register(name, registerOptions)}
-        className="flex h-16 w-full items-center rounded-big border border-primary-100 bg-transparent px-5 text-primary-100
+      <div className="flex flex-col gap-1">
+        <input
+          type={type}
+          {...register(name, registerOptions)}
+          inputMode={isNumber ? "numeric" : undefined}
+          className="flex h-16 w-full items-center rounded-big border border-primary-100 bg-transparent px-5 text-primary-100
         placeholder:text-primary-100 focus:outline-none lg:min-w-[11.5rem]"
-        placeholder={placeholder}
-      />
-      {errors[name]?.message && (
-        <p className="pt-1 text-xs text-red-600">
-          {String(errors[name]?.message)}
-        </p>
-      )}
+          placeholder={placeholder}
+        />
+        <Error {...{ name }} />
+      </div>
     </div>
   );
 }

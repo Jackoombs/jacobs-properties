@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import FormWrapper from "../ReactHook/FormWrapper";
 import FormStep1 from "./FormStep1";
 import FormStep2 from "./FormStep2";
-import FormStep3 from "./FormStep3";
 import FormStepWrapper from "../ReactHook/FormStepWrapper";
 import FormStepButtons from "../ReactHook/FormStepButtons";
 import clsx from "clsx";
@@ -13,13 +12,13 @@ interface Props {
 }
 
 export default function Form({ setIsOpen }: Props) {
-  const steps = 2;
+  const steps = 1;
   const [currentStep, setCurrentStep] = useState(0);
 
   const methods = useForm({
     mode: "all",
   });
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit, reset, watch } = methods;
 
   const onSubmit = async (data: any) => {
     if (currentStep === steps - 1) {
@@ -48,15 +47,13 @@ export default function Form({ setIsOpen }: Props) {
               <FormStepWrapper formStep={0} {...{ currentStep }}>
                 <FormStep1 />
               </FormStepWrapper>
-              <FormStepWrapper formStep={1} {...{ currentStep }}>
-                <FormStep2 />
+              <FormStepWrapper width="" formStep={1} {...{ currentStep }}>
+                <FormStep2 {...{ setIsOpen }} />
               </FormStepWrapper>
-              <FormStepWrapper width="" formStep={2} {...{ currentStep }}>
-                <FormStep3 {...{ setIsOpen }} />
-              </FormStepWrapper>
+
               {currentStep !== steps && (
                 <FormStepButtons
-                  submitText="Register"
+                  submitText="SendMessage"
                   {...{ currentStep, setCurrentStep, steps }}
                 />
               )}

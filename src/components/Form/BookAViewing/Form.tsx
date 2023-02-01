@@ -9,15 +9,20 @@ import FormStepButtons from "../ReactHook/FormStepButtons";
 import clsx from "clsx";
 
 interface Props {
+  price: string;
+  address: string;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Form({ setIsOpen }: Props) {
+export default function Form({ price, address, setIsOpen }: Props) {
   const steps = 2;
   const [currentStep, setCurrentStep] = useState(0);
 
   const methods = useForm({
     mode: "all",
+    defaultValues: {
+      dates: [{ date: "" }],
+    },
   });
   const { handleSubmit, reset } = methods;
 
@@ -45,8 +50,12 @@ export default function Form({ setIsOpen }: Props) {
             {...{ currentStep, setCurrentStep, steps }}
           >
             <div className="flex w-full flex-col items-center gap-5 md:w-max">
-              <FormStepWrapper formStep={0} {...{ currentStep }}>
-                <FormStep1 />
+              <FormStepWrapper
+                width="md:max-w-[35rem]"
+                formStep={0}
+                {...{ currentStep }}
+              >
+                <FormStep1 {...{ price, address }} />
               </FormStepWrapper>
               <FormStepWrapper formStep={1} {...{ currentStep }}>
                 <FormStep2 />
@@ -56,7 +65,7 @@ export default function Form({ setIsOpen }: Props) {
               </FormStepWrapper>
               {currentStep !== steps && (
                 <FormStepButtons
-                  submitText="Register"
+                  submitText="Book a viewing"
                   {...{ currentStep, setCurrentStep, steps }}
                 />
               )}

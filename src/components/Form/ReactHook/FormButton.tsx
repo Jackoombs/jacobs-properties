@@ -6,6 +6,7 @@ interface Props {
   steps: number;
   currentStep: number;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
+  submitText?: string;
 }
 
 export default function FormButton({
@@ -13,6 +14,7 @@ export default function FormButton({
   steps,
   currentStep,
   setCurrentStep,
+  submitText = "Register",
 }: Props) {
   const {
     formState: { isValid },
@@ -25,8 +27,8 @@ export default function FormButton({
     if (type === "next") {
       return "Continue";
     }
-    if (type === "submit") {
-      return "Register";
+    if (type === "submit" && submitText) {
+      return submitText;
     }
   };
 
@@ -53,14 +55,16 @@ export default function FormButton({
       type={type === "submit" ? "submit" : "button"}
       onClick={handleClick}
       className={clsx(
-        "flex h-14 w-full min-w-[9rem] items-center justify-center rounded-big px-3 text-[0.875rem] font-semibold uppercase tracking-[1.4px] duration-100 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:brightness-100 md:w-max",
+        "flex h-14 w-full items-center justify-center rounded-big text-[0.875rem] font-semibold uppercase tracking-[1.4px] duration-100 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:brightness-100 md:w-max",
         (type === "next" || type === "submit") &&
           "bg-secondary-100 text-primary-100 hover:brightness-110",
-        type === "prev" && "bg-transparent text-primary-100",
+        type === "prev"
+          ? "bg-transparent px-3 text-primary-100"
+          : "min-w-[9rem] px-8",
         ((type === "prev" && currentStep === 0) ||
-          (type === "next" && currentStep === steps)) &&
+          (type === "next" && currentStep >= steps - 1)) &&
           "hidden",
-        type === "submit" && currentStep !== steps && "hidden"
+        type === "submit" && currentStep !== steps - 1 && "hidden"
       )}
     >
       {buttonText()}

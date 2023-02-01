@@ -9,17 +9,21 @@ import FormStepButtons from "../ReactHook/FormStepButtons";
 import clsx from "clsx";
 
 interface Props {
+  address: string;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function Form({ setIsOpen }: Props) {
+export default function Form({ address, setIsOpen }: Props) {
   const steps = 2;
   const [currentStep, setCurrentStep] = useState(0);
 
   const methods = useForm({
     mode: "all",
+    defaultValues: {
+      address,
+    },
   });
-  const { handleSubmit, reset } = methods;
+  const { handleSubmit, reset, watch } = methods;
 
   const onSubmit = async (data: any) => {
     if (currentStep === steps - 1) {
@@ -56,7 +60,7 @@ export default function Form({ setIsOpen }: Props) {
               </FormStepWrapper>
               {currentStep !== steps && (
                 <FormStepButtons
-                  submitText="Register"
+                  submitText="Submit offer"
                   {...{ currentStep, setCurrentStep, steps }}
                 />
               )}

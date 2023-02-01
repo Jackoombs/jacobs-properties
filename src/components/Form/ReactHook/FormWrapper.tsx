@@ -1,6 +1,4 @@
 import clsx from "clsx";
-import { Children } from "react";
-import FormButton from "./FormButton";
 import FormProgressBar from "./FormProgressBar";
 
 interface Props {
@@ -22,20 +20,12 @@ export default function FormWrapper({
     <form
       noValidate
       onSubmit={submitHandler}
-      className="flex w-full flex-col items-center gap-5"
+      className={clsx("flex w-full flex-col items-center gap-5")}
     >
-      <FormProgressBar {...{ steps, currentStep, setCurrentStep }} />
+      {steps !== currentStep && (
+        <FormProgressBar {...{ steps, currentStep, setCurrentStep }} />
+      )}
       {children}
-      <div
-        className={clsx(
-          "mx-auto flex w-full max-w-[25rem]",
-          currentStep === 0 ? "justify-end" : "justify-between"
-        )}
-      >
-        <FormButton type="prev" {...{ steps, currentStep, setCurrentStep }} />
-        <FormButton type="next" {...{ steps, currentStep, setCurrentStep }} />
-        <FormButton type="submit" {...{ steps, currentStep, setCurrentStep }} />
-      </div>
     </form>
   );
 }

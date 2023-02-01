@@ -2,13 +2,19 @@ import TextInput from "../ReactHook/TextInput";
 import SectionHeader from "../../General/Text/SectionHeader";
 import Copy from "../../General/Text/Copy";
 import InputsWrapper from "../ReactHook/InputsWrapper";
+import SelectInput from "../ReactHook/SelectInput";
+import { generatePriceOptions } from "../../../utils";
+import { Controller, useFormContext } from "react-hook-form";
+import BuyRentToggle from "../ReactHook/BuyRentToggle";
+import TextAreaInput from "../ReactHook/TextAreaInput";
 
-export default function FormStep2() {
+export default function FormStage1() {
   return (
     <>
       <div className="text-center">
-        <SectionHeader className="w-full pb-3">Contact details</SectionHeader>
-        <Copy size="lg">Please fill out all of the fields below.</Copy>
+        <SectionHeader className="w-full pb-3">
+          Fill out the form below
+        </SectionHeader>
       </div>
       <InputsWrapper>
         <TextInput
@@ -35,6 +41,13 @@ export default function FormStep2() {
           hideLabel
           colSpanFull
           type="tel"
+        />
+        <TextAreaInput
+          name="message"
+          label="Message"
+          placeholder="Type your message..."
+          colSpanFull
+          hideLabel
         />
       </InputsWrapper>
     </>

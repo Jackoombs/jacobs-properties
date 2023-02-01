@@ -1,10 +1,13 @@
+import clsx from "clsx";
+
 interface Props {
   children: JSX.Element | JSX.Element[];
+  maxWidth?: string;
 }
 
 export default function InputsWrapper({ children }: Props) {
   return (
-    <div className="mx-auto grid w-full grid-cols-2 gap-4 sm:max-w-[25rem]">
+    <div className={clsx("mx-auto grid w-full grid-cols-2 gap-4")}>
       {children}
     </div>
   );

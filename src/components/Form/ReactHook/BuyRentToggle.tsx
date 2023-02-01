@@ -5,9 +5,15 @@ interface Props {
   name: string;
   value: "buy" | "rent";
   onChange: (...args: any) => any;
+  updateSelectOnChange?: boolean;
 }
 
-export default function BuyRentToggle({ name, value, onChange }: Props) {
+export default function BuyRentToggle({
+  name,
+  value,
+  onChange,
+  updateSelectOnChange = false,
+}: Props) {
   const { setValue } = useFormContext();
 
   return (
@@ -18,8 +24,10 @@ export default function BuyRentToggle({ name, value, onChange }: Props) {
         checked={value === "rent" ? true : false}
         onChange={(e) => {
           onChange(value === "buy" ? "rent" : "buy");
-          setValue("minPrice", "–");
-          setValue("maxPrice", "–");
+          if (updateSelectOnChange) {
+            setValue("minPrice", "–");
+            setValue("maxPrice", "–");
+          }
         }}
         id={name}
       />

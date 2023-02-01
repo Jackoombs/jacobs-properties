@@ -4,6 +4,7 @@ import FormWrapper from "../ReactHook/FormWrapper";
 import FormStep1 from "./FormStep1";
 import FormStep2 from "./FormStep2";
 import FormStep3 from "./FormStep3";
+import FormStep4 from "./FormStep4";
 import FormStepWrapper from "../ReactHook/FormStepWrapper";
 import FormStepButtons from "../ReactHook/FormStepButtons";
 import clsx from "clsx";
@@ -13,11 +14,14 @@ interface Props {
 }
 
 export default function Form({ setIsOpen }: Props) {
-  const steps = 2;
+  const steps = 3;
   const [currentStep, setCurrentStep] = useState(0);
 
   const methods = useForm({
     mode: "all",
+    defaultValues: {
+      dates: [{ date: "" }],
+    },
   });
   const { handleSubmit, reset } = methods;
 
@@ -51,12 +55,16 @@ export default function Form({ setIsOpen }: Props) {
               <FormStepWrapper formStep={1} {...{ currentStep }}>
                 <FormStep2 />
               </FormStepWrapper>
-              <FormStepWrapper width="" formStep={2} {...{ currentStep }}>
-                <FormStep3 {...{ setIsOpen }} />
+              <FormStepWrapper formStep={2} {...{ currentStep }}>
+                <FormStep3 />
               </FormStepWrapper>
+              <FormStepWrapper width="" formStep={3} {...{ currentStep }}>
+                <FormStep4 {...{ setIsOpen }} />
+              </FormStepWrapper>
+
               {currentStep !== steps && (
                 <FormStepButtons
-                  submitText="Register"
+                  submitText="Instant valuation"
                   {...{ currentStep, setCurrentStep, steps }}
                 />
               )}
