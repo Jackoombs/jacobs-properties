@@ -6,6 +6,7 @@ interface Props {
   bgColor?: string;
   disablePb?: boolean;
   disablePt?: boolean;
+  disableLazy?: boolean;
 }
 
 interface Image {
@@ -19,6 +20,7 @@ const {
   bgColor = "bg-white",
   disablePb = false,
   disablePt = false,
+  disableLazy = false,
 }: Props = Astro.props;
 ---
 
@@ -34,6 +36,7 @@ const {
     class="mx-auto grid w-full max-w-container-lg items-center gap-6 lg:grid-cols-2 lg:gap-16"
   >
     <img
+      loading={disableLazy ? "eager" : "lazy"}
       class={clsx(
         "h-auto w-full justify-self-end rounded-big object-cover",
         image.aspectRatio,
