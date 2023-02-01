@@ -18,6 +18,9 @@ export default function Form({ setIsOpen }: Props) {
 
   const methods = useForm({
     mode: "all",
+    defaultValues: {
+      buyOrRent: "buy",
+    },
   });
   const { handleSubmit, reset, watch } = methods;
 

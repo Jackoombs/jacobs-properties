@@ -27,7 +27,12 @@ export default function FormStep1() {
       <InputsWrapper>
         <Controller
           render={({ field: { value, onChange, name } }) => (
-            <BuyRentToggle onChange={onChange} value={value} name={name} />
+            <BuyRentToggle
+              updateSelectOnChange
+              onChange={onChange}
+              value={value}
+              name={name}
+            />
           )}
           name="buyOrRent"
           control={control}
