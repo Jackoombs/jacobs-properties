@@ -14,8 +14,8 @@ const propertiesWithLocation = await Promise.all(
       }%20${property.Address2}&key=${import.meta.env.PUBLIC_GOOGLE_MAPS_KEY}`
     );
     const data = await res2.json();
-    const location: GoogleMapProps["center"] = await data.results[0].geometry
-      .location;
+    const location: GoogleMapProps["center"] | undefined =
+      data.results[0]?.geometry?.location;
     return { ...property, Location: location };
   })
 );
@@ -25,8 +25,8 @@ const res3 = await fetch(
   }`
 );
 const data = await res3.json();
-const center: GoogleMapProps["center"] = await data.results[0].geometry
-  .location;
+const center: GoogleMapProps["center"] | undefined =
+  data.results[0]?.geometry?.location;
 ---
 
 <StandardLayout title="Property Search">

@@ -19,7 +19,8 @@ const res = await fetch(
   }`
 );
 const data = await res.json();
-const location: GoogleMapProps["center"] = data.results[0].geometry.location;
+const location: GoogleMapProps["center"] | undefined = await data.results[0]
+  ?.geometry?.location;
 ---
 
 <StandardLayout title="Contact Us">
