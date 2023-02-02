@@ -6,8 +6,9 @@ import type { GoogleMapProps } from "@react-google-maps/api";
 
 const res = await fetch("https://jacobs-server.onrender.com/properties");
 const properties: Property[] = await res.json();
-const propertiesWithLocation = await Promise.all(
-  properties.map(async (property) => {
+const propertiesWithLocation: Property[] = properties;
+for (const property of properties) {
+  try {
     const res2 = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${
         property.Address1
@@ -16,9 +17,14 @@ const propertiesWithLocation = await Promise.all(
     const data = await res2.json();
     const location: GoogleMapProps["center"] | undefined =
       data.results[0]?.geometry?.location;
-    return { ...property, Location: location };
-  })
-);
+    propertiesWithLocation.push({ ...property, Location: location });
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+}
+
 const res3 = await fetch(
   `https://maps.googleapis.com/maps/api/geocode/json?address=Basingstoke&key=${
     import.meta.env.PUBLIC_GOOGLE_MAPS_KEY
