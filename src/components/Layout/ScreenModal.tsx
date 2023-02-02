@@ -24,7 +24,7 @@ export default function ScreenModal({ isOpen, setIsOpen, children }: Props) {
             x: 400,
             transition: { duration: 0.2, ease: "easeInOut" },
           }}
-          className="fixed top-0 z-[100] h-full min-h-screen w-screen overflow-y-auto bg-primary-200 lg:grid lg:grid-cols-2"
+          className="fixed top-0 z-[100] h-full min-h-[100svh] w-screen overflow-y-auto bg-primary-200 lg:grid lg:grid-cols-2"
         >
           <div className=" bg-white py-4 lg:hidden">
             <div className="mx-auto flex w-full max-w-container-lg justify-between">

@@ -11,20 +11,31 @@ import MiscSection from "../components/Layout/MiscSection.astro";
 
 <StandardLayout title="Form Test">
   <MiscSection>
-    <div class="mx-auto grid w-max gap-4 md:grid-cols-2 lg:grid-cols-3">
-      <EarlyBirdButton client:load />
+    <div
+      class="mx-auto grid gap-4 bg-secondary-100 md:w-max md:grid-cols-2 lg:grid-cols-3"
+    >
+      <EarlyBirdButton variant="secondary" client:load
+        >Early bird</EarlyBirdButton
+      >
       <MakeAnOfferButton
+        variant="white"
         address={"123 Test Street, Example Area"}
-        client:load
-      />
-      <GetInTouchButton client:load />
+        client:load>Make an offer</MakeAnOfferButton
+      >
+      <GetInTouchButton variant="transparent-blue" client:load
+        >Get in touch</GetInTouchButton
+      >
       <BookAViewingButton
+        variant="transparent-white"
         price="£475,000"
         address="Meadow Court, Ravenstone, MK46"
-        client:load
-      />
-      <ExpertValuationButton client:load />
-      <InstantValuationButton client:load />
+        client:load>Book a viewing</BookAViewingButton
+      >
+      <ExpertValuationButton client:load>Expert valuation</ExpertValuationButton
+      >
+      <InstantValuationButton client:load
+        >Instant valuation</InstantValuationButton
+      >
     </div>
   </MiscSection>
 </StandardLayout>

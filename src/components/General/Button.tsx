@@ -1,44 +1,45 @@
 import clsx from "clsx";
 interface Props {
   children: string;
-  type:
+  variant?:
     | "primary"
     | "secondary"
     | "white"
     | "transparent-white"
     | "transparent-blue";
-  size: "sm" | "md" | "lg";
-  buttonType: "button" | "submit";
-  classes?: string;
-  callback?: (...args: any) => any;
+  size?: "sm" | "md" | "lg";
+  type?: "button" | "submit";
+  className?: string;
+  onClick?: (...args: any) => any;
 }
 
 export default function Button({
   children,
-  type,
+  variant = "primary",
   size,
-  classes,
-  buttonType,
-  callback,
+  type = "button",
+  className,
+  onClick,
 }: Props) {
   return (
     <button
-      type={buttonType}
-      onClick={callback}
+      type={type}
+      onClick={onClick}
       className={clsx(
-        "flex h-14 w-full items-center justify-center rounded-big text-[0.875rem] font-semibold uppercase tracking-[1.4px] duration-100",
-        classes,
-        type === "primary" && "bg-primary-100 text-white hover:brightness-110",
-        type === "secondary" &&
+        "flex h-14 w-full items-center justify-center rounded-big px-6 text-[0.875rem] font-semibold uppercase tracking-[1.4px] duration-100",
+        className,
+        variant === "primary" &&
+          "bg-primary-100 text-white hover:brightness-110",
+        variant === "secondary" &&
           "bg-secondary-100 text-primary-100 hover:brightness-110",
-        type === "white" && "bg-white text-primary-100 hover:bg-blue-100",
-        type === "transparent-white" &&
+        variant === "white" && "bg-white text-primary-100 hover:bg-blue-100",
+        variant === "transparent-white" &&
           "border-2 border-white bg-transparent text-white hover:border-primary-100 hover:bg-primary-100 hover:text-white",
-        type === "transparent-blue" &&
+        variant === "transparent-blue" &&
           "border-2 border-primary-100 bg-transparent text-primary-100 hover:bg-primary-100 hover:text-white",
         size === "sm" && "md:w-16",
-        size === "md" && "md:w-40",
-        size === "lg" && "md:w-52"
+        size === "md" && "md:w-max md:min-w-[10rem]",
+        size === "lg" && "md:w-max md:min-w-[13rem]"
       )}
     >
       {children}

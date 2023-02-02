@@ -1,26 +1,42 @@
 import { useState } from "react";
-import clsx from "clsx";
 import Form from "./Form";
 import FormModal from "../ReactHook/FormModal";
+import GeneralButton from "../../General/Button";
 
 interface Props {
+  children: string;
   price: string;
   address: string;
+  variant?:
+    | "primary"
+    | "secondary"
+    | "white"
+    | "transparent-white"
+    | "transparent-blue";
+  size?: "sm" | "md" | "lg";
+  type?: "button" | "submit";
+  className?: string;
 }
 
-export default function Button({ price, address }: Props) {
+export default function Button({
+  children,
+  price,
+  address,
+  variant = "primary",
+  size,
+  type = "button",
+  className,
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <button
+      <GeneralButton
         onClick={() => setIsOpen(true)}
-        className={clsx(
-          "flex h-14 w-full items-center justify-center rounded-big bg-secondary-100 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 hover:brightness-110 md:w-max md:min-w-[13rem]"
-        )}
+        {...{ variant, size, type, className }}
       >
-        Book a viewing form
-      </button>
+        {children}
+      </GeneralButton>
       <FormModal
         {...{ isOpen, setIsOpen }}
         label="Book a viewing"
