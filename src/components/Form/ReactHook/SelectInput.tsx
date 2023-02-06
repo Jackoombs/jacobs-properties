@@ -56,7 +56,7 @@ export default function SelectInput({
         <select
           {...register(name, registerOptions)}
           className={clsx(
-            "flex h-16 w-full cursor-pointer appearance-none items-center rounded-big border border-primary-100 bg-transparent px-4 focus:outline-none disabled:text-placeholder lg:min-w-[11.5rem]",
+            "flex h-16 w-full cursor-pointer appearance-none items-center rounded-big border border-primary-100 bg-transparent px-4 focus:outline-none lg:min-w-[11.5rem]",
             !value ? "text-placeholder" : "text-primary-100"
           )}
         >
