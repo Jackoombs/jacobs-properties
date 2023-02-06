@@ -1,4 +1,4 @@
-import { BsCheck } from "react-icons/bs";
+import { BsCheck } from "react-icons/bs/index.js";
 import clsx from "clsx";
 
 interface Props {
