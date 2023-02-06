@@ -6,7 +6,9 @@ import type { GoogleMapProps } from "@react-google-maps/api";
 
 const res = await fetch("https://jacobs-server.onrender.com/properties");
 const properties: Property[] = await res.json();
-const propertiesWithLocation: Property[] = properties;
+console.log(properties.length);
+
+const propertiesWithLocation: Property[] = [];
 for (const property of properties) {
   try {
     const res2 = await fetch(
@@ -22,7 +24,7 @@ for (const property of properties) {
   } catch (error) {
     console.error(error);
   }
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 200));
 }
 
 const res3 = await fetch(
