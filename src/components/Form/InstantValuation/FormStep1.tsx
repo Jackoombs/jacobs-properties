@@ -52,7 +52,13 @@ export default function FormStep1() {
         <div className="col-span-full max-w-[20rem] justify-self-center">
           <Controller
             render={({ field: { value, onChange, name } }) => (
-              <BuyRentToggle onChange={onChange} value={value} name={name} />
+              <BuyRentToggle
+                onChange={onChange}
+                value={value}
+                name={name}
+                variant="secondary"
+                colSpanFull
+              />
             )}
             name="buyOrRent"
             control={control}

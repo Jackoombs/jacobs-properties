@@ -32,6 +32,8 @@ export default function FormStep1() {
               onChange={onChange}
               value={value}
               name={name}
+              variant="secondary"
+              colSpanFull
             />
           )}
           name="buyOrRent"
