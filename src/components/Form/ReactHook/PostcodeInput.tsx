@@ -40,7 +40,6 @@ export default function PostcodeInput({
       }&expand=true `
     );
     const data = await res.json();
-    console.log(data.addresses);
     setAddressOptions(data.addresses);
   };
 
@@ -83,8 +82,12 @@ export default function PostcodeInput({
           onChange={handleChange}
           value={value}
           type="text"
-          className="flex h-16 w-full items-center rounded-big border border-primary-100 bg-transparent px-5 text-primary-100
-      placeholder:text-primary-100 focus:outline-none lg:min-w-[11.5rem]"
+          className={clsx(
+            "flex h-16 w-full items-center rounded-big border bg-transparent px-5 text-primary-100 placeholder:text-placeholder focus:outline-none lg:min-w-[11.5rem]",
+            errors[name]?.message
+              ? "border-error focus:border-error"
+              : "border-primary-100"
+          )}
           placeholder="Enter postcode"
         />
         <IoMdSearch className="absolute right-0 box-content p-5 text-2xl text-primary-100" />

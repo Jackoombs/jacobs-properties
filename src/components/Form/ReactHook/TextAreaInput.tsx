@@ -45,7 +45,7 @@ export default function TextAreaInput({
         rows={rows}
         {...register(name)}
         className="flex w-full resize-none items-center rounded-big border border-primary-100 bg-transparent px-5 py-4
-        text-primary-100 placeholder:text-primary-100 focus:outline-none lg:min-w-[11.5rem]"
+        text-primary-100 placeholder:text-placeholder focus:outline-none lg:min-w-[11.5rem]"
         placeholder={placeholder}
       />
       <Error {...{ name }} />

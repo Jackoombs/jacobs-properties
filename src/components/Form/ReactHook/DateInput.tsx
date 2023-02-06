@@ -39,7 +39,7 @@ export default function DateInput({
           selected={value}
           placeholderText="Please Select a date"
           className="flex h-16 w-full items-center rounded-big border border-primary-100 bg-transparent px-5 text-primary-100
-      placeholder:text-primary-100 focus:outline-none lg:min-w-[11.5rem]"
+      placeholder:text-placeholder focus:outline-none lg:min-w-[11.5rem]"
           {...{ value, onChange, onBlur, name }}
         />
         <FaRegCalendar className="text absolute right-5 text-primary-100" />

@@ -11,6 +11,7 @@ export type Props = {
   required?: boolean;
   type?: "text" | "email" | "tel";
   isNumber?: boolean;
+  isBorderless?: boolean;
 };
 
 export default function TextInput({
@@ -22,6 +23,7 @@ export default function TextInput({
   required = false,
   type = "text",
   isNumber = false,
+  isBorderless = false,
 }: Props) {
   const {
     register,
@@ -55,10 +57,22 @@ export default function TextInput({
     }),
   };
 
+  const borderColor = () => {
+    if (isBorderless) {
+      return errors[name]?.message
+        ? "border-error focus:border-error"
+        : "focus:border-primary-100";
+    } else {
+      return errors[name]?.message
+        ? "border-error focus:border-error"
+        : "border-primary-100";
+    }
+  };
+
   return (
     <div
       className={clsx(
-        "flex flex-col gap-2 text-left",
+        "flex w-full flex-col gap-2 text-left",
         colSpanFull && "col-span-full"
       )}
     >
@@ -71,13 +85,15 @@ export default function TextInput({
       >
         {label}
       </label>
-      <div className="flex flex-col gap-1">
+      <div className="flex w-full flex-col gap-1">
         <input
           type={type}
           {...register(name, registerOptions)}
           inputMode={isNumber ? "numeric" : undefined}
-          className="flex h-16 w-full items-center rounded-big border border-primary-100 bg-transparent px-5 text-primary-100
-        placeholder:text-primary-100 focus:outline-none lg:min-w-[11.5rem]"
+          className={clsx(
+            "flex h-16 w-full items-center rounded-big border bg-transparent px-5 text-primary-100 placeholder:text-placeholder focus:outline-none lg:min-w-[11.5rem]",
+            borderColor()
+          )}
           placeholder={placeholder}
         />
         <Error {...{ name }} />

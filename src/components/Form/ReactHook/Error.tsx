@@ -12,7 +12,7 @@ export default function Error({ name }: Props) {
   return (
     <>
       {errors[name]?.message && (
-        <p className="pt-1 text-xs text-red-600">
+        <p className="pt-1 text-xs text-error">
           {String(errors[name]?.message)}
         </p>
       )}

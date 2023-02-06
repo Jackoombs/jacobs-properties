@@ -28,7 +28,7 @@ export default function SelectInput({
           value={state}
           onChange={(e) => setState(e.currentTarget.value)}
           className="flex h-16 w-full cursor-pointer appearance-none items-center rounded-big border border-primary-100 bg-transparent px-4 text-primary-100
-        placeholder:text-primary-100 focus:border-[#ff1010] focus:outline-none lg:min-w-[11.5rem]"
+        placeholder:text-placeholder focus:border-[#ff1010] focus:outline-none lg:min-w-[11.5rem]"
         >
           <option value={placeholder} disabled>
             {placeholder}
