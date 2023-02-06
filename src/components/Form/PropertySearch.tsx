@@ -4,54 +4,56 @@ import PropertySearchForm from "./PropertySearchForm";
 import type { Property } from "../../env";
 import { priceStringToPriceNumber } from "../../utils";
 import Fuse from "fuse.js";
-import PropertyGridView from "../Property/PropertyGridView";
-import PropertyListView from "../Property/PropertyListView";
-import { ViewToggle } from "../Property/ViewToggle";
-import Copy from "../General/Text/Copy";
-import PropertyMap from "../Property/PropertyMap";
-import PropertyMapCard from "../Property/PropertyMapCard";
+import PropertyViewSection from "../Property/PropertyViewSection";
 
 interface Props {
   properties: Property[];
   center: google.maps.LatLng | google.maps.LatLngLiteral | undefined;
+  params?: {
+    location: string;
+    buyOrRent: "buy" | "rent";
+  };
 }
 
 export interface SearchCriteria {
-  isBuyRent: boolean;
+  buyOrRent: "buy" | "rent";
   location: string | undefined;
   minBeds: number | undefined;
   minPrice: number | undefined;
   maxPrice: number | undefined;
   propertyType: "House" | "Apartment" | "Bungalow" | "Commerical" | undefined;
-  excludeSoldOffer: boolean;
+  excludeSold: boolean;
 }
 
-export default function PropertySearch({ properties, center }: Props) {
-  const [width, setWidth] = useState(window.innerWidth);
-  const [currMapCardLocation, setCurrMapCardLocation] = useState<
-    google.maps.LatLng | google.maps.LatLngLiteral | undefined
-  >(undefined);
-
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      setWidth(window.innerWidth);
-    });
-  }, []);
-
-  const [viewType, setViewType] = useState<"list" | "grid" | "map">(
-    // width < 1024 ? "grid" : "list"
-    "grid"
-  );
+export default function PropertySearch({ properties, center, params }: Props) {
+  const [screenWidth, setScreenWidth] = useState<number | undefined>(undefined);
 
   const [searchCriteria, setSearchCriteria] = useState<SearchCriteria>({
-    isBuyRent: false,
-    location: undefined,
+    buyOrRent: params?.buyOrRent || "buy",
+    location: params?.location,
     minBeds: undefined,
     minPrice: undefined,
     maxPrice: undefined,
     propertyType: undefined,
-    excludeSoldOffer: false,
+    excludeSold: false,
   });
+
+  useEffect(() => {
+    setScreenWidth(window.innerWidth);
+    const handleResize = () => setScreenWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const buyOrRent: string | null = window.sessionStorage.getItem("buyOrRent");
+    const location: string | null = window.sessionStorage.getItem("location");
+    const newSearchCriteria = { ...searchCriteria };
+    newSearchCriteria.buyOrRent =
+      buyOrRent === "buy" || buyOrRent === "rent" ? buyOrRent : "buy";
+    newSearchCriteria.location = location ? location : undefined;
+    setSearchCriteria(newSearchCriteria);
+  }, []);
 
   const filterProperties = (
     properties: Property[],
@@ -60,8 +62,9 @@ export default function PropertySearch({ properties, center }: Props) {
     let result: Property[] = properties
       .filter((property) => {
         if (
-          (searchCriteria.isBuyRent && property.InternalLettingStatus) ||
-          (!searchCriteria.isBuyRent && property.InternalSaleStatus)
+          (searchCriteria.buyOrRent === "rent" &&
+            property.InternalLettingStatus) ||
+          (searchCriteria.buyOrRent === "buy" && property.InternalSaleStatus)
         ) {
           return true;
         }
@@ -86,9 +89,9 @@ export default function PropertySearch({ properties, center }: Props) {
       .filter((property) => {
         const status =
           property.InternalLettingStatus || property.InternalSaleStatus;
-        if (!searchCriteria.excludeSoldOffer) return true;
+        if (!searchCriteria.excludeSold) return true;
         if (
-          searchCriteria.excludeSoldOffer &&
+          searchCriteria.excludeSold &&
           (status === "For Sale - Available" ||
             status === "To Let - Available" ||
             status === "Tenancy Current - Available")
@@ -111,9 +114,10 @@ export default function PropertySearch({ properties, center }: Props) {
   };
 
   const filteredProperties = filterProperties(properties, searchCriteria);
-  const currentMapProperty = filteredProperties.find(
-    (property) => property.Location === currMapCardLocation
-  );
+
+  if (!screenWidth) {
+    return;
+  }
 
   return (
     <>
@@ -123,60 +127,22 @@ export default function PropertySearch({ properties, center }: Props) {
           <PropertySearchForm {...{ setSearchCriteria }} />
         </div>
       </section>
-      {/* <section className="justify-center py-10 md:flex md:pb-28">
-        <div className="mx-auto flex w-full max-w-container-lg flex-col">
-          <div>
-            Sort by: Price (High-low) <span></span>
-          </div>
-        </div>
-      </section> */}
-
-      <section className="overflow-hidden py-10 md:pb-28">
-        <div className="mx-auto flex w-full max-w-container-lg items-center justify-between pb-8 lg:pb-10">
-          <Copy
-            className="order-1 lg:order-none"
-            size="lg"
-          >{`${filteredProperties.length} properties`}</Copy>
-          {width < 1024 && (
-            <ViewToggle
-              state={viewType}
-              setState={setViewType}
-              isMobile={true}
-            />
-          )}
-          {width > 1023 && (
-            <ViewToggle
-              state={viewType}
-              setState={setViewType}
-              isMobile={false}
-            />
-          )}
-        </div>
-        {viewType === "grid" && (
-          <PropertyGridView properties={filteredProperties} />
-        )}
-        {viewType === "list" && (
-          <PropertyListView properties={filteredProperties} />
-        )}
-        {viewType === "map" && (
-          <div className="mx-auto max-w-container-lg">
-            <PropertyMap
-              zoom={12}
-              markers={filteredProperties.map((property) => property.Location)}
-              location={center}
-              state={currMapCardLocation}
-              setState={setCurrMapCardLocation}
-            >
-              {currentMapProperty && (
-                <PropertyMapCard
-                  setState={setCurrMapCardLocation}
-                  property={currentMapProperty}
-                />
-              )}
-            </PropertyMap>
-          </div>
-        )}
-      </section>
+      {screenWidth < 1024 && (
+        <PropertyViewSection
+          properties={filteredProperties}
+          isMobile={true}
+          {...{ center }}
+        />
+      )}
+      {screenWidth >= 1024 && (
+        <section className="overflow-hidden py-10 md:pb-28">
+          <PropertyViewSection
+            properties={filteredProperties}
+            isMobile={false}
+            {...{ center }}
+          />
+        </section>
+      )}
     </>
   );
 }
