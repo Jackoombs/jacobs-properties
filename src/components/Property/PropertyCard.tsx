@@ -68,7 +68,7 @@ export default function PropertyCard({
             </p>
           </div>
         </div>
-        <p className="flex h-10 w-max min-w-[5rem] items-center justify-center rounded-lg bg-secondary-100 px-2 text-xs font-semibold uppercase tracking-[2.4px] lg:text-[0.875rem]">
+        <p className="mt-2 flex h-10 items-center justify-center self-start whitespace-nowrap rounded-lg bg-secondary-100 px-4 text-xs font-semibold uppercase tracking-[2.4px] lg:text-[0.875rem]">
           {statusString()}
         </p>
       </div>
