@@ -2,7 +2,7 @@ import clsx from "clsx";
 import BuyRentToggle from "../Form/ReactHook/BuyRentToggle";
 import { useForm, Controller, FormProvider } from "react-hook-form";
 import Error from "../Form/ReactHook/Error";
-import { IoMdSearch } from "react-icons/io";
+import { IoMdSearch } from "react-icons/io/index.js";
 
 export default function PropertySearchBar() {
   const methods = useForm();
