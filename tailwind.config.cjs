@@ -18,7 +18,8 @@ module.exports = {
         "primary-300": "#90a2b5",
         "primary-400": "#003952",
         "secondary-100": "#bfd730",
-        placeholder: "#8094aa",
+        placeholder: "#7f93a9",
+        error: "#fc0d1b",
       },
       padding: {
         sm: "2rem",
