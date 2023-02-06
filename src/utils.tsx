@@ -27,3 +27,16 @@ export const generatePriceOptions = (
 export const removeArrayDuplicates = (array: string[]) => {
   return Array.from(new Set(array));
 };
+
+export const getNumberFromPriceString = (
+  formattedNumber: string
+): number | undefined => {
+  const unformattedNumber = formattedNumber
+    .replace(/\([^\)]*\)/, "")
+    .replace(/[^\d.]/g, "");
+  if (Number.isNaN(unformattedNumber)) {
+    return undefined;
+  } else {
+    return +unformattedNumber;
+  }
+};
