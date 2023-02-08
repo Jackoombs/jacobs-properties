@@ -40,10 +40,7 @@ export default function ImageSlider({ images, description, ID }: Props) {
   };
 
   return (
-    <div
-      id="target"
-      className="relative flex h-min w-full items-center justify-self-end overflow-hidden rounded-big xl:order-1 xl:max-w-[58rem]"
-    >
+    <div className="relative flex h-min w-full items-center justify-self-start overflow-hidden rounded-big xl:order-1 xl:max-w-[58rem]">
       <ImageSliderNavBtn swiper={swiper} isReverse={true} />
       <ImageSliderNavBtn swiper={swiper} isReverse={false} />
       <ImageIndexCount
@@ -60,7 +57,7 @@ export default function ImageSlider({ images, description, ID }: Props) {
             <img
               src={`https://ik.imagekit.io/wd8wdr96s/tr:w-825,h-550/${ID}/${index}.webp`}
               className={clsx(
-                "z-10 aspect-property h-full w-full bg-secondary-100 object-cover object-center text-primary-100 hover:brightness-110"
+                "z-10 aspect-property h-full w-full bg-secondary-100 object-cover object-center text-primary-100"
               )}
             ></img>
           </SwiperSlide>
