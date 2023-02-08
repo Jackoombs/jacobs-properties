@@ -8,6 +8,7 @@ interface Props {
   ID: string;
   Address1: string;
   Address2: string;
+  Description?: string;
   PriceString: string;
   TotalBedrooms: number;
   Bathrooms: number;
@@ -17,6 +18,7 @@ interface Props {
 
 export default function PropertyListCard({
   ID,
+  Description,
   Address1,
   Address2,
   PriceString,
@@ -55,7 +57,7 @@ export default function PropertyListCard({
     return "N/A";
   };
   return (
-    <div className="flex w-full flex-row items-center justify-between gap-16">
+    <div className="grid w-full grid-cols-2 items-center justify-between gap-6 xl:gap-16 2xl:grid-cols-[5fr_3fr]">
       <ImageSlider
         images={Image.map((image) => image.Filepath)}
         description="hi"
@@ -85,10 +87,11 @@ export default function PropertyListCard({
             </p>
           </span>
         </div>
-        <Copy className="hidden lg:block" size="lg">
-          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore.
-        </Copy>
+        {Description && (
+          <Copy className="hidden text-ellipsis lg:line-clamp-2" size="lg">
+            {Description}
+          </Copy>
+        )}
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link size="lg" link={`properties/${ID}`} type="primary">
             View Property

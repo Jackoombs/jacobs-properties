@@ -15,6 +15,7 @@ export default function PropertyListView({ properties }: Props) {
         .map(
           ({
             ID,
+            Description,
             Address1,
             Address2,
             PriceString,
@@ -28,6 +29,7 @@ export default function PropertyListView({ properties }: Props) {
               key={ID}
               {...{
                 ID,
+                Description,
                 Address1,
                 Address2,
                 PriceString,
