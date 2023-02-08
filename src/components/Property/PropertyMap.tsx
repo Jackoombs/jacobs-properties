@@ -44,7 +44,6 @@ export default function PropertyMap({
         zoom={zoom}
         center={location}
         mapContainerClassName="w-full aspect-property h-auto min-h-[12rem] rounded-big"
-        options={{ gestureHandling: "greedy" }}
         mapContainerStyle={{
           filter: state !== undefined ? "grayscale(90%)" : "",
         }}
