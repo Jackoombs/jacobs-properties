@@ -2,6 +2,8 @@ import Background from "../../../assets/images/home/background.webp";
 import Background2 from "../../../assets/images/home/background_2.webp";
 import Background3 from "../../../assets/images/home/background_3.webp";
 import Background4 from "../../../assets/images/home/background_4.webp";
+import InstantValuationButton from "../../Form/InstantValuation/Button";
+import ExpertValuationButton from "../../Form/ExpertValuation/Button";
 import Link from "../../General/Link";
 import Copy from "../../General/Text/Copy";
 import PageHeader from "../../General/Text/PageHeader";
@@ -56,16 +58,16 @@ export default function Banner() {
             padding="hero-lg"
           >
             Jacobs Properties is a family-run estate and letting agency in
-            Basingstoke, helping people in and around the area with all things
-            property.
+            Basingstoke, delivering exceptional results and providing solutions
+            for all things property.
           </Copy>
           <div className="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start">
-            <Link link="/" type="white" size="lg">
+            <InstantValuationButton size="lg" variant="white">
               Instant Valuation
-            </Link>
-            <Link link="/" type="secondary" size="lg">
+            </InstantValuationButton>
+            <ExpertValuationButton size="lg" variant="secondary">
               Expert Valuation
-            </Link>
+            </ExpertValuationButton>
           </div>
         </div>
       </div>
