@@ -1,7 +1,6 @@
 import type { newsCardType } from "./NewsSlider";
 import SectionLabel from "../General/Text/SectionLabel";
 import SectionSubHeader from "../General/Text/SectionSubHeader";
-import type { Props } from "astro";
 
 export default function NewsCard({
   title,
@@ -24,7 +23,7 @@ export default function NewsCard({
           {title}
         </SectionSubHeader>
         <a
-          href="/"
+          href={`/news/${title.toLowerCase().replace(" ", "-")}`}
           className="text-sm font-semibold uppercase tracking-[1.4px] decoration-primary-100 decoration-2 underline-offset-4 hover:underline"
         >
           Read More

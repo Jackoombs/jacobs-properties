@@ -34,7 +34,9 @@ export default function newsSlider({ newsTemplate }: Props) {
   return (
     <>
       <div className="flex items-start justify-between">
-        <SectionHeader padding="misc">The latest property news</SectionHeader>
+        <SectionHeader padding="misc">
+          Read the latest property news
+        </SectionHeader>
         <CarouselNavBtns swiper={swiper} slideStatus={slideStatus} />
       </div>
       <Swiper
