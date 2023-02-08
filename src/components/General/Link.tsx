@@ -11,6 +11,7 @@ interface Props {
   size?: "default" | "sm" | "md" | "lg";
   className?: string;
   download?: boolean;
+  newTab?: boolean;
 }
 
 export default function Link({
@@ -20,9 +21,11 @@ export default function Link({
   size = "default",
   className,
   download = false,
+  newTab = false,
 }: Props) {
   return (
     <a
+      target={newTab ? "_blank" : "_self"}
       download={download}
       className={clsx(
         "flex h-14 w-full items-center justify-center rounded-big text-[0.875rem] font-semibold uppercase tracking-[1.4px] duration-100",
