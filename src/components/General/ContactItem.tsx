@@ -14,10 +14,22 @@ interface Props {
 export default function ContactItem({
   children,
   className,
-  icon,
   link,
+  icon,
   textColor = "text-primary-100",
 }: Props) {
+  const linkRef = () => {
+    if (icon === "phone") {
+      return `tel:${link}`;
+    }
+    if (icon === "mail") {
+      return `mailto:${link}`;
+    }
+    if (icon === "pin") {
+      return link;
+    }
+  };
+
   return (
     <a
       className={clsx(
@@ -25,11 +37,17 @@ export default function ContactItem({
         className,
         textColor
       )}
-      href={link}
+      href={linkRef()}
     >
-      {icon === "phone" && <FaPhoneAlt className="text-secondary-100" />}
-      {icon === "mail" && <GrMail className="text-secondary-100" />}
-      {icon === "pin" && <MdLocationPin className="text-secondary-100" />}
+      {icon === "phone" && (
+        <FaPhoneAlt className="box-content pt-1 text-secondary-100" />
+      )}
+      {icon === "mail" && (
+        <GrMail className="box-content pt-1 text-secondary-100" />
+      )}
+      {icon === "pin" && (
+        <MdLocationPin className="box-content pt-1 text-secondary-100" />
+      )}
       {children}
     </a>
   );

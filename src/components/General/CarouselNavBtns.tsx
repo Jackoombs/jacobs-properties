@@ -5,24 +5,31 @@ import type { Swiper } from "swiper/types";
 interface Props {
   slideStatus: "start" | "end" | "locked" | null;
   swiper: Swiper | null;
+  variant?: "primary" | "secondary";
+  className?: string;
 }
 
-export default function CarouselNavBtn({ slideStatus, swiper }: Props) {
+export default function CarouselNavBtn({
+  slideStatus,
+  swiper,
+  variant = "primary",
+  className,
+}: Props) {
   const handleClick = (direction: "prev" | "next") => {
     direction === "prev" ? swiper?.slidePrev() : swiper?.slideNext();
   };
 
+  const buttonColor = variant === "primary" ? "text-primary-100" : "text-white";
+
   return (
     <>
       {slideStatus !== "locked" && (
-        <div className="flex gap-3 text-3xl">
+        <div className={clsx("flex gap-3 text-3xl", className)}>
           <button onClick={() => handleClick("prev")}>
             <MdOutlineArrowForwardIos
               className={clsx(
                 "rotate-180 duration-75",
-                slideStatus === "start"
-                  ? "text-secondary-100"
-                  : "text-primary-100"
+                slideStatus === "start" ? "text-secondary-100" : buttonColor
               )}
             />
           </button>
@@ -30,9 +37,7 @@ export default function CarouselNavBtn({ slideStatus, swiper }: Props) {
             <MdOutlineArrowForwardIos
               className={clsx(
                 "duration-75",
-                slideStatus === "end"
-                  ? "text-secondary-100"
-                  : "text-primary-100"
+                slideStatus === "end" ? "text-secondary-100" : buttonColor
               )}
             />
           </button>

@@ -1,0 +1,104 @@
+---
+import AccrediationSlider from "./AccreditationSlider";
+import LogoGreen from "../../assets/images/header/logo_green.svg";
+import Socials from "./Socials";
+import ContactItem from "../General/ContactItem";
+import Copy from "../General/Text/Copy";
+---
+
+<footer class="my-auto bg-primary-100 py-6">
+  <div class="mx-auto flex w-full max-w-container-lg flex-col">
+    <AccrediationSlider client:idle />
+    <div
+      class="flex flex-col justify-start xl:flex-row xl:justify-between xl:pt-16"
+    >
+      <div
+        class="grid w-max gap-11 pt-16 pb-11 md:grid-cols-2 xl:grid-cols-1 xl:pt-0"
+      >
+        <img loading="lazy" src={LogoGreen} class="aspect-[2.1] h-auto w-64" />
+        <Socials />
+      </div>
+      <nav
+        class="grid max-w-xl gap-y-11 pb-16 text-xl font-medium text-white md:grid-cols-2 lg:max-w-none lg:grid-cols-4 lg:gap-x-12 xl:grid-cols-[1fr_auto_auto_1fr] 2xl:gap-x-32"
+      >
+        <section>
+          <h3
+            class="pb-5 text-sm font-semibold uppercase tracking-[1.4px] text-secondary-100"
+          >
+            Contact
+          </h3>
+          <ul class="flex flex-col gap-2">
+            <li>
+              <ContactItem
+                textColor="text-white"
+                icon="phone"
+                link="01256 363683">01256 363683</ContactItem
+              >
+            </li>
+            <li>
+              <ContactItem
+                textColor="text-white"
+                icon="mail"
+                link="info@jacobs.properties"
+                >info@jacobs.properties</ContactItem
+              >
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3
+            class="pb-5 text-sm font-semibold uppercase tracking-[1.4px] text-secondary-100"
+          >
+            Quick links
+          </h3>
+          <ul class="flex flex-col gap-2 text-xl font-medium text-white">
+            <li><a href="/property-search">Property search</a></li>
+            <li><a href="/valuation">Property valuation</a></li>
+            <li><a href="/sellers">Sellers</a></li>
+            <li><a href="/landlords">Landlords</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3
+            class="pb-5 text-sm font-semibold uppercase tracking-[1.4px] text-secondary-100"
+          >
+            About
+          </h3>
+          <ul class="flex flex-col gap-2 text-xl font-medium text-white">
+            <li><a href="/abouts-us">About us</a></li>
+            <li><a href="/news">Latest news</a></li>
+            <li><a href="/meet-the-team">Meet the team</a></li>
+            <li><a href="/contact-us">Contact</a></li>
+          </ul>
+        </section>
+        <section class="xl:text-right">
+          <h3
+            class="pb-5 text-sm font-semibold uppercase tracking-[1.4px] text-secondary-100"
+          >
+            Legal
+          </h3>
+          <ul class="flex flex-col gap-2 text-xl font-medium text-white">
+            <li><a href="/abouts-us">Privacy policy</a></li>
+            <li><a href="/news">Letting fees</a></li>
+            <li><a href="/meet-the-team">Cookie policy</a></li>
+          </ul>
+        </section>
+      </nav>
+    </div>
+    <div class="flex w-full flex-col justify-between gap-5 lg:flex-row">
+      <Copy size="sm" textColor="text-white" className="max-w-[26rem]">
+        <>
+          © Jacobs Properties Limited 2022. All Rights Reserved. Terms &
+          conditions Stratfords Estate Agents. Registered in England. Company
+          No: 123456789.
+        </>
+      </Copy>
+
+      <Copy size="sm" textColor="text-white" className="lg:text-right">
+        <>
+          Website designed by Property Stream<br />Part of 22 Group
+        </>
+      </Copy>
+    </div>
+  </div>
+</footer>
