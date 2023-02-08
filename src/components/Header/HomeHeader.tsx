@@ -45,7 +45,7 @@ export default function HomeHeader() {
       >
         <a
           className={clsx("flex items-center self-end", isSticky ? "pb-2" : "")}
-          href="/"
+          href="/valuation"
         >
           <img
             className={clsx(
