@@ -7,6 +7,7 @@ interface Props {
   bgColor?: string;
   client: Client;
   maxFAQs?: number;
+  showLink?: boolean;
 }
 
 export default function FAQs({ bgColor, client, maxFAQs }: Props) {
@@ -15,7 +16,7 @@ export default function FAQs({ bgColor, client, maxFAQs }: Props) {
   const FAQTemplate = FAQJson[client];
 
   return (
-    <ul className="flex flex-col items-center gap-2 md:gap-5">
+    <ul className="flex w-full flex-col items-center gap-2 md:gap-5">
       {FAQTemplate.slice(0, maxFAQs).map(({ question, answer }, index) => (
         <FAQCard
           key={index}

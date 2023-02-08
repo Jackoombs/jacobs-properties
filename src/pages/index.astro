@@ -5,7 +5,6 @@ import HomeHeader from "../components/Header/HomeHeader";
 import Banner from "../components/Home/Banner/Banner";
 import PropertySearchBar from "../components/General/PropertySearchBar";
 import Home1 from "../assets/images/home/home_1.webp";
-import ValuationHero from "../assets/images/valuation-hero.webp";
 import FirstTime from "../assets/images/home/first-time.webp";
 import SectionLabel from "../components/General/Text/SectionLabel";
 import SectionHeader from "../components/General/Text/SectionHeader";
@@ -19,6 +18,9 @@ import Reviews from "../components/Reviews/Reviews";
 import FAQs from "../components/FAQs/FAQs";
 import Display from "../components/General/Text/Display";
 import type { Property } from "../env";
+import MiscSection from "../components/Layout/MiscSection.astro";
+import HeroSection from "../components/Layout/HeroSection.astro";
+import ValuationSection from "../components/Layout/ValuationSection.astro";
 
 const filterProperties = (properties: Property[]) => {
   return properties
@@ -46,170 +48,113 @@ const lettingsData: Property[] = await lettingsRes.json();
 const lettingsProperties = filterProperties(lettingsData);
 ---
 
-<Layout title="Welcome to Jacobs Properties.">
+<Layout
+  title="Jacobs Properties: The people’s estate agent in Basingstoke"
+  description="At Jacobs Properties, we put people before property. Whether you’re looking to sell, let, rent or buy a property, our reliable team of estate agents drive results and provide solutions for your property needs. "
+>
   <HomeHeader client:load />
   <main>
     <Banner client:load />
-    <section
-      class="justify-center bg-primary-200 py-10 md:flex md:pb-40 md:pt-28"
+    <MiscSection
+      bgColor="bg-primary-200"
+      className="flex flex-col gap-8 text-center items-center lg:gap-16"
     >
-      <div
-        class="mx-auto flex max-w-container-lg flex-col items-center gap-[34px]"
-      >
-        <Display>Your property search starts here.</Display>
-        <PropertySearchBar client:visible />
-      </div>
-    </section>
+      <Display>Your property search starts here.</Display>
+      <PropertySearchBar client:visible />
+    </MiscSection>
 
-    <section class="bg-white py-10 md:py-28">
-      <div
-        class="mx-auto grid max-w-container-lg gap-12 lg:grid-cols-2 lg:gap-7"
-      >
-        <img
-          loading="lazy"
-          class="h-auto w-full justify-self-end rounded-big object-cover md:aspect-hero lg:order-1"
-          src={Home1.src}
-          alt="St Michael's Church Basingstoke"
-        />
-        <div class="flex flex-col md:max-w-xl md:justify-center">
-          <SectionLabel padding="hero-md">About</SectionLabel>
-          <SectionHeader padding="hero"
-            >People first. Property second</SectionHeader
-          >
-          <Copy size="md" className="lg:pb-7"
-            >Meet Team Jacobs. We're a friendly bunch of property experts who
-            put people first. Since 1999, we've been helping the people of
-            Basingstoke get on the property ladder, find their forever home,
-            sell up and move on, downsize, upsize, rightsize - whatever your
-            property needs we've got your back.</Copy
-          >
-          <Link className="hidden lg:flex" link="/" type="secondary" size="lg"
-            >Meet the Team</Link
-          >
-        </div>
-      </div>
-    </section>
-
-    <section class="overflow-hidden bg-primary-200 py-10 md:py-28">
-      <div class="mx-auto max-w-container-lg">
-        <HowCanWeHelp client:idle />
-      </div>
-    </section>
-
-    <section class="bg-white py-10 md:py-28">
-      <div
-        id="targetTake"
-        class="mx-auto flex h-auto max-w-container-lg flex-col gap-9 md:items-center md:gap-16"
-      >
-        <SectionHeader className="max-w-[17rem] sm:max-w-none"
-          >Let's put some faces to our names</SectionHeader
+    <HeroSection
+      image={{
+        path: Home1.src,
+        aspectRatio: "aspect-property",
+        alt: "",
+        position: true,
+      }}
+    >
+      <div class="flex flex-col md:max-w-xl md:justify-center">
+        <SectionLabel padding="hero-md">About</SectionLabel>
+        <SectionHeader padding="hero"
+          >We’re about people, not just property</SectionHeader
         >
-        <Video
-          videoId="dQw4w9WgXcQ"
-          thumbnailPath={Thumbnail.src}
-          origin={Astro.url}
-          client:visible
-        />
+        <Copy size="md" className="lg:pb-7"
+          >Meet Team Jacobs. We’re a friendly bunch of property experts who put
+          people first. Since 1999, we’ve been helping the people of Basingstoke
+          get on the property ladder, find their forever home, sell up and move
+          on, downsize, upsize, rightsize – whatever your property needs, we’ve
+          got your back.</Copy
+        >
+        <Link
+          className="hidden lg:flex"
+          link="/meet-the-team"
+          type="secondary"
+          size="lg">Meet the Team</Link
+        >
       </div>
-    </section>
+    </HeroSection>
 
-    <section
-      class="relative flex flex-col justify-center gap-6 bg-secondary-100 pb-10 lg:aspect-[12/5] lg:pb-0"
-    >
-      <img
-        loading="lazy"
-        class="right-0 top-0 mx-auto aspect-[6/5] h-auto w-full object-cover object-left lg:absolute lg:order-1 lg:w-[50vw]"
-        src={ValuationHero.src}
-        alt=""
+    <MiscSection bgColor="bg-primary-200">
+      <HowCanWeHelp client:idle />
+    </MiscSection>
+
+    <!-- <MiscSection>
+      <SectionHeader padding="misc" className="max-w-[17rem] sm:max-w-none"
+        >Let's put some faces to our names</SectionHeader
+      >
+      <Video
+        videoId="dQw4w9WgXcQ"
+        thumbnailPath={Thumbnail.src}
+        origin={Astro.url}
+        client:visible
       />
-      <div class="mx-auto w-full max-w-container-lg">
-        <div class="flex flex-1 flex-col pr-3 lg:justify-center">
-          <SectionLabel padding="hero-md">Valuation</SectionLabel>
-          <SectionHeader className="lg:max-w-lg" padding="hero"
-            >Find out how much your property is worth</SectionHeader
-          >
-          <Copy className="lg:max-w-md xl:max-w-xl" padding="hero-md" size="lg"
-            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor
-            lorem, eleifend pharetra nibh ut, blandit placerat massa. Mauris
-            maximus ligula placerat ligula viverra gravida. Cras sed neque vitae
-            tortor varius accumsan. Nunc accumsan ex in commodo viverra.</Copy
-          >
-          <div class="flex flex-col gap-3 md:flex-row">
-            <Link link="/" type="white" size="lg">Instant Valuation</Link>
-            <Link link="/" type="primary" size="lg">Expert Valuation</Link>
-          </div>
-        </div>
-      </div>
-    </section>
+    </MiscSection> -->
 
-    <section class="overflow-hidden bg-white py-10 md:py-28">
-      <div class="mx-auto max-w-container-lg">
-        <RecentlySoldLet
-          {...{salesProperties, lettingsProperties}}
-          client:idle
-        />
-      </div>
-    </section>
+    <!-- <ValuationSection /> -->
 
-    <section
-      class="relative flex flex-col gap-12 bg-primary-200 pb-10 md:pb-28 lg:flex-row lg:gap-0 lg:py-28"
+    <MiscSection>
+      <RecentlySoldLet {...{salesProperties, lettingsProperties}} client:idle />
+    </MiscSection>
+
+    <HeroSection
+      bgColor="bg-primary-200"
+      image={{
+        path: FirstTime.src,
+        aspectRatio: "aspect-hero",
+        alt: "",
+        position: true,
+      }}
     >
-      <img
-        loading="lazy"
-        class="aspect-5/4 h-auto w-full flex-1 object-cover object-left lg:order-1 lg:hidden lg:w-[50vw]"
-        src={FirstTime.src}
-        alt=""
-      />
-      <div
-        class="mx-auto grid w-full max-w-container-lg items-center gap-7 lg:grid-cols-2"
-      >
-        <div>
-          <div class="flex flex-col lg:max-w-xl lg:justify-center">
-            <SectionLabel className="pb-3">Sales Brochure</SectionLabel>
-            <SectionHeader className="pb-4"
-              >First time selling a property?</SectionHeader
-            >
-            <Copy className="pb-5" size="md"
-              >We understand how daunting it can be. That's why we've compiled a
-              FREE guide of pro tips to help make your experience as stress-free
-              as possible.</Copy
-            >
-            <BrochureForm client:visible />
-          </div>
-        </div>
-        <img
-          loading="lazy"
-          class="hidden aspect-[1.42_/_1] h-auto w-full flex-1 self-center rounded-big object-cover object-left lg:order-1 lg:inline"
-          src={FirstTime.src}
-          alt=""
-        />
-      </div>
-    </section>
-
-    <section class="bg-white py-10 md:items-center md:py-28">
-      <div class="mx-auto flex max-w-container-lg flex-col">
-        <SectionHeader className="md:text-center" padding="misc"
-          >Hear from our customers</SectionHeader
+      <div class="flex flex-col lg:max-w-xl lg:justify-center">
+        <SectionLabel className="pb-3">Sales Brochure</SectionLabel>
+        <SectionHeader className="pb-4"
+          >First time selling a property?</SectionHeader
         >
-        <Reviews client:visible />
-      </div>
-    </section>
-
-    <section
-      class="bg-primary-200 py-14 md:items-center md:gap-16 md:py-section"
-    >
-      <div
-        class="mx-auto flex max-w-container-lg flex-col gap-8 md:justify-center md:gap-16"
-      >
-        <SectionHeader className="md:text-center"
-          >Frequently asked questions</SectionHeader
+        <Copy className="pb-5 max-w-md" size="md"
+          >We understand how daunting it can be. That's why we've compiled a
+          FREE guide of pro tips to help make your experience as stress-free as
+          possible.</Copy
         >
-        <FAQs maxFAQs={5} client="buyers" client:visible />
+        <BrochureForm client:visible />
+      </div>
+    </HeroSection>
+
+    <MiscSection>
+      <SectionHeader className="lg:text-center" padding="misc"
+        >Hear from our customers</SectionHeader
+      >
+      <Reviews client:visible />
+    </MiscSection>
+
+    <MiscSection bgColor="bg-primary-200">
+      <SectionHeader className="lg:text-center" padding="misc"
+        >Frequently asked questions</SectionHeader
+      >
+      <div class="flex w-full flex-col gap-8 lg:items-center lg:gap-16">
+        <FAQs maxFAQs={5} client={"buyers"} client:visible />
         <a
           class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
-          href="/">See All Our Faqs</a
+          href="/faq">See All Our Faqs</a
         >
       </div>
-    </section>
+    </MiscSection>
   </main>
 </Layout>

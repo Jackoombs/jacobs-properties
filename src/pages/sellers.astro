@@ -1,6 +1,10 @@
 ---
 import StandardLayout from "../layouts/StandardLayout.astro";
+import HeroSection from "../components/Layout/HeroSection.astro";
+import MiscSection from "../components/Layout/MiscSection.astro";
 import Link from "../components/General/Link";
+import InstantValuationButton from "../components/Form/InstantValuation/Button";
+import ExpertValuationButton from "../components/Form/ExpertValuation/Button";
 import FirstTime from "../assets/images/sellers/first-time-2.webp";
 import SellerHero from "../assets/images/sellers/seller-hero.webp";
 import WhySell from "../assets/images/sellers/why-sell.webp";
@@ -24,9 +28,42 @@ const data: Property[] = await res.json();
 const client = "sellers";
 ---
 
-<StandardLayout title="Sellers">
+<StandardLayout
+  title="Sell Your Property in Basingstoke | Jacobs Properties"
+  description="Ready to sell your home? Talk to our team of friendly local estate agents, who specialise in selling property in Basingstoke quickly and efficiently."
+>
   <main>
-    <section class="bg-primary-200 py-10 md:py-28">
+    <HeroSection
+      disableLazy
+      bgColor="bg-primary-200"
+      image={{
+        path: SellerHero.src,
+        aspectRatio: "aspect-property",
+        alt: "",
+        position: true,
+      }}
+    >
+      <div class="flex flex-col text-primary-100 md:max-w-lg">
+        <SectionLabel padding="hero-lg">Sellers</SectionLabel>
+        <PageHeader padding="hero">Sell your home in Basingstoke</PageHeader>
+        <Copy padding="hero-lg" size="lg"
+          >There’s a lot to consider when selling your home, that’s why you need
+          a reliable estate agent by your side. Our people-focused agents are
+          here to help.</Copy
+        >
+        <div
+          class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
+        >
+          <InstantValuationButton client:visible size="lg">
+            Instant Valuation
+          </InstantValuationButton>
+          <ExpertValuationButton client:visible size="lg" variant="secondary">
+            Expert Valuation
+          </ExpertValuationButton>
+        </div>
+      </div>
+    </HeroSection>
+    <!-- <section class="bg-primary-200 py-10 md:py-28">
       <div
         class="mx-auto grid max-w-container-lg items-center gap-7 lg:grid-cols-2"
       >
@@ -35,171 +72,121 @@ const client = "sellers";
           src={SellerHero.src}
           alt=""
         />
-        <div class="flex flex-col text-primary-100 md:max-w-lg">
-          <SectionLabel padding="hero-lg">Sellers</SectionLabel>
-          <PageHeader padding="hero">Sell your home in Basingstoke</PageHeader>
-          <Copy padding="hero-lg" size="lg"
-            >There's a lot to consider when selling your home, that's why you
-            need a reliable estate agent by your side. Luckily for you, our
-            people-centric agents are here to help.</Copy
-          >
-          <div
-            class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
-          >
-            <Link link="/" type="primary" size="lg">Expert Valuation</Link>
-            <Link link="/" type="secondary" size="lg">Instant Valuation</Link>
-          </div>
-        </div>
       </div>
-    </section>
+    </section> -->
 
-    <section class="w-full py-10 text-primary-100 md:py-28">
-      <div
-        class="mx-auto flex max-w-container-lg flex-col gap-8 lg:items-center lg:text-center"
-      >
-        <Display>On a mission to sell your home.</Display>
-        <h3
-          class="max-w-xl text-[1.5rem] font-semibold leading-7 lg:max-w-[51rem] lg:text-[2rem] lg:leading-10"
-        >
-          Our focus is to get a broader exposure for your property, negotiate a
-          better deal and make sure the process is smooth and stress free all
-          the way.
-        </h3>
-      </div>
-    </section>
-
-    <section class="bg-primary-200 py-10 md:py-28">
-      <div class="mx-auto max-w-container-lg">
-        <Stats client:visible />
-      </div>
-    </section>
-
-    <section class="bg-white py-10 md:py-28">
-      <div class="mx-auto max-w-container-lg">
-        <SectionHeader padding="misc"
-          >Four reasons you should sell with us</SectionHeader
-        >
-        <div class="flex flex-col gap-6 md:grid md:grid-cols-2 lg:gap-16">
-          <img
-            src={WhySell.src}
-            loading="lazy"
-            class="aspect-[6/5] h-auto w-full self-start rounded-big object-cover"
-            alt=""
-          />
-          <Dropdown client={client} client:visible />
-        </div>
-      </div>
-    </section>
-
-    <section class="overflow-hidden bg-primary-200 py-10 md:py-28">
-      <div class="mx-auto max-w-container-lg">
-        <ProcessSlider
-          client={client}
-          header="Our selling process at a glance"
-          client:idle
-        />
-      </div>
-    </section>
-
-    <section class="bg-white py-10 md:py-28">
-      <div
-        class="mx-auto grid max-w-container-lg items-center gap-12 lg:gap-16 xl:grid-cols-2"
-      >
-        <img
-          class="aspect-[1.27/1] w-full rounded-big object-cover object-center"
-          src={ProvenRecipe.src}
-          alt=""
-        />
-        <div class="max-w-2xl 2xl:pl-20">
-          <SectionLabel padding="hero-md">About</SectionLabel>
-          <SectionHeader padding="hero" className="lg:max-w-lg"
-            >Proven recipe to sell your home for the best price</SectionHeader
-          >
-          <Copy size="lg" padding="hero-md"
-            >We don’t just take a few pictures and stick your property on
-            Rightmove. That’s simply not our style. And it won’t help you
-            achieve the best sale price for your home. We bring the story of
-            your property to life and design a winning strategy to really make
-            your home stand out. Then, we implement a custom marketing plan
-            across a wide variety of the latest technologies including social,
-            online, in print, direct mail and in person. We like to get to know
-            you and your property. Trust us, this makes a difference to the
-            final outcome and the price you can achieve when selling your home.</Copy
-          >
-          <Link link="/" type="secondary" size="md">Meet the Team</Link>
-        </div>
-      </div>
-    </section>
-
-    <section
-      class="relative flex flex-col gap-12 bg-primary-200 pb-10 md:pb-28 lg:flex-row lg:gap-0 lg:py-28"
+    <MiscSection
+      className="flex max-w-container-lg flex-col gap-8 lg:items-center lg:text-center"
     >
-      <img
-        loading="lazy"
-        class="aspect-5/4 h-auto w-full flex-1 object-cover object-left lg:order-1 lg:hidden lg:w-[50vw]"
-        src={FirstTime.src}
-        alt=""
+      <Display>On a mission to sell your home.</Display>
+      <h3
+        class="max-w-xl text-[1.5rem] font-semibold leading-7 text-primary-100 lg:max-w-[51rem] lg:text-[2rem] lg:leading-10"
+      >
+        Our focus is to get a broader exposure for your property, negotiate a
+        better deal and make sure the process is smooth and stress free all the
+        way.
+      </h3>
+    </MiscSection>
+
+    <MiscSection bgColor="bg-primary-200">
+      <SectionHeader padding="misc">Why sell your home with us</SectionHeader>
+      <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
+        <img class="rounded-big" src={WhySell.src} alt="" />
+        <Dropdown color="bg-white" client={client} client:visible />
+      </div>
+    </MiscSection>
+
+    <MiscSection bgColor="bg-white">
+      <Stats client:visible />
+    </MiscSection>
+
+    <MiscSection bgColor="bg-primary-200">
+      <ProcessSlider
+        client={client}
+        header="Our selling process at a glance"
+        client:idle
       />
-      <div
-        class="mx-auto grid w-full max-w-container-lg items-center gap-7 lg:grid-cols-2"
-      >
-        <div>
-          <div class="flex flex-col lg:max-w-xl lg:justify-center">
-            <SectionLabel className="pb-3">Sales Brochure</SectionLabel>
-            <SectionHeader className="pb-4"
-              >First time selling a property?</SectionHeader
-            >
-            <Copy className="pb-5" size="md"
-              >We understand how daunting it can be. That's why we've compiled a
-              FREE guide of pro tips to help make your experience as stress-free
-              as possible.</Copy
-            >
-            <BrochureForm client:visible />
-          </div>
-        </div>
-        <img
-          loading="lazy"
-          class="hidden aspect-[1.42_/_1] h-auto w-full flex-1 self-center rounded-big object-cover object-left lg:order-1 lg:inline"
-          src={FirstTime.src}
-          alt=""
-        />
-      </div>
-    </section>
+    </MiscSection>
 
-    <section class="overflow-hidden bg-white pt-10 md:pt-28">
-      <div class="mx-auto max-w-container-lg">
-        <PropertySlider
-          client:idle
-          header="Your property could be one of them"
-          properties={data}
-        />
-      </div>
-    </section>
-
-    <section class="bg-white py-10 md:items-center md:py-28">
-      <div class="mx-auto flex max-w-container-lg flex-col">
-        <SectionHeader className="md:text-center" padding="misc"
-          >Hear from our customers</SectionHeader
-        >
-        <Reviews client:visible />
-      </div>
-    </section>
-
-    <section
-      class="bg-primary-200 py-14 md:items-center md:gap-16 md:py-section"
+    <HeroSection
+      image={{
+        path: ProvenRecipe.src,
+        aspectRatio: "aspect-hero",
+        alt: "",
+        position: false,
+      }}
     >
-      <div
-        class="mx-auto flex max-w-container-lg flex-col gap-8 md:justify-center md:gap-16"
-      >
-        <SectionHeader className="md:text-center"
-          >Frequently asked questions</SectionHeader
+      <div class="max-w-2xl 2xl:pl-20">
+        <SectionLabel padding="hero-md">About</SectionLabel>
+        <SectionHeader padding="hero" className="lg:max-w-lg"
+          >Proven recipe to sell your home for the best price</SectionHeader
         >
-        <FAQs client={client} client:visible />
+        <Copy size="lg" padding="hero-md"
+          >We don’t just take a few pictures and stick your property on
+          Rightmove. That’s simply not our style. And it won’t help you achieve
+          the best sale price for your home. We bring the story of your property
+          to life and design a winning strategy to really make your home stand
+          out. Then, we implement a custom marketing plan across a wide variety
+          of the latest technologies including social, online, in print, direct
+          mail and in person. We like to get to know you and your property.
+          Trust us, this makes a difference to the final outcome and the price
+          you can achieve when selling your home.</Copy
+        >
+      </div>
+    </HeroSection>
+
+    <HeroSection
+      bgColor="bg-primary-200"
+      image={{
+        path: FirstTime.src,
+        aspectRatio: "aspect-hero",
+        alt: "",
+        position: true,
+      }}
+    >
+      <div class="flex flex-col lg:max-w-xl lg:justify-center">
+        <SectionLabel className="pb-3">Sales Brochure</SectionLabel>
+        <SectionHeader className="pb-4">Free Selling Guide</SectionHeader>
+        <Copy className="pb-5" size="md"
+          >Thinking of selling? Download our free Selling Guide for useful
+          advice on how to achieve the best price for your property and what’s
+          involved in selling.</Copy
+        >
+        <BrochureForm client:visible />
+      </div>
+    </HeroSection>
+
+    <MiscSection>
+      <PropertySlider
+        client:idle
+        header="Your property could be one of them"
+        properties={data}
+      />
+    </MiscSection>
+
+    <MiscSection bgColor="bg-primary-200">
+      <SectionHeader className="lg:text-center" padding="misc"
+        >Hear from our customers</SectionHeader
+      >
+      <Reviews client:visible />
+    </MiscSection>
+
+    <MiscSection>
+      <SectionHeader className="lg:text-center" padding="misc"
+        >Frequently asked questions</SectionHeader
+      >
+      <div class="flex w-full flex-col gap-8 lg:items-center lg:gap-16">
+        <FAQs
+          bgColor="bg-primary-200"
+          maxFAQs={5}
+          client={client}
+          client:visible
+        />
         <a
           class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
-          href="/">See All Our Faqs</a
+          href="/faq">See All Our Faqs</a
         >
       </div>
-    </section>
+    </MiscSection>
   </main>
 </StandardLayout>

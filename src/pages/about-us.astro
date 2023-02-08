@@ -4,7 +4,7 @@ import Copy from "../components/General/Text/Copy";
 import PageHeader from "../components/General/Text/PageHeader";
 import HeroSection from "../components/Layout/HeroSection.astro";
 import StandardLayout from "../layouts/StandardLayout.astro";
-import Image from "../assets/images/valuation.webp";
+import WhatStandFor from "../assets/images/about-us/what-stand-for.webp";
 import SectionHeader from "../components/General/Text/SectionHeader";
 import SectionLabel from "../components/General/Text/SectionLabel";
 import MiscSection from "../components/Layout/MiscSection.astro";
@@ -13,6 +13,7 @@ import Dropdown from "../components/Dropdown/Dropdown";
 import NewsSlider from "../components/News/NewsSlider";
 import Reviews from "../components/Reviews/Reviews";
 import FAQs from "../components/FAQs/FAQs";
+import GetInTouchButton from "../components/Form/GetInTouch/Button";
 
 const news = await Astro.glob("./news/**.md");
 const newsTemplate = news.map((post) => {
@@ -21,27 +22,69 @@ const newsTemplate = news.map((post) => {
 });
 ---
 
-<StandardLayout title="About">
-  <section class="bg-primary-200 py-10 md:py-28">
-    <div
-      class="mx-auto grid w-full max-w-container-lg items-center gap-6 lg:grid-cols-[4fr_3fr] lg:gap-16"
+<StandardLayout
+  title="Your Friendly Estate Agents in Basingstoke | Jacobs Properties"
+  description="We are an independent estate agent with a friendly team of property experts, who have been helping you buy, sell, let and rent property in Basingstoke since 1999."
+>
+  <MiscSection
+    bgColor="bg-primary-200"
+    className="grid items-center gap-6 lg:grid-cols-[4fr_3fr] lg:gap-16"
+  >
+    <PageHeader padding="hero" className=" max-w-md lg:max-w-[56rem]"
+      >Get to know your friendly local property experts</PageHeader
     >
-      <PageHeader padding="hero" className=" max-w-md lg:max-w-[56rem]"
-        >Get to know your friendly local property experts</PageHeader
+    <div class="flex flex-col">
+      <Copy size="lg" padding="hero-md"
+        >Independent and proud, we keep things local at Jacobs Properties.</Copy
       >
-      <div class="flex flex-col">
-        <Copy size="lg" padding="hero-md"
-          >Independent and proud, we keep things local at Jacobs Properties.</Copy
-        >
-        <Link link="/" type="secondary" size="lg">Get in touch</Link>
-      </div>
+      <GetInTouchButton size="lg" variant="secondary"
+        >Get in touch</GetInTouchButton
+      >
     </div>
-  </section>
+  </MiscSection>
 
   <HeroSection
+    disableLazy
     bgColor="bg-white"
     image={{
-      path: Image.src,
+      path: WhatStandFor.src,
+      position: true,
+      alt: "",
+      aspectRatio: "aspect-[1.27: 1]",
+    }}
+  >
+    <div>
+      <SectionLabel padding="hero-md">About</SectionLabel>
+      <SectionHeader padding="hero" className="lg:max-w-lg"
+        >About Jacobs Properties
+      </SectionHeader>
+      <Copy size="md" padding="hero-md" className="max-w-2xl">
+        <>
+          All estate agents will say they are friendly and fair, but when you
+          are an independent, family-run business like us, you really do take
+          pride in real feedback you receive from the community you work in, the
+          relationships you build and the referrals you get through word of
+          mouth.<br /><br />When we combine our sound knowledge of Basingstoke
+          and its surrounding areas with our expertise in property, we ensure
+          our clients have the best property experience – whether you’re a
+          seller, a first-time buyer, a landlord or a tenant. And that’s exactly
+          how we’ve established Jacobs Properties and cemented our place in
+          Basingstoke, and we don’t intend to stop.<br /><br />As the business
+          owner, you have my personal guarantee that we are focused to deliver a
+          friendly, high quality service throughout to help you reach your
+          goals.<br /><br />[Electronic signature]<br /><br />Jon Coombs<br
+          />Director
+        </>
+      </Copy>
+    </div>
+  </HeroSection>
+
+  <HeroSection
+    disablePt
+    disableLazy
+    bgColor="bg-white"
+    image={{
+      path: WhatStandFor.src,
       position: false,
       alt: "",
       aspectRatio: "aspect-[1.27: 1]",
@@ -50,85 +93,86 @@ const newsTemplate = news.map((post) => {
     <div class="max-w-3xl 2xl:pl-20">
       <SectionLabel padding="hero-md">About</SectionLabel>
       <SectionHeader padding="hero" className="lg:max-w-lg"
-        >How it started, how it’s going</SectionHeader
-      >
-      <Copy size="lg" padding="hero-md">
-        <>
-          Jacobs Properties is born out of Founding Director Jon Coombs’
-          experience in managing Basingstoke’s first HMO in 1999. From there,
-          Jon went on to purchase another HMO and organically built up his
-          portfolio of properties. <br /><br /> After amassing close to two decades’
-          worth of expertise in letting and managing properties in Basingstoke, Jon
-          established Jacobs Properties in 2018 with a fully fledged sales and lettings
-          department. The motto was to help people at every stage of the property
-          journey through a warm and friendly approach. Since then, we have slowly
-          but surely grown into who we are today: Basingstoke’s leading estate agent.
-        </>
-      </Copy>
-    </div>
-  </HeroSection>
-
-  <HeroSection
-    bgColor="white"
-    disablePt={true}
-    image={{
-      path: Image.src,
-      position: true,
-      alt: "",
-      aspectRatio: "aspect-[1.27: 1]",
-    }}
-  >
-    <div class="max-w-xl">
-      <SectionLabel padding="hero-md">About</SectionLabel>
-      <SectionHeader padding="hero" className="lg:max-w-lg"
-        >What makes us different?</SectionHeader
-      >
+        >About Jacobs Properties
+      </SectionHeader>
       <Copy size="md" padding="hero-md">
         <>
-          All estate agents will say they are friendly and fair; but when you
-          are an independent, family-run business like us, you really do take
-          pride in real feedback you receive from the community you work in, the
-          relationships you build and the referrals you get through word of
-          mouth.<br /><br />When we combine our sound knowledge of Basingstoke
-          and its surrounding areas with our expertise in property, we ensure
-          our clients have the best property experience – whether you’re a
-          seller, a first-time buyer, a landlord, a tenant or a growing family.
-          And that’s exactly how we’ve established Jacobs Properties and
-          cemented our place in Basingstoke, and we don’t intend to stop.
+          We are local Basingstoke estate agent helping home-owners, property
+          owners, buyers and tenants with their property needs. And we do it
+          with a smile.<br /><br />Founding Director Jon Coombs entered the
+          property business in the early 90’s, initially letting and managing
+          his own portfolio of properties. Over the next 10 years Jon found
+          himself with a growing loyal customer base, most of whom are still
+          customers today.<br /><br />In 1999 the business formally established
+          as Jacob’s Properties which expanded further in 2018 after the
+          acquisition of another local agency. Since then, we have slowly but
+          surely grown into what we are today - Basingstoke’s leading estate
+          agent.<br /><br />With Jon at the helm, we have always been about
+          building trust and helping people at every stage of their property
+          journey. Jacobs Properties has a warm and friendly approach, something
+          we know matters to our customers and the people within the business.
+          We support home-movers in and around Basingstoke and have an office in
+          Worting House, Church Lane.
         </>
       </Copy>
     </div>
   </HeroSection>
 
   <MiscSection bgColor="bg-primary-200">
-    <TeamSlider client:load />
-    <Link link="/" type="secondary" size="lg" className="mx-auto mt-16"
-      >View full team</Link
+    <SectionHeader padding="misc"
+      >Get to know these friendly faces</SectionHeader
     >
-  </MiscSection>
-
-  <MiscSection>
-    <SectionHeader padding="misc">What we stand for</SectionHeader>
     <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
       <img
-        src={Image.src}
+        src={WhatStandFor.src}
         loading="lazy"
         class="order-1 aspect-[6/5] h-auto w-full self-center rounded-big object-cover lg:order-none"
         alt=""
       />
-      <Dropdown client="about-us" client:idle />
+      <Dropdown color="bg-white" client="about-us" client:idle />
     </div>
   </MiscSection>
+
+  <MiscSection>
+    <TeamSlider client:idle />
+    <Link
+      link="/meet-the-team"
+      type="secondary"
+      size="lg"
+      className="mx-auto mt-16">View full team</Link
+    >
+  </MiscSection>
+
+  <HeroSection
+    disablePt={true}
+    image={{
+      path: WhatStandFor.src,
+      aspectRatio: "aspect-hero",
+      alt: "",
+      position: true,
+    }}
+  >
+    <div>
+      <SectionLabel padding="hero-md">About</SectionLabel>
+      <SectionHeader padding="hero">
+        <>
+          Have a question about selling your home?<br />Just want to chat about
+          property?
+        </>
+      </SectionHeader>
+      <GetInTouchButton size="lg">Get in touch</GetInTouchButton>
+    </div>
+  </HeroSection>
 
   <MiscSection bgColor="bg-primary-200">
     <NewsSlider newsTemplate={newsTemplate} client:idle />
   </MiscSection>
 
-  <MiscSection>
-    <SectionHeader padding="misc" className="md:text-center"
-      >Our customers said</SectionHeader
-    >
-    <Reviews client:idle />
+  <MiscSection bgColor="bg-white">
+    <SectionHeader className="lg:text-center" padding="misc">
+      This is why we do what we do
+    </SectionHeader>
+    <Reviews client:visible />
   </MiscSection>
 
   <MiscSection bgColor="bg-primary-200">

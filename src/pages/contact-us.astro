@@ -23,7 +23,10 @@ const location: GoogleMapProps["center"] | undefined = await data.results[0]
   ?.geometry?.location;
 ---
 
-<StandardLayout title="Contact Us">
+<StandardLayout
+  title="Send Us Your Questions | Jacobs Properties"
+  description="Have any questions about our properties? Like to find out more about our processes? Drop us a message and we'll get back to you!"
+>
   <section class="bg-primary-200 py-10 md:py-28">
     <div
       class="mx-auto grid w-full max-w-container-lg grid-cols-1 items-center gap-6 md:grid-cols-1/2 lg:gap-16 xl:grid-cols-[4fr_3fr]"
@@ -52,25 +55,31 @@ const location: GoogleMapProps["center"] | undefined = await data.results[0]
       aspectRatio: "aspect-hero",
     }}
   >
-    <div class="max-w-3xl 2xl:pl-20">
+    <div class="max-w-3xl xl:pl-32">
       <SectionLabel padding="hero-md">Contact</SectionLabel>
       <SectionHeader padding="hero">Branch details</SectionHeader>
       <div class="pb-10">
-        <ContactItem className="pb-3" icon="phone" link="/"
+        <ContactItem className="pb-3" icon="phone" link="01256 363683"
           >01256 363683</ContactItem
         >
-        <ContactItem className="pb-7" icon="mail" link="/"
+        <ContactItem className="pb-7" icon="mail" link="info@jacobs.properties"
           >info@jacobs.properties</ContactItem
         >
-        <ContactItem icon="pin" link="/">
+        <ContactItem icon="pin" link="#map">
           <>Worting House, Church Lane,<br />Basingstoke, RG23 8PY</>
         </ContactItem>
       </div>
-      <Link link="/" type="secondary" size="lg">Get Directions</Link>
+      <Link
+        newTab
+        link="https://goo.gl/maps/4E6pRAGUoiuqaVkB6"
+        type="secondary"
+        size="lg">Get Directions</Link
+      >
     </div>
   </HeroSection>
 
   <MiscSection disablePb={true} disablePt={true}>
+    <span id="map"></span>
     <PropertyMap
       client:idle
       location={location}

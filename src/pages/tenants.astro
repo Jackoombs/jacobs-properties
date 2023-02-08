@@ -17,17 +17,22 @@ import QuesitonRenting from "../assets/images/tenants/question-renting.webp";
 import FAQs from "../components/FAQs/FAQs";
 import ProcessSlider from "../components/Process/ProcessSlider";
 import Reviews from "../components/Reviews/Reviews";
+import PropertySearchBar from "../components/General/PropertySearchBar";
+import GetInTouchButton from "../components/Form/GetInTouch/Button";
 
 const client = "tenants";
 ---
 
-<StandardLayout title="Rent a property in Basingstoke | Jacobs Properties">
+<StandardLayout
+  title="Rent a property in Basingstoke | Jacobs Properties"
+  description="Looking for a house or flat to rent in Basingstoke? Talk to our team of letting agents today to find out how we can help you find the perfect rental property."
+>
   <HeroSection
     bgColor="bg-primary-200"
     disableLazy
     image={{
       path: TenantsHero.src,
-      alt: "Woman at desk",
+      alt: "",
       aspectRatio: "aspect-property",
       position: true,
     }}
@@ -45,37 +50,27 @@ const client = "tenants";
       <div
         class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
       >
-        <Link link="/" type="primary" size="lg">Get in touch</Link>
-        <Link link="/" type="secondary" size="lg">Report a repair</Link>
+        <GetInTouchButton client:idle size="lg">Get in touch</GetInTouchButton>
+        <Link link="/contact-us" type="secondary" size="lg"
+          >Report a repair</Link
+        >
       </div>
     </div>
   </HeroSection>
 
   <MiscSection
     bgColor="bg-primary-200"
-    className="flex flex-col gap-8 text-center"
+    className="flex flex-col gap-8 text-center items-center lg:gap-16"
     disablePt={true}
   >
     <Display>Find a rental property here</Display>
-    <h3
-      class="mx-auto max-w-xl text-[1.5rem] font-semibold leading-7 text-primary-100 lg:max-w-[51rem] lg:text-[2rem] lg:leading-10"
-    >
-      Our focus is to get a broader exposure for your property, negotiate a
-      better deal and make sure the process is smooth and stress free all the
-      way.
-    </h3>
+    <PropertySearchBar client:visible />
   </MiscSection>
 
   <MiscSection>
-    <SectionHeader padding="misc">
-      Why buy a property with Jacobs?
-    </SectionHeader>
+    <SectionHeader padding="misc">Why rent with us?</SectionHeader>
     <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
-      <img
-        class="rounded-big"
-        src={WhyRent.src}
-        alt="Two young woman easting pancakes watching iPad"
-      />
+      <img class="rounded-big" src={WhyRent.src} alt="" />
       <Dropdown client={client} client:visible />
     </div>
   </MiscSection>
@@ -154,12 +149,16 @@ const client = "tenants";
       <SectionHeader padding="hero"
         >Have a question about renting?</SectionHeader
       >
-      <Link type="secondary" link="/" size="lg">Ask us now</Link>
+      <GetInTouchButton variant="secondary" client:idle size="lg"
+        >Ask us now</GetInTouchButton
+      >
     </div>
   </HeroSection>
 
-  <MiscSection>
-    <SectionHeader padding="misc">Our customers are the best</SectionHeader>
+  <MiscSection bgColor="bg-primary-200">
+    <SectionHeader className="lg:text-center" padding="misc">
+      Our customers are the best
+    </SectionHeader>
     <Reviews client:visible />
   </MiscSection>
 </StandardLayout>

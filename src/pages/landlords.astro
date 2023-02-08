@@ -1,6 +1,9 @@
 ---
 import StandardLayout from "../layouts/StandardLayout.astro";
-import Link from "../components/General/Link";
+import HeroSection from "../components/Layout/HeroSection.astro";
+import MiscSection from "../components/Layout/MiscSection.astro";
+import GetInTouchButton from "../components/Form/GetInTouch/Button";
+import ExpertValuationButton from "../components/Form/ExpertValuation/Button";
 import FirstTime from "../assets/images/landlords/first-time-3.webp";
 import LandlordHero from "../assets/images/landlords/landlord-hero.webp";
 import WhyLet from "../assets/images/landlords/why-let.webp";
@@ -18,202 +21,171 @@ import PropertySlider from "../components/Property/PropertySlider";
 import Reviews from "../components/Reviews/Reviews";
 import FAQs from "../components/FAQs/FAQs";
 import type { Property } from "../env";
+import ValuationSection from "../components/Layout/ValuationSection.astro";
 
-const res = await fetch(`https://jacobs-server.onrender.com/properties/sales`);
+const res = await fetch(
+  `https://jacobs-server.onrender.com/properties/lettings`
+);
 const data: Property[] = await res.json();
 const client = "landlords";
 ---
 
-<StandardLayout title="Landlords">
+<StandardLayout
+  title="Let Your Property in Basingstoke | Jacobs Properties"
+  description="Letting your property in Basingstoke? Our friendly letting agents can take the hassle out of renting out your property. Learn more about our landlord services."
+>
   <main>
-    <section class="bg-primary-200 py-10 md:py-28">
-      <div
-        class="mx-auto grid max-w-container-lg items-center gap-7 lg:grid-cols-2"
-      >
-        <img
-          class="aspect-[1.42_/_1] h-auto w-full self-center rounded-big object-cover object-left lg:order-1"
-          src={LandlordHero.src}
-          alt=""
-        />
-        <div class="flex flex-col text-primary-100 md:max-w-xl">
-          <SectionLabel padding="hero-lg">Landlords</SectionLabel>
-          <PageHeader padding="hero"
-            >Let your property in Basingstoke</PageHeader
-          >
-          <Copy padding="hero-lg" size="lg"
-            >At Jacobs Properties, we pride ourselves on delivering a first
-            class lettings service with a personal touch. From rental valuation
-            and finding the right tenant, to property management and portfolio
-            expansion, we’ll keep it seamless.</Copy
-          >
-          <div
-            class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
-          >
-            <Link link="/" type="primary" size="md">Get in Touch</Link>
-            <Link className="px-7" link="/" type="secondary" size="lg"
-              >Book rental valuation</Link
-            >
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="bg-primary-200 py-10 md:py-28">
-      <div class="mx-auto max-w-container-lg">
-        <Stats client:visible />
-      </div>
-    </section>
-
-    <section class="bg-white py-10 md:py-28">
-      <div class="mx-auto max-w-container-lg">
-        <SectionHeader padding="misc"
-          >Four reasons you should let with us</SectionHeader
+    <HeroSection
+      disableLazy
+      bgColor="bg-primary-200"
+      image={{
+        path: LandlordHero.src,
+        aspectRatio: "aspect-property",
+        alt: "",
+        position: true,
+      }}
+    >
+      <div class="flex flex-col text-primary-100">
+        <SectionLabel padding="hero-lg">Landlords</SectionLabel>
+        <PageHeader className="md:max-w-xl" padding="hero"
+          >Let your property in Basingstoke</PageHeader
         >
-        <div class="flex flex-col gap-6 md:grid md:grid-cols-2 lg:gap-16">
-          <img
-            src={WhyLet.src}
-            loading="lazy"
-            class="md:order-0 order-1 aspect-[6/5] h-auto w-full flex-1 self-start rounded-big object-cover"
-            alt=""
-          />
-          <Dropdown client={client} client:visible />
-        </div>
-      </div>
-    </section>
-
-    <section class="overflow-hidden bg-primary-200 py-10 md:py-28">
-      <div class="mx-auto max-w-container-lg">
-        <ProcessSlider
-          header="Our lettings process at a glance"
-          client={client}
-          client:idle
-        />
-      </div>
-    </section>
-
-    <section class="bg-white py-10 md:py-28">
-      <div
-        class="mx-auto grid max-w-container-lg items-center gap-12 md:grid-cols-2 md:gap-16"
-      >
-        <img
-          class="aspect-[1.27/1] w-full rounded-big object-cover object-center"
-          src={Home3.src}
-          alt=""
-        />
-        <div class="lg:max-w-xl 2xl:pl-20">
-          <SectionLabel padding="hero-md">Landlords</SectionLabel>
-          <SectionHeader padding="hero" className="lg:max-w-lg"
-            >Fully managed</SectionHeader
-          >
-          <Copy size="lg" padding="hero-md"
-            >Don’t have the time or resources to manage your lettings? We do!
-            Choose the Fully Managed option and let us look after the entire
-            running of your rental property, or your portfolio of properties.</Copy
-          >
-          <div class="flex flex-col gap-3 md:flex-row">
-            <Link link="/" type="secondary" size="md">Get in touch</Link>
-            <Link link="/" type="primary" size="md">Lettings fees</Link>
-          </div>
-        </div>
-      </div>
-
-      <section class="bg-white py-10 md:py-28">
+        <Copy className="md:max-w-2xl" padding="hero-lg" size="lg"
+          >At Jacobs Properties, we pride ourselves on delivering a first class
+          lettings service with a personal touch. From rental valuation and
+          finding the right tenant, to property management and portfolio
+          expansion, we’ll keep it seamless.</Copy
+        >
         <div
-          class="mx-auto grid max-w-container-lg items-center gap-12 md:grid-cols-2 md:gap-16"
+          class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
         >
-          <img
-            class="aspect-[1.27/1] w-full rounded-big object-cover object-center md:order-1"
-            src={LetOnly.src}
-            alt=""
-          />
-          <div class="md:max-w-lg">
-            <SectionLabel padding="hero-md">Landlords</SectionLabel>
-            <SectionHeader padding="hero" className="lg:max-w-lg"
-              >Let Only</SectionHeader
-            >
-            <Copy size="lg" padding="hero-md"
-              >If you’re a landlord who is experienced in the day-to-day running
-              of your lettings but need some help with finding the right tenant,
-              then this is the ideal service for you.</Copy
-            >
-            <div class="flex flex-col gap-3 md:flex-row">
-              <Link link="/" type="secondary" size="md">Get in touch</Link>
-              <Link link="/" type="primary" size="md">Lettings fees</Link>
-            </div>
-          </div>
+          <GetInTouchButton client:idle size="lg">
+            Get in Touch
+          </GetInTouchButton>
+          <ExpertValuationButton client:idle size="lg" variant="secondary">
+            Book rental valuation
+          </ExpertValuationButton>
         </div>
-      </section>
+      </div>
+    </HeroSection>
 
-      <section
-        class="relative flex flex-col gap-12 bg-primary-200 pb-10 md:pb-28 lg:flex-row lg:gap-0 lg:py-28"
+    <MiscSection bgColor="bg-white">
+      <Stats client:visible />
+    </MiscSection>
+
+    <MiscSection bgColor="bg-primary-200">
+      <SectionHeader padding="misc"
+        >Four reasons you should let with us</SectionHeader
       >
-        <img
-          loading="lazy"
-          class="aspect-5/4 h-auto w-full flex-1 object-cover object-left lg:order-1 lg:hidden lg:w-[50vw]"
-          src={FirstTime.src}
-          alt=""
-        />
-        <div
-          class="mx-auto grid w-full max-w-container-lg items-center gap-7 lg:grid-cols-2"
+      <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
+        <img class="rounded-big" src={WhyLet.src} alt="" />
+        <Dropdown color="bg-white" client={client} client:visible />
+      </div>
+    </MiscSection>
+
+    <HeroSection
+      image={{
+        path: Home3.src,
+        aspectRatio: "aspect-hero",
+        alt: "",
+        position: false,
+      }}
+    >
+      <div class="lg:max-w-xl 2xl:pl-20">
+        <SectionLabel padding="hero-md">Landlords</SectionLabel>
+        <SectionHeader padding="hero" className="lg:max-w-lg"
+          >Fully managed</SectionHeader
         >
-          <div>
-            <div class="flex flex-col lg:max-w-xl lg:justify-center">
-              <SectionLabel className="pb-3">Sales Brochure</SectionLabel>
-              <SectionHeader className="pb-4"
-                >First time letting a property?</SectionHeader
-              >
-              <Copy className="pb-5" size="md"
-                >We understand how daunting it can be. That's why we've compiled
-                a FREE guide of pro tips to help make your experience as
-                stress-free as possible.</Copy
-              >
-              <BrochureForm client:visible />
-            </div>
-          </div>
-          <img
-            loading="lazy"
-            class="hidden aspect-[1.42_/_1] h-auto w-full flex-1 self-center rounded-big object-cover object-left lg:order-1 lg:inline"
-            src={FirstTime.src}
-            alt=""
-          />
-        </div>
-      </section>
+        <Copy size="lg" padding="hero-md"
+          >Don’t have the time or resources to manage your lettings? We do!
+          Choose the Fully Managed option and let us look after the entire
+          running of your rental property, or your portfolio of properties.</Copy
+        >
+      </div>
+    </HeroSection>
 
-      <section class="overflow-hidden bg-white pt-10 md:pt-28">
-        <div class="mx-auto max-w-container-lg">
-          <PropertySlider
-            client:idle
-            header="Your property could be one of them"
-            properties={data}
-          />
-        </div>
-      </section>
+    <HeroSection
+      disablePt={true}
+      image={{
+        path: LetOnly.src,
+        aspectRatio: "aspect-hero",
+        alt: "",
+        position: true,
+      }}
+    >
+      <div class="md:max-w-lg">
+        <SectionLabel padding="hero-md">Landlords</SectionLabel>
+        <SectionHeader padding="hero" className="lg:max-w-lg"
+          >Let Only</SectionHeader
+        >
+        <Copy size="lg" padding="hero-md"
+          >If you’re a landlord who is experienced in the day-to-day running of
+          your lettings but need some help with finding the right tenant, then
+          this is the ideal service for you.</Copy
+        >
+      </div>
+    </HeroSection>
 
-      <section class="bg-white py-10 md:items-center md:py-28">
-        <div class="mx-auto flex max-w-container-lg flex-col">
-          <SectionHeader className="md:text-center" padding="misc"
-            >Hear from our customers</SectionHeader
-          >
-          <Reviews client:visible />
-        </div>
-      </section>
+    <MiscSection bgColor="bg-primary-200">
+      <ProcessSlider
+        client={client}
+        header="Our lettings process at a glance"
+        client:idle
+      />
+    </MiscSection>
 
-      <section
-        class="bg-primary-200 py-14 md:items-center md:gap-16 md:py-section"
+    <MiscSection className="flex flex-col gap-8 md:justify-center md:gap-16">
+      <SectionHeader className="md:text-center"
+        >Frequently asked questions</SectionHeader
       >
-        <div
-          class="mx-auto flex max-w-container-lg flex-col gap-8 md:justify-center md:gap-16"
+      <FAQs
+        bgColor="bg-primary-200"
+        maxFAQs={5}
+        client={client}
+        client:visible
+      />
+      <a
+        class="max-auto text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
+        href="/faq">See All Our Faqs</a
+      >
+    </MiscSection>
+
+    <ValuationSection title="Want to sell your home instead?" />
+
+    <HeroSection
+      bgColor="bg-primary-200"
+      image={{
+        path: FirstTime.src,
+        aspectRatio: "aspect-hero",
+        alt: "",
+        position: true,
+      }}
+    >
+      <div class="flex flex-col lg:max-w-xl lg:justify-center">
+        <SectionLabel className="pb-3">Lettings Brochure</SectionLabel>
+        <SectionHeader className="pb-4">Free Landlord Guide</SectionHeader>
+        <Copy className="pb-5 max-w-md" size="md"
+          >A comprehensive Guide for landlords helping you understand the steps
+          involved in the lettings process and ways you can maximise the return
+          from your property investment.</Copy
         >
-          <SectionHeader className="md:text-center"
-            >Frequently asked questions</SectionHeader
-          >
-          <FAQs client={client} client:visible />
-          <a
-            class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
-            href="/">See All Our Faqs</a
-          >
-        </div>
-      </section>
-    </section>
+        <BrochureForm client:visible />
+      </div>
+    </HeroSection>
+
+    <MiscSection>
+      <SectionHeader className="md:text-center" padding="misc"
+        >Happy agents make happy customers</SectionHeader
+      >
+      <Reviews client:visible />
+    </MiscSection>
+
+    <MiscSection bgColor="bg-primary-200">
+      <PropertySlider
+        client:idle
+        header="Success! We’ve just let these properties!"
+        properties={data}
+      />
+    </MiscSection>
   </main>
 </StandardLayout>
