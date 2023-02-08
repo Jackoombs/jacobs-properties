@@ -71,15 +71,10 @@ export default function BrochureForm() {
             privacy policy
           </a>
         </p>
-        <Button type="secondary" size="lg" buttonType="submit">
+        <Button variant="secondary" size="lg" type="submit">
           Download Guide
         </Button>
-        <a
-          ref={downloadRef}
-          href="/"
-          download="dummy.pdf"
-          className="hidden"
-        ></a>
+        <a ref={downloadRef} href="/dummy.pdf" download className="hidden"></a>
       </form>
     </div>
   );
