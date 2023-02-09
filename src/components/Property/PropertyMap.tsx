@@ -23,7 +23,7 @@ export default function PropertyMap({
   state,
   setState,
 }: Props) {
-  const currentMarker = useRef<any>(null);
+  const currentMarker = useRef<null | HTMLElement>(null);
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: import.meta.env.PUBLIC_GOOGLE_MAPS_KEY,
@@ -34,9 +34,13 @@ export default function PropertyMap({
     e: google.maps.MapMouseEvent,
     marker: google.maps.LatLng | google.maps.LatLngLiteral | undefined
   ) => {
-    currentMarker.current = e.domEvent.currentTarget;
+    console.log(e);
+    const target = e.domEvent.target as HTMLElement;
+    currentMarker.current = target.parentElement;
     setState ? setState(marker) : undefined;
   };
+
+  console.log(currentMarker.current);
 
   return (
     <div className="bg-gray-200 lg:relative">

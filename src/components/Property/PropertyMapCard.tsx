@@ -33,7 +33,7 @@ export default function PropertyMapCard({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: { duration: 0.4 } }}
       exit={{ opacity: 0, transition: { duration: 0.2 } }}
-      className="fixed left-0 top-0 z-[80] m-6 h-screen max-h-[calc(100%-3rem)] w-[calc(100%-3rem)] overflow-y-scroll rounded-big bg-white p-6 lg:absolute lg:z-10 lg:h-min lg:w-full lg:max-w-md"
+      className="fixed left-0 top-0 z-[80] h-screen w-screen overflow-y-scroll bg-white p-6 lg:absolute lg:z-10 lg:m-6 lg:h-min lg:w-full lg:max-w-md lg:rounded-big"
     >
       <div className="flex justify-between pb-8">
         <button className="flex gap-2" onClick={() => setState(undefined)}>
