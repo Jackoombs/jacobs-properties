@@ -98,7 +98,7 @@ export default function PropertyMap({
       >
         {currentMarker.current && state !== undefined && (
           <div
-            className="absolute z-10 bg-primary-100"
+            className="absolute z-10 hidden bg-primary-100 lg:block"
             style={{
               WebkitMask: `url(${LocationDot}) no-repeat center`,
               mask: `url(${LocationDot}) no-repeat center`,
