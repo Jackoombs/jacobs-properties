@@ -26,8 +26,6 @@ export interface SearchCriteria {
 }
 
 export default function PropertySearch({ properties, center, params }: Props) {
-  const [screenWidth, setScreenWidth] = useState<number | undefined>(undefined);
-
   const [searchCriteria, setSearchCriteria] = useState<SearchCriteria>({
     buyOrRent: params?.buyOrRent || "buy",
     location: params?.location,
@@ -37,13 +35,6 @@ export default function PropertySearch({ properties, center, params }: Props) {
     propertyType: undefined,
     excludeSold: false,
   });
-
-  useEffect(() => {
-    setScreenWidth(window.innerWidth);
-    const handleResize = () => setScreenWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     const buyOrRent: string | null = window.sessionStorage.getItem("buyOrRent");
@@ -115,10 +106,6 @@ export default function PropertySearch({ properties, center, params }: Props) {
 
   const filteredProperties = filterProperties(properties, searchCriteria);
 
-  if (!screenWidth) {
-    return;
-  }
-
   return (
     <>
       <section className="justify-center py-10 md:flex md:py-28">
@@ -127,22 +114,20 @@ export default function PropertySearch({ properties, center, params }: Props) {
           <PropertySearchForm {...{ setSearchCriteria }} />
         </div>
       </section>
-      {screenWidth < 1024 && (
+      <section className="overflow-hidden py-10 md:pb-28 lg:hidden">
         <PropertyViewSection
           properties={filteredProperties}
           isMobile={true}
           {...{ center }}
         />
-      )}
-      {screenWidth >= 1024 && (
-        <section className="overflow-hidden py-10 md:pb-28">
-          <PropertyViewSection
-            properties={filteredProperties}
-            isMobile={false}
-            {...{ center }}
-          />
-        </section>
-      )}
+      </section>
+      <section className="hidden overflow-hidden py-10 md:pb-28 lg:block">
+        <PropertyViewSection
+          properties={filteredProperties}
+          isMobile={false}
+          {...{ center }}
+        />
+      </section>
     </>
   );
 }
