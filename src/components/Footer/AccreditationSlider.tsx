@@ -66,36 +66,36 @@ export default function AccrediationSlider() {
           },
         }}
       >
-        <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] px-16 py-10 lg:bg-transparent">
+        <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] py-10 lg:bg-transparent">
           <img
             loading="lazy"
             src={Ombudsman.src}
             alt="Ombudsman logo"
-            className="aspect-[2.88/1]"
+            className="aspect-[2.88/1] w-60"
           />
         </SwiperSlide>
-        <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] px-16 py-10 lg:bg-transparent">
+        <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] py-10 lg:bg-transparent">
           <img
             loading="lazy"
             src={PropertyMark.src}
             alt="PropertyMark logo"
-            className="aspect-[2.74/1]"
+            className="aspect-[2.74/1] w-60"
           />
         </SwiperSlide>
-        <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] px-16 py-10 lg:bg-transparent">
+        <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] py-10 lg:bg-transparent">
           <img
             loading="lazy"
             src={Rightmove.src}
             alt="rightmove logo"
-            className="aspect-[4.91/1]"
+            className="aspect-[4.91/1] w-60"
           />
         </SwiperSlide>
-        <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] px-16 py-10 lg:bg-transparent">
+        <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] py-10 lg:bg-transparent">
           <img
             loading="lazy"
             src={Zoopla.src}
             alt="zoopla logo"
-            className="aspect-[5.55/1]"
+            className="aspect-[5.55/1] w-60"
           />
         </SwiperSlide>
       </Swiper>
