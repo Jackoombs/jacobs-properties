@@ -71,7 +71,7 @@ export default function AccrediationSlider() {
             loading="lazy"
             src={Ombudsman.src}
             alt="Ombudsman logo"
-            className="aspect-[2.88/1] w-60"
+            className="aspect-[2.88/1] w-40 sm:w-60"
           />
         </SwiperSlide>
         <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] py-10 lg:bg-transparent">
@@ -79,7 +79,7 @@ export default function AccrediationSlider() {
             loading="lazy"
             src={PropertyMark.src}
             alt="PropertyMark logo"
-            className="aspect-[2.74/1] w-60"
+            className="aspect-[2.74/1] w-40 sm:w-60"
           />
         </SwiperSlide>
         <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] py-10 lg:bg-transparent">
@@ -87,7 +87,7 @@ export default function AccrediationSlider() {
             loading="lazy"
             src={Rightmove.src}
             alt="rightmove logo"
-            className="aspect-[4.91/1] w-60"
+            className="aspect-[4.91/1] w-40 sm:w-60"
           />
         </SwiperSlide>
         <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] py-10 lg:bg-transparent">
@@ -95,7 +95,7 @@ export default function AccrediationSlider() {
             loading="lazy"
             src={Zoopla.src}
             alt="zoopla logo"
-            className="aspect-[5.55/1] w-60"
+            className="aspect-[5.55/1] w-40 sm:w-60"
           />
         </SwiperSlide>
       </Swiper>

@@ -4,7 +4,7 @@ import { HiArrowSmLeft } from "react-icons/hi/index.js";
 import { RiCloseCircleLine } from "react-icons/ri/index.js";
 import Copy from "../General/Text/Copy";
 import Link from "../General/Link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface Props {
   property: Property;
