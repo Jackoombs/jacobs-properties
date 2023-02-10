@@ -40,3 +40,13 @@ export const getNumberFromPriceString = (
     return +unformattedNumber;
   }
 };
+
+export const toArray = <T,>(item: T | T[] | undefined): T[] | undefined => {
+  if (!item) {
+    return undefined;
+  } else if (!Array.isArray(item)) {
+    return [item];
+  } else {
+    return item;
+  }
+};
