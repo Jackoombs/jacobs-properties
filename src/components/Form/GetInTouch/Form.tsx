@@ -33,6 +33,7 @@ export default function Form({ setIsOpen }: Props) {
               "x-api-key": import.meta.env.PUBLIC_INTEGRATEDMARKETING_KEY,
             },
             body: JSON.stringify(data),
+            mode: "cors",
           }
         );
         console.log(res);
