@@ -25,9 +25,7 @@ import ValuationSection from "../components/Layout/ValuationSection.astro";
 const filterProperties = (properties: Property[]) => {
   return properties
     .filter(
-      (property) =>
-        property.InternalSaleStatus !== "For Sale - Available" &&
-        property.InternalLettingStatus !== "To Let - Available"
+      (property) => property.InternalSaleStatus !== "For Sale - Available"
     )
     .sort(function (a: Property, b: Property) {
       return (
@@ -46,6 +44,7 @@ const lettingsRes = await fetch(
 );
 const lettingsData: Property[] = await lettingsRes.json();
 const lettingsProperties = filterProperties(lettingsData);
+console.log(lettingsData.length, lettingsProperties.length);
 ---
 
 <Layout
