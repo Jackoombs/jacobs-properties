@@ -50,7 +50,7 @@ export default function StampDutyCalc() {
     }
     if (price > 250000 && price < 925001) {
       return (
-        (price - 250000) * (isAdditional ? 0.08 : 0.5) +
+        (price - 250000) * (isAdditional ? 0.08 : 0.05) +
         (isAdditional ? 7500 : 0)
       );
     }
