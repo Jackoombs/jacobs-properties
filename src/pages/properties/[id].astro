@@ -13,6 +13,7 @@ import MortgageCalc from "../../components/Calculators/MortgageCalc";
 import PropertySlider from "../../components/Property/PropertySlider";
 import { toArray } from "../../utils";
 import MiscSection from "../../components/Layout/MiscSection.astro";
+import SharePropertyButton from "../../components/Property/ShareProperty";
 
 export async function getStaticPaths() {
   const res = await fetch("https://jacobs-server.onrender.com/properties");
@@ -146,7 +147,7 @@ console.log(Location);
               address={`${Address1}, ${Address2}`}
               size="lg">Book a viewing</BookAViewingButton
             >
-            <Link size="lg" link="/" type="secondary">Share property</Link>
+            <SharePropertyButton>Share Property</SharePropertyButton>
           </div>
         </div>
       </div>
