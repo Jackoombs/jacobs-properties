@@ -6,6 +6,7 @@ import FormStep2 from "./FormStep2";
 import FormStepWrapper from "../ReactHook/FormStepWrapper";
 import FormStepButtons from "../ReactHook/FormStepButtons";
 import clsx from "clsx";
+import axios from "axios";
 
 interface Props {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,16 +25,14 @@ export default function Form({ setIsOpen }: Props) {
     if (currentStep === steps - 1) {
       setCurrentStep((curr) => curr + 1);
       try {
-        const res = await fetch(
+        const res = await axios.post(
           "https://jacobsproperties.api.integratedinterest.com/form/getintouch",
+          data,
           {
-            method: "POST",
             headers: {
               "Content-Type": "application/json",
               "x-api-key": import.meta.env.PUBLIC_INTEGRATEDMARKETING_KEY,
             },
-            body: JSON.stringify(data),
-            mode: "cors",
           }
         );
         console.log(res);
