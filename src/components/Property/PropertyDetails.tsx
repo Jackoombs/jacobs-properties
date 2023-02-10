@@ -9,70 +9,98 @@ import PropertyMap from "./PropertyMap";
 import Link from "../General/Link";
 
 interface Props {
-  Description?: string;
+  details: {
+    Description?: string;
+    Floorplan?: Image[];
+    EPC?: Image[];
+    VirtualTour?: string;
+  };
   location: GoogleMapProps["center"];
-  Floorplan: Image | Image[];
-  EPC?: Image;
+  address: string;
 }
 
-export default function PropertyDetails({
-  Description,
-  location,
-  Floorplan,
-  EPC,
-}: Props) {
-  const [currentMenuItem, setCurrentMenuItem] = useState<
-    "Description" | "Floorplan" | "EPC" | "Gallery" | "Virtual Tour"
-  >("Description");
+const detailsArray = [
+  "Description",
+  "Floorplan",
+  "EPC",
+  "Gallery",
+  "Virtual Tour",
+] as const;
+
+export type Detail = typeof detailsArray[number];
+
+export default function PropertyDetails({ details, location, address }: Props) {
+  const navItems = Object.keys(details)
+    .filter(Boolean)
+    .map((key) => key.toString() as Detail)
+    .filter((key) => detailsArray.includes(key));
+
+  const [currentMenuItem, setCurrentMenuItem] = useState<Detail>(navItems[0]);
 
   return (
     <>
       <section className="bg-primary-200 pt-4 md:bg-white md:py-0">
         <div className="mx-auto max-w-container-lg">
-          <PropertyDetailMenu {...{ currentMenuItem, setCurrentMenuItem }} />
+          <PropertyDetailMenu
+            {...{ currentMenuItem, setCurrentMenuItem, navItems }}
+          />
         </div>
       </section>
 
       <section className="bg-primary-200 py-4">
         <div className="mx-auto max-w-container-lg">
-          <div className="grid gap-9 py-10 md:gap-12 lg:grid-cols-[5fr_4fr] xl:gap-44">
+          <div className="grid gap-9 py-10 md:gap-12 lg:grid-cols-[5fr_4fr] xl:gap-20">
             <div className="flex flex-col gap-9 md:gap-12 lg:max-w-3xl">
               {currentMenuItem === "Description" && (
                 <>
                   <SectionHeader>Full property description</SectionHeader>
-                  {Description && <Copy size="md">Description</Copy>}
+                  {details.Description && (
+                    <Copy size="md" className="whitespace-pre-line">
+                      {details.Description}
+                    </Copy>
+                  )}
                 </>
               )}
               {currentMenuItem === "Floorplan" && (
                 <>
                   <SectionHeader>Floorplan</SectionHeader>
-                  {Floorplan ? (
-                    <img
-                      className="max-w-2xl self-center rounded-big object-cover"
-                      src={Floorplan?.Filepath}
-                      alt=""
-                    />
-                  ) : (
-                    <Copy size="lg">The floorplan will be coming soon</Copy>
-                  )}
+                  {details.Floorplan &&
+                    details.Floorplan.map((image, index) => (
+                      <img
+                        key={index}
+                        className="w-full self-center rounded-big object-cover"
+                        src={image.Filepath}
+                        alt={image.Caption}
+                      />
+                    ))}
                 </>
               )}
               {currentMenuItem === "EPC" && (
                 <>
                   <SectionHeader>Energy performance certificate</SectionHeader>
-                  <img
-                    className="max-w-2xl self-center rounded-big object-cover"
-                    src={EPC?.Filepath}
-                    alt=""
-                  />
+                  {details.EPC &&
+                    details.EPC.map((image, index) => (
+                      <img
+                        key={index}
+                        className="w-full self-center rounded-big object-cover"
+                        src={image.Filepath}
+                        alt={image.Caption}
+                      />
+                    ))}
                 </>
               )}
             </div>
             <div>
               <SectionHeader className="pb-9 md:pb-12">Location</SectionHeader>
-              <PropertyMap location={location} />
+              <PropertyMap location={location} markers={[location]} />
               <div className="flex flex-col gap-5 py-7 md:flex-row">
-                <Link type="primary" link="/">
+                <Link
+                  type="primary"
+                  link={`https://www.google.com/maps/place/${address.replaceAll(
+                    " ",
+                    "+"
+                  )}`}
+                >
                   Get Directions
                 </Link>
                 <Link type="primary" link="/">

@@ -5,12 +5,14 @@ import Copy from "../../components/General/Text/Copy";
 import SectionHeader from "../../components/General/Text/SectionHeader";
 import PropertyDetails from "../../components/Property/PropertyDetails";
 import StandardLayout from "../../layouts/StandardLayout.astro";
-
+import BookAViewingButton from "../../components/Form/BookAViewing/Button";
 import type { Property } from "../../env";
 import type { GoogleMapProps } from "@react-google-maps/api";
 import StampDutyCalc from "../../components/Calculators/StampDutyCalc";
 import MortgageCalc from "../../components/Calculators/MortgageCalc";
 import PropertySlider from "../../components/Property/PropertySlider";
+import { toArray } from "../../utils";
+import MiscSection from "../../components/Layout/MiscSection.astro";
 
 export async function getStaticPaths() {
   const res = await fetch("https://jacobs-server.onrender.com/properties");
@@ -25,7 +27,7 @@ export async function getStaticPaths() {
   }));
 }
 
-const {
+let {
   ID,
   Description,
   Image,
@@ -41,13 +43,16 @@ const {
   InternalSaleStatus,
 }: Property = Astro.props.property;
 
+const EPCArray = toArray(EPC);
+const FloorplanArray = toArray(Floorplan);
+
 const res2 = await fetch(
   `https://maps.googleapis.com/maps/api/geocode/json?address=${Address1}%20${Address2}&key=${
     import.meta.env.PUBLIC_GOOGLE_MAPS_KEY
   }`
 );
 const data = await res2.json();
-const location: GoogleMapProps["center"] | undefined =
+const Location: GoogleMapProps["center"] | undefined =
   data.results[0]?.geometry?.location;
 let salesStatus = InternalLettingStatus ? "lettings" : "sales";
 
@@ -81,9 +86,10 @@ const similarPropertiesFilteredSorted = findSimilarllyPricedProperties(
   similarProperties,
   PriceString
 ).filter((property) => property.ID !== ID);
+console.log(Location);
 ---
 
-<StandardLayout title={Address1}>
+<StandardLayout title={`${Address1} | Jacobs Properties`} description="">
   <section class="py-10 md:pb-28">
     <div
       class="mx-auto flex w-full max-w-container-lg flex-col gap-4 xl:flex-row xl:justify-between xl:gap-16"
@@ -124,12 +130,22 @@ const similarPropertiesFilteredSorted = findSimilarllyPricedProperties(
             >
             <SectionHeader>{PriceString}</SectionHeader>
           </div>
-          <Copy className="hidden lg:block" size="lg"
-            >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore.</Copy
-          >
+          {
+            Description && (
+              <Copy
+                className="text-ellipsis whitespace-pre-line line-clamp-3"
+                size="lg"
+              >
+                {Description}
+              </Copy>
+            )
+          }
           <div class="flex flex-col gap-3 sm:flex-row">
-            <Link size="lg" link="/" type="primary">Book a viewing</Link>
+            <BookAViewingButton
+              price={PriceString}
+              address={`${Address1}, ${Address2}`}
+              size="lg">Book a viewing</BookAViewingButton
+            >
             <Link size="lg" link="/" type="secondary">Share property</Link>
           </div>
         </div>
@@ -138,27 +154,31 @@ const similarPropertiesFilteredSorted = findSimilarllyPricedProperties(
   </section>
 
   <PropertyDetails
-    {...{ Description, Floorplan, EPC, location }}
+    details={{
+      Description,
+      Floorplan: FloorplanArray,
+      EPC: EPCArray,
+    }}
+    location={Location}
+    address={`${Address1},${Address2}`}
     client:visible
   />
 
-  <section class="bg-primary-200 py-10 md:py-28">
-    <div class="mx-auto max-w-container-lg">
-      <SectionHeader padding="misc">Stamp duty calculator</SectionHeader>
-      <div class="flex w-full flex-col gap-7 lg:flex-row xl:gap-16">
-        <StampDutyCalc client:visible />
-        <MortgageCalc client:visible />
-      </div>
+  <MiscSection>
+    <SectionHeader padding="misc"
+      >Try one of our useful calculators…
+    </SectionHeader>
+    <div class="flex w-full flex-col gap-7 lg:flex-row xl:gap-16">
+      <StampDutyCalc client:visible />
+      <MortgageCalc client:visible />
     </div>
-  </section>
+  </MiscSection>
 
-  <section class="bg-primary-200 py-10 md:py-28">
-    <div class="mx-auto max-w-container-lg">
-      <PropertySlider
-        client:idle
-        header="Similar Properties"
-        properties={similarPropertiesFilteredSorted}
-      />
-    </div>
-  </section>
+  <MiscSection bgColor="bg-primary-200" overflowVisible={false}>
+    <PropertySlider
+      client:idle
+      header="Similar Properties"
+      properties={similarPropertiesFilteredSorted}
+    />
+  </MiscSection>
 </StandardLayout>

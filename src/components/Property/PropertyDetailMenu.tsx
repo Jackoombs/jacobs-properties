@@ -1,35 +1,28 @@
 import clsx from "clsx";
+import type { Detail } from "./PropertyDetails";
 
 interface Props {
-  currentMenuItem:
-    | "Description"
-    | "Floorplan"
-    | "EPC"
-    | "Gallery"
-    | "Virtual Tour";
-  setCurrentMenuItem: React.Dispatch<
-    React.SetStateAction<
-      "Description" | "Floorplan" | "EPC" | "Gallery" | "Virtual Tour"
-    >
-  >;
+  currentMenuItem: Detail;
+  setCurrentMenuItem: React.Dispatch<React.SetStateAction<Detail>>;
+  navItems: Detail[];
 }
 
 export default function PropertyDetailMobileMenu({
   currentMenuItem,
   setCurrentMenuItem,
+  navItems,
 }: Props) {
-  const navItems: Props["currentMenuItem"][] = [
-    "Description",
-    "Floorplan",
-    "EPC",
-    "Gallery",
-    "Virtual Tour",
-  ];
-
   return (
     <ul className="grid w-full grid-cols-2 gap-3 md:flex">
-      {navItems.map((item) => (
-        <li key={item} className={item === "Virtual Tour" ? "col-span-2" : ""}>
+      {navItems.map((item, index) => (
+        <li
+          key={item}
+          className={
+            index === navItems.length - 1 && navItems.length % 2 !== 0
+              ? "col-span-2"
+              : ""
+          }
+        >
           <button
             onClick={() => setCurrentMenuItem(item)}
             className={clsx(
