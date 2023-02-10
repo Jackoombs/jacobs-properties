@@ -29,6 +29,22 @@ export default function Form({ price, address, setIsOpen }: Props) {
   const onSubmit = async (data: any) => {
     if (currentStep === steps - 1) {
       setCurrentStep((curr) => curr + 1);
+      try {
+        const res = await fetch(
+          "https://jacobsproperties.api.integratedinterest.com/form/bookaviewing",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "x-api-key": import.meta.env.PUBLIC_INTEGRATEDMARKETING_KEY,
+            },
+            body: JSON.stringify(data),
+          }
+        );
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
