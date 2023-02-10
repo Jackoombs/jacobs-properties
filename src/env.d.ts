@@ -12,10 +12,11 @@ export interface Property {
   ReceptionRooms: number;
   InternalLettingStatus?: string;
   InternalSaleStatus?: string;
-  EPC?: Image;
+  EPC?: Image | Image[];
   Floorplan?: Image | Image[];
   TimeAmended: string;
   Location?: google.maps.LatLng | google.maps.LatLngLiteral | undefined;
+  VirtualTour?: string;
 }
 
 interface Image {
