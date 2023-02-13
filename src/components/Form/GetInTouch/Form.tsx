@@ -26,14 +26,8 @@ export default function Form({ setIsOpen }: Props) {
       setCurrentStep((curr) => curr + 1);
       try {
         const res = await axios.post(
-          "https://jacobsproperties.api.integratedinterest.com/form/getintouch",
-          data,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              "x-api-key": import.meta.env.PUBLIC_INTEGRATEDMARKETING_KEY,
-            },
-          }
+          "https://jacobs-server.onrender.com/integrated/getintouch",
+          data
         );
         console.log(res);
       } catch (err) {

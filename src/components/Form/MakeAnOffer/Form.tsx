@@ -7,6 +7,7 @@ import FormStep3 from "./FormStep3";
 import FormStepWrapper from "../ReactHook/FormStepWrapper";
 import FormStepButtons from "../ReactHook/FormStepButtons";
 import clsx from "clsx";
+import axios from "axios";
 
 interface Props {
   address: string;
@@ -29,16 +30,9 @@ export default function Form({ address, setIsOpen }: Props) {
     if (currentStep === steps - 1) {
       setCurrentStep((curr) => curr + 1);
       try {
-        const res = await fetch(
-          "https://jacobsproperties.api.integratedinterest.com/form/makeanoffer",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "x-api-key": import.meta.env.PUBLIC_INTEGRATEDMARKETING_KEY,
-            },
-            body: JSON.stringify(data),
-          }
+        const res = await axios.post(
+          "https://jacobs-server.onrender.com/integrated/makeanoffer",
+          data
         );
         console.log(res);
       } catch (err) {

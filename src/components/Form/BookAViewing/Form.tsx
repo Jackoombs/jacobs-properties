@@ -7,6 +7,7 @@ import FormStep3 from "./FormStep3";
 import FormStepWrapper from "../ReactHook/FormStepWrapper";
 import FormStepButtons from "../ReactHook/FormStepButtons";
 import clsx from "clsx";
+import axios from "axios";
 
 interface Props {
   price: string;
@@ -27,25 +28,20 @@ export default function Form({ price, address, setIsOpen }: Props) {
   const { handleSubmit, reset, watch } = methods;
 
   const onSubmit = async (data: any) => {
-    if (currentStep === steps - 1) {
-      setCurrentStep((curr) => curr + 1);
-      try {
-        const res = await fetch(
-          "https://jacobsproperties.api.integratedinterest.com/form/bookaviewing",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "x-api-key": import.meta.env.PUBLIC_INTEGRATEDMARKETING_KEY,
-            },
-            body: JSON.stringify(data),
-          }
-        );
-        console.log(res);
-      } catch (err) {
-        console.log(err);
+    const onSubmit = async (data: any) => {
+      if (currentStep === steps - 1) {
+        setCurrentStep((curr) => curr + 1);
+        try {
+          const res = await axios.post(
+            "https://jacobs-server.onrender.com/integrated/bookaviewing",
+            data
+          );
+          console.log(res);
+        } catch (err) {
+          console.log(err);
+        }
       }
-    }
+    };
   };
 
   useEffect(() => {
