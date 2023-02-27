@@ -1,9 +1,9 @@
-import SelectInput from "./ReactHook/SelectInput";
+import SelectInput from "../Form/ReactHook/SelectInput";
 import { motion, AnimatePresence } from "framer-motion";
 import { generatePriceOptions } from "../../utils";
 import clsx from "clsx";
 import { Controller, useFormContext } from "react-hook-form";
-import CheckboxInput from "./ReactHook/CheckboxInput";
+import CheckboxInput from "../Form/ReactHook/CheckboxInput";
 
 interface Props {
   className?: string;

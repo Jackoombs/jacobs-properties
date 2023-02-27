@@ -1,18 +1,13 @@
 import { useEffect, useState } from "react";
 import Display from "../General/Text/Display";
 import PropertySearchForm from "./PropertySearchForm";
-import type { Property } from "../../env";
-import { priceStringToPriceNumber } from "../../utils";
+import type { Property2 } from "../../env";
 import Fuse from "fuse.js";
 import PropertyViewSection from "../Property/PropertyViewSection";
 
 interface Props {
-  properties: Property[];
+  properties: Property2[];
   center: google.maps.LatLng | google.maps.LatLngLiteral | undefined;
-  params?: {
-    location: string;
-    buyOrRent: "buy" | "rent";
-  };
 }
 
 export interface SearchCriteria {
@@ -25,10 +20,10 @@ export interface SearchCriteria {
   excludeSold: boolean;
 }
 
-export default function PropertySearch({ properties, center, params }: Props) {
+export default function PropertySearch({ properties, center }: Props) {
   const [searchCriteria, setSearchCriteria] = useState<SearchCriteria>({
-    buyOrRent: params?.buyOrRent || "buy",
-    location: params?.location,
+    buyOrRent: "buy",
+    location: undefined,
     minBeds: undefined,
     minPrice: undefined,
     maxPrice: undefined,
@@ -47,45 +42,36 @@ export default function PropertySearch({ properties, center, params }: Props) {
   }, []);
 
   const filterProperties = (
-    properties: Property[],
+    properties: Property2[],
     searchCriteria: SearchCriteria
-  ): Property[] => {
-    let result: Property[] = properties
-      .filter((property) => {
+  ): Property2[] => {
+    let result: Property2[] = properties
+      .filter((p) => {
         if (
-          (searchCriteria.buyOrRent === "rent" &&
-            property.InternalLettingStatus) ||
-          (searchCriteria.buyOrRent === "buy" && property.InternalSaleStatus)
+          (searchCriteria.buyOrRent === "rent" && p.type === "letting") ||
+          (searchCriteria.buyOrRent === "buy" && p.type === "selling")
         ) {
           return true;
         }
       })
-      .filter((property) => {
+      .filter((p) => {
+        if (!searchCriteria.minBeds || p.bedrooms >= searchCriteria.minBeds) {
+          return true;
+        }
+      })
+      .filter((p) => {
         if (
-          !searchCriteria.minBeds ||
-          property.TotalBedrooms >= searchCriteria.minBeds
+          (!searchCriteria.minPrice || p.price >= searchCriteria.minPrice) &&
+          (!searchCriteria.maxPrice || p.price <= searchCriteria.maxPrice)
         ) {
           return true;
         }
       })
-      .filter((property) => {
-        const price = priceStringToPriceNumber(property.PriceString);
-        if (
-          (!searchCriteria.minPrice || price >= searchCriteria.minPrice) &&
-          (!searchCriteria.maxPrice || price <= searchCriteria.maxPrice)
-        ) {
-          return true;
-        }
-      })
-      .filter((property) => {
-        const status =
-          property.InternalLettingStatus || property.InternalSaleStatus;
+      .filter((p) => {
         if (!searchCriteria.excludeSold) return true;
         if (
           searchCriteria.excludeSold &&
-          (status === "For Sale - Available" ||
-            status === "To Let - Available" ||
-            status === "Tenancy Current - Available")
+          (p.status === "forSale" || p.status === "toLet")
         ) {
           return true;
         }
@@ -95,7 +81,7 @@ export default function PropertySearch({ properties, center, params }: Props) {
       const options = {
         includeScore: true,
         threshold: 0.4,
-        keys: ["Address1", "Address2"],
+        keys: ["address1", "address2"],
       };
       const fuse = new Fuse(result, options);
       const fuseResult = fuse.search(searchCriteria.location);

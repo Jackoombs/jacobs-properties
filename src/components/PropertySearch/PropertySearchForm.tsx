@@ -1,13 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { FaChevronDown } from "react-icons/fa/index.js";
 import { IoIosSearch } from "react-icons/io/index.js";
-import BuyRentToggle from "./ReactHook/BuyRentToggle";
+import BuyRentToggle from "../Form/ReactHook/BuyRentToggle";
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import PropertySearchMenu from "./PropertySearchMenu";
 import type { SearchCriteria } from "./PropertySearch";
 import { useForm, FormProvider, Controller } from "react-hook-form";
-import TextInput from "./ReactHook/TextInput";
+import TextInput from "../Form/ReactHook/TextInput";
 import { getNumberFromPriceString } from "../../utils";
 
 interface Props {
