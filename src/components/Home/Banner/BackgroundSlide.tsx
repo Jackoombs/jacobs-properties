@@ -10,7 +10,7 @@ export default function BackgroundSlide({ backgroundSrc, objectFit }: Props) {
     <div
       className={clsx("h-screen w-screen bg-cover")}
       style={{
-        backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("${backgroundSrc.src}")`,
+        backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25) ), url("${backgroundSrc.src}")`,
         backgroundPosition: objectFit,
       }}
     ></div>

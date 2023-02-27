@@ -28,25 +28,25 @@ export default function HowCanWeHelp() {
       title: "Buyers",
       bgSrc: Buyers,
       imageAlt: "",
-      link: "/",
+      link: "/buyers",
     },
     {
       title: "Sellers",
       bgSrc: Sellers,
       imageAlt: "",
-      link: "/",
+      link: "/sellers",
     },
     {
       title: "Landlords",
       bgSrc: Landlords,
       imageAlt: "",
-      link: "/",
+      link: "/landlords",
     },
     {
       title: "Tenants",
       bgSrc: Tenants,
       imageAlt: "",
-      link: "/",
+      link: "/tenants",
     },
   ];
 
@@ -89,7 +89,7 @@ export default function HowCanWeHelp() {
               <a
                 href={link}
                 style={{
-                  backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(${bgSrc.src})`,
+                  backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25) ), url(${bgSrc.src})`,
                 }}
                 className="block h-full w-full bg-cover bg-bottom duration-100 hover:scale-105"
               >
