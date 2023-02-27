@@ -3,24 +3,29 @@ import ImageSlider from "../../components/ImageCarousel/ImageSlider";
 import Link from "../../components/General/Link";
 import Copy from "../../components/General/Text/Copy";
 import SectionHeader from "../../components/General/Text/SectionHeader";
-import PropertyDetails from "../../components/Property/PropertyDetails";
+import PropertyDetails from "../../components/PropertyDetails/PropertyDetails";
 import StandardLayout from "../../layouts/StandardLayout.astro";
 import BookAViewingButton from "../../components/Form/BookAViewing/Button";
-import type { Property } from "../../env";
+import type { Property2 } from "../../env";
 import type { GoogleMapProps } from "@react-google-maps/api";
 import StampDutyCalc from "../../components/Calculators/StampDutyCalc";
 import MortgageCalc from "../../components/Calculators/MortgageCalc";
 import PropertySlider from "../../components/Property/PropertySlider";
-import { toArray } from "../../utils";
+import { getPropertyStatus, priceNumberToPriceString } from "../../utils";
 import MiscSection from "../../components/Layout/MiscSection.astro";
 import SharePropertyButton from "../../components/Property/ShareProperty";
+import PropertyListCard from "../../components/Property/PropertyListCard";
+
+const res = await fetch("https://jacobs-server.onrender.com/properties");
+const properties: Property2[] = await res.json();
+console.log(properties);
 
 export async function getStaticPaths() {
   const res = await fetch("https://jacobs-server.onrender.com/properties");
-  const propertyList = await res.json();
-  return propertyList.map((property: Property) => ({
+  const properties: Property2[] = await res.json();
+  return properties.map((property) => ({
     params: {
-      id: property.ID,
+      id: property.id,
     },
     props: {
       property,
@@ -29,78 +34,68 @@ export async function getStaticPaths() {
 }
 
 let {
-  ID,
-  Description,
-  Image,
-  Address1,
-  Address2,
-  PriceString,
-  TotalBedrooms,
-  ReceptionRooms,
-  Bathrooms,
-  Floorplan,
-  EPC,
-  InternalLettingStatus,
-  InternalSaleStatus,
-}: Property = Astro.props.property;
-
-const EPCArray = toArray(EPC);
-const FloorplanArray = toArray(Floorplan);
+  id,
+  type,
+  status,
+  description,
+  address1,
+  address2,
+  postcode,
+  price,
+  bedrooms,
+  bathrooms,
+  receptions,
+  images,
+  floorplan,
+  epc,
+  created,
+  virtualTour,
+  brochure,
+}: Property2 = Astro.props.property;
 
 const res2 = await fetch(
-  `https://maps.googleapis.com/maps/api/geocode/json?address=${Address1}%20${Address2}&key=${
+  `https://maps.googleapis.com/maps/api/geocode/json?address=${address1}%20${address2}&key=${
     import.meta.env.PUBLIC_GOOGLE_MAPS_KEY
   }`
 );
 const data = await res2.json();
-const Location: GoogleMapProps["center"] | undefined =
+const location: GoogleMapProps["center"] | undefined =
   data.results[0]?.geometry?.location;
-let salesStatus = InternalLettingStatus ? "lettings" : "sales";
 
-const priceStringToPriceNumber = (price: string): number => {
-  return +price.split(" ")[0].replace(/[^0-9.]/g, "");
-};
+const priceString = priceNumberToPriceString(price);
 
-const findSimilarllyPricedProperties = (
-  propertyList: Property[],
-  propertyPrice: string
-) => {
-  const value = priceStringToPriceNumber(propertyPrice);
-
+const findSimilarllyPricedProperties = (propertyList: Property2[]) => {
   propertyList.sort((a, b) => {
-    const priceA = priceStringToPriceNumber(a.PriceString);
-    const priceB = priceStringToPriceNumber(b.PriceString);
-    const differenceA = priceA > value ? priceA - value : value - priceA;
-    const differenceB = priceB > value ? priceB - value : value - priceB;
+    const priceA = price;
+    const priceB = price;
+    const differenceA = priceA > price ? priceA - price : price - priceA;
+    const differenceB = priceB > price ? priceB - price : price - priceB;
 
     return differenceA > differenceB ? 1 : -1;
   });
 
-  return propertyList;
+  return propertyList.splice(0, 10);
 };
 
-const res3 = await fetch(
-  `https://jacobs-server.onrender.com/properties/${salesStatus}`
-);
-const similarProperties: Property[] = await res3.json();
 const similarPropertiesFilteredSorted = findSimilarllyPricedProperties(
-  similarProperties,
-  PriceString
-).filter((property) => property.ID !== ID);
-console.log(Location);
+  properties.filter((p) => {
+    if (p.type === type && p.id !== id) {
+      return true;
+    } else {
+      return false;
+    }
+  })
+);
+
+console.log(location);
 ---
 
-<StandardLayout title={`${Address1} | Jacobs Properties`} description="">
+<StandardLayout title={`${address1} | Jacobs Properties`} description="">
   <section class="py-10 md:pb-28">
     <div
       class="mx-auto flex w-full max-w-container-lg flex-col gap-4 xl:flex-row xl:justify-between xl:gap-16"
     >
-      <ImageSlider
-        client:load
-        images={Image.map((image) => image.Filepath)}
-        description="hi"
-        ID={ID}
-      />
+      <ImageSlider client:load {...{images, id}} />
       <div class="grid flex-1 sm:max-w-[34rem] xl:grid-rows-[1fr_auto_1fr]">
         <a
           class="hidden w-max pb-6 text-[0.75rem] font-semibold uppercase leading-[1.1] tracking-[2.8px] text-primary-100 duration-100 hover:text-secondary-100 lg:text-[0.875rem] xl:block"
@@ -110,44 +105,44 @@ console.log(Location);
           <p
             class="mb-2 flex h-10 w-max items-center justify-center rounded-md bg-secondary-100 px-7 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 lg:h-14"
           >
-            For sale
+            {getPropertyStatus(status, type)}
           </p>
           <ul class="flex gap-7 text-primary-100">
             <li
               class="text-[0.875rem] font-semibold uppercase tracking-[1.4px]"
             >
-              {`${TotalBedrooms} Bed`}
+              {`${bedrooms} Bed`}
             </li>
             <div class="h-3 self-center border-l-2 border-secondary-100"></div>
             <li
               class="text-[0.875rem] font-semibold uppercase tracking-[1.4px]"
             >
-              {`${Bathrooms} Bath`}
+              {`${bathrooms} Bath`}
             </li>
           </ul>
           <div class="pb-4 lg:pb-0">
             <SectionHeader className={"lg:pb-2"}
-              >{`${Address1}, ${Address2}`}</SectionHeader
+              >{`${address1}, ${address2}`}</SectionHeader
             >
-            <SectionHeader>{PriceString}</SectionHeader>
+            <SectionHeader>{priceString}</SectionHeader>
           </div>
           {
-            Description && (
+            description && (
               <Copy
-                className="text-ellipsis whitespace-pre-line line-clamp-3"
+                className="line-clamp-3 text-ellipsis whitespace-pre-line"
                 size="lg"
               >
-                {Description}
+                {description}
               </Copy>
             )
           }
           <div class="flex flex-col gap-3 sm:flex-row">
             <BookAViewingButton
-              price={PriceString}
-              address={`${Address1}, ${Address2}`}
+              price={priceString}
+              address={`${address1}, ${address2}`}
               size="lg">Book a viewing</BookAViewingButton
             >
-            <SharePropertyButton>Share Property</SharePropertyButton>
+            <!-- <SharePropertyButton>Share Property</SharePropertyButton> -->
           </div>
         </div>
       </div>
@@ -156,12 +151,14 @@ console.log(Location);
 
   <PropertyDetails
     details={{
-      Description,
-      Floorplan: FloorplanArray,
-      EPC: EPCArray,
+      description,
+      floorplan,
+      epc,
+      virtualTour,
+      images,
     }}
-    location={Location}
-    address={`${Address1},${Address2}`}
+    location={location}
+    address={`${address1},${address2}`}
     client:visible
   />
 

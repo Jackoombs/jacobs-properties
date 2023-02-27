@@ -17,34 +17,16 @@ import BrochureForm from "../components/Form/BrochureForm";
 import Reviews from "../components/Reviews/Reviews";
 import FAQs from "../components/FAQs/FAQs";
 import Display from "../components/General/Text/Display";
-import type { Property } from "../env";
+import type { Property2 } from "../env";
 import MiscSection from "../components/Layout/MiscSection.astro";
 import HeroSection from "../components/Layout/HeroSection.astro";
-import ValuationSection from "../components/Layout/ValuationSection.astro";
 
-const filterProperties = (properties: Property[]) => {
-  return properties
-    .filter(
-      (property) => property.InternalSaleStatus !== "For Sale - Available"
-    )
-    .sort(function (a: Property, b: Property) {
-      return (
-        (new Date(b.TimeAmended) as any) - (new Date(a.TimeAmended) as any)
-      );
-    });
-};
-const salesRes = await fetch(
-  "https://jacobs-server.onrender.com/properties/sales"
-);
-const salesData: Property[] = await salesRes.json();
-const salesProperties = filterProperties(salesData);
+const res = await fetch("https://jacobs-server.onrender.com/properties");
+const properties: Property2[] = await res.json();
+const salesProperties = properties.filter((p) => p.type === "selling");
+const lettingsProperties = properties.filter((p) => p.type === "letting");
 
-const lettingsRes = await fetch(
-  "https://jacobs-server.onrender.com/properties/lettings"
-);
-const lettingsData: Property[] = await lettingsRes.json();
-const lettingsProperties = filterProperties(lettingsData);
-console.log(lettingsData.length, lettingsProperties.length);
+console.log(properties.length, salesProperties.length, lettingsProperties);
 ---
 
 <Layout

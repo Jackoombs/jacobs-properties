@@ -1,26 +1,24 @@
 ---
 import StandardLayout from "../layouts/StandardLayout.astro";
-import PropertySearch from "../components/Form/PropertySearch";
-import type { Property } from "../env";
+import PropertySearch from "../components/PropertySearch/PropertySearch";
+import type { Property2 } from "../env";
 import type { GoogleMapProps } from "@react-google-maps/api";
 
 const res = await fetch("https://jacobs-server.onrender.com/properties");
-const properties: Property[] = await res.json();
-console.log(properties.length);
+const properties: Property2[] = await res.json();
 
-const propertiesWithLocation: Property[] = [];
+const propertiesWithLocation: Property2[] = [];
 for (const property of properties) {
   try {
     const res2 = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${
-        property.Address1
-      }%20${property.Address2}&key=${import.meta.env.PUBLIC_GOOGLE_MAPS_KEY}`
+        property.address1
+      }%20${property.address2}&key=${import.meta.env.PUBLIC_GOOGLE_MAPS_KEY}`
     );
     const data = await res2.json();
     const location: GoogleMapProps["center"] | undefined =
       data.results[0]?.geometry?.location;
-    propertiesWithLocation.push({ ...property, Location: location });
-    console.log(data);
+    propertiesWithLocation.push({ ...property, location: location });
   } catch (error) {
     console.error(error);
   }
@@ -37,7 +35,7 @@ const center: GoogleMapProps["center"] | undefined =
   data.results[0]?.geometry?.location;
 ---
 
-<StandardLayout title="Property Search">
+<StandardLayout title="Property Search" description="">
   <PropertySearch
     center={center}
     properties={propertiesWithLocation}

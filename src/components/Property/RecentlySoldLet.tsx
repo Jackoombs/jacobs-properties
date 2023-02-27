@@ -6,11 +6,11 @@ import PropertyCard from "./PropertyCard";
 import SoldLetToggle from "./SoldLetToggle";
 
 import type { Swiper as SwiperType } from "swiper/types";
-import type { Property } from "../../env";
+import type { Property2 } from "../../env";
 
 interface Props {
-  salesProperties: Property[];
-  lettingsProperties: Property[];
+  salesProperties: Property2[];
+  lettingsProperties: Property2[];
 }
 
 export default function RecentlySoldLet({
@@ -54,30 +54,11 @@ export default function RecentlySoldLet({
         </h3>
         <SwiperNavBtns isStartOrEnd={isStartOrEnd} />
       </div>
-      {properties.map(
-        (
-          {
-            Address1,
-            Address2,
-            ID,
-            PriceString,
-            InternalSaleStatus,
-            InternalLettingStatus,
-          }: Property,
-          index
-        ) => (
-          <SwiperSlide key={index}>
-            <PropertyCard
-              status={
-                InternalLettingStatus
-                  ? InternalLettingStatus
-                  : InternalSaleStatus
-              }
-              {...{ Address1, Address2, ID, PriceString }}
-            />
-          </SwiperSlide>
-        )
-      )}
+      {properties.map((property) => (
+        <SwiperSlide key={property.id}>
+          <PropertyCard {...{ property }} />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 }

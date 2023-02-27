@@ -5,13 +5,12 @@ import PropertyListView from "./PropertyListView";
 import PropertyMap from "./PropertyMap";
 import PropertyMapCard from "./PropertyMapCard";
 import { useState } from "react";
-import type { Property } from "../../env";
-import { getNumberFromPriceString } from "../../utils";
+import type { Property2 } from "../../env";
 import SortInput from "../Form/SortInput";
 
 interface Props {
   center: google.maps.LatLng | google.maps.LatLngLiteral | undefined;
-  properties: Property[];
+  properties: Property2[];
   isMobile: boolean;
 }
 
@@ -35,22 +34,20 @@ export default function PropertyViewSection({
   >("Relevant");
 
   const currentMapProperty = properties.find(
-    (property) => property.Location === currMapCardLocation
+    (p) => p.location === currMapCardLocation
   );
 
   const sortedData = [...properties].sort((a, b): any => {
-    const numberA = getNumberFromPriceString(a.PriceString);
-    const numberB = getNumberFromPriceString(b.PriceString);
-    if (!numberA || !numberB) return;
+    if (!a.price || !b.price) return;
     if (sortBy === "Price (Low-high)") {
-      return numberA - numberB;
+      return a.price - b.price;
     } else if (sortBy === "Address (A-Z)") {
-      return a.Address1.localeCompare(b.Address1);
+      return a.address1.localeCompare(b.address1);
     } else if (sortBy === "Address (Z-A)") {
-      return b.Address1.localeCompare(a.Address1);
+      return b.address1.localeCompare(a.address1);
     } else if (sortBy === "Price (High-low)") {
-      return numberB - numberA;
-    } else return properties;
+      return b.price - a.price;
+    }
   });
 
   return (
@@ -84,7 +81,7 @@ export default function PropertyViewSection({
         <div className="mx-auto max-w-container-lg">
           <PropertyMap
             zoom={12}
-            markers={sortedData.map((property) => property.Location)}
+            markers={sortedData.map((p) => p.location)}
             location={center}
             state={currMapCardLocation}
             setState={setCurrMapCardLocation}

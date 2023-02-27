@@ -6,11 +6,11 @@ import PropertyCard from "./PropertyCard";
 import SectionHeader from "../General/Text/SectionHeader";
 
 import type { Swiper as SwiperType } from "swiper/types";
-import type { Property } from "../../env";
+import type { Property2 } from "../../env";
 
 interface Props {
   header: string;
-  properties: Property[];
+  properties: Property2[];
 }
 
 export default function PropertySlider({ header, properties }: Props) {
@@ -46,30 +46,11 @@ export default function PropertySlider({ header, properties }: Props) {
           <SectionHeader>{header}</SectionHeader>
           <SwiperNavBtns isStartOrEnd={isStartOrEnd} />
         </div>
-        {properties.map(
-          (
-            {
-              Address1,
-              Address2,
-              ID,
-              PriceString,
-              InternalLettingStatus,
-              InternalSaleStatus,
-            }: Property,
-            index
-          ) => (
-            <SwiperSlide key={index}>
-              <PropertyCard
-                status={
-                  InternalLettingStatus
-                    ? InternalLettingStatus
-                    : InternalSaleStatus
-                }
-                {...{ Address1, Address2, ID, PriceString }}
-              />
-            </SwiperSlide>
-          )
-        )}
+        {properties.map((property) => (
+          <SwiperSlide key={property.id}>
+            <PropertyCard {...{ property }} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );

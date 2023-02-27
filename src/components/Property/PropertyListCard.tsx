@@ -1,99 +1,66 @@
-import type { Image } from "../../env";
+import type { Image, Property2 } from "../../env";
 import ImageSlider from "../ImageCarousel/ImageSlider";
 import SectionHeader from "../General/Text/SectionHeader";
 import Copy from "../General/Text/Copy";
 import Link from "../General/Link";
+import { priceNumberToPriceString, getPropertyStatus } from "../../utils";
 
 interface Props {
-  ID: string;
-  Address1: string;
-  Address2: string;
-  Description?: string;
-  PriceString: string;
-  TotalBedrooms: number;
-  Bathrooms: number;
-  status: string | undefined;
-  Image: Image[];
+  property: Property2;
 }
 
-export default function PropertyListCard({
-  ID,
-  Description,
-  Address1,
-  Address2,
-  PriceString,
-  status,
-  Image,
-  TotalBedrooms,
-  Bathrooms,
-}: Props) {
-  const statusString = () => {
-    if (
-      status === "Under offer - Available" ||
-      status === "Sold STC - Available" ||
-      status === "Sold STC - Unavailable"
-    ) {
-      return "SSTC";
-    } else if (status === "Exchanged" || status === "Completed") {
-      return "Sold";
-    } else if (status === "For Sale - Available") {
-      return "For Sale";
-    }
+export default function PropertyListCard({ property }: Props) {
+  const {
+    id,
+    type,
+    status,
+    description,
+    address1,
+    address2,
+    bedrooms,
+    bathrooms,
+    receptions,
+    images,
+    price,
+  } = property;
 
-    if (
-      status === "To Let - Available" ||
-      status === "Tenancy Current - Available"
-    ) {
-      return "To Let";
-    } else if (
-      status === "Tenancy Current - Unavailable" ||
-      status === "Under Offer - Available" ||
-      status === "Arranging Tenancy - Available" ||
-      status === "Tenancy Finished"
-    ) {
-      return "Let";
-    }
+  const priceString = priceNumberToPriceString(price);
+  const propertyStatus = getPropertyStatus(status, type);
 
-    return "N/A";
-  };
   return (
     <div className="grid w-full grid-cols-2 items-center justify-between gap-6 xl:gap-16 2xl:grid-cols-[5fr_3fr]">
-      <ImageSlider
-        images={Image.map((image) => image.Filepath)}
-        description="hi"
-        ID={ID}
-      />
+      <ImageSlider images={images} {...{ id }} />
       <div className="order-2 flex flex-col gap-2 xl:gap-5">
         <p className="mb-2 flex h-10 w-max items-center justify-center rounded-md bg-secondary-100 px-7 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 lg:h-14">
-          {statusString()}
+          {propertyStatus}
         </p>
         <ul className="flex gap-7 text-primary-100">
           <li className="text-[0.875rem] font-semibold uppercase tracking-[1.4px]">
-            {`${TotalBedrooms} Bed`}
+            {`${bedrooms} Bed`}
           </li>
           <div className="h-3 self-center border-l-2 border-secondary-100"></div>
           <li className="text-[0.875rem] font-semibold uppercase tracking-[1.4px]">
-            {`${Bathrooms} Bath`}
+            {`${bathrooms} Bath`}
           </li>
         </ul>
         <div className="pb-4 lg:pb-0">
           <SectionHeader
             className={"lg:pb-2"}
-          >{`${Address1}, ${Address2}`}</SectionHeader>
+          >{`${address1}, ${address2}`}</SectionHeader>
           <span className="flex items-center gap-4">
-            <SectionHeader>{PriceString}</SectionHeader>
+            <SectionHeader>{priceString}</SectionHeader>
             <p className="text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100">
               Guide Price
             </p>
           </span>
         </div>
-        {Description && (
+        {description && (
           <Copy className="hidden text-ellipsis lg:line-clamp-2" size="lg">
-            {Description}
+            {description}
           </Copy>
         )}
         <div className="flex flex-col gap-3 sm:flex-row">
-          <Link size="lg" link={`properties/${ID}`} type="primary">
+          <Link size="lg" link={`properties/${id}`} type="primary">
             View Property
           </Link>
         </div>
