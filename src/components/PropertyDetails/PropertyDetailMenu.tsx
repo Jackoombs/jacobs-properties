@@ -1,24 +1,25 @@
 import clsx from "clsx";
-import type { Detail } from "./PropertyDetails";
+import type { DetailItem } from "./PropertyDetails";
 
 interface Props {
-  currentMenuItem: Detail;
-  setCurrentMenuItem: React.Dispatch<React.SetStateAction<Detail>>;
-  navItems: Detail[];
+  currentMenuItem: DetailItem;
+  setCurrentMenuItem: React.Dispatch<React.SetStateAction<DetailItem>>;
+  detailMenuItems: DetailItem[];
 }
 
 export default function PropertyDetailMobileMenu({
   currentMenuItem,
   setCurrentMenuItem,
-  navItems,
+  detailMenuItems,
 }: Props) {
   return (
     <ul className="grid w-full grid-cols-2 gap-3 md:flex">
-      {navItems.map((item, index) => (
+      {detailMenuItems.map((item, index) => (
         <li
           key={item}
           className={
-            index === navItems.length - 1 && navItems.length % 2 !== 0
+            index === detailMenuItems.length - 1 &&
+            detailMenuItems.length % 2 !== 0
               ? "col-span-2"
               : ""
           }

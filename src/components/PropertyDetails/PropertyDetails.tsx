@@ -3,46 +3,51 @@ import Copy from "../General/Text/Copy";
 import SectionHeader from "../General/Text/SectionHeader";
 import PropertyDetailMenu from "./PropertyDetailMenu";
 
-import type { Image } from "../../env";
+import type { Image2 } from "../../env";
 import type { GoogleMapProps } from "@react-google-maps/api";
-import PropertyMap from "./PropertyMap";
+import PropertyMap from "../Property/PropertyMap";
 import Link from "../General/Link";
 
 interface Props {
   details: {
-    Description?: string;
-    Floorplan?: Image[];
-    EPC?: Image[];
-    VirtualTour?: string;
+    description?: string;
+    floorplan: Image2[];
+    epc: Image2[];
+    images: Image2[];
+    virtualTour?: string;
   };
   location: GoogleMapProps["center"];
   address: string;
 }
 
-const detailsArray = [
-  "Description",
-  "Floorplan",
-  "EPC",
-  "Gallery",
-  "Virtual Tour",
-] as const;
-
-export type Detail = typeof detailsArray[number];
+export type DetailItem =
+  | "Description"
+  | "Floorplan"
+  | "EPC"
+  | "Gallery"
+  | "Virtual Tour";
 
 export default function PropertyDetails({ details, location, address }: Props) {
-  const navItems = Object.keys(details)
-    .filter(Boolean)
-    .map((key) => key.toString() as Detail)
-    .filter((key) => detailsArray.includes(key));
+  const detailMenuItems = [
+    details.description && "Description",
+    details.floorplan.length !== 0 && "Floorplan",
+    details.epc.length !== 0 && "EPC",
+    details.images.length !== 0 && "Gallery",
+    details.virtualTour && "Virtual Tour",
+  ].filter(Boolean) as DetailItem[];
 
-  const [currentMenuItem, setCurrentMenuItem] = useState<Detail>(navItems[0]);
+  console.log(detailMenuItems);
+
+  const [currentMenuItem, setCurrentMenuItem] = useState<DetailItem>(
+    detailMenuItems[0]
+  );
 
   return (
     <>
       <section className="bg-primary-200 pt-4 md:bg-white md:py-0">
         <div className="mx-auto max-w-container-lg">
           <PropertyDetailMenu
-            {...{ currentMenuItem, setCurrentMenuItem, navItems }}
+            {...{ currentMenuItem, setCurrentMenuItem, detailMenuItems }}
           />
         </div>
       </section>
@@ -54,9 +59,9 @@ export default function PropertyDetails({ details, location, address }: Props) {
               {currentMenuItem === "Description" && (
                 <>
                   <SectionHeader>Full property description</SectionHeader>
-                  {details.Description && (
+                  {details.description && (
                     <Copy size="md" className="whitespace-pre-line">
-                      {details.Description}
+                      {details.description}
                     </Copy>
                   )}
                 </>
@@ -64,13 +69,13 @@ export default function PropertyDetails({ details, location, address }: Props) {
               {currentMenuItem === "Floorplan" && (
                 <>
                   <SectionHeader>Floorplan</SectionHeader>
-                  {details.Floorplan &&
-                    details.Floorplan.map((image, index) => (
+                  {details.floorplan &&
+                    details.floorplan.map((image, index) => (
                       <img
                         key={index}
                         className="w-full self-center rounded-big object-cover"
-                        src={image.Filepath}
-                        alt={image.Caption}
+                        src={image.url}
+                        alt={image.caption}
                       />
                     ))}
                 </>
@@ -78,13 +83,13 @@ export default function PropertyDetails({ details, location, address }: Props) {
               {currentMenuItem === "EPC" && (
                 <>
                   <SectionHeader>Energy performance certificate</SectionHeader>
-                  {details.EPC &&
-                    details.EPC.map((image, index) => (
+                  {details.epc &&
+                    details.epc.map((image, index) => (
                       <img
                         key={index}
                         className="w-full self-center rounded-big object-cover"
-                        src={image.Filepath}
-                        alt={image.Caption}
+                        src={image.url}
+                        alt={image.caption}
                       />
                     ))}
                 </>
