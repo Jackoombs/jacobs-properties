@@ -21,10 +21,11 @@ import BrochureForm from "../components/Form/BrochureForm";
 import PropertySlider from "../components/Property/PropertySlider";
 import Reviews from "../components/Reviews/Reviews";
 import FAQs from "../components/FAQs/FAQs";
-import type { Property } from "../env";
+import type { Property2 } from "../env";
 
-const res = await fetch(`https://jacobs-server.onrender.com/properties/sales`);
-const data: Property[] = await res.json();
+const res = await fetch(`https://jacobs-server.onrender.com/properties`);
+const properties: Property2[] = await res.json();
+const salesProperties = properties.filter((p) => p.type === "selling");
 const client = "sellers";
 ---
 
@@ -160,7 +161,7 @@ const client = "sellers";
       <PropertySlider
         client:idle
         header="Your property could be one of them"
-        properties={data}
+        properties={salesProperties}
       />
     </MiscSection>
 

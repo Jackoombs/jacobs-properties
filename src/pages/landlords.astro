@@ -20,13 +20,13 @@ import BrochureForm from "../components/Form/BrochureForm";
 import PropertySlider from "../components/Property/PropertySlider";
 import Reviews from "../components/Reviews/Reviews";
 import FAQs from "../components/FAQs/FAQs";
-import type { Property } from "../env";
+import type { Property2 } from "../env";
 import ValuationSection from "../components/Layout/ValuationSection.astro";
 
-const res = await fetch(
-  `https://jacobs-server.onrender.com/properties/lettings`
-);
-const data: Property[] = await res.json();
+const res = await fetch(`https://jacobs-server.onrender.com/properties`);
+const properties: Property2[] = await res.json();
+const lettingsProperties = properties.filter((p) => p.type === "letting");
+
 const client = "landlords";
 ---
 
@@ -184,7 +184,7 @@ const client = "landlords";
       <PropertySlider
         client:idle
         header="Success! We’ve just let these properties!"
-        properties={data}
+        properties={lettingsProperties}
       />
     </MiscSection>
   </main>
