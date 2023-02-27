@@ -1,3 +1,5 @@
+import type { Property2 } from "./env";
+
 export const priceNumberToPriceString = (number: number) => {
   return new Intl.NumberFormat("en-GB", {
     style: "currency",
@@ -48,5 +50,48 @@ export const toArray = <T,>(item: T | T[] | undefined): T[] | undefined => {
     return [item];
   } else {
     return item;
+  }
+};
+
+export const getPropertyStatus = (
+  status: Property2["status"],
+  type: Property2["type"]
+) => {
+  if (
+    status === "sold" ||
+    status === "exchanged" ||
+    status === "completed" ||
+    status === "soldExternally"
+  ) {
+    return "sold";
+  } else if (status === "forSale") {
+    return "for sale";
+  } else if (status === "underOffer" && type === "selling") {
+    return "sstc";
+  } else if (status === "reserved") {
+    return "reserved";
+  } else if (status === "toLet") {
+    return "to let";
+  } else if (
+    (status === "underOffer" && type === "letting") ||
+    status === "arrangingTenancy"
+  ) {
+    return "let agreed";
+  } else if (status === "tenancyCurrent" || status === "tenancyFinished") {
+    return "let";
+  } else {
+    return "n/a";
+  }
+};
+
+export const getImageFileNameFromUrl = (url: string, withExt: boolean) => {
+  const regex: RegExp = /([^/]+$)/;
+
+  const match: RegExpMatchArray | null = url.match(regex);
+
+  if (match) {
+    const fileName: string = match[1];
+    const fileNameWithoutExtension: string = fileName.split(".")[0];
+    return withExt ? fileName : fileNameWithoutExtension;
   }
 };
