@@ -37,7 +37,7 @@ export default function TeamGrid() {
   ];
 
   return (
-    <div className="grid grid-cols-4 gap-16">
+    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-16 xl:grid-cols-4">
       {teamTemplate.map(({ name, role, imagePath, linkedInLink }, index) => (
         <TeamCard key={index} {...{ name, role, imagePath, linkedInLink }} />
       ))}
