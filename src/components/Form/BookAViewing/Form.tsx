@@ -23,6 +23,7 @@ export default function Form({ price, address, setIsOpen }: Props) {
     mode: "all",
     defaultValues: {
       dates: [{ date: "" }],
+      address,
     },
   });
   const { handleSubmit, reset, watch } = methods;
