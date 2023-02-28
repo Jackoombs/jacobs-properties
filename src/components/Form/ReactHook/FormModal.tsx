@@ -30,41 +30,33 @@ export default function FormModal({
   heading,
   copy,
 }: Props) {
-  const [body, setBody] = useState<null | HTMLElement>(null);
-
-  useEffect(() => {
-    setBody(document.body);
-  }, []);
-
   return (
-    <>
-      {body &&
-        createPortal(
-          <ScreenModal {...{ isOpen, setIsOpen }}>
-            <div className="flex w-full items-center bg-white py-10">
-              <div className="relative mx-auto flex h-full w-full max-w-container-lg items-center lg:max-w-[min(82%,37rem)]">
-                <div className="w-full">
-                  <div>
-                    <img
-                      className="absolute top-10 hidden h-auto w-[9rem] lg:inline lg:w-[12rem] xl:top-16"
-                      src={LogoBlue}
-                      alt="Jacobs Properties Logo"
-                    />
-                    <SectionLabel padding="hero-md">{label}</SectionLabel>
-                    <Display className={clsx("pb-6", heading.width)}>
-                      {heading.text}
-                    </Display>
-                    <Copy className={copy.width} size="md">
-                      {copy.text}
-                    </Copy>
-                  </div>
-                </div>
-              </div>
+    <ScreenModal
+      {...{ isOpen, setIsOpen }}
+      variant="primary-200"
+      className="lg:grid lg:grid-cols-2"
+    >
+      <div className="flex w-full items-center bg-white py-10">
+        <div className="relative mx-auto flex h-full w-full max-w-container-lg items-center lg:max-w-[min(82%,37rem)]">
+          <div className="w-full">
+            <div>
+              <img
+                className="absolute top-10 hidden h-auto w-[9rem] lg:inline lg:w-[12rem] xl:top-16"
+                src={LogoBlue}
+                alt="Jacobs Properties Logo"
+              />
+              <SectionLabel padding="hero-md">{label}</SectionLabel>
+              <Display className={clsx("pb-6", heading.width)}>
+                {heading.text}
+              </Display>
+              <Copy className={copy.width} size="md">
+                {copy.text}
+              </Copy>
             </div>
-            <>{children}</>
-          </ScreenModal>,
-          body
-        )}
-    </>
+          </div>
+        </div>
+      </div>
+      <>{children}</>
+    </ScreenModal>
   );
 }
