@@ -13,7 +13,7 @@ import MortgageCalc from "../../components/Calculators/MortgageCalc";
 import PropertySlider from "../../components/Property/PropertySlider";
 import { getPropertyStatus, priceNumberToPriceString } from "../../utils";
 import MiscSection from "../../components/Layout/MiscSection.astro";
-import SharePropertyButton from "../../components/Property/ShareProperty";
+import SharePropertyButton from "../../components/PropertyDetails/ShareProperty";
 import PropertyListCard from "../../components/Property/PropertyListCard";
 
 const res = await fetch("https://jacobs-server.onrender.com/properties");
@@ -129,7 +129,7 @@ console.log(location);
           {
             description && (
               <Copy
-                className="line-clamp-3 text-ellipsis whitespace-pre-line"
+                className="line-clamp-3 mb-3 text-ellipsis whitespace-pre-line"
                 size="lg"
               >
                 {description}
@@ -138,11 +138,15 @@ console.log(location);
           }
           <div class="flex flex-col gap-3 sm:flex-row">
             <BookAViewingButton
+              client:idle
               price={priceString}
               address={`${address1}, ${address2}`}
-              size="lg">Book a viewing</BookAViewingButton
+              size="lg"
+              >Book a viewing
+            </BookAViewingButton>
+            <SharePropertyButton size="lg" variant="secondary" client:idle
+              >Share Property</SharePropertyButton
             >
-            <!-- <SharePropertyButton>Share Property</SharePropertyButton> -->
           </div>
         </div>
       </div>
@@ -159,6 +163,8 @@ console.log(location);
     }}
     location={location}
     address={`${address1},${address2}`}
+    price={priceString}
+    id={id}
     client:visible
   />
 
