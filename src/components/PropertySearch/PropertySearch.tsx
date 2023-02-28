@@ -94,7 +94,7 @@ export default function PropertySearch({ properties, center }: Props) {
 
   return (
     <>
-      <section className="justify-center py-10 md:flex md:py-28">
+      <section className="justify-center py-10 md:flex md:pt-28">
         <div className="mx-auto flex w-full max-w-container-lg flex-col items-center gap-[34px]">
           <Display>Start your search</Display>
           <PropertySearchForm {...{ setSearchCriteria }} />

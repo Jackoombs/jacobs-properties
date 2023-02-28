@@ -29,7 +29,6 @@ interface SearchData {
 }
 
 export default function PropertySearchForm({ setSearchCriteria }: Props) {
-  const [mouseDown, setMouseDown] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const methods = useForm();
@@ -66,7 +65,7 @@ export default function PropertySearchForm({ setSearchCriteria }: Props) {
   return (
     <FormProvider {...methods}>
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onChange={handleSubmit(onSubmit)}
         className="flex w-full max-w-[68rem] flex-col items-center justify-center gap-4 lg:grid lg:grid-cols-2 lg:gap-2 xl:grid-cols-[auto,1fr,auto,auto]"
       >
         <Controller
@@ -90,13 +89,13 @@ export default function PropertySearchForm({ setSearchCriteria }: Props) {
           hideLabel
         />
 
-        <div className="flex w-full flex-col">
+        <div className="flex w-full flex-col md:col-span-full xl:col-span-1">
           <button
             type="button"
             onClick={() => setMenuOpen((state) => !state)}
             className="relative flex h-[3.5rem] w-full min-w-[15rem] items-center justify-center gap-2 rounded-big bg-primary-200 px-3 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 lg:h-[4.625rem]"
           >
-            Advanced Search{" "}
+            Advanced Search
             <motion.div
               animate={{
                 rotateX: menuOpen ? "-180deg" : "0deg",
@@ -118,24 +117,10 @@ export default function PropertySearchForm({ setSearchCriteria }: Props) {
             </AnimatePresence>
           </button>
         </div>
-
-        <button
-          onMouseDown={() => setMouseDown(true)}
-          onMouseUp={() => setMouseDown(false)}
-          type="submit"
-          className={clsx(
-            "order-1 flex h-[3.5rem] w-full min-w-[10rem] items-center justify-center gap-2 rounded-big bg-secondary-100 px-3 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-[5000] md:order-none lg:h-[4.625rem]",
-            mouseDown && "bg-primary-100 text-secondary-100",
-            !menuOpen && "-mt-4 md:-mt-0"
-          )}
-        >
-          Search <IoIosSearch className="text-xl" />
-        </button>
         <div className="col-span-full w-full">
           <PropertySearchMenu {...{ menuOpen }} />
         </div>
       </form>
-      <pre>{JSON.stringify(watch(), null, 2)}</pre>
     </FormProvider>
   );
 }
