@@ -51,7 +51,7 @@ export interface Property2 {
     | "letPrivately"
     | "provisional"
     | "withdrawn";
-  description?: string;
+  description: string;
   address1: string;
   address2: string;
   postcode: string;
