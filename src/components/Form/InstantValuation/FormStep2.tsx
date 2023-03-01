@@ -35,7 +35,6 @@ export default function FormStep2() {
           label="No of bedrooms"
           placeholder="-"
           options={["Studio", "1", "2", "3", "4", "5", "6", "6+"]}
-          isNumber
           colSpanFull
           required
         />
