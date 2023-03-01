@@ -30,19 +30,29 @@ export default function FormStep2() {
           placeholder=""
         />
         <TextInput name="postcode" label="Postcode" placeholder="" />
-        <TextInput
+        <SelectInput
           name="bedrooms"
           label="No of bedrooms"
-          placeholder=""
+          placeholder="-"
+          options={["Studio", "1", "2", "3", "4", "5", "6", "6+"]}
           isNumber
           colSpanFull
+          required
         />
         <SelectInput
           name="propertyType"
           label="Property type"
           placeholder="–"
-          options={["House", "Apartment", "Bungalow", "Commerical"]}
+          options={[
+            "Semi Detached House",
+            "Detached House",
+            "Terraced House",
+            "Semi Detached Bungalow",
+            "Detached Bungalow",
+            "Flat",
+          ]}
           colSpanFull
+          required
         />
       </InputsWrapper>
     </>
