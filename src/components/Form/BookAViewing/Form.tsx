@@ -29,20 +29,18 @@ export default function Form({ price, address, setIsOpen }: Props) {
   const { handleSubmit, reset, watch } = methods;
 
   const onSubmit = async (data: any) => {
-    const onSubmit = async (data: any) => {
-      if (currentStep === steps - 1) {
-        setCurrentStep((curr) => curr + 1);
-        try {
-          const res = await axios.post(
-            "https://jacobs-server.onrender.com/integrated/bookaviewing",
-            data
-          );
-          console.log(res);
-        } catch (err) {
-          console.log(err);
-        }
+    if (currentStep === steps - 1) {
+      setCurrentStep((curr) => curr + 1);
+      try {
+        const res = await axios.post(
+          "https://jacobs-server.onrender.com/integrated/bookaviewing",
+          data
+        );
+        console.log(res);
+      } catch (err) {
+        console.log(err);
       }
-    };
+    }
   };
 
   useEffect(() => {
