@@ -87,6 +87,7 @@ export default function Menu({ menuOpen, setMenuOpen }: Props) {
               <ul>
                 {quickLinks.map(({ text, link }, index, array) => (
                   <MenuItem
+                    key={index}
                     arrayLength={array.length}
                     size="lg"
                     {...{ index, link }}
@@ -102,6 +103,7 @@ export default function Menu({ menuOpen, setMenuOpen }: Props) {
               <ul>
                 {ourServices.map(({ text, link }, index, array) => (
                   <MenuItem
+                    key={index}
                     arrayLength={array.length}
                     size="sm"
                     {...{ index, link }}
@@ -117,6 +119,7 @@ export default function Menu({ menuOpen, setMenuOpen }: Props) {
               <ul>
                 {aboutUs.map(({ text, link }, index, array) => (
                   <MenuItem
+                    key={index}
                     arrayLength={array.length}
                     size="sm"
                     {...{ index, link }}
