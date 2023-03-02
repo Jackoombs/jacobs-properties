@@ -3,38 +3,61 @@ import { SlClose } from "react-icons/sl/index.js";
 import { BsFillCircleFill } from "react-icons/bs/index.js";
 import SectionHeader from "../../General/Text/SectionHeader";
 import Copy from "../../General/Text/Copy";
+import type { Valpal } from "../../../env";
+import Button from "../ExpertValuation/Button";
 
 interface Props {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  valpalData: Valpal | null;
 }
 
-export default function FormStep4({ setIsOpen }: Props) {
+export default function FormStep4({ setIsOpen, valpalData }: Props) {
+  const insertPoundSign = (text: string | undefined) => {
+    if (!text) {
+      return;
+    }
+    return text.replace("&pound;", "£");
+  };
+
   return (
     <div className="flex h-full w-full items-center justify-center">
-      <div className="flex flex-col items-center gap-3 text-center">
-        <div className="relative flex h-[5rem] items-center justify-center lg:h-[10rem]">
-          <TbCheck className="absolute z-10 text-[3rem] text-primary-100 lg:text-8xl" />
-          <BsFillCircleFill className="absolute text-[5rem] text-secondary-100 lg:text-[10rem]" />
+      <div className="mx-auto flex w-full max-w-[45rem] flex-col items-center gap-6">
+        <div className="flex w-full flex-col items-center justify-center gap-5 self-stretch rounded-big bg-secondary-100 py-20 px-3 text-primary-100">
+          <Copy size="lg">Estimated Range</Copy>
+          <SectionHeader>
+            {`${insertPoundSign(valpalData?.minvaluation)} — ${insertPoundSign(
+              valpalData?.maxvaluation
+            )}`}
+          </SectionHeader>
+          <Copy size="lg">{`Predicted value = ${insertPoundSign(
+            valpalData?.valuation
+          )}`}</Copy>
         </div>
-        <SectionHeader textColor="text-white">
-          Thanks for submitting your offer.
-        </SectionHeader>
-        <Copy textColor="text-white" size="lg">
-          We will be in touch with you shortly.
-        </Copy>
-        <button
-          type="button"
-          onClick={() => setIsOpen(false)}
-          className="mt-4 flex h-14 w-max items-center justify-center rounded-big bg-secondary-100 px-6 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 hover:brightness-110"
+        <div className="justify-cente flex w-full flex-col items-center gap-5 rounded-big bg-white py-11 px-3 text-primary-100">
+          <Copy size="lg" className="max-w-[28rem] text-center">
+            Ready to arrange for one of our experts to visit your home and
+            provide a free valuation?
+          </Copy>
+          <Button variant="primary" size="lg">
+            Expert Valuation
+          </Button>
+        </div>
+        <Copy
+          size="lg"
+          className="max-w-[28rem] text-center"
+          textColor="text-white"
         >
-          Close
-        </button>
+          <>
+            One of your experts will contact you shortly. Can’t wait? Call us on{" "}
+            <strong>01234 567 890</strong>
+          </>
+        </Copy>
       </div>
       <button
         onClick={() => setIsOpen(false)}
         className="absolute right-9 top-9 z-[102] hidden p-4 text-white lg:inline"
       >
-        <SlClose className="text-3xl " />
+        <SlClose className="text-3xl" />
       </button>
     </div>
   );
