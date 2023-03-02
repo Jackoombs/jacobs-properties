@@ -99,7 +99,7 @@ export const getImageFileNameFromUrl = (url: string, withExt: boolean) => {
 
 export interface Data {
   dates: {
-    date: Date;
+    date: Date | "";
     [otherFields: string]: any;
   }[];
   [otherFields: string]: any;
@@ -111,8 +111,12 @@ const formatDate = (date: Date) => {
 
 export const formatDates = (data: Data) => {
   const formatedData = data.dates.map((date) => {
-    const formattedDate = formatDate(date.date);
-    return { ...date, date: formattedDate };
+    if (!date.date) {
+      return date;
+    } else {
+      const formattedDate = formatDate(date.date);
+      return { ...date, date: formattedDate };
+    }
   });
   return { ...data, dates: formatedData };
 };
