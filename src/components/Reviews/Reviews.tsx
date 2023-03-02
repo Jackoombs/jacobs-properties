@@ -38,21 +38,42 @@ export default function Reviews({ color = "standard" }: Props) {
         onSlideChange={handleSlideChange}
       >
         <SwiperSlide className="flex justify-center">
-          <Review color={color} author="Example name">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor
-            lorem, eleifend pharetra nibh ut, blandit placerat massa.
+          <Review color={color} author="Leigh Elcock">
+            Jacobs Properties found us the right tenant very quickly. The whole
+            process was handled smoothly and communication between
+            Jacobs/tenant/ourselves was very good and in a timely manner. I
+            would recommend anyone who is thinking of renting out a property to
+            use their services.
           </Review>
         </SwiperSlide>
         <SwiperSlide className="flex justify-center">
-          <Review color={color} author="Example name">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor
-            lorem, eleifend pharetra nibh ut, blandit placerat massa.
+          <Review color={color} author="Andrew Brackenridge">
+            Ashlea was amazing in her support when going through the stresses of
+            moving home.. She provided information and guidance throughout the
+            process and I would highly recommend both her and Jacobs.
           </Review>
         </SwiperSlide>
         <SwiperSlide className="flex justify-center">
-          <Review color={color} author="Example name">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dolor
-            lorem, eleifend pharetra nibh ut, blandit placerat massa.
+          <Review color={color} author="Rachel Roberts">
+            I can't recommend Jacobs highly enough. They're very friendly and
+            professional. The sale was extremely quick thanks to the knowledge
+            and hard work put in by all involved. If you want to sell your
+            property, contact Jacobs.
+          </Review>
+        </SwiperSlide>
+        <SwiperSlide className="flex justify-center">
+          <Review color={color} author="Susanna Davies">
+            Ashlea was extremely helpful from start to finish of our house
+            buying experience. We would definitely recommend using Jacobs!
+          </Review>
+        </SwiperSlide>
+        <SwiperSlide className="flex justify-center">
+          <Review color={color} author="Sharon">
+            I would highly recommend Jacobs Properties for their professional
+            service. Communication was excellent and I was fully informed on the
+            progress of the sale. Particular recognition and thanks to Ashlea
+            for her diligence and outstanding work which facilitated the
+            completion of the sale.
           </Review>
         </SwiperSlide>
       </Swiper>
