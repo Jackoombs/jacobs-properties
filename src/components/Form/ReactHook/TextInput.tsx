@@ -12,6 +12,7 @@ export type Props = {
   type?: "text" | "email" | "tel";
   isNumber?: boolean;
   isBorderless?: boolean;
+  isReadonly?: boolean;
 };
 
 export default function TextInput({
@@ -24,6 +25,7 @@ export default function TextInput({
   type = "text",
   isNumber = false,
   isBorderless = false,
+  isReadonly = false,
 }: Props) {
   const {
     register,
@@ -87,6 +89,7 @@ export default function TextInput({
       </label>
       <div className="flex w-full flex-col gap-1">
         <input
+          readOnly={isReadonly}
           type={type}
           {...register(name, registerOptions)}
           inputMode={isNumber ? "numeric" : undefined}
