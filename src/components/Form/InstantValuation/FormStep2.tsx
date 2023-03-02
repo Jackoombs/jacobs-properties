@@ -16,20 +16,33 @@ export default function FormStep2() {
           name="houseNumber"
           label="Building/House number"
           placeholder=""
+          isReadonly
         />
-        <TextInput name="houseName" label="Building Name" placeholder="" />
+        <TextInput
+          name="houseName"
+          label="Building Name"
+          placeholder=""
+          isReadonly
+        />
         <TextInput
           name="apartment"
           label="Apartment / Building"
           placeholder=""
+          isReadonly
         />
-        <TextInput name="street" label="Street Name" placeholder="" />
+        <TextInput
+          name="street"
+          label="Street Name"
+          placeholder=""
+          isReadonly
+        />
         <TextInput
           name="dependantStreet"
           label="Dependent Street"
           placeholder=""
+          isReadonly
         />
-        <TextInput name="postcode" label="Postcode" placeholder="" />
+        <TextInput name="postcode" label="Postcode" placeholder="" isReadonly />
         <SelectInput
           name="bedrooms"
           label="No of bedrooms"
