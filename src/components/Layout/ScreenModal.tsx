@@ -27,9 +27,16 @@ export default function ScreenModal({
     setBody(document.body);
   }, []);
 
+  useEffect(() => {
+    if (isOpen && body) {
+      body.style.overflowY = "hidden";
+    } else if (!isOpen && body) {
+      body.style.overflowY = "visible";
+    }
+  }, [isOpen]);
+
   return (
     <>
-      {" "}
       {body &&
         createPortal(
           <AnimatePresence>
