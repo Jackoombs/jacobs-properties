@@ -89,11 +89,6 @@ export default function Form({ setIsOpen }: Props) {
                 />
               )}
             </div>
-            <pre
-              className={
-                currentStep === steps ? "text-white" : "text-primary-100"
-              }
-            ></pre>
           </FormWrapper>
         </FormProvider>
       </div>
