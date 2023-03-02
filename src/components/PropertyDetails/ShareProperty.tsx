@@ -66,6 +66,7 @@ export default function SharePropertyButton({
           </Copy>
           <div className="grid w-max grid-cols-2 gap-6 md:grid-cols-4">
             <a
+              target="_blank"
               href={`mailto:?body=${pageWindow?.location.href}`}
               className="flex h-28 w-28 flex-col items-center justify-center gap-2 rounded-big bg-[#1A3D66]"
             >
@@ -87,6 +88,7 @@ export default function SharePropertyButton({
               </p>
             </button>
             <a
+              target="_blank"
               href={`https://www.facebook.com/sharer/sharer.php?u=${pageWindow?.location.href}`}
               className="flex h-28 w-28 flex-col items-center justify-center gap-2 rounded-big bg-[#1A3D66]"
             >
@@ -94,6 +96,7 @@ export default function SharePropertyButton({
               <p className="text-base">Facebook</p>
             </a>
             <a
+              target="_blank"
               href={`https://wa.me/?text=${pageWindow?.location.href}`}
               className="flex h-28 w-28 flex-col items-center justify-center gap-2 rounded-big bg-[#1A3D66]"
             >
