@@ -1,9 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { FaChevronDown } from "react-icons/fa/index.js";
-import { IoIosSearch } from "react-icons/io/index.js";
 import BuyRentToggle from "../Form/ReactHook/BuyRentToggle";
 import React, { useEffect, useState } from "react";
-import clsx from "clsx";
 import PropertySearchMenu from "./PropertySearchMenu";
 import type { SearchCriteria } from "./PropertySearch";
 import { useForm, FormProvider, Controller } from "react-hook-form";
@@ -14,25 +12,11 @@ interface Props {
   setSearchCriteria: React.Dispatch<React.SetStateAction<SearchCriteria>>;
 }
 
-interface SearchData {
-  buyOrRent: "buy" | "rent";
-  location: string;
-  minBeds: number;
-  minPrice: string;
-  maxPrice: string;
-  propertyType:
-    | "Detached"
-    | "Semi-Detached"
-    | "Apartment"
-    | "Bungalow"
-    | "Commerical";
-}
-
 export default function PropertySearchForm({ setSearchCriteria }: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const methods = useForm();
-  const { watch, control, handleSubmit, setValue } = methods;
+  const { control, setValue, getValues } = methods;
 
   useEffect(() => {
     const buyOrRent: string | null = window.sessionStorage.getItem("buyOrRent");
@@ -41,7 +25,8 @@ export default function PropertySearchForm({ setSearchCriteria }: Props) {
     setValue("location", location ? location : "");
   }, []);
 
-  const onSubmit = (data: any) => {
+  const onChange = () => {
+    const values = getValues();
     const {
       buyOrRent,
       location,
@@ -50,9 +35,9 @@ export default function PropertySearchForm({ setSearchCriteria }: Props) {
       maxPrice,
       propertyType,
       excludeSold,
-    } = data;
+    } = values;
     setSearchCriteria({
-      buyOrRent,
+      buyOrRent: buyOrRent,
       location: location ? location : undefined,
       minBeds: minBeds ? minBeds : undefined,
       minPrice: minPrice ? getNumberFromPriceString(minPrice) : undefined,
@@ -65,7 +50,7 @@ export default function PropertySearchForm({ setSearchCriteria }: Props) {
   return (
     <FormProvider {...methods}>
       <form
-        onChange={handleSubmit(onSubmit)}
+        onChange={onChange}
         className="flex w-full max-w-[68rem] flex-col items-center justify-center gap-4 lg:grid lg:grid-cols-2 lg:gap-2 xl:grid-cols-[auto,1fr,auto,auto]"
       >
         <Controller
