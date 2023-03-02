@@ -1,4 +1,5 @@
 import type { Property2 } from "./env";
+import { format, parseISO } from "date-fns";
 
 export const priceNumberToPriceString = (number: number) => {
   return new Intl.NumberFormat("en-GB", {
@@ -94,4 +95,24 @@ export const getImageFileNameFromUrl = (url: string, withExt: boolean) => {
     const fileNameWithoutExtension: string = fileName.split(".")[0];
     return withExt ? fileName : fileNameWithoutExtension;
   }
+};
+
+export interface Data {
+  dates: {
+    date: Date;
+    [otherFields: string]: any;
+  }[];
+  [otherFields: string]: any;
+}
+
+const formatDate = (date: Date) => {
+  return format(date, "dd/MM/yyyy");
+};
+
+export const formatDates = (data: Data) => {
+  const formatedData = data.dates.map((date) => {
+    const formattedDate = formatDate(date.date);
+    return { ...date, date: formattedDate };
+  });
+  return { ...data, dates: formatedData };
 };
