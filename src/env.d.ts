@@ -109,3 +109,15 @@ export interface FAQType {
 }
 
 export type Client = "buyers" | "sellers" | "landlords" | "tenants";
+
+export type SubmitState = "default" | "loading" | "error";
+
+export interface Valpal {
+  minvaluation: string;
+  valuation: string;
+  maxvaluation: string;
+  propertytype: string;
+  tenure: string;
+  bedrooms: string;
+  yearofpropertyconstruction: string;
+}
