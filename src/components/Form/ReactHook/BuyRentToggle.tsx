@@ -22,19 +22,15 @@ export default function BuyRentToggle({
 }: Props) {
   const { setValue } = useFormContext();
 
+  console.log(value);
+
   return (
     <>
       <input
         className="hidden"
         type="checkbox"
         checked={value === "rent" ? true : false}
-        onChange={(e) => {
-          onChange(value === "buy" ? "rent" : "buy");
-          if (updateSelectOnChange) {
-            setValue("minPrice", "");
-            setValue("maxPrice", "");
-          }
-        }}
+        readOnly
         id={name}
       />
       <div
@@ -53,6 +49,13 @@ export default function BuyRentToggle({
           )}
         >
           <label
+            onClick={(e) => {
+              onChange(value === "buy" ? "rent" : "buy");
+              if (updateSelectOnChange) {
+                setValue("minPrice", "");
+                setValue("maxPrice", "");
+              }
+            }}
             htmlFor={name}
             className={clsx(
               "relative z-10 flex h-full w-1/2 flex-1 cursor-pointer items-center justify-center bg-transparent font-semibold uppercase tracking-[1.4px] duration-300",
@@ -67,6 +70,13 @@ export default function BuyRentToggle({
               "relative z-10 flex h-full w-1/2 flex-1 cursor-pointer items-center justify-center bg-transparent font-semibold uppercase tracking-[1.4px] duration-300",
               variant === "primary" && value === "rent" && "text-white"
             )}
+            onClick={(e) => {
+              onChange(value === "buy" ? "rent" : "buy");
+              if (updateSelectOnChange) {
+                setValue("minPrice", "");
+                setValue("maxPrice", "");
+              }
+            }}
           >
             Rent
           </label>
