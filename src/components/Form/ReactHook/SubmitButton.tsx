@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { BiLoaderAlt } from "react-icons/bi";
+import { BiLoaderAlt } from "react-icons/bi/index.js";
 import type { SubmitState } from "../../../env";
 import { useFormContext } from "react-hook-form";
 
