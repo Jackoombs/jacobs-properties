@@ -75,6 +75,10 @@ export default function FormStep1() {
                 /^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))\s?[0-9][A-Za-z]{2})$/,
               message: "Please enter a valid postcode",
             },
+            required: {
+              value: true,
+              message: "This is a required field",
+            },
           }}
           render={({ field: { onChange, value, name } }) => (
             <PostcodeInput
