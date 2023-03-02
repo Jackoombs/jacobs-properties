@@ -31,6 +31,7 @@ export default function PostcodeInput({
   const {
     getValues,
     formState: { errors },
+    setValue,
   } = useFormContext();
 
   const getAddress = async (postcode: string) => {
@@ -40,7 +41,9 @@ export default function PostcodeInput({
       }&expand=true `
     );
     const data = await res.json();
+    console.log(data);
     setAddressOptions(data.addresses);
+    setValue("postcode", data.postcode);
   };
 
   const regex =
