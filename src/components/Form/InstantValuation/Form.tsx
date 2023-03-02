@@ -9,6 +9,7 @@ import FormStepWrapper from "../ReactHook/FormStepWrapper";
 import FormStepButtons from "../ReactHook/FormStepButtons";
 import clsx from "clsx";
 import axios from "axios";
+import type { SubmitState, Valpal } from "../../../env";
 
 interface Props {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,6 +18,8 @@ interface Props {
 export default function Form({ setIsOpen }: Props) {
   const steps = 3;
   const [currentStep, setCurrentStep] = useState(0);
+  const [submitState, setSubmitState] = useState<SubmitState>("default");
+  const [valpalData, setValpalData] = useState<Valpal | null>(null);
 
   const methods = useForm({
     mode: "all",
@@ -28,14 +31,17 @@ export default function Form({ setIsOpen }: Props) {
 
   const onSubmit = async (data: any) => {
     if (currentStep === steps - 1) {
-      setCurrentStep((curr) => curr + 1);
+      setSubmitState("loading");
       try {
         const res = await axios.post(
           "https://jacobs-server.onrender.com/integrated/instantvaluation",
           data
         );
+        setValpalData(res.data.results);
+        setCurrentStep((curr) => curr + 1);
         console.log(res);
       } catch (err) {
+        setSubmitState("error");
         console.log(err);
       }
     }
@@ -58,7 +64,12 @@ export default function Form({ setIsOpen }: Props) {
             submitHandler={handleSubmit(onSubmit)}
             {...{ currentStep, setCurrentStep, steps }}
           >
-            <div className="flex w-full flex-col items-center gap-5 md:w-max">
+            <div
+              className={clsx(
+                "flex w-full flex-col items-center gap-5",
+                currentStep !== steps && "md:w-max"
+              )}
+            >
               <FormStepWrapper formStep={0} {...{ currentStep }}>
                 <FormStep1 />
               </FormStepWrapper>
@@ -69,13 +80,12 @@ export default function Form({ setIsOpen }: Props) {
                 <FormStep3 />
               </FormStepWrapper>
               <FormStepWrapper width="" formStep={3} {...{ currentStep }}>
-                <FormStep4 {...{ setIsOpen }} />
+                <FormStep4 {...{ setIsOpen, valpalData }} />
               </FormStepWrapper>
-
               {currentStep !== steps && (
                 <FormStepButtons
                   submitText="Instant valuation"
-                  {...{ currentStep, setCurrentStep, steps }}
+                  {...{ currentStep, setCurrentStep, steps, submitState }}
                 />
               )}
             </div>
@@ -83,9 +93,7 @@ export default function Form({ setIsOpen }: Props) {
               className={
                 currentStep === steps ? "text-white" : "text-primary-100"
               }
-            >
-              {JSON.stringify(watch(), null, 2)}
-            </pre>
+            ></pre>
           </FormWrapper>
         </FormProvider>
       </div>

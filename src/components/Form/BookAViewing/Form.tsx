@@ -8,6 +8,8 @@ import FormStepWrapper from "../ReactHook/FormStepWrapper";
 import FormStepButtons from "../ReactHook/FormStepButtons";
 import clsx from "clsx";
 import axios from "axios";
+import type { SubmitState } from "../../../env";
+import { formatDates } from "../../../utils";
 
 interface Props {
   price: string;
@@ -18,6 +20,7 @@ interface Props {
 export default function Form({ price, address, setIsOpen }: Props) {
   const steps = 2;
   const [currentStep, setCurrentStep] = useState(0);
+  const [submitState, setSubmitState] = useState<SubmitState>("default");
 
   const methods = useForm({
     mode: "all",
@@ -30,14 +33,17 @@ export default function Form({ price, address, setIsOpen }: Props) {
 
   const onSubmit = async (data: any) => {
     if (currentStep === steps - 1) {
-      setCurrentStep((curr) => curr + 1);
+      setSubmitState("loading");
       try {
+        const formattedData = formatDates(data);
         const res = await axios.post(
           "https://jacobs-server.onrender.com/integrated/bookaviewing",
-          data
+          formattedData
         );
+        setCurrentStep((curr) => curr + 1);
         console.log(res);
       } catch (err) {
+        setSubmitState("error");
         console.log(err);
       }
     }
@@ -77,7 +83,7 @@ export default function Form({ price, address, setIsOpen }: Props) {
               {currentStep !== steps && (
                 <FormStepButtons
                   submitText="Book a viewing"
-                  {...{ currentStep, setCurrentStep, steps }}
+                  {...{ currentStep, setCurrentStep, steps, submitState }}
                 />
               )}
             </div>

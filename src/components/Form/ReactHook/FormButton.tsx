@@ -2,11 +2,10 @@ import clsx from "clsx";
 import { useFormContext } from "react-hook-form";
 
 interface Props {
-  type: "prev" | "next" | "submit";
+  type: "prev" | "next";
   steps: number;
   currentStep: number;
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
-  submitText?: string;
 }
 
 export default function FormButton({
@@ -14,10 +13,10 @@ export default function FormButton({
   steps,
   currentStep,
   setCurrentStep,
-  submitText = "Register",
 }: Props) {
   const {
     formState: { isValid },
+    trigger,
   } = useFormContext();
 
   const buttonText = () => {
@@ -26,9 +25,6 @@ export default function FormButton({
     }
     if (type === "next") {
       return "Continue";
-    }
-    if (type === "submit" && submitText) {
-      return submitText;
     }
   };
 
@@ -42,7 +38,10 @@ export default function FormButton({
 
   const handleClick = () => {
     if (type === "next") {
-      return next();
+      trigger();
+      if (isValid) {
+        return next();
+      }
     }
     if (type === "prev") {
       return prev();
@@ -51,20 +50,16 @@ export default function FormButton({
 
   return (
     <button
-      disabled={!isValid && type !== "prev"}
-      type={type === "submit" ? "submit" : "button"}
+      type="button"
       onClick={handleClick}
       className={clsx(
         "flex h-14 w-full items-center justify-center rounded-big text-[0.875rem] font-semibold uppercase tracking-[1.4px] duration-100 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:brightness-100 md:w-max",
-        (type === "next" || type === "submit") &&
-          "bg-secondary-100 text-primary-100 hover:brightness-110",
-        type === "prev"
-          ? "bg-transparent px-3 text-primary-100"
-          : "min-w-[9rem] px-8",
+        type === "next" &&
+          "min-w-[9rem] bg-secondary-100 px-8 text-primary-100 hover:brightness-110",
+        type === "prev" && "bg-transparent px-3 text-primary-100",
         ((type === "prev" && currentStep === 0) ||
           (type === "next" && currentStep >= steps - 1)) &&
-          "hidden",
-        type === "submit" && currentStep !== steps - 1 && "hidden"
+          "hidden"
       )}
     >
       {buttonText()}

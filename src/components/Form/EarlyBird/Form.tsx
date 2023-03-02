@@ -8,6 +8,7 @@ import FormStepWrapper from "../ReactHook/FormStepWrapper";
 import FormStepButtons from "../ReactHook/FormStepButtons";
 import clsx from "clsx";
 import axios from "axios";
+import type { SubmitState } from "../../../env";
 
 interface Props {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,6 +17,7 @@ interface Props {
 export default function Form({ setIsOpen }: Props) {
   const steps = 2;
   const [currentStep, setCurrentStep] = useState(0);
+  const [submitState, setSubmitState] = useState<SubmitState>("default");
 
   const methods = useForm({
     mode: "all",
@@ -27,14 +29,17 @@ export default function Form({ setIsOpen }: Props) {
 
   const onSubmit = async (data: any) => {
     if (currentStep === steps - 1) {
+      setSubmitState("loading");
       setCurrentStep((curr) => curr + 1);
       try {
         const res = await axios.post(
           "https://jacobs-server.onrender.com/integrated/earlybird",
           data
         );
+        setCurrentStep((curr) => curr + 1);
         console.log(res);
       } catch (err) {
+        setSubmitState("error");
         console.log(err);
       }
     }
@@ -70,7 +75,7 @@ export default function Form({ setIsOpen }: Props) {
               {currentStep !== steps && (
                 <FormStepButtons
                   submitText="Register"
-                  {...{ currentStep, setCurrentStep, steps }}
+                  {...{ currentStep, setCurrentStep, steps, submitState }}
                 />
               )}
             </div>

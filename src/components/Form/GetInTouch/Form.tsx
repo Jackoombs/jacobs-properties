@@ -7,6 +7,7 @@ import FormStepWrapper from "../ReactHook/FormStepWrapper";
 import FormStepButtons from "../ReactHook/FormStepButtons";
 import clsx from "clsx";
 import axios from "axios";
+import type { SubmitState } from "../../../env";
 
 interface Props {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,6 +16,7 @@ interface Props {
 export default function Form({ setIsOpen }: Props) {
   const steps = 1;
   const [currentStep, setCurrentStep] = useState(0);
+  const [submitState, setSubmitState] = useState<SubmitState>("default");
 
   const methods = useForm({
     mode: "all",
@@ -23,14 +25,15 @@ export default function Form({ setIsOpen }: Props) {
 
   const onSubmit = async (data: any) => {
     if (currentStep === steps - 1) {
-      setCurrentStep((curr) => curr + 1);
+      setSubmitState("loading");
       try {
-        const res = await axios.post(
+        await axios.post(
           "https://jacobs-server.onrender.com/integrated/getintouch",
           data
         );
-        console.log(res);
+        setCurrentStep((curr) => curr + 1);
       } catch (err) {
+        setSubmitState("error");
         console.log(err);
       }
     }
@@ -63,8 +66,8 @@ export default function Form({ setIsOpen }: Props) {
 
               {currentStep !== steps && (
                 <FormStepButtons
-                  submitText="SendMessage"
-                  {...{ currentStep, setCurrentStep, steps }}
+                  submitText="Send Message"
+                  {...{ currentStep, setCurrentStep, steps, submitState }}
                 />
               )}
             </div>

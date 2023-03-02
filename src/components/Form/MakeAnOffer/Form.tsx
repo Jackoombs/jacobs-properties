@@ -8,6 +8,7 @@ import FormStepWrapper from "../ReactHook/FormStepWrapper";
 import FormStepButtons from "../ReactHook/FormStepButtons";
 import clsx from "clsx";
 import axios from "axios";
+import type { SubmitState } from "../../../env";
 
 interface Props {
   address: string;
@@ -17,6 +18,7 @@ interface Props {
 export default function Form({ address, setIsOpen }: Props) {
   const steps = 2;
   const [currentStep, setCurrentStep] = useState(0);
+  const [submitState, setSubmitState] = useState<SubmitState>("default");
 
   const methods = useForm({
     mode: "all",
@@ -28,14 +30,16 @@ export default function Form({ address, setIsOpen }: Props) {
 
   const onSubmit = async (data: any) => {
     if (currentStep === steps - 1) {
-      setCurrentStep((curr) => curr + 1);
+      setSubmitState("loading");
       try {
         const res = await axios.post(
           "https://jacobs-server.onrender.com/integrated/makeanoffer",
           data
         );
+        setCurrentStep((curr) => curr + 1);
         console.log(res);
       } catch (err) {
+        setSubmitState("error");
         console.log(err);
       }
     }
@@ -71,7 +75,7 @@ export default function Form({ address, setIsOpen }: Props) {
               {currentStep !== steps && (
                 <FormStepButtons
                   submitText="Submit offer"
-                  {...{ currentStep, setCurrentStep, steps }}
+                  {...{ currentStep, setCurrentStep, steps, submitState }}
                 />
               )}
             </div>
