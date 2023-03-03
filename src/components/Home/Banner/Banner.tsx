@@ -27,10 +27,6 @@ export default function Banner() {
   }
   const backGrounds: Background[] = [
     {
-      backgroundSrc: Background,
-      objectFit: "center",
-    },
-    {
       backgroundSrc: Background2,
       objectFit: "68% 0",
     },
@@ -82,7 +78,7 @@ export default function Banner() {
           onSlideChange={(e) => setActiveIndex(e.activeIndex)}
           modules={[Autoplay, EffectFade]}
           autoplay={{ delay: 3000 }}
-          speed={800}
+          speed={1400}
           navigation
           pagination={{ clickable: true, dynamicBullets: true }}
           effect="fade"
