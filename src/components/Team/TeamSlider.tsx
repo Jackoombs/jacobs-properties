@@ -5,14 +5,7 @@ import CarouselNavBtns from "../General/CarouselNavBtns";
 import SectionHeader from "../General/Text/SectionHeader";
 import { useState } from "react";
 import TeamCard from "./TeamCard";
-import Jon from "../../assets/images/jon-coombs.png";
-
-export type TeamCardType = {
-  name: string;
-  role: string;
-  imagePath: string;
-  linkedInLink?: string;
-};
+import { teamTemplate } from "./teamTemplate";
 
 export default function TeamSlider() {
   const [slideStatus, setSlideStatus] = useState<
@@ -26,39 +19,6 @@ export default function TeamSlider() {
     else if (e.isLocked) setSlideStatus("locked");
     else setSlideStatus(null);
   };
-
-  const teamTemplate: TeamCardType[] = [
-    {
-      name: "Jon Coombs",
-      role: "Managing Director",
-      imagePath: Jon.src,
-      linkedInLink: "",
-    },
-    {
-      name: "Jon Coombs",
-      role: "Managing Director",
-      imagePath: Jon.src,
-      linkedInLink: "",
-    },
-    {
-      name: "Jon Coombs",
-      role: "Managing Director",
-      imagePath: Jon.src,
-      linkedInLink: "",
-    },
-    {
-      name: "Jon Coombs",
-      role: "Managing Director",
-      imagePath: Jon.src,
-      linkedInLink: "",
-    },
-    {
-      name: "Jon Coombs",
-      role: "Managing Director",
-      imagePath: Jon.src,
-      linkedInLink: "",
-    },
-  ];
 
   return (
     <>
@@ -83,11 +43,15 @@ export default function TeamSlider() {
           },
         }}
       >
-        {teamTemplate.map(({ name, role, imagePath, linkedInLink }, index) => (
-          <SwiperSlide key={index}>
-            <TeamCard {...{ name, role, imagePath, linkedInLink }} />
-          </SwiperSlide>
-        ))}
+        {teamTemplate.map(
+          ({ name, role, imagePath, linkedInLink, email, bio }, index) => (
+            <SwiperSlide key={index}>
+              <TeamCard
+                {...{ name, role, bio, email, imagePath, linkedInLink }}
+              />
+            </SwiperSlide>
+          )
+        )}
       </Swiper>
     </>
   );
