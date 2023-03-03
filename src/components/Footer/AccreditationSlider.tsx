@@ -98,7 +98,7 @@ export default function AccrediationSlider() {
             loading="lazy"
             src={Tds.src}
             alt="Tenancy Deposit Scheme logo"
-            className="aspect-[1.77/1] w-40 sm:w-60"
+            className="aspect-[2.35/1] w-40 sm:w-60"
           />
         </SwiperSlide>
         <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] py-10 lg:bg-transparent">
