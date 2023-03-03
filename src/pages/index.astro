@@ -25,6 +25,12 @@ const res = await fetch("https://jacobs-server.onrender.com/properties");
 const properties: Property2[] = await res.json();
 const salesProperties = properties.filter((p) => p.type === "selling");
 const lettingsProperties = properties.filter((p) => p.type === "letting");
+const filteredSalesProperties = salesProperties.filter(
+  (p) => p.status !== "forSale"
+);
+const filteredLettingsProperties = salesProperties.filter(
+  (p) => p.status !== "toLet"
+);
 
 console.log(properties.length, salesProperties.length, lettingsProperties);
 ---
@@ -92,7 +98,11 @@ console.log(properties.length, salesProperties.length, lettingsProperties);
     <!-- <ValuationSection /> -->
 
     <MiscSection>
-      <RecentlySoldLet {...{salesProperties, lettingsProperties}} client:idle />
+      <RecentlySoldLet
+        salesProperties={filteredSalesProperties}
+        lettingsProperties={filteredLettingsProperties}
+        client:idle
+      />
     </MiscSection>
 
     <HeroSection
