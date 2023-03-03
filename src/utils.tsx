@@ -106,7 +106,7 @@ export interface Data {
 }
 
 const formatDate = (date: Date) => {
-  return format(date, "dd/MM/yyyy");
+  return format(date, "iiii do MMMM yyyy");
 };
 
 export const formatDates = (data: Data) => {
