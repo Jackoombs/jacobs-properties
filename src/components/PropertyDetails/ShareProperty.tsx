@@ -53,7 +53,7 @@ export default function SharePropertyButton({
         {children}
       </GeneralButton>
       <ScreenModal {...{ isOpen, setIsOpen }} className="flex flex-col">
-        <div className="mx-auto flex  w-full max-w-container-lg flex-1 flex-col items-center justify-center gap-8">
+        <div className="mx-auto flex w-full max-w-container-lg flex-1 flex-col items-center justify-center gap-8">
           <h2 className="text-4xl font-bold sm:text-5xl md:text-7xl">
             Share this property
           </h2>
