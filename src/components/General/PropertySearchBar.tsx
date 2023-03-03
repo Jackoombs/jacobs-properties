@@ -53,7 +53,7 @@ export default function PropertySearchBar() {
               placeholder="Begin your search by town or postcode… i.e RG21"
             />
             <button className="absolute right-0 ">
-              <IoMdSearch className="box-content p-5 text-2xl text-primary-100" />
+              <IoMdSearch className="box-content bg-white p-5 pl-0 text-2xl text-primary-100" />
             </button>
             <Error name="location" />
           </div>
