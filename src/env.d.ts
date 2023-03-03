@@ -66,6 +66,18 @@ export interface Property2 {
   virtualTour?: string;
   brochure?: string;
   location?: google.maps.LatLng | google.maps.LatLngLiteral | undefined;
+  propertyType: (
+    | "house"
+    | "bungalow"
+    | "flatApartment"
+    | "maisonette"
+    | "land"
+    | "farm"
+    | "cottage"
+    | "studio"
+    | "townhouse"
+    | "developmentPlot"
+  )[];
 }
 
 interface Image2 {
