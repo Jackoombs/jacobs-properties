@@ -1,6 +1,6 @@
 import clsx from "clsx";
 interface Props {
-  children: string;
+  children: string | JSX.Element;
   link: string;
   type:
     | "primary"
@@ -38,7 +38,7 @@ export default function Link({
           "border-2 border-white bg-transparent text-white hover:border-primary-100 hover:bg-primary-100 hover:text-white",
         type === "transparent-blue" &&
           "border-2 border-primary-100 bg-transparent text-primary-100 hover:bg-primary-100 hover:text-white",
-        size === "sm" && "md:w-16",
+        size === "sm" && "md:w-max md:min-w-[8rem]",
         size === "md" && "md:w-max md:min-w-[10rem]",
         size === "lg" && "md:w-max md:min-w-[13rem]"
       )}
