@@ -30,7 +30,6 @@ export default function Form({ setIsOpen }: Props) {
   const onSubmit = async (data: any) => {
     if (currentStep === steps - 1) {
       setSubmitState("loading");
-      setCurrentStep((curr) => curr + 1);
       try {
         const res = await axios.post(
           "https://jacobs-server.onrender.com/integrated/earlybird",
