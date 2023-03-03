@@ -82,7 +82,7 @@ export default function Reviews({ color = "standard" }: Props) {
         <ReviewNavBtn {...{ swiper, color, slideStatus }} isReverse={false} />
       </div>
       <CarouselNavBtns
-        variant="secondary"
+        variant={color === "standard" ? "secondary" : "primary"}
         swiper={swiper}
         slideStatus={slideStatus}
         className="pt-2 md:hidden"
