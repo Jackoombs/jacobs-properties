@@ -77,16 +77,16 @@ export default function PropertySearch({ properties, center }: Props) {
         }
       });
 
-    if (searchCriteria.location) {
-      const options = {
-        includeScore: true,
-        threshold: 0.4,
-        keys: ["address1", "address2"],
-      };
-      const fuse = new Fuse(result, options);
-      const fuseResult = fuse.search(searchCriteria.location);
-      return fuseResult.map((result) => result.item);
-    }
+    // if (searchCriteria.location) {
+    //   const options = {
+    //     includeScore: true,
+    //     threshold: 0.4,
+    //     keys: ["address1", "address2"],
+    //   };
+    //   const fuse = new Fuse(result, options);
+    //   const fuseResult = fuse.search(searchCriteria.location);
+    //   return fuseResult.map((result) => result.item);
+    // }
     return result;
   };
 
