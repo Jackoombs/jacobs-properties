@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 interface Props {
-  variant?: "primary-100" | "primary-200";
+  variant?: "primary-100" | "primary-200" | "white";
   children: JSX.Element | JSX.Element[];
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -59,6 +59,7 @@ export default function ScreenModal({
                     "bg-primary-100 text-primary-200",
                   variant === "primary-200" &&
                     "bg-primary-200 text-primary-100",
+                  variant === "white" && "bg-white text-primary-100",
                   className
                 )}
               >
@@ -67,7 +68,8 @@ export default function ScreenModal({
                     "py-4 lg:hidden",
                     variant === "primary-100" &&
                       "bg-primary-100 text-primary-200",
-                    variant === "primary-200" && "bg-white text-primary-100"
+                    (variant === "primary-200" || variant === "white") &&
+                      "bg-white text-primary-100"
                   )}
                 >
                   <div className="mx-auto flex w-full max-w-container-lg justify-between">
