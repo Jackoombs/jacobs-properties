@@ -4,14 +4,14 @@ import { IoArrowForwardOutline } from "react-icons/io5/index.js";
 interface Props {
   isReverse: boolean;
   swiper: any;
-  isStartOrEnd: string;
+  slideStatus: "start" | "end" | "locked" | null;
   color?: "standard" | "alt";
 }
 
 export default function ReviewNavBtn({
   isReverse,
   swiper,
-  isStartOrEnd,
+  slideStatus,
   color = "standard",
 }: Props) {
   const handleClick = () => {
@@ -21,8 +21,8 @@ export default function ReviewNavBtn({
   const buttonColor = () => {
     if (color === "alt") return "text-primary-100";
     if (
-      (isStartOrEnd === "start" && isReverse) ||
-      (isStartOrEnd === "end" && !isReverse)
+      (slideStatus === "start" && isReverse) ||
+      (slideStatus === "end" && !isReverse)
     ) {
       return "text-white";
     } else {
@@ -31,23 +31,27 @@ export default function ReviewNavBtn({
   };
 
   return (
-    <button
-      onClick={handleClick}
-      className={clsx(
-        "hidden min-h-[3.5rem] min-w-[3.5rem] items-center justify-center rounded-full duration-150 md:flex",
-        isReverse && "rotate-180",
-        (isStartOrEnd === "start" && isReverse) ||
-          (isStartOrEnd === "end" && !isReverse)
-          ? "cursor-default"
-          : "bg-secondary-100"
+    <>
+      {slideStatus !== "locked" && (
+        <button
+          onClick={handleClick}
+          className={clsx(
+            "hidden min-h-[3.5rem] min-w-[3.5rem] items-center justify-center rounded-full duration-150 md:flex",
+            isReverse && "rotate-180",
+            (slideStatus === "start" && isReverse) ||
+              (slideStatus === "end" && !isReverse)
+              ? "cursor-default"
+              : "bg-secondary-100"
+          )}
+        >
+          <IoArrowForwardOutline
+            className={clsx(
+              "text-2xl text-primary-100 duration-150",
+              buttonColor()
+            )}
+          />
+        </button>
       )}
-    >
-      <IoArrowForwardOutline
-        className={clsx(
-          "text-2xl text-primary-100 duration-150",
-          buttonColor()
-        )}
-      />
-    </button>
+    </>
   );
 }
