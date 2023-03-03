@@ -4,7 +4,10 @@ import { Grid } from "swiper";
 import "swiper/css";
 import "swiper/css/grid";
 import Ombudsman from "../../assets/images/footer/ombudsman.webp";
-import PropertyMark from "../../assets/images/footer/propertymark.webp";
+import Tsi from "../../assets/images/footer/tsi.webp";
+import Arla from "../../assets/images/footer/arla.webp";
+import Tds from "../../assets/images/footer/tds.webp";
+import Guild from "../../assets/images/footer/guild.webp";
 import Rightmove from "../../assets/images/footer/rightmove.webp";
 import Zoopla from "../../assets/images/footer/zoopla.webp";
 import { useState } from "react";
@@ -77,8 +80,32 @@ export default function AccrediationSlider() {
         <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] py-10 lg:bg-transparent">
           <img
             loading="lazy"
-            src={PropertyMark.src}
-            alt="PropertyMark logo"
+            src={Tsi.src}
+            alt="Trading standards logo"
+            className="aspect-[2/1] w-40 sm:w-60"
+          />
+        </SwiperSlide>
+        <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] py-10 lg:bg-transparent">
+          <img
+            loading="lazy"
+            src={Guild.src}
+            alt="Property guild logo"
+            className="aspect-[2.72/1] w-40 sm:w-60"
+          />
+        </SwiperSlide>
+        <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] py-10 lg:bg-transparent">
+          <img
+            loading="lazy"
+            src={Tds.src}
+            alt="Tenancy Deposit Scheme logo"
+            className="aspect-[1.77/1] w-40 sm:w-60"
+          />
+        </SwiperSlide>
+        <SwiperSlide className="swiper-same-height flex h-auto w-full items-center justify-center rounded-big bg-[#1A3D66] py-10 lg:bg-transparent">
+          <img
+            loading="lazy"
+            src={Arla.src}
+            alt="Arla logo"
             className="aspect-[2.74/1] w-40 sm:w-60"
           />
         </SwiperSlide>
