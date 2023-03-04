@@ -33,6 +33,7 @@ export default function NewsGrid({ newsTemplate }: Props) {
         label="Category:"
         name="category"
         setState={setCategory}
+        className="pb-4 md:pb-7"
       />
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:gap-16">
         {sortedNews
