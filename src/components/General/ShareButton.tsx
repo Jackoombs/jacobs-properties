@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import GeneralButton from "../General/Button";
+import GeneralButton from "./Button";
 import ScreenModal from "../Layout/ScreenModal";
-import Copy from "../General/Text/Copy";
+import Copy from "./Text/Copy";
 import { IoMail } from "react-icons/io5/index.js";
 import { FaCopy, FaFacebook, FaWhatsapp } from "react-icons/fa/index.js";
 import clsx from "clsx";
 
 interface Props {
   children: string;
+  name: string;
   variant?:
     | "primary"
     | "secondary"
@@ -21,6 +22,7 @@ interface Props {
 
 export default function SharePropertyButton({
   children,
+  name,
   variant = "primary",
   size,
   type = "button",
@@ -55,14 +57,14 @@ export default function SharePropertyButton({
       <ScreenModal {...{ isOpen, setIsOpen }} className="flex flex-col">
         <div className="mx-auto flex w-full max-w-container-lg flex-1 flex-col items-center justify-center gap-8">
           <h2 className="text-4xl font-bold sm:text-5xl md:text-7xl">
-            Share this property
+            {`Share this ${name}`}
           </h2>
           <Copy
             textColor="text-white"
             size="lg"
             className="max-w-[14rem] text-center sm:max-w-none "
           >
-            Click one of the options below to share this property
+            {`Click one of the options below to share this Share this ${name}`}
           </Copy>
           <div className="grid w-max grid-cols-2 gap-6 md:grid-cols-4">
             <a

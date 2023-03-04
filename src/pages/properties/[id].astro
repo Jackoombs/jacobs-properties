@@ -13,7 +13,7 @@ import MortgageCalc from "../../components/Calculators/MortgageCalc";
 import PropertySlider from "../../components/Property/PropertySlider";
 import { getPropertyStatus, priceNumberToPriceString } from "../../utils";
 import MiscSection from "../../components/Layout/MiscSection.astro";
-import SharePropertyButton from "../../components/PropertyDetails/ShareProperty";
+import SharePropertyButton from "../../components/General/ShareButton";
 import PropertyListCard from "../../components/Property/PropertyListCard";
 
 const res = await fetch("https://jacobs-server.onrender.com/properties");
@@ -129,7 +129,7 @@ console.log(location);
           {
             description && (
               <Copy
-                className="line-clamp-3 mb-3 text-ellipsis whitespace-pre-line"
+                className="mb-3 text-ellipsis whitespace-pre-line line-clamp-3"
                 size="lg"
               >
                 {description}
@@ -144,8 +144,11 @@ console.log(location);
               size="lg"
               >Book a viewing
             </BookAViewingButton>
-            <SharePropertyButton size="lg" variant="secondary" client:idle
-              >Share Property</SharePropertyButton
+            <SharePropertyButton
+              name="property"
+              size="lg"
+              variant="secondary"
+              client:idle>Share Property</SharePropertyButton
             >
           </div>
         </div>
