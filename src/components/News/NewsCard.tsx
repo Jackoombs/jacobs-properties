@@ -8,6 +8,17 @@ export default function NewsCard({
   date,
   image,
 }: newsCardType) {
+  const getHref = (title: string) => {
+    const specialCharsRegex = /[^A-Za-z0-9\s]/g;
+
+    const cleanStr = title
+      .toLowerCase()
+      .replaceAll(specialCharsRegex, "")
+      .replaceAll(" ", "-");
+
+    return `/news/${cleanStr}`;
+  };
+
   return (
     <div className="flex w-full flex-col gap-6">
       <div className="relative overflow-hidden rounded-big">
@@ -23,7 +34,7 @@ export default function NewsCard({
           {title}
         </SectionSubHeader>
         <a
-          href={`/news/${title.toLowerCase().replace(" ", "-")}`}
+          href={getHref(title)}
           className="text-sm font-semibold uppercase tracking-[1.4px] decoration-primary-100 decoration-2 underline-offset-4 hover:underline"
         >
           Read More
