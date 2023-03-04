@@ -5,7 +5,13 @@ import * as z from "zod";
 import Button from "../General/Button";
 import { useRef } from "react";
 
-export default function BrochureForm() {
+interface Props {
+  pdfPath:
+    | "Jacobs properties - Guide To Letting.pdf"
+    | "Jacobs properties - Guide To Selling.pdf";
+}
+
+export default function BrochureForm({ pdfPath }: Props) {
   const downloadRef = useRef<null | HTMLAnchorElement>(null);
 
   const messages = {
@@ -74,7 +80,13 @@ export default function BrochureForm() {
         <Button variant="secondary" size="lg" type="submit">
           Download Guide
         </Button>
-        <a ref={downloadRef} href="/dummy.pdf" download className="hidden"></a>
+        <a
+          target="_blank"
+          ref={downloadRef}
+          href={`/${pdfPath}`}
+          download
+          className="hidden"
+        ></a>
       </form>
     </div>
   );
