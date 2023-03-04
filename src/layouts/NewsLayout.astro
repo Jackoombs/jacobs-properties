@@ -1,0 +1,141 @@
+---
+import Header from "../components/Header/Header.astro";
+import Footer from "../components/Footer/Footer.astro";
+import MiscSection from "../components/Layout/MiscSection.astro";
+import HeroSection from "../components/Layout/HeroSection.astro";
+import SectionLabel from "../components/General/Text/SectionLabel";
+import SectionHeader from "../components/General/Text/SectionHeader";
+import SharePropertyButton from "../components/General/ShareButton";
+import PageHeader from "../components/General/Text/PageHeader";
+import Copy from "../components/General/Text/Copy";
+
+export interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description, frontmatter } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-[100svh]">
+    <Header />
+    <HeroSection
+      bgColor="bg-primary-200"
+      image={{
+        path: frontmatter.image,
+        position: true,
+        aspectRatio: "hero",
+        alt: "",
+      }}
+    >
+      <div class="flex flex-col text-primary-100">
+        <SectionLabel padding="hero-lg">Landlords</SectionLabel>
+        <h1>{frontmatter.title}</h1>
+        <Copy className="md:max-w-2xl" padding="hero-lg" size="lg"
+          >{frontmatter.description}</Copy
+        >
+        <SharePropertyButton
+          client:idle
+          name="article"
+          variant="secondary"
+          size="md">Share Article</SharePropertyButton
+        >
+      </div>
+    </HeroSection>
+    <MiscSection>
+      <div class="mx-auto max-w-5xl text-primary-100">
+        <hr class="border-primary-100" />
+        <slot />
+      </div>
+    </MiscSection>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  h1 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    line-height: 1.1;
+    padding-bottom: 1rem;
+  }
+
+  h2,
+  h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    padding-bottom: 0.6rem;
+    padding-top: 1.4rem;
+  }
+
+  p {
+    font-size: 1rem;
+    padding-bottom: ;
+  }
+
+  p + p {
+    padding-top: 1rem;
+  }
+
+  @media (min-width: 1024px) {
+    h1 {
+      padding-bottom: 1.5rem /* 24px */;
+      font-size: 2rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    h1 {
+      font-size: 2.375rem /* 38px */;
+    }
+  }
+  .swiper-same-height {
+    height: auto !important;
+  }
+
+  @font-face {
+    font-family: "ProximaNova";
+    src: url("/fonts/ProximaNova-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "ProximaNova";
+    src: url("/fonts/ProximaNova-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "ProximaNova";
+    src: url("/fonts/ProximaNova-Semibold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "ProximaNova";
+    src: url("/fonts/ProximaNova-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "HarmoniaSans";
+    src: url("/fonts/HarmoniaSansW1G-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+</style>

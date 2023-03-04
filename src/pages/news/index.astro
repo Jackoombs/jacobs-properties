@@ -10,13 +10,15 @@ import Reviews from "../../components/Reviews/Reviews";
 import ValuationSection from "../../components/Layout/ValuationSection.astro";
 
 const news = await Astro.glob("./**.md");
+
 const newsTemplate = news.map((post) => {
   const { title, category, date, image } = post.frontmatter;
+  console.log(post.frontmatter);
   return { title, category, date, image };
 });
 ---
 
-<StandardLayout title="News">
+<StandardLayout title="News" description="">
   <MiscSection
     bgColor="bg-primary-200"
     className="flex flex-col md:grid grid-cols-1 items-center gap-6 md:grid-cols-1/2 lg:gap-16 xl:grid-cols-[4fr_3fr]"
@@ -34,7 +36,7 @@ const newsTemplate = news.map((post) => {
     <NewsGrid client:load newsTemplate={newsTemplate} />
   </MiscSection>
 
-  <ValuationSection />
+  <ValuationSection title="Ready to sell your home?" />
 
   <MiscSection>
     <SectionHeader className="md:text-center" padding="misc"
