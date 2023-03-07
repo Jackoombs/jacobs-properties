@@ -8,7 +8,7 @@ const res = await fetch("https://jacobs-server.onrender.com/properties");
 const properties: Property2[] = await res.json();
 
 const propertiesWithLocation: Property2[] = [];
-for (const property of properties.slice(0, 5)) {
+for (const property of properties) {
   try {
     const res2 = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${
