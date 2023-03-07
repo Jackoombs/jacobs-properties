@@ -34,7 +34,7 @@ export default function FormModal({
     <ScreenModal
       {...{ isOpen, setIsOpen }}
       variant="primary-200"
-      className="lg:grid lg:grid-cols-2"
+      className="flex flex-col lg:grid lg:grid-cols-2"
     >
       <div className="flex w-full items-center bg-white py-10">
         <div className="relative mx-auto flex h-full w-full max-w-container-lg items-center lg:max-w-[min(82%,37rem)]">
