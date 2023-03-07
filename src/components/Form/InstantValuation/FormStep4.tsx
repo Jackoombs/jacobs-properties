@@ -1,6 +1,4 @@
-import { TbCheck } from "react-icons/tb/index.js";
 import { SlClose } from "react-icons/sl/index.js";
-import { BsFillCircleFill } from "react-icons/bs/index.js";
 import SectionHeader from "../../General/Text/SectionHeader";
 import Copy from "../../General/Text/Copy";
 import type { Valpal } from "../../../env";

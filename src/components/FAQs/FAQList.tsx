@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Client } from "../../env";
+import Button from "../General/Button";
 import FAQMenuItem from "./FAQMenuItem";
 import FAQs from "./FAQs";
 import FAQJson from "./FAQS.json";
@@ -25,12 +26,14 @@ export default function FAQList() {
       </ul>
       <FAQs client={currentItem} bgColor="bg-primary-200" maxFAQs={maxFAQs} />
       {maxFAQs < FAQJson[currentItem].length && (
-        <button
-          className="col-span-full mx-auto mt-6 flex h-14 w-full items-center justify-center rounded-big bg-secondary-100 px-6 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 hover:brightness-110 md:w-auto md:min-w-[10rem] xl:mt-16"
+        <Button
+          size="md"
+          className="col-span-full mx-auto mt-6"
           onClick={() => setMaxFAQs((value) => (value += 10))}
+          variant="secondary"
         >
           View More
-        </button>
+        </Button>
       )}
     </>
   );

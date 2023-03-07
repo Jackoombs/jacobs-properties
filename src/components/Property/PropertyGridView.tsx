@@ -1,5 +1,6 @@
 import { useState } from "react";
 import type { Property2 } from "../../env";
+import Button from "../General/Button";
 import PropertyCard from "./PropertyCard";
 
 interface Props {
@@ -15,12 +16,14 @@ export default function PropertyGridView({ properties }: Props) {
           <PropertyCard key={property.id} {...{ property }} />
         ))}
         {maxProperties < properties.length && (
-          <button
-            className="col-span-full mx-auto flex h-14 w-full items-center justify-center rounded-big bg-secondary-100 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 hover:brightness-110 md:w-auto md:min-w-[10rem]"
+          <Button
+            className="col-span-full mx-auto"
+            size="md"
             onClick={() => setMaxProperties((value) => (value += 12))}
+            variant="secondary"
           >
             Load More
-          </button>
+          </Button>
         )}
       </div>
     </>

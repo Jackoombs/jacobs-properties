@@ -3,6 +3,7 @@ import NewsCard from "./NewsCard";
 import { useState } from "react";
 import { removeArrayDuplicates } from "../../utils";
 import SortInput from "../Form/SortInput";
+import Button from "../General/Button";
 
 interface Props {
   newsTemplate: newsCardType[];
@@ -42,12 +43,14 @@ export default function NewsGrid({ newsTemplate }: Props) {
             <NewsCard key={index} {...{ title, category, date, image }} />
           ))}
         {maxPosts < sortedNews.length && (
-          <button
-            className="col-span-full mx-auto flex h-14 w-full items-center justify-center rounded-big bg-secondary-100 px-6 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 hover:brightness-110 md:w-auto md:min-w-[10rem]"
+          <Button
+            className="col-span-full mx-auto"
+            size="md"
             onClick={() => setMaxPosts((value) => (value += 12))}
+            variant="secondary"
           >
             Load More Stories
-          </button>
+          </Button>
         )}
       </div>
     </>

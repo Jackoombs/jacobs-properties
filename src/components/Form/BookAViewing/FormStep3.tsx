@@ -3,6 +3,7 @@ import { SlClose } from "react-icons/sl/index.js";
 import { BsFillCircleFill } from "react-icons/bs/index.js";
 import SectionHeader from "../../General/Text/SectionHeader";
 import Copy from "../../General/Text/Copy";
+import Button from "../../General/Button";
 
 interface Props {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,13 +23,15 @@ export default function FormStep3({ setIsOpen }: Props) {
         <Copy textColor="text-white" size="lg">
           We will be in touch with you shortly.
         </Copy>
-        <button
-          type="button"
+        <Button
+          className="mt-4"
           onClick={() => setIsOpen(false)}
-          className="mt-4 flex h-14 w-max items-center justify-center rounded-big bg-secondary-100 px-6 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 hover:brightness-110"
+          type="button"
+          variant="secondary"
+          size="sm"
         >
           Close
-        </button>
+        </Button>
       </div>
       <button
         onClick={() => setIsOpen(false)}

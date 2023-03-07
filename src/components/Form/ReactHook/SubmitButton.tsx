@@ -32,7 +32,7 @@ export default function SubmitButton({
     <button
       type="submit"
       className={clsx(
-        "flex h-14 w-full min-w-[9rem] items-center justify-center rounded-big bg-secondary-100 px-8 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 hover:brightness-110 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:hover:brightness-100 md:w-max",
+        "flex h-14 w-full min-w-[9rem] items-center justify-center rounded-big bg-secondary-100 px-8 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 hover:bg-[#D3ED35] disabled:cursor-not-allowed disabled:bg-gray-400 md:w-max",
         currentStep !== steps - 1 && "hidden"
       )}
     >
