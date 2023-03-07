@@ -7,7 +7,7 @@ interface Props {
     | "white"
     | "transparent-white"
     | "transparent-blue";
-  size?: "sm" | "md" | "lg";
+  size?: "default" | "sm" | "md" | "lg";
   type?: "button" | "submit";
   className?: string;
   onClick?: (...args: any) => any;
@@ -16,7 +16,7 @@ interface Props {
 export default function Button({
   children,
   variant = "primary",
-  size,
+  size = "default",
   type = "button",
   className,
   onClick,
@@ -36,6 +36,7 @@ export default function Button({
           "border-2 border-white bg-transparent text-white hover:border-primary-100 hover:bg-primary-100 hover:text-white",
         variant === "transparent-blue" &&
           "border-2 border-primary-100 bg-transparent text-primary-100 hover:bg-primary-100 hover:text-white",
+        size === "default" && "md:w-max",
         size === "sm" && "md:w-16",
         size === "md" && "md:w-max md:min-w-[10rem]",
         size === "lg" && "md:w-max md:min-w-[13rem]"
