@@ -28,7 +28,6 @@ export default function FormStep2({ setIsOpen }: Props) {
           onClick={() => setIsOpen(false)}
           type="button"
           variant="secondary"
-          size="sm"
         >
           Close
         </Button>

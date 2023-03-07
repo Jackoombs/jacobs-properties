@@ -29,7 +29,6 @@ export default function FormStep5({ setIsOpen }: Props) {
           onClick={() => setIsOpen(false)}
           type="button"
           variant="secondary"
-          size="sm"
         >
           Close
         </Button>
