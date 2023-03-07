@@ -73,11 +73,13 @@ export default function ScreenModal({
                   )}
                 >
                   <div className="mx-auto flex w-full max-w-container-lg justify-between">
-                    <img
-                      className="h-auto w-[9rem]"
-                      src={variant === "primary-100" ? LogoGreen : LogoBlue}
-                      alt="Jacobs Properties Logo"
-                    />
+                    <a href="/">
+                      <img
+                        className="h-auto w-[9rem]"
+                        src={variant === "primary-100" ? LogoGreen : LogoBlue}
+                        alt="Jacobs Properties Logo"
+                      />
+                    </a>
                     <button onClick={() => setIsOpen(false)} className="p-4">
                       <SlClose className="text-3xl " />
                     </button>

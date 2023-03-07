@@ -40,11 +40,13 @@ export default function FormModal({
         <div className="relative mx-auto flex h-full w-full max-w-container-lg items-center lg:max-w-[min(82%,37rem)]">
           <div className="w-full">
             <div>
-              <img
-                className="absolute top-10 hidden h-auto w-[9rem] lg:inline lg:w-[12rem] xl:top-16"
-                src={LogoBlue}
-                alt="Jacobs Properties Logo"
-              />
+              <a href="/">
+                <img
+                  className="absolute top-10 hidden h-auto w-[9rem] lg:inline lg:w-[12rem] xl:top-16"
+                  src={LogoBlue}
+                  alt="Jacobs Properties Logo"
+                />
+              </a>
               <SectionLabel padding="hero-md">{label}</SectionLabel>
               <Display className={clsx("pb-6", heading.width)}>
                 {heading.text}

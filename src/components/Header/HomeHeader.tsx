@@ -29,11 +29,15 @@ export default function HomeHeader() {
       )}
     >
       {!isSticky && (
-        <div className="flex h-12 w-full items-center justify-center bg-primary-100 md:hidden">
-          <p className="text-[0.75rem] font-semibold uppercase tracking-[1.4px] text-white md:text-[0.875rem]">
+        <a
+          id="header-target"
+          href="/valuation"
+          className="flex h-12 w-full items-center justify-center bg-primary-100 duration-100 md:hidden"
+        >
+          <p className="text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-white">
             Book a Valuation
           </p>
-        </div>
+        </a>
       )}
       <div
         className={clsx(
