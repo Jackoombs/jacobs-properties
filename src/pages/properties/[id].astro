@@ -11,7 +11,11 @@ import type { GoogleMapProps } from "@react-google-maps/api";
 import StampDutyCalc from "../../components/Calculators/StampDutyCalc";
 import MortgageCalc from "../../components/Calculators/MortgageCalc";
 import PropertySlider from "../../components/Property/PropertySlider";
-import { getPropertyStatus, priceNumberToPriceString } from "../../utils";
+import {
+  getPropertyStatus,
+  priceNumberToPriceString,
+  truncateDescription,
+} from "../../utils";
 import MiscSection from "../../components/Layout/MiscSection.astro";
 import SharePropertyButton from "../../components/General/ShareButton";
 import PropertyListCard from "../../components/Property/PropertyListCard";
@@ -87,10 +91,13 @@ const similarPropertiesFilteredSorted = findSimilarllyPricedProperties(
   })
 );
 
-console.log(location);
+const shortDescription = truncateDescription(description, 20);
 ---
 
-<StandardLayout title={`${address1} | Jacobs Properties`} description="">
+<StandardLayout
+  title={`${address1}, ${address2} | Property Details | Jacobs Properties`}
+  description={`Discover more about ${address1}, ${address2}. Our experienced estate agents provide detailed property information and are here to help you find your dream home. ${shortDescription}`}
+>
   <section class="py-10 md:pb-28">
     <div
       class="mx-auto flex w-full max-w-container-lg flex-col gap-4 xl:flex-row xl:justify-between xl:gap-16"

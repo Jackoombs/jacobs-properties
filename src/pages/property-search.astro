@@ -8,7 +8,7 @@ const res = await fetch("https://jacobs-server.onrender.com/properties");
 const properties: Property2[] = await res.json();
 
 const propertiesWithLocation: Property2[] = [];
-for (const property of properties) {
+for (const property of properties.slice(0, 5)) {
   try {
     const res2 = await fetch(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${
@@ -35,7 +35,10 @@ const center: GoogleMapProps["center"] | undefined =
   data.results[0]?.geometry?.location;
 ---
 
-<StandardLayout title="Property Search" description="">
+<StandardLayout
+  title="Search Properties for Sale and to Let in Basingstoke | Jacobs Properties"
+  description="Search properties for sale in Basingstoke with Jacobs Properties. Our local estate agents are here to help you find your dream home."
+>
   <PropertySearch
     center={center}
     properties={propertiesWithLocation}
