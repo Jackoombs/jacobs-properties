@@ -4,6 +4,7 @@ import PropertySearchForm from "./PropertySearchForm";
 import type { Property2 } from "../../env";
 import Fuse from "fuse.js";
 import PropertyViewSection from "../Property/PropertyViewSection";
+import AlertBar from "../Form/AlertBar";
 
 interface Props {
   properties: Property2[];
@@ -94,7 +95,8 @@ export default function PropertySearch({ properties, center }: Props) {
 
   return (
     <>
-      <section className="justify-center py-10 md:flex md:pt-28">
+      <section className="relative justify-center pb-10 md:flex md:pt-28">
+        <AlertBar />
         <div className="mx-auto flex w-full max-w-container-lg flex-col items-center gap-[34px]">
           <Display>Start your search</Display>
           <PropertySearchForm {...{ setSearchCriteria }} />

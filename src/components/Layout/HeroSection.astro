@@ -1,5 +1,6 @@
 ---
 import clsx from "clsx";
+import AlertBar from "../Form/AlertBar";
 
 interface Props {
   image: Image;
@@ -7,6 +8,7 @@ interface Props {
   disablePb?: boolean;
   disablePt?: boolean;
   disableLazy?: boolean;
+  alertBar?: boolean;
 }
 
 interface Image {
@@ -21,6 +23,7 @@ const {
   disablePb = false,
   disablePt = false,
   disableLazy = false,
+  alertBar = false,
 }: Props = Astro.props;
 ---
 
@@ -29,9 +32,11 @@ const {
     "py-10 md:py-28",
     bgColor,
     disablePb && "pb-0 md:pb-0",
-    disablePt && "pt-0 md:pt-0"
+    disablePt && "pt-0 md:pt-0",
+    alertBar && "relative pt-0"
   )}
 >
+  {alertBar && <AlertBar client:idle />}
   <div
     class="mx-auto grid w-full max-w-container-lg items-center gap-6 lg:grid-cols-2 lg:gap-16"
   >

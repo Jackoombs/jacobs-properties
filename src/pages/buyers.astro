@@ -18,6 +18,7 @@ import MortgageCalc from "../components/Calculators/MortgageCalc";
 import ValuationSection from "../components/Layout/ValuationSection.astro";
 import PropertySearchBar from "../components/General/PropertySearchBar";
 import GetInTouchButton from "../components/Form/GetInTouch/Button";
+import AlertBar from "../components/Form/AlertBar";
 
 const client = "buyers";
 ---
@@ -35,6 +36,7 @@ const client = "buyers";
       alt: "Couple drinking coffee together",
       position: true,
     }}
+    alertBar
   >
     <div class="flex flex-col text-primary-100 md:max-w-xl">
       <SectionLabel padding="hero-lg">Buyers</SectionLabel>
