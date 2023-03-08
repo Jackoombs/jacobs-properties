@@ -6,12 +6,19 @@ import Button from "../General/Button";
 import { useRef } from "react";
 
 interface Props {
-  pdfPath:
-    | "Jacobs properties - Guide To Letting.pdf"
-    | "Jacobs properties - Guide To Selling.pdf";
+  href:
+    | "/Jacobs properties - Guide To Letting.pdf"
+    | "/Jacobs properties - Guide To Selling.pdf"
+    | "https://insights.street.co.uk/l/b06fde34-9b04-4ea7-8190-947bbc2fd15f/property-search";
+  isDownload?: boolean;
+  buttonText: string;
 }
 
-export default function BrochureForm({ pdfPath }: Props) {
+export default function BrochureForm({
+  href,
+  isDownload = false,
+  buttonText,
+}: Props) {
   const downloadRef = useRef<null | HTMLAnchorElement>(null);
 
   const messages = {
@@ -78,14 +85,14 @@ export default function BrochureForm({ pdfPath }: Props) {
           </a>
         </p>
         <Button variant="secondary" size="lg" type="submit">
-          Download Guide
+          {buttonText}
         </Button>
         <a
           target="_blank"
           ref={downloadRef}
-          href={`/${pdfPath}`}
-          download
+          href={href}
           className="hidden"
+          download={isDownload}
         ></a>
       </form>
     </div>
