@@ -3,14 +3,14 @@ import LogoGreen from "../../assets/images/header/logo_green.svg";
 import Link from "../General/Link";
 import MenuBtn from "./MenuBtn";
 import clsx from "clsx";
-import { BsTelephoneFill } from "react-icons/bs/index.js";
 import { useEffect, useState } from "react";
+import ContactBtn from "./ContactBtn";
 
 export default function HomeHeader() {
   const [isSticky, setIsSticky] = useState(false);
 
   useEffect(() => {
-    document.addEventListener("scroll", function () {
+    const updateIsSticky = () => {
       let scrollPos = window.pageYOffset;
 
       if (scrollPos > 100) {
@@ -18,7 +18,13 @@ export default function HomeHeader() {
       } else {
         setIsSticky(false);
       }
-    });
+    };
+    updateIsSticky();
+    document.addEventListener("scroll", updateIsSticky);
+
+    return () => {
+      document.removeEventListener("scroll", updateIsSticky);
+    };
   }, []);
 
   return (
@@ -117,7 +123,7 @@ export default function HomeHeader() {
               isSticky ? "text-primary-100" : "text-white"
             )}
           >
-            <BsTelephoneFill className="scale-x-[-1] text-[1.75rem]" />
+            <ContactBtn />
             <MenuBtn color={isSticky ? "primary-100" : "white"} />
           </div>
         </div>
