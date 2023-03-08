@@ -34,6 +34,7 @@ export default function Reviews({ color = "standard" }: Props) {
         <ReviewNavBtn {...{ swiper, color, slideStatus }} isReverse={true} />
 
         <Swiper
+          spaceBetween={30}
           onSwiper={setSwiper}
           slidesPerView={1}
           onSlideChange={handleSlideChange}

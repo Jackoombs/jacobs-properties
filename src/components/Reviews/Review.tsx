@@ -24,7 +24,7 @@ export default function Review({
           <BsStarFill key={index} />
         ))}
       </div>
-      <p className="leading-10md:max-w-[51.25rem] text-[1.5rem] font-medium md:text-center lg:text-[2rem]">
+      <p className="text-xl font-medium md:max-w-[51.25rem] md:text-center md:leading-10 lg:text-[2rem]">
         {children}
       </p>
       <p className="font-harm text-base lg:text-[1.25rem]">{author}</p>
