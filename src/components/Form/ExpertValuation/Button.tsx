@@ -36,7 +36,7 @@ export default function Button({
       </GeneralButton>
       <FormModal
         {...{ isOpen, setIsOpen }}
-        label="Book a viewing"
+        label="Expert Valuation"
         heading={{ text: "Face to face Valuation", width: "max-w-[34rem]" }}
         copy={{
           text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,sed diam nonumy eirmod tempor invidunt ut.",
