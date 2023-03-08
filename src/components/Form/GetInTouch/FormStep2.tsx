@@ -13,7 +13,7 @@ export default function FormStep2({ setIsOpen }: Props) {
   return (
     <div className="flex h-full w-full items-center justify-center">
       <div className="flex flex-col items-center gap-3 text-center">
-        <div className="relative flex h-[5rem] items-center justify-center lg:h-[10rem]">
+        <div className="relative flex h-[5rem] items-center justify-center pb-12 lg:h-[10rem]">
           <TbCheck className="absolute z-10 text-[3rem] text-primary-100 lg:text-8xl" />
           <BsFillCircleFill className="absolute text-[5rem] text-secondary-100 lg:text-[10rem]" />
         </div>
