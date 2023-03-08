@@ -46,8 +46,10 @@ export default function FormStep4({ setIsOpen, valpalData }: Props) {
           textColor="text-white"
         >
           <>
-            One of your experts will contact you shortly. Can’t wait? Call us on{" "}
-            <strong>01234 567 890</strong>
+            One of our experts will contact you shortly. Can’t wait? Call us on{" "}
+            <a className="font-bold" href="tel:01256781300">
+              01256 781300
+            </a>
           </>
         </Copy>
       </div>
