@@ -28,20 +28,22 @@ export default function TeamCard({
             src={imagePath}
             alt={`${name}, ${role}`}
           />
-          <a
-            className="absolute right-0 top-0 p-5"
-            target="_blank"
-            href={linkedInLink}
-          >
-            <BsLinkedin className="bg-primary-100 text-lg text-white" />
-          </a>
+          {linkedInLink && (
+            <a
+              className="absolute right-0 top-0 p-5"
+              target="_blank"
+              href={linkedInLink}
+            >
+              <BsLinkedin className="bg-primary-100 text-lg text-white" />
+            </a>
+          )}
         </div>
         <div className="flex flex-col gap-2 text-primary-100">
           <div className="flex items-center justify-between">
             <SectionSubHeader size="lg">{name}</SectionSubHeader>
             <FaInfoCircle className="mr-2 text-2xl" />
           </div>
-          <p className="text-sm font-semibold uppercase tracking-[1.4px]">
+          <p className="text-left text-sm font-semibold uppercase tracking-[1.4px]">
             {role}
           </p>
         </div>
@@ -55,7 +57,7 @@ export default function TeamCard({
         <div className="relative mx-auto flex w-full max-w-container-lg flex-1 items-center justify-center py-6">
           <div className="grid w-full items-center gap-16 lg:grid-cols-2">
             <img
-              className="aspect-square self-baseline justify-self-center duration-300 hover:scale-110 sm:max-w-lg"
+              className="aspect-square self-baseline justify-self-center rounded-big duration-300 hover:scale-110 sm:max-w-lg"
               src={imagePath}
               alt={`${name}, ${role}`}
             />
