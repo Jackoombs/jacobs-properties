@@ -12,6 +12,7 @@ import SectionHeader from "../components/General/Text/SectionHeader";
 import ContactItem from "../components/General/ContactItem";
 import type { GoogleMapProps } from "@react-google-maps/api";
 import PropertyMap from "../components/Property/PropertyMap";
+import GetInTouchButton from "../components/Form/GetInTouch/Button";
 
 const res = await fetch(
   `https://maps.googleapis.com/maps/api/geocode/json?address=WortingHouse%20ChurchLane&key=${
@@ -36,13 +37,12 @@ const location: GoogleMapProps["center"] | undefined = await data.results[0]
       >
       <div class="col-start-2 flex flex-col">
         <Copy size="lg" padding="hero-md"
-          >Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-          nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-          rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-          ipsum dolor.</Copy
+          >Have any questions about our properties? Like to find out more about
+          our processes? Drop us a message and we'll get back to you!</Copy
         >
-        <Link link="/" type="secondary" size="lg">Get in touch</Link>
+        <GetInTouchButton client:idle variant="secondary" size="lg"
+          >Get in touch</GetInTouchButton
+        >
       </div>
     </div>
   </section>
