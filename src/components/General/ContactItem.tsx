@@ -33,7 +33,7 @@ export default function ContactItem({
   return (
     <a
       className={clsx(
-        "flex items-start gap-3 text-xl font-medium",
+        "flex items-start gap-3 text-xl font-medium duration-100 hover:text-secondary-100",
         className,
         textColor
       )}
