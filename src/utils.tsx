@@ -71,14 +71,14 @@ export const getPropertyStatus = (
     return "sstc";
   } else if (status === "reserved") {
     return "reserved";
-  } else if (status === "toLet") {
+  } else if (status === "toLet" || status === "tenancyCurrent") {
     return "to let";
   } else if (
     (status === "underOffer" && type === "letting") ||
     status === "arrangingTenancy"
   ) {
     return "let agreed";
-  } else if (status === "tenancyCurrent" || status === "tenancyFinished") {
+  } else if (status === "tenancyFinished") {
     return "let";
   } else {
     return "n/a";

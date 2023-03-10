@@ -1,9 +1,9 @@
 import Copy from "../General/Text/Copy";
-import { ViewToggle } from "./ViewToggle";
-import PropertyGridView from "./PropertyGridView";
-import PropertyListView from "./PropertyListView";
-import PropertyMap from "./PropertyMap";
-import PropertyMapCard from "./PropertyMapCard";
+import { ViewToggle } from "../Property/ViewToggle";
+import PropertyGridView from "../Property/PropertyGridView";
+import PropertyListView from "../Property/PropertyListView";
+import PropertyMap from "../Property/PropertyMap";
+import PropertyMapCard from "../Property/PropertyMapCard";
 import { useState } from "react";
 import type { Property2 } from "../../env";
 import SortInput from "../Form/SortInput";
@@ -37,18 +37,41 @@ export default function PropertyViewSection({
     (p) => p.location === currMapCardLocation
   );
 
-  const sortedData = [...properties].sort((a, b): any => {
-    if (!a.price || !b.price) return;
-    if (sortBy === "Price (Low-high)") {
-      return a.price - b.price;
-    } else if (sortBy === "Address (A-Z)") {
-      return a.address1.localeCompare(b.address1);
-    } else if (sortBy === "Address (Z-A)") {
-      return b.address1.localeCompare(a.address1);
-    } else if (sortBy === "Price (High-low)") {
-      return b.price - a.price;
+  function sortPropertiesByStatus(properties: Property2[]): Property2[] {
+    const forSaleOrToLetProperties = properties.filter(
+      (property) =>
+        property.status === "forSale" ||
+        property.status === "toLet" ||
+        property.status === "tenancyCurrent"
+    );
+    const otherProperties = properties.filter(
+      (property) =>
+        property.status !== "forSale" &&
+        property.status !== "toLet" &&
+        property.status !== "tenancyCurrent"
+    );
+    return [...forSaleOrToLetProperties, ...otherProperties];
+  }
+
+  const sortedData = () => {
+    if (sortBy === "Relevant") {
+      return sortPropertiesByStatus(properties);
+    } else {
+      [...properties].sort((a, b): any => {
+        if (!a.price || !b.price) return properties;
+        if (sortBy === "Price (Low-high)") {
+          return a.price - b.price;
+        } else if (sortBy === "Address (A-Z)") {
+          return a.address1.localeCompare(b.address1);
+        } else if (sortBy === "Address (Z-A)") {
+          return b.address1.localeCompare(a.address1);
+        } else if (sortBy === "Price (High-low)") {
+          return b.price - a.price;
+        }
+      });
     }
-  });
+    return properties;
+  };
 
   return (
     <section className="overflow-hidden py-10 md:pb-28">
@@ -75,13 +98,13 @@ export default function PropertyViewSection({
           isMobile={isMobile}
         />
       </div>
-      {viewType === "grid" && <PropertyGridView properties={sortedData} />}
-      {viewType === "list" && <PropertyListView properties={sortedData} />}
+      {viewType === "grid" && <PropertyGridView properties={sortedData()} />}
+      {viewType === "list" && <PropertyListView properties={sortedData()} />}
       {viewType === "map" && (
         <div className="mx-auto max-w-container-lg">
           <PropertyMap
             zoom={12}
-            markers={sortedData.map((p) => p.location)}
+            markers={sortedData().map((p) => p.location)}
             location={center}
             state={currMapCardLocation}
             setState={setCurrMapCardLocation}

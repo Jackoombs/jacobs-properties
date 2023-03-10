@@ -3,7 +3,7 @@ import Display from "../General/Text/Display";
 import PropertySearchForm from "./PropertySearchForm";
 import type { Property2 } from "../../env";
 import Fuse from "fuse.js";
-import PropertyViewSection from "../Property/PropertyViewSection";
+import PropertyViewSection from "./PropertyViewSection";
 import AlertBar from "../Form/AlertBar";
 
 interface Props {
