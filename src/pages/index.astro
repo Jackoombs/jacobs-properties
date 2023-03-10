@@ -29,7 +29,7 @@ const lettingsProperties = properties.filter((p) => p.type === "letting");
 const filteredSalesProperties = salesProperties.filter(
   (p) => p.status !== "forSale"
 );
-const filteredLettingsProperties = salesProperties.filter(
+const filteredLettingsProperties = lettingsProperties.filter(
   (p) => p.status !== "toLet"
 );
 
