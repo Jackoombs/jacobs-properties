@@ -20,8 +20,10 @@ export default function FormStep2({ setIsOpen }: Props) {
         <SectionHeader textColor="text-white">
           Thank you for your enquiry.
         </SectionHeader>
-        <Copy textColor="text-white" size="lg">
-          Please check your inbox for more details.
+        <Copy textColor="text-white" size="lg" className="max-w-lg">
+          One of our representatives will be in touch with you shortly to
+          discuss your needs further. If you have any urgent questions or
+          concerns, please don't hesitate to contact us directly.
         </Copy>
         <Button
           className="mt-4"

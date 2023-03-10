@@ -20,8 +20,10 @@ export default function FormStep3({ setIsOpen }: Props) {
         <SectionHeader textColor="text-white">
           Thank you for subscribing.
         </SectionHeader>
-        <Copy textColor="text-white" size="lg">
-          Please check your inbox for more details.
+        <Copy textColor="text-white" size="lg" className="max-w-lg">
+          You will now receive email notifications whenever new properties that
+          match your preferences become available on the market. Thank you for
+          choosing us to help you find your dream property.
         </Copy>
         <Button
           className="mt-4"

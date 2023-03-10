@@ -17,11 +17,14 @@ export default function FormStep3({ setIsOpen }: Props) {
           <TbCheck className="absolute z-10 text-[3rem] text-primary-100 lg:text-8xl" />
           <BsFillCircleFill className="absolute text-[5rem] text-secondary-100 lg:text-[10rem]" />
         </div>
-        <SectionHeader textColor="text-white">
+        <SectionHeader textColor="text-white" className="max-w-md">
           Thank you for your viewing request.
         </SectionHeader>
-        <Copy textColor="text-white" size="lg">
-          We will be in touch with you shortly.
+        <Copy textColor="text-white" size="lg" className="max-w-lg">
+          We have received your request and will be in touch soon to confirm the
+          details. If you have any urgent questions or changes to your schedule,
+          please don't hesitate to contact us directly. We look forward to
+          showing you the property.
         </Copy>
         <Button
           className="mt-4"

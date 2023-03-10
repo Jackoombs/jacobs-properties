@@ -51,7 +51,7 @@ export default function Form({ setIsOpen }: Props) {
   return (
     <div
       className={clsx(
-        "w-full py-10",
+        "w-full flex-1 py-10",
         currentStep === steps ? "bg-primary-100" : "bg-primary-200"
       )}
     >
