@@ -50,7 +50,7 @@ export default function Banner() {
           <Copy
             size="lg"
             textColor="text-white"
-            className="pb-8"
+            className="pb-8 md:max-w-lg"
             padding="hero-lg"
           >
             Jacobs Properties is a family-run estate and letting agency in
