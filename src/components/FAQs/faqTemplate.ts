@@ -54,6 +54,57 @@ If the price is over £625,000 you cannot claim the relief for first time buyers
       answer:
         "March to September. Sellers have months ahead of longer, warmer days – which obviously set the right scene. However, people’s plans often have no regard for seasons – we list and sell property in the Basingstoke area all year round.",
     },
+    {
+      question: "How much will you charge to sell my property?",
+      answer:
+        "Our fees are competitive in each and every case. We could not provide a high-quality service if we were the cheapest but we are nowhere near the most expensive. Before you ask us to proceed, we’ll offer you a quotation based on the type and price of the property you wish to sell and the extent of the service we’ll provide.",
+    },
+    {
+      question: "How do Jacobs set the price of a property?",
+      answer:
+        "By making comparisons with the prices recently achieved for similar property types and by accounting for supply and demand. Location, condition and extra features all play a part, as do the timescale and needs and wishes of the seller.",
+    },
+    {
+      question: "How can I best prepare my property for sale?",
+      answer:
+        "Getting your property looking its best is really important. Please see our helpful guide. We appreciate that sometimes properties may require refurbishment. In such cases we are able to advise on the best approach",
+    },
+    {
+      question: "Must I have a Jacobs 'For Sale' board?",
+      answer:
+        "No, but it really does help if you do. They’re ‘on site’ advertising 24 hours a day, 7 days a week and we know many of our sales are encouraged by their presence.",
+    },
+    {
+      question: "Who will conduct the viewings?",
+      answer:
+        "It is our strong recommendation that Jacobs carry out the viewings without you at the property. Buyers generally feel freer to ask questions and we are able to help overcome any objections. We will always ensure we know and understand your property before viewings commence e.g. when was the property built? How old is the boiler? Is the loft boarded? Is there power to the garage? ",
+    },
+    {
+      question: "How long do Jacobs take to get my property ready for market?",
+      answer:
+        "On average two days. Yes TWO days (some agents take up to two weeks). Once instructed to proceed we don’t hang about. The only delay can be caused by the absence of blue sky for the photos. Without blue sky we won’t go to print. If you’re not in a rush, we’ll go at your speed. If you are – we’ll go at top speed! ",
+    },
+    {
+      question: "Where will Jacobs advertise my property?",
+      answer:
+        "Jacobs have a strong Internet presence with our own website and also the market leader Rightmove, we also have a strong social media prescence on Facebook, Instagram and Twitter.",
+    },
+    {
+      question: "Will Jacobs prepare a floorplan for my property?",
+      answer:
+        "YES. We wouldn’t be without one – Buyers love them! We also include the gross interior floor space on our brochures.",
+    },
+    {
+      question:
+        "Will Jacobs ask me to sign an agency contract for a lengthy period?",
+      answer:
+        "No. Many agents will expect you to sign an agreement ‘tying’ you in with them for periods of 12, 16 and 20 weeks or more. We want you to stay with us because you’re happy with our service, not because you’re locked into a long contract.  ",
+    },
+    {
+      question: "Why sell through Jacobs?",
+      answer:
+        "Because we believe Wilsons CARE more than any other agent and will go further than any other agent to serve your needs and achieve your objectives. We also believe our office to be the best placed in town and this, combined with our attention to top class presentation and advertising, will maximise your prospects of a sale.  Sell with Wilsons and nothing will be too much trouble - Try us and see!",
+    },
   ],
   buyers: [
     {
@@ -460,6 +511,34 @@ Once you know your budget, your ideal location and tenancy start date, register 
       question: "What if I want to end the tenancy?",
       answer:
         "If you are tied into a fixed term contract, you will be liable for the rent until the fixed term is finished. If you are no longer in a fixed term contract (ie. a rolling contract) your tenancy agreement will define the notice you need to give.",
+    },
+  ],
+  home: [
+    {
+      question: "What areas do you cover?",
+      answer:
+        "Basingstoke and surrounding villages, including Oakley, Overton, Wootton St Lawrence, Sherborne St John, Bramley, Cliddesden, Sherfield on Loddon.",
+    },
+    {
+      question: "Where will my property be listed?",
+      answer:
+        "Rightmove, Zoopla, Prime Location, Jacobs’ website and social media.",
+    },
+    {
+      question:
+        "Do Jacobs charge to visit my property to provide a sales appraisal?",
+      answer:
+        "This service is entirely free. We will also, if required, offer advice relating to your particular plan together with ideas to best present your property and garden.",
+    },
+    {
+      question: "How long will it take to sell my property?",
+      answer:
+        "If the price is realistically set a buyer should be found within the first two months. It can take only a few days if a property is a type in demand. When a sale has been agreed, the average time to completion is six to eight weeks. In short, if a property is properly priced and all goes smoothly, the process can be contained within a six to twelve week time span from start to finish.",
+    },
+    {
+      question: "How can I best prepare my property for sale?",
+      answer:
+        "Getting your property looking its best is really important. Please see our helpful guide. We appreciate that sometimes properties may require refurbishment. In such cases we are able to advise on the best approach",
     },
   ],
 };

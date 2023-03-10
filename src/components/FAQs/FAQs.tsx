@@ -5,7 +5,7 @@ import type { Client } from "../../env";
 
 interface Props {
   bgColor?: string;
-  client: Client;
+  client: Client | "home";
   maxFAQs?: number;
   showLink?: boolean;
 }
