@@ -38,7 +38,7 @@ export default function Button({
         label="Instant valuation"
         heading={{ text: "Quick and easy valuation", width: "max-w-[34rem]" }}
         copy={{
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,sed diam nonumy eirmod tempor invidunt ut.",
+          text: "Are you curious about the value of your property? Look no further than our online property valuation tool. With just a few clicks, you can receive a fast and easy estimate of your property's worth.",
           width: "max-w-md",
         }}
       >

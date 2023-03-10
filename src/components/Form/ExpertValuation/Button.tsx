@@ -39,7 +39,7 @@ export default function Button({
         label="Expert Valuation"
         heading={{ text: "Face to face Valuation", width: "max-w-[34rem]" }}
         copy={{
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,sed diam nonumy eirmod tempor invidunt ut.",
+          text: "If you're considering selling or letting your property, it's important to know its current market value. We will visit your property when it suits you, whether that's during the day, in the evening, or at the weekend. We'll take the time to conduct an in-depth valuation of your property, taking into account its location, size, age, and condition, as well as any recent renovations or upgrades. We'll also consider current market trends and comparable properties in your area to give you an accurate estimate of your property's value.",
           width: "max-w-md",
         }}
       >

@@ -42,7 +42,7 @@ export default function Button({
         label="Book a viewing"
         heading={{ text: "Take a Closer look", width: "max-w-[24rem]" }}
         copy={{
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,sed diam nonumy eirmod tempor invidunt ut.",
+          text: "We're glad you like the look of this property! Simply fill in the form with your preferred dates and times, and we'll get back to you as soon as possible to confirm your appointment.",
           width: "max-w-md",
         }}
       >

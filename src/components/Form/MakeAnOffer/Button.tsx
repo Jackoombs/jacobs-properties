@@ -40,7 +40,7 @@ export default function Button({
         label="Make an offer"
         heading={{ text: "Ready to make an offer?", width: "max-w-[28rem]" }}
         copy={{
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,sed diam nonumy eirmod tempor invidunt ut.",
+          text: "Thank you for your interest in our property. If you're ready to make an offer, this form provides a quick and easy way to submit your proposal to us. Please fill in the following details and we'll get back to you as soon as possible to discuss your offer further.",
           width: "max-w-md",
         }}
       >

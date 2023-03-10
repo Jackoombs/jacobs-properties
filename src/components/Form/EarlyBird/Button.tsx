@@ -41,7 +41,7 @@ export default function Button({
           width: "max-w-[34rem]",
         }}
         copy={{
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr,sed diam nonumy eirmod tempor invidunt ut.",
+          text: "Be first to hear about the properties we have coming to the market. Help us match you to your dream home by filling in our quick and easy form.",
           width: "max-w-md",
         }}
       >
