@@ -43,7 +43,7 @@ export default function FAQCard({
           <div>
             <IoMdChatbubbles className="text-xl text-secondary-100 lg:text-[2.5rem]" />
           </div>
-          <h3 className="w-full flex-1 text-lg font-medium text-primary-400 lg:text-[1.75rem]">
+          <h3 className="w-full flex-1 text-lg font-medium leading-normal text-primary-400 lg:text-[1.75rem]">
             {question}
           </h3>
           <motion.div
@@ -57,7 +57,7 @@ export default function FAQCard({
         </div>
         <AnimatePresence initial={false}>
           {currentIndex === index && (
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{
                 opacity: 1,
@@ -69,10 +69,10 @@ export default function FAQCard({
                 height: 0,
                 transition: { duration: 0.4, opacity: { duration: 0.15 } },
               }}
-              className="row-start-2 text-base text-primary-100 lg:pl-[calc(3.5rem+2.5rem)] lg:pr-[calc(3.5rem+1.5rem)]"
+              className="row-start-2  text-base text-primary-100 lg:pl-[calc(3.5rem+2.5rem)] lg:pr-[calc(3.5rem+1.5rem)]"
             >
-              {answer}
-            </motion.p>
+              <p className="whitespace-pre-wrap">{answer}</p>
+            </motion.div>
           )}
         </AnimatePresence>
       </motion.button>

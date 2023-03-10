@@ -3,7 +3,7 @@ import type { Client } from "../../env";
 import Button from "../General/Button";
 import FAQMenuItem from "./FAQMenuItem";
 import FAQs from "./FAQs";
-import FAQJson from "./FAQS.json";
+import { faqTemplate } from "./faqTemplate";
 
 export default function FAQList() {
   const [currentItem, setCurrentItem] = useState<Client>("buyers");
@@ -25,7 +25,7 @@ export default function FAQList() {
         ))}
       </ul>
       <FAQs client={currentItem} bgColor="bg-primary-200" maxFAQs={maxFAQs} />
-      {maxFAQs < FAQJson[currentItem].length && (
+      {maxFAQs < faqTemplate[currentItem].length && (
         <Button
           size="md"
           className="col-span-full mx-auto mt-6"

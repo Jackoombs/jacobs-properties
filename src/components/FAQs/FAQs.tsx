@@ -1,6 +1,6 @@
 import { useState } from "react";
 import FAQCard from "./FAQCard";
-import FAQJson from "./FAQS.json";
+import { faqTemplate } from "./faqTemplate";
 import type { Client } from "../../env";
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 export default function FAQs({ bgColor, client, maxFAQs }: Props) {
   const [currentIndex, setCurrentIndex] = useState(-1);
 
-  const FAQTemplate = FAQJson[client];
+  const FAQTemplate = faqTemplate[client];
 
   return (
     <ul className="flex w-full flex-col items-center gap-2 md:gap-5">
