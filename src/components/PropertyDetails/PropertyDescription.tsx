@@ -5,6 +5,7 @@ import BookAViewingButton from "../Form/BookAViewing/Button";
 import MakeAnOfferButton from "../Form/MakeAnOffer/Button";
 import type { GoogleMapProps } from "@react-google-maps/api";
 import Copy from "../General/Text/Copy";
+import type { Property2 } from "../../env";
 
 interface Props {
   address: string;
@@ -12,6 +13,7 @@ interface Props {
   price: string;
   description: string;
   brochure?: string;
+  type: Property2["type"];
 }
 
 export default function PropertyDescription({
@@ -20,6 +22,7 @@ export default function PropertyDescription({
   price,
   description,
   brochure,
+  type,
 }: Props) {
   return (
     <div className="grid gap-9 py-10 md:gap-12 lg:grid-cols-[5fr_4fr] xl:gap-20">
@@ -56,12 +59,23 @@ export default function PropertyDescription({
             nonumy eirmod tempor invidunt ut labore et dolore.
           </Copy>
           <div className="flex flex-col gap-4 xl:flex-row">
-            <BookAViewingButton price={price} address={address} variant="white">
+            <BookAViewingButton
+              price={price}
+              address={address}
+              variant="white"
+              buyOrRent={type === "letting" ? "rent" : "buy"}
+            >
               Book a viewing
             </BookAViewingButton>
-            <MakeAnOfferButton address={address} variant="primary">
-              Make an offer
-            </MakeAnOfferButton>
+            {type === "selling" && (
+              <MakeAnOfferButton
+                address={address}
+                variant="primary"
+                buyOrRent={"buy"}
+              >
+                Make an offer
+              </MakeAnOfferButton>
+            )}
           </div>
           <div className="font-harms">
             <p className="text-lg lg:text-xl">

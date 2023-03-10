@@ -6,6 +6,7 @@ import GeneralButton from "../../General/Button";
 interface Props {
   children: string;
   address: string;
+  buyOrRent: "buy" | "rent";
   variant?:
     | "primary"
     | "secondary"
@@ -20,6 +21,7 @@ interface Props {
 export default function Button({
   children,
   address,
+  buyOrRent,
   variant = "primary",
   size,
   type = "button",
@@ -44,7 +46,7 @@ export default function Button({
           width: "max-w-md",
         }}
       >
-        <Form {...{ setIsOpen, address }} />
+        <Form {...{ setIsOpen, address, buyOrRent }} />
       </FormModal>
     </>
   );

@@ -7,6 +7,7 @@ interface Props {
   children: string;
   price: string;
   address: string;
+  buyOrRent: "buy" | "rent";
   variant?:
     | "primary"
     | "secondary"
@@ -22,6 +23,7 @@ export default function Button({
   children,
   price,
   address,
+  buyOrRent,
   variant = "primary",
   size,
   type = "button",
@@ -46,7 +48,7 @@ export default function Button({
           width: "max-w-md",
         }}
       >
-        <Form {...{ price, address, setIsOpen }} />
+        <Form {...{ price, address, setIsOpen, buyOrRent }} />
       </FormModal>
     </>
   );

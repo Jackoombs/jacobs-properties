@@ -15,9 +15,10 @@ interface Props {
   price: string;
   address: string;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  buyOrRent: "buy" | "rent";
 }
 
-export default function Form({ price, address, setIsOpen }: Props) {
+export default function Form({ price, address, setIsOpen, buyOrRent }: Props) {
   const steps = 2;
   const [currentStep, setCurrentStep] = useState(0);
   const [submitState, setSubmitState] = useState<SubmitState>("default");
@@ -27,6 +28,7 @@ export default function Form({ price, address, setIsOpen }: Props) {
     defaultValues: {
       dates: [{ date: "" }],
       address,
+      buyOrRent,
     },
   });
   const { handleSubmit, reset, watch } = methods;

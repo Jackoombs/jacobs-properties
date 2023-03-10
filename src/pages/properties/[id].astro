@@ -149,6 +149,7 @@ const shortDescription = truncateDescription(description, 20);
               price={priceString}
               address={`${address1}, ${address2}`}
               size="lg"
+              buyOrRent={type === "letting" ? "rent" : "buy"}
               >Book a viewing
             </BookAViewingButton>
             <SharePropertyButton
