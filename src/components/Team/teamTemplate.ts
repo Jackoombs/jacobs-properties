@@ -70,7 +70,7 @@ export const teamTemplate: TeamCardType[] = [
     role: "Mortgage Advisor",
     imagePath: Denis.src,
     linkedInLink: "",
-    bio: "",
+    bio: "Denis has worked in Financial Services for over 16 years and has been a Mortgage and Protection Consultant for the last 9 years. His primary focus is building long term relationships with his clients and their families. Initially helping them buy their homes and, as years go by, assisting with mortgaging all the time making sure that they have adequate long-term protection. He also specialises in Investment and Buy To Let mortgages. Away from work, Denis spends his spare time with his wife, Becky and his 2 young sons. As a family they are all heavily involved with his local community which includes charitable work with young people.",
     email: "denis@coxandflight.com",
   },
   {
