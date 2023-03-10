@@ -51,7 +51,7 @@ export default function Reviews({ color = "standard" }: Props) {
           <SwiperSlide className="flex justify-center">
             <Review color={color} author="Andrew Brackenridge">
               Ashlea was amazing in her support when going through the stresses
-              of moving home.. She provided information and guidance throughout
+              of moving home. She provided information and guidance throughout
               the process and I would highly recommend both her and Jacobs.
             </Review>
           </SwiperSlide>
