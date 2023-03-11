@@ -23,7 +23,7 @@ export default function NewsCard({
     <div className="flex w-full flex-col gap-6">
       <div className="relative overflow-hidden rounded-big">
         <img
-          className="hover:scale-120 aspect-square duration-300"
+          className="hover:scale-120 aspect-[1.31/1] w-full object-cover object-center duration-300"
           src={image}
           alt=""
         />
