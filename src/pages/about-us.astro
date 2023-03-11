@@ -14,6 +14,9 @@ import NewsSlider from "../components/News/NewsSlider";
 import Reviews from "../components/Reviews/Reviews";
 import FAQs from "../components/FAQs/FAQs";
 import GetInTouchButton from "../components/Form/GetInTouch/Button";
+import Team from "../assets/images/team/team.webp";
+import Jon from "../assets/images/jon-coombs.png";
+import BuyerHero from "../assets/images/buyers/buyer-hero.webp";
 
 const news = await Astro.glob("./news/**.md");
 const newsTemplate = news.map((post) => {
@@ -47,16 +50,16 @@ const newsTemplate = news.map((post) => {
     disableLazy
     bgColor="bg-white"
     image={{
-      path: WhatStandFor.src,
+      path: Jon.src,
       position: true,
       alt: "",
-      aspectRatio: "aspect-[1.27: 1]",
+      aspectRatio: "aspect-[1: 1]",
     }}
   >
     <div>
-      <SectionLabel padding="hero-md">About</SectionLabel>
+      <SectionLabel padding="hero-lg">About</SectionLabel>
       <SectionHeader padding="hero" className="lg:max-w-lg"
-        >About Jacobs Properties
+        >A Personal Pledge
       </SectionHeader>
       <Copy size="md" padding="hero-md" className="max-w-2xl">
         <>
@@ -72,8 +75,7 @@ const newsTemplate = news.map((post) => {
           Basingstoke, and we don’t intend to stop.<br /><br />As the business
           owner, you have my personal guarantee that we are focused to deliver a
           friendly, high quality service throughout to help you reach your
-          goals.<br /><br />[Electronic signature]<br /><br />Jon Coombs<br
-          />Director
+          goals.<br /><br />Jon Coombs<br />Director
         </>
       </Copy>
     </div>
@@ -84,14 +86,14 @@ const newsTemplate = news.map((post) => {
     disableLazy
     bgColor="bg-white"
     image={{
-      path: WhatStandFor.src,
+      path: Team.src,
       position: false,
       alt: "",
       aspectRatio: "aspect-[1.27: 1]",
     }}
   >
     <div class="max-w-3xl 2xl:pl-20">
-      <SectionLabel padding="hero-md">About</SectionLabel>
+      <SectionLabel padding="hero-lg">About</SectionLabel>
       <SectionHeader padding="hero" className="lg:max-w-lg"
         >About Jacobs Properties
       </SectionHeader>
@@ -146,7 +148,7 @@ const newsTemplate = news.map((post) => {
   <HeroSection
     disablePt={true}
     image={{
-      path: WhatStandFor.src,
+      path: BuyerHero.src,
       aspectRatio: "aspect-hero",
       alt: "",
       position: true,
@@ -179,6 +181,6 @@ const newsTemplate = news.map((post) => {
     <SectionHeader padding="misc" className="md:text-center"
       >Frequently asked questions</SectionHeader
     >
-    <FAQs client="buyers" client:visible />
+    <FAQs client="home" client:visible />
   </MiscSection>
 </StandardLayout>
