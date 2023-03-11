@@ -19,6 +19,8 @@ export default function CarouselNavBtn({
     direction === "prev" ? swiper?.slidePrev() : swiper?.slideNext();
   };
 
+  console.log(slideStatus);
+
   const buttonColor = variant === "primary" ? "text-primary-100" : "text-white";
 
   return (

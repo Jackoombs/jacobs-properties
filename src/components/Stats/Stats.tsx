@@ -1,31 +1,100 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
 import "swiper/css";
-import SwiperNavBtns from "../General/SwiperNavBtns";
+import CarouselNavBtn from "../General/CarouselNavBtns";
 import SectionHeader from "../General/Text/SectionHeader";
 import { useState } from "react";
 import StatCard from "./StatCard";
 
-export default function Stats() {
-  const [isStartOrEnd, setIsStartOrEnd] = useState("start");
+interface Props {
+  statType: "letting" | "selling";
+}
+
+export default function Stats({ statType }: Props) {
+  const [slideStatus, setSlideStatus] = useState<
+    "start" | "end" | "locked" | null
+  >("start");
+  const [swiper, setSwiper] = useState<null | SwiperType>(null);
+  console.log(swiper?.isLocked);
 
   const handleSlideChange = (e: SwiperType) => {
-    if (e.isBeginning) setIsStartOrEnd("start");
-    else if (e.isEnd) setIsStartOrEnd("end");
-    else setIsStartOrEnd("");
+    if (e.isLocked) setSlideStatus("locked");
+    else if (e.isEnd) setSlideStatus("end");
+    else if (e.isBeginning) setSlideStatus("start");
+    else setSlideStatus(null);
   };
 
-  const stats = [
-    { text: "Local market share", value: 50, isPercent: true },
-    { text: "Success rate", value: 73, isPercent: true },
-    { text: "Average days to sell", value: 34, isPercent: false },
-    { text: "Sale price achieved", value: 97, isPercent: true },
-    { text: "Gangster employees", value: 0, isPercent: false },
+  const sellingStats = [
+    {
+      text: "Average of asking price achieved",
+      value: 99,
+      isPercent: true,
+      isRounded: true,
+      isPrice: false,
+    },
+    {
+      text: "No of buyers looking",
+      value: 8564,
+      isPercent: false,
+      isRounded: true,
+      isPrice: false,
+    },
+    {
+      text: "Average days to exchange vs industry average of circa 120",
+      value: 92,
+      isPercent: false,
+      isRounded: true,
+      isPrice: false,
+    },
+    {
+      text: "Stars on google",
+      value: 4.7,
+      isPercent: false,
+      isRounded: false,
+      isPrice: false,
+    },
   ];
+
+  const lettingStats = [
+    {
+      text: "Average rent pcm",
+      value: 1258,
+      isPercent: false,
+      isRounded: true,
+      isPrice: true,
+    },
+    {
+      text: "Increased rent vs last qtr",
+      value: 3.5,
+      isPercent: true,
+      isRounded: false,
+      isPrice: false,
+    },
+    {
+      text: "Average yield",
+      value: 5.8,
+      isPercent: true,
+      isRounded: false,
+      isPrice: false,
+    },
+    {
+      text: "Increase in rent vs last year",
+      value: 11.2,
+      isPercent: true,
+      isRounded: false,
+      isPrice: false,
+    },
+  ];
+
+  const stats = statType === "selling" ? sellingStats : lettingStats;
 
   return (
     <>
       <Swiper
+        onSwiper={(swiper) => {
+          setSwiper(swiper);
+          handleSlideChange(swiper);
+        }}
         className="flex flex-col"
         slidesPerView={1}
         spaceBetween={20}
@@ -55,12 +124,14 @@ export default function Stats() {
           </SectionHeader>
         </div>
         <div slot="container-end">
-          <SwiperNavBtns isStartOrEnd={isStartOrEnd} />
+          <CarouselNavBtn {...{ swiper, slideStatus }} />
         </div>
 
-        {stats.map(({ text, value, isPercent }, index) => (
+        {stats.map(({ text, value, isPercent, isRounded, isPrice }, index) => (
           <SwiperSlide key={index}>
-            <StatCard {...{ index, value, isPercent }}>{text}</StatCard>
+            <StatCard {...{ value, isPercent, isRounded, isPrice }}>
+              {text}
+            </StatCard>
           </SwiperSlide>
         ))}
       </Swiper>
