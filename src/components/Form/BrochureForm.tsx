@@ -80,7 +80,11 @@ export default function BrochureForm({
         </div>
         <p className="pb-8 font-harm text-[0.625rem] text-primary-100 lg:text-[0.75rem]">
           {"By pressing 'Download' you are agreeing to our "}
-          <a className=" pt-3 pb-7 underline" href="/" target="_blank">
+          <a
+            className=" pt-3 pb-7 underline"
+            href="/jacobs-privacy-statement.pdf"
+            target="_blank"
+          >
             privacy policy
           </a>
         </p>

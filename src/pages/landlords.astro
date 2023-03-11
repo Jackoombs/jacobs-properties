@@ -22,6 +22,7 @@ import Reviews from "../components/Reviews/Reviews";
 import FAQs from "../components/FAQs/FAQs";
 import type { Property2 } from "../env";
 import ValuationSection from "../components/Layout/ValuationSection.astro";
+import Link from "../components/General/Link";
 
 const res = await fetch(`https://jacobs-server.onrender.com/properties`);
 const properties: Property2[] = await res.json();
@@ -101,6 +102,22 @@ const client = "landlords";
           Choose the Fully Managed option and let us look after the entire
           running of your rental property, or your portfolio of properties.</Copy
         >
+        <div
+          class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
+        >
+          <GetInTouchButton client:load size="md" variant="secondary"
+            >Get in touch</GetInTouchButton
+          >
+          <Link
+            size="md"
+            link="/Landlord Fee Schedule Fully Managed.pdf"
+            type="primary"
+            newTab
+            download
+          >
+            Letting Fees
+          </Link>
+        </div>
       </div>
     </HeroSection>
 
@@ -123,6 +140,22 @@ const client = "landlords";
           your lettings but need some help with finding the right tenant, then
           this is the ideal service for you.</Copy
         >
+        <div
+          class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
+        >
+          <GetInTouchButton client:load size="md" variant="secondary"
+            >Get in touch</GetInTouchButton
+          >
+          <Link
+            size="md"
+            link="/Landlord Fee Schedule Let Only.pdf"
+            type="primary"
+            newTab
+            download
+          >
+            Letting Fees
+          </Link>
+        </div>
       </div>
     </HeroSection>
 
