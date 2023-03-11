@@ -19,17 +19,31 @@ export default function FormStepButtons({
   submitState,
 }: Props) {
   return (
-    <div
-      className={clsx(
-        "mx-auto flex w-full",
-        currentStep === 0 ? "justify-end" : "justify-between"
+    <div className="mx-auto w-full">
+      <div
+        className={clsx(
+          "flex",
+          currentStep === 0 ? "justify-end" : "justify-between"
+        )}
+      >
+        <FormButton type="prev" {...{ steps, currentStep, setCurrentStep }} />
+        <FormButton type="next" {...{ steps, currentStep, setCurrentStep }} />
+        <SubmitButton
+          {...{ steps, currentStep, setCurrentStep, submitText, submitState }}
+        />
+      </div>
+      {currentStep === steps - 1 && (
+        <p className="pt-6 text-center font-harm text-xs">
+          By clicking ‘{submitText}’ you’re agreeing to our{" "}
+          <a
+            href="/jacobs-privacy-statement.pdf"
+            className="underline"
+            target="blank"
+          >
+            terms & conditions
+          </a>
+        </p>
       )}
-    >
-      <FormButton type="prev" {...{ steps, currentStep, setCurrentStep }} />
-      <FormButton type="next" {...{ steps, currentStep, setCurrentStep }} />
-      <SubmitButton
-        {...{ steps, currentStep, setCurrentStep, submitText, submitState }}
-      />
     </div>
   );
 }
