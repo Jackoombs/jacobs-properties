@@ -8,13 +8,11 @@ import Team from "../assets/images/team/team.webp";
 import FirstTime from "../assets/images/home/first-time.webp";
 import SectionLabel from "../components/General/Text/SectionLabel";
 import SectionHeader from "../components/General/Text/SectionHeader";
-import SectionSubHeader from "../components/General/Text/SectionSubHeader";
 import Copy from "../components/General/Text/Copy";
 import HowCanWeHelp from "../components/Home/HowCanWeHelp";
 import Video from "../components/General/Video";
 import RecentlySoldLet from "../components/Property/RecentlySoldLet";
 import Thumbnail from "../assets/images/home/thumbnail.webp";
-import BrochureForm from "../components/Form/BrochureForm";
 import Reviews from "../components/Reviews/Reviews";
 import FAQs from "../components/FAQs/FAQs";
 import Display from "../components/General/Text/Display";
@@ -61,19 +59,17 @@ console.log(properties.length, salesProperties.length, lettingsProperties);
     >
       <div class="flex flex-col md:max-w-xl md:justify-center">
         <SectionLabel padding="hero-md">About</SectionLabel>
-        <SectionHeader padding="hero" className="max-w-[17rem] sm:max-w-none"
+        <SectionHeader padding="hero" className="md:max-w-[25rem] sm:max-w-none"
           >We’re about people, not just property</SectionHeader
         >
-        <Copy size="md" padding="hero-md"
-          >Meet Team Jacobs. We’re a friendly bunch of property experts who put
-          people first. Since 1999, we’ve been helping the people of Basingstoke
-          get on the property ladder, find their forever home, sell up and move
-          on, downsize, upsize, rightsize – whatever your property needs, we’ve
-          got your back.</Copy
+        <Copy size="md" padding="hero-md" className="lg:max-w-lg"
+          >Meet Team Jacobs. We are a friendly and professional team of property
+          experts who put people first. Since 1999, we’ve been helping the
+          people of Basingstoke get on the property ladder, find their forever
+          home, sell up and move on, downsize, upsize, rightsize – whatever your
+          property needs, we have it covered.</Copy
         >
-        <Link link="/meet-the-team" type="secondary" size="lg"
-          >Meet the Team</Link
-        >
+        <Link link="/about-us" type="secondary" size="lg">About us</Link>
       </div>
     </HeroSection>
 
@@ -113,9 +109,9 @@ console.log(properties.length, salesProperties.length, lettingsProperties);
       }}
     >
       <div class="flex flex-col lg:max-w-xl lg:justify-center">
-        <SectionLabel className="pb-3">Sales Brochure</SectionLabel>
+        <SectionLabel className="pb-3">Property Report</SectionLabel>
         <SectionHeader className="pb-2 md:max-w-[30rem]"
-          >Get your free home property report</SectionHeader
+          >Get your free home property report...</SectionHeader
         >
         <Copy className="pb-5 max-w-md" size="md"
           >This report is worth £19.95 and includes a valuation of your property
