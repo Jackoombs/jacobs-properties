@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper/types";
 import "swiper/css";
-import Buyers from "../../assets/images/home/buyers.webp";
+import Buyers from "../../assets/images/buyers/buyer-hero.webp";
 import Sellers from "../../assets/images/home/sellers.webp";
 import Landlords from "../../assets/images/home/landlords.webp";
 import Tenants from "../../assets/images/home/tenants.webp";
@@ -25,16 +25,16 @@ export default function HowCanWeHelp() {
 
   const slides = [
     {
-      title: "Buyers",
-      bgSrc: Buyers,
-      imageAlt: "",
-      link: "/buyers",
-    },
-    {
       title: "Sellers",
       bgSrc: Sellers,
       imageAlt: "",
       link: "/sellers",
+    },
+    {
+      title: "Buyers",
+      bgSrc: Buyers,
+      imageAlt: "",
+      link: "/buyers",
     },
     {
       title: "Landlords",
