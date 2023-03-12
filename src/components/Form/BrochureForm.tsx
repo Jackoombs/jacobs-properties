@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Button from "../General/Button";
 import { useRef } from "react";
+import axios from "axios";
 
 interface Props {
   href:
@@ -48,6 +49,7 @@ export default function BrochureForm({
     console.log(data);
     if (downloadRef.current) {
       downloadRef.current.click();
+      axios.post("https://jacobs-server.onrender.com/brochureform", data);
     }
   };
 
