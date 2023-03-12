@@ -40,7 +40,7 @@ If the price is over £625,000 you cannot claim the relief for first time buyers
     },
     {
       question:
-        "Do Jacobs charge to visit my property to provide a sales appraisal?",
+        "Do Jacobs charge to visit my property to provide a sales or lettings valuation?",
       answer:
         "This service is entirely free. We will also, if required, offer advice relating to your particular plan together with ideas to best present your property and garden.",
     },
@@ -526,7 +526,7 @@ Once you know your budget, your ideal location and tenancy start date, register 
     },
     {
       question:
-        "Do Jacobs charge to visit my property to provide a sales appraisal?",
+        "Do Jacobs charge to visit my property to provide a sales or lettings valuation?",
       answer:
         "This service is entirely free. We will also, if required, offer advice relating to your particular plan together with ideas to best present your property and garden.",
     },
