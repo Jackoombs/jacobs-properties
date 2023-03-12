@@ -167,7 +167,11 @@ const newsTemplate = news.map((post) => {
   </HeroSection>
 
   <MiscSection bgColor="bg-primary-200">
-    <NewsSlider newsTemplate={newsTemplate} client:idle />
+    <NewsSlider
+      newsTemplate={newsTemplate}
+      title="Read the latest property news"
+      client:idle
+    />
   </MiscSection>
 
   <MiscSection bgColor="bg-white">
