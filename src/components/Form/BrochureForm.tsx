@@ -33,6 +33,7 @@ export default function BrochureForm({
       .string()
       .min(1, { message: messages.required })
       .email({ message: messages.email }),
+    buyOrRent: z.string(),
   });
   type SchemaType = z.infer<typeof Schema>;
 
@@ -43,6 +44,10 @@ export default function BrochureForm({
     formState: { errors, isSubmitting },
   } = useForm<SchemaType>({
     resolver: zodResolver(Schema),
+    defaultValues: {
+      buyOrRent:
+        href === "/Jacobs properties - Guide To Letting.pdf" ? "rent" : "buy",
+    },
   });
 
   const onSubmit: SubmitHandler<SchemaType> = async (data) => {
