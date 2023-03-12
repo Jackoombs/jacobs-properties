@@ -16,9 +16,10 @@ export type newsCardType = {
 
 interface Props {
   newsTemplate: newsCardType[];
+  title: string;
 }
 
-export default function newsSlider({ newsTemplate }: Props) {
+export default function newsSlider({ newsTemplate, title }: Props) {
   const [slideStatus, setSlideStatus] = useState<
     "start" | "end" | "locked" | null
   >("start");
@@ -34,9 +35,7 @@ export default function newsSlider({ newsTemplate }: Props) {
   return (
     <>
       <div className="flex items-start justify-between">
-        <SectionHeader padding="misc">
-          Read the latest property news
-        </SectionHeader>
+        <SectionHeader padding="misc">{title}</SectionHeader>
         <CarouselNavBtns swiper={swiper} slideStatus={slideStatus} />
       </div>
       <Swiper
