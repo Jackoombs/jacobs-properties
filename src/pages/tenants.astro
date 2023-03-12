@@ -19,6 +19,7 @@ import ProcessSlider from "../components/Process/ProcessSlider";
 import Reviews from "../components/Reviews/Reviews";
 import PropertySearchBar from "../components/General/PropertySearchBar";
 import GetInTouchButton from "../components/Form/GetInTouch/Button";
+import Valuation from "../assets/images/valuation.webp";
 
 const client = "tenants";
 ---
@@ -70,7 +71,11 @@ const client = "tenants";
   <MiscSection>
     <SectionHeader padding="misc">Why rent with us?</SectionHeader>
     <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
-      <img class="rounded-big" src={WhyRent.src} alt="" />
+      <img
+        class="aspect-[1.2/1] w-full rounded-big object-cover"
+        src={Valuation.src}
+        alt=""
+      />
       <Dropdown client={client} client:visible />
     </div>
   </MiscSection>
