@@ -8,13 +8,25 @@ import SectionHeader from "../components/General/Text/SectionHeader";
 import SharePropertyButton from "../components/General/ShareButton";
 import PageHeader from "../components/General/Text/PageHeader";
 import Copy from "../components/General/Text/Copy";
+import NewsSlider from "../components/News/NewsSlider";
+import Reviews from "../components/Reviews/Reviews";
 
 export interface Props {
   title: string;
   description: string;
 }
 
+const news = await Astro.glob("../pages/news/**.md");
+const newsTemplate = news.map((post) => {
+  const { title, category, date, image } = post.frontmatter;
+  return { title, category, date, image };
+});
+
 const { title, description, frontmatter } = Astro.props;
+
+const filteredTemplate = newsTemplate.filter(
+  (post) => post.title !== frontmatter.title
+);
 ---
 
 <!DOCTYPE html>
@@ -57,6 +69,19 @@ const { title, description, frontmatter } = Astro.props;
         <hr class="border-primary-100" />
         <slot />
       </div>
+    </MiscSection>
+    <MiscSection bgColor="bg-primary-200">
+      <NewsSlider
+        newsTemplate={filteredTemplate}
+        title="Read the latest property news"
+        client:idle
+      />
+    </MiscSection>
+    <MiscSection>
+      <SectionHeader padding="misc" className="md:text-center"
+        >Hear from our customers</SectionHeader
+      >
+      <Reviews color="alt" client:visible />
     </MiscSection>
     <Footer />
   </body>
