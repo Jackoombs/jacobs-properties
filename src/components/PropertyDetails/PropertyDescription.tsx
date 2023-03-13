@@ -55,8 +55,10 @@ export default function PropertyDescription({
         <div className="flex w-full flex-col gap-5 rounded-big bg-secondary-100 px-3 py-8 text-primary-100 md:px-8 lg:p-12">
           <SectionHeader>Interested in this property?</SectionHeader>
           <Copy size="lg">
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore.
+            If you'd like to book a viewing, click the "Book a Viewing" button
+            and select a date and time that works for you. Our team will then
+            contact you to confirm the viewing and provide you with any
+            additional information you may need
           </Copy>
           <div className="flex flex-col gap-4 xl:flex-row">
             <BookAViewingButton
