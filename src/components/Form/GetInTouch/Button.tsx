@@ -38,7 +38,7 @@ export default function Button({
         label="Get in touch"
         heading={{ text: "How can we help you?", width: "max-w-[24rem]" }}
         copy={{
-          text: "Do you have a question? Need some information? Want to book a valuation or viewing? Whatever your query just fill in the quick and easy form and we will get back to you before you know it. Alternatively call us on 01256 781300. (need to be able to hit the number and call)",
+          text: "Do you have a question? Need some information? Want to book a valuation or viewing? Whatever your query just fill in the quick and easy form and we will get back to you before you know it. Alternatively call us on 01256 781300.",
           width: "max-w-md",
         }}
       >
