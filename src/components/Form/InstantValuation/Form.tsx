@@ -39,7 +39,6 @@ export default function Form({ setIsOpen }: Props) {
         );
         setValpalData(res.data.results);
         setCurrentStep((curr) => curr + 1);
-        console.log(res);
       } catch (err) {
         setSubmitState("error");
         console.log(err);

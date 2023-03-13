@@ -22,7 +22,6 @@ import PropertyListCard from "../../components/Property/PropertyListCard";
 
 const res = await fetch("https://jacobs-server.onrender.com/properties");
 const properties: Property2[] = await res.json();
-console.log(properties);
 
 export async function getStaticPaths() {
   const res = await fetch("https://jacobs-server.onrender.com/properties");
@@ -176,6 +175,7 @@ const shortDescription = truncateDescription(description, 20);
     address={`${address1},${address2}`}
     price={priceString}
     id={id}
+    type={type}
     client:visible
   />
 

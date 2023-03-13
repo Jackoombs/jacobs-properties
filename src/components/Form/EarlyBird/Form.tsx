@@ -36,7 +36,6 @@ export default function Form({ setIsOpen }: Props) {
           data
         );
         setCurrentStep((curr) => curr + 1);
-        console.log(res);
       } catch (err) {
         setSubmitState("error");
         console.log(err);

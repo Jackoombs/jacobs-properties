@@ -40,8 +40,6 @@ export default function PropertyMap({
     setState ? setState(marker) : undefined;
   };
 
-  console.log(currentMarker.current);
-
   return (
     <div className="bg-gray-200 lg:relative">
       <GoogleMap

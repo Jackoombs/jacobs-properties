@@ -39,7 +39,6 @@ export default function Form({ address, setIsOpen, buyOrRent }: Props) {
           data
         );
         setCurrentStep((curr) => curr + 1);
-        console.log(res);
       } catch (err) {
         setSubmitState("error");
         console.log(err);

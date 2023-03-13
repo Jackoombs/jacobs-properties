@@ -22,8 +22,6 @@ export default function BuyRentToggle({
 }: Props) {
   const { setValue } = useFormContext();
 
-  console.log(value);
-
   return (
     <>
       <input
