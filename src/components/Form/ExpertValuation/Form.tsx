@@ -73,7 +73,7 @@ export default function Form({ setIsOpen }: Props) {
                 <FormStep2 />
               </FormStepWrapper>
               <FormStepWrapper
-                width="md:max-w-[35rem]"
+                width="md:min-w-[32rem]"
                 formStep={2}
                 {...{ currentStep }}
               >

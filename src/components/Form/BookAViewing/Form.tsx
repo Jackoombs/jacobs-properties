@@ -69,7 +69,7 @@ export default function Form({ price, address, setIsOpen, buyOrRent }: Props) {
           >
             <div className="flex w-full flex-col items-center gap-5 md:w-max">
               <FormStepWrapper
-                width="md:max-w-[35rem]"
+                width="md:min-w-[32rem]"
                 formStep={0}
                 {...{ currentStep }}
               >
