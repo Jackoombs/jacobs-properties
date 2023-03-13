@@ -53,11 +53,12 @@ export default function PropertyViewSection({
     return [...forSaleOrToLetProperties, ...otherProperties];
   }
 
-  const sortedData = () => {
+  const sortedProperties = () => {
+    let sortedProperties: Property2[] = [];
     if (sortBy === "Relevant") {
-      return sortPropertiesByStatus(properties);
+      sortedProperties = sortPropertiesByStatus(properties);
     } else {
-      [...properties].sort((a, b): any => {
+      sortedProperties = [...properties].sort((a, b): any => {
         if (!a.price || !b.price) return properties;
         if (sortBy === "Price (Low-high)") {
           return a.price - b.price;
@@ -70,7 +71,7 @@ export default function PropertyViewSection({
         }
       });
     }
-    return properties;
+    return sortedProperties;
   };
 
   return (
@@ -98,13 +99,17 @@ export default function PropertyViewSection({
           isMobile={isMobile}
         />
       </div>
-      {viewType === "grid" && <PropertyGridView properties={sortedData()} />}
-      {viewType === "list" && <PropertyListView properties={sortedData()} />}
+      {viewType === "grid" && (
+        <PropertyGridView properties={sortedProperties()} />
+      )}
+      {viewType === "list" && (
+        <PropertyListView properties={sortedProperties()} />
+      )}
       {viewType === "map" && (
         <div className="mx-auto max-w-container-lg">
           <PropertyMap
             zoom={12}
-            markers={sortedData().map((p) => p.location)}
+            markers={sortedProperties().map((p) => p.location)}
             location={center}
             state={currMapCardLocation}
             setState={setCurrMapCardLocation}
