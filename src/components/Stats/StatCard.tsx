@@ -54,7 +54,7 @@ export default function StatCard({
       )}
     >
       <div className="flex h-full flex-col justify-center gap-10">
-        <p className="text-[7.25rem] font-bold leading-[6rem]">
+        <p className="text-[6.25rem] font-bold leading-[6rem]">
           {formattedValue(statValue)}
         </p>
         <p className="max-w-xs font-harm text-[1.25rem] font-medium">
