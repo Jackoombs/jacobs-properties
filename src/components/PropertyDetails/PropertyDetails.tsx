@@ -20,6 +20,7 @@ interface Props {
   price: string;
   id: string;
   brochure?: string;
+  type: "selling" | "letting";
 }
 
 export type DetailItem =
@@ -36,6 +37,7 @@ export default function PropertyDetails({
   price,
   id,
   brochure,
+  type,
 }: Props) {
   const detailMenuItems = [
     details.description && "Description",
@@ -44,8 +46,6 @@ export default function PropertyDetails({
     details.images.length !== 0 && "Gallery",
     details.virtualTour && "Virtual Tour",
   ].filter(Boolean) as DetailItem[];
-
-  console.log(detailMenuItems);
 
   const [currentMenuItem, setCurrentMenuItem] = useState<DetailItem>(
     detailMenuItems[0]
@@ -65,7 +65,7 @@ export default function PropertyDetails({
         <div className="mx-auto max-w-container-lg">
           {currentMenuItem === "Description" && (
             <PropertyDescription
-              {...{ address, price, location, brochure }}
+              {...{ address, price, location, brochure, type }}
               description={details.description}
             />
           )}

@@ -21,7 +21,7 @@ export interface Property {
 
 export interface Property2 {
   id: string;
-  type: "selling" | "letting" | "sellingAndLetting";
+  type: "selling" | "letting";
   status:
     | "preAppraisal"
     | "valuation"
