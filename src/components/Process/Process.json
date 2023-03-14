@@ -18,7 +18,7 @@
     },
     {
       "title": "Hire a surveyor and conveyancer",
-      "text": "Before you start house-hunting, it’s a good idea to work out how much your monthly mortgage payments will likely cost and whether you can afford it."
+      "text": "The surveyor will value the property and check for potential problems which might affect its final cost, whilst the conveyancer will handle the legal side of the sale."
     },
     {
       "title": "Finalise everything",
@@ -35,32 +35,36 @@
   ],
   "sellers": [
     {
-      "title": "Arrange an appraisal visit",
-      "text": "During the appraisal visit, we will have a tour around your property then provide an accurate rental value and make recommendations where we see fit."
+      "title": "Get the price right",
+      "text": "We will give you an accurate and up-to-date valuation of your property, based on data including current market values and recent sales in your area."
     },
     {
-      "title": "Prepare your property",
-      "text": "Once we’re happy that all legalities are in place, we will prepare marketing materials to create a listing on leading property portals Rightmove and Zoopla, social media and our own website."
+      "title": "Prepare marketing materials",
+      "text": "We will take professional photos of your property, create floor plans, video tours and even capture drone footage if appropriate, to give your property the best chance of standing out in the market."
     },
     {
-      "title": "Find the right tenant",
-      "text": "We will invite suitable tenants for viewings. All subsequent offers and relevant information will be presented to you in writing, all you have to do is choose your best fit."
+      "title": "List your property",
+      "text": "We will advertise your property on leading property portals, social media and our website, as well as contact our database of registered buyers."
     },
     {
-      "title": "Referencing and deposits",
-      "text": "We will take a holding deposit from your tenant, send them more information and initiate a reference check in partnership with a professional company."
+      "title": "Arrange viewings",
+      "text": "One of our team members will be on hand to carry out accompanied viewings at a time and day that works for you and your prospective buyers."
     },
     {
-      "title": "Contracts, payments and move-in",
-      "text": "When all referencing checks out, you and your tenant will sign the tenancy agreement, and you tenant will pay the first month’s rent and balance of deposit before moving in."
+      "title": "Respond to feedback",
+      "text": "We aim to provide you with feedback within 24 hours after each viewing and evaluate the comments to come up with a plan of action if necessary."
     },
     {
-      "title": "Property management",
-      "text": "Throughout the tenancy, our network of trusted contractors will carry out regular inspections and promptly respond to maintenance requests if needed."
+      "title": "Accept an offer",
+      "text": "You’ve received an offer – brilliant! We will negotiate the best price for your property on your behalf, but the final decision is yours to make."
     },
     {
-      "title": "Check-out and deposit settlement",
-      "text": "When the time comes for your tenant to move out, we will pay them a visit to ensure the property is returned in its original condition; and the search for the next tenant begins."
+      "title": "Progress your sale",
+      "text": "A dedicated team member will guide you through the sales progression and do their best to reduce delays and avoid problems where possible."
+    },
+    {
+      "title": "Completion day",
+      "text": "Once the property sales contracts are exchanged via your solicitors and the final funds are transferred, it’s time to hand over the keys. Congratulations!"
     }
   ],
   "landlords": [
