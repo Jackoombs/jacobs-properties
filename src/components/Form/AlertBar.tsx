@@ -14,7 +14,7 @@ export default function AlertBar() {
       <div
         className={clsx(
           "top-0 left-0 flex h-10 w-full origin-top items-center overflow-hidden bg-secondary-100 text-primary-100 duration-300 md:absolute",
-          showBar ? "max-h-10" : "max-h-0"
+          showBar ? "max-h-10" : "max-h-0 opacity-0"
         )}
       >
         <div className="mx-auto flex w-full max-w-container-lg items-center justify-between">
