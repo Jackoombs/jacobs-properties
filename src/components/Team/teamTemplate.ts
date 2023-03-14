@@ -62,7 +62,7 @@ export const teamTemplate: TeamCardType[] = [
     role: "HMO Support & Administration",
     imagePath: Miriam.src,
     linkedInLink: "",
-    bio: "As you probably guessed from the photo, Miriam is from Brazil. Miriam joined the team about 7 years ago and plays a vital role in overseeing the smooth running of our HMO let properties. Miriam always works with a smile and is the life and soul of the party. She has 2 grown up children and is married to Ben.",
+    bio: "Miriam joined the team about 7 years ago and plays a vital role in overseeing the smooth running of our HMO let properties. Miriam always works with a smile and is the life and soul of the party. She has 2 grown up children and is married to Ben.",
     email: "miriam-price@hotmail.com",
   },
   {
