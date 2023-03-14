@@ -24,7 +24,6 @@ export default function AccrediationSlider() {
     else if (e.isBeginning) setSlideStatus("start");
     else if (e.isEnd) setSlideStatus("end");
     else setSlideStatus(null);
-    console.log(e.isLocked);
   };
 
   return (
