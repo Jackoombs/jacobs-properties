@@ -31,6 +31,7 @@ export default function PropertySearch({ properties, center }: Props) {
     propertyType: undefined,
     excludeSold: false,
   });
+  const [filteredProperties, setFilteredProperties] = useState(properties);
 
   useEffect(() => {
     const buyOrRent: string | null = window.sessionStorage.getItem("buyOrRent");
@@ -91,7 +92,11 @@ export default function PropertySearch({ properties, center }: Props) {
     return result;
   };
 
-  const filteredProperties = filterProperties(properties, searchCriteria);
+  useEffect(() => {
+    setTimeout(() => {
+      setFilteredProperties(filterProperties(properties, searchCriteria));
+    }, 300);
+  }, [searchCriteria]);
 
   return (
     <>
