@@ -47,7 +47,7 @@ If the price is over £625,000 you cannot claim the relief for first time buyers
     {
       question: "How long will it take to sell my property?",
       answer:
-        "If the price is realistically set a buyer should be found within the first two months. It can take only a few days if a property is a type in demand. When a sale has been agreed, the average time to completion is six to eight weeks. In short, if a property is properly priced and all goes smoothly, the process can be contained within a six to twelve week time span from start to finish.",
+        "If the price is realistically set a buyer should be found within the first two months. It can take only a few days if a property is a type in demand. When a sale has been agreed, the average time to completion is six to twelve weeks. In short, if a property is properly priced and all goes smoothly, the process can be contained within a six to twelve week time span from start to finish.",
     },
     {
       question: "When is the best time to sell?",
