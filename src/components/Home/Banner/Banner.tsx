@@ -50,7 +50,7 @@ export default function Banner() {
       <div className="row-start-2 mx-auto w-full max-w-container-lg self-center pb-11 lg:pb-0">
         <div className="mx-auto flex flex-col text-white md:mx-0 md:max-w-[40rem] xl:max-w-[48rem]">
           <PageHeader textColor="text-white" padding="hero">
-            A people-first estate agent in Basingstoke & Surrounding Villages
+            A people-first estate agent in Basingstoke & surrounding villages
           </PageHeader>
           <Copy
             size="lg"
