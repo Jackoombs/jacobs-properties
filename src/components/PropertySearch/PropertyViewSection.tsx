@@ -75,7 +75,7 @@ export default function PropertyViewSection({
   };
 
   return (
-    <section className="overflow-hidden py-10 md:pb-28">
+    <>
       <div className="mx-auto grid w-full max-w-container-lg grid-cols-2 grid-rows-2 items-center justify-between pb-4 lg:flex lg:gap-36 lg:pb-10">
         <Copy className="order-1 text-right lg:order-none" size="lg">{`${
           properties.length
@@ -123,6 +123,6 @@ export default function PropertyViewSection({
           </PropertyMap>
         </div>
       )}
-    </section>
+    </>
   );
 }
