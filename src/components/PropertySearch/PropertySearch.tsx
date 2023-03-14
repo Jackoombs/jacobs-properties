@@ -107,14 +107,14 @@ export default function PropertySearch({ properties, center }: Props) {
           <PropertySearchForm {...{ setSearchCriteria }} />
         </div>
       </section>
-      <section className="overflow-hidden py-10 md:pb-28 lg:hidden">
+      <section className="overflow-hidden pb-10 md:pb-28 lg:hidden">
         <PropertyViewSection
           properties={filteredProperties}
           isMobile={true}
           {...{ center }}
         />
       </section>
-      <section className="hidden overflow-hidden py-10 md:pb-28 lg:block">
+      <section className="hidden overflow-hidden pb-10 md:pb-28 lg:block">
         <PropertyViewSection
           properties={filteredProperties}
           isMobile={false}
