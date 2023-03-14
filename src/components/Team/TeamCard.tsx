@@ -38,7 +38,7 @@ export default function TeamCard({
             </a>
           )}
         </div>
-        <div className="flex flex-col gap-2 text-primary-100">
+        <div className="flex w-full flex-col gap-2 text-primary-100">
           <div className="flex items-center justify-between">
             <SectionSubHeader size="lg">{name}</SectionSubHeader>
             <FaInfoCircle className="mr-2 text-2xl" />
