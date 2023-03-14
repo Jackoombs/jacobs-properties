@@ -27,10 +27,10 @@ export const teamTemplate: TeamCardType[] = [
   },
   {
     name: "Cameron George",
-    role: "Sales & Lettings Director",
+    role: "Sales & Lettings Manager",
     imagePath: Cameron.src,
     linkedInLink: "",
-    bio: "Cameron has worked within the industry for 10 years and has excelled in his career throughout that time. Cameron’s strength is in his adaptability to work with every Vendor, Investor, Landlord and Tenant successfully and ensure that the service he provides is tailored to their individual needs. Cameron views each person as an individual, with individual needs and it is Cameron’s adaptability and versatility that has enabled him to maximise positive results for all of those that he works with. In his free time he manages two local football teams and is a devoted West Ham supporter – but first and foremost he is ‘Dad’ to his young son.",
+    bio: "Cameron has worked within the industry for 10 years and has excelled in his career throughout that time. Cameron’s strengths are his adaptability and versatility to work with every Vendor, Investor, Landlord and Tenant successfully and ensure that the service he provides is tailored to their individual needs to maximise positive results. In his free time he manages two local football teams and is a devoted West Ham supporter – but first and foremost he is ‘Dad’ to his young son.",
     email: "camerongeorge@jacobs.properties",
   },
   {
