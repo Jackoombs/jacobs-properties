@@ -9,7 +9,7 @@ interface Props {
 
 export default function BannerNav({ swiper, imageLength, activeIndex }: Props) {
   return (
-    <div className="row-start-3 mx-auto hidden w-full max-w-container-lg self-end pb-[5%] md:block">
+    <div className="row-start-3 mx-auto hidden w-full max-w-container-lg self-end pb-10 md:block xl:pb-20">
       <div className="flex">
         {[...Array(imageLength).keys()].map((e, index) => (
           <button

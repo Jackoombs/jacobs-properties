@@ -47,7 +47,7 @@ export default function Banner() {
 
   return (
     <section className="top-0 -z-10 grid h-[100svh] w-screen grid-rows-[1fr_auto_auto] lg:grid-rows-[1fr_auto_1fr]">
-      <div className="row-start-2 mx-auto w-full max-w-container-lg self-center pb-11 lg:pb-0">
+      <div className="row-start-2 mx-auto w-full max-w-container-lg self-center pb-6 lg:pb-0 xl:pb-11">
         <div className="mx-auto flex flex-col text-white md:mx-0 md:max-w-[40rem] xl:max-w-[48rem]">
           <PageHeader textColor="text-white" padding="hero">
             A people-first estate agent in Basingstoke & surrounding villages
