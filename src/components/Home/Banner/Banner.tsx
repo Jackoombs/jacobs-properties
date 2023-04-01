@@ -58,7 +58,7 @@ export default function Banner() {
             className="pb-8 md:max-w-xl"
             padding="hero-lg"
           >
-            Jacobs Properties is a independent family-run estate and letting
+            Jacobs Properties is an independent family-run estate and letting
             agency in Basingstoke, delivering exceptional results and providing
             solutions for all things property.
           </Copy>
