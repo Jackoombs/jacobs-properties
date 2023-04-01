@@ -179,13 +179,16 @@ const newsTemplate = news.map((post) => {
     <Reviews client:visible />
   </MiscSection>
 
-  <MiscSection bgColor="bg-primary-200">
-    <SectionHeader padding="misc" className="md:text-center"
+  <MiscSection
+    className="flex flex-col gap-8 md:justify-center md:gap-16"
+    bgColor="bg-primary-200"
+  >
+    <SectionHeader className="md:text-center"
       >Frequently asked questions</SectionHeader
     >
-    <FAQs client="home" client:visible />
+    <FAQs maxFAQs={5} client="home" client:visible />
     <a
-      class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
+      class="max-auto text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
       href="/faq">See All Our Faqs</a
     >
   </MiscSection>
