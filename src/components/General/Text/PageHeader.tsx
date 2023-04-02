@@ -16,9 +16,9 @@ export default function PageHeader({
   return (
     <h1
       className={clsx(
-        "text-[2.375rem] font-bold leading-[1.1] xl:text-[3.5rem] 2xl:text-[4.5rem]",
+        "text-[2.375rem] font-bold leading-[1.1] xl:text-[3.25rem] 3xl:text-[4.5rem]",
         textColor,
-        padding === "hero" && "pb-3 lg:pb-7",
+        padding === "hero" && "pb-3 2xl:pb-7",
         className
       )}
     >

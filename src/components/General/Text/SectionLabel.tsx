@@ -18,7 +18,7 @@ export default function SectionLabel({
       className={clsx(
         "text-[0.75rem] font-semibold uppercase leading-[1.1] tracking-[2.8px] lg:text-[0.875rem]",
         textColor,
-        padding === "hero-md" && "pb-2 lg:pb-6",
+        padding === "hero-md" && "pb-2 2xl:pb-6",
         padding === "hero-lg" && "pb-2",
         className
       )}
