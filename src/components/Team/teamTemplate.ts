@@ -63,7 +63,7 @@ export const teamTemplate: TeamCardType[] = [
     imagePath: Miriam.src,
     linkedInLink: "",
     bio: "Miriam joined the team about 7 years ago and plays a vital role in overseeing the smooth running of our HMO let properties. Miriam always works with a smile and is the life and soul of the party. She has 2 grown up children and is married to Ben.",
-    email: "miriam-price@hotmail.com",
+    email: "info@jacobs.properties",
   },
   {
     name: "Denis Acquaah",
@@ -79,6 +79,6 @@ export const teamTemplate: TeamCardType[] = [
     imagePath: Jack.src,
     linkedInLink: "",
     bio: "Every estate agent needs a Jack. Estate agency has become increasing complicated with the integration of CRMs to marketing platforms, websites, and other forms of proptech and social media - social media being central to the marketing strategy of any forward thinking agency. Jack has a degree in Physics and is heavily relied upon for the ongoing development of the agency. Jack is an awesome bass player as well as prolific reader.",
-    email: "jackg.coombs97@gmail.com",
+    email: "info@jacobs.properties",
   },
 ];
