@@ -39,7 +39,7 @@ export default function FAQCard({
         }}
         className="flex w-full flex-col gap-4 py-8 px-6 text-left md:px-9"
       >
-        <div className="flex items-center justify-between gap-8 lg:gap-14">
+        <div className="flex w-full items-center justify-between gap-8 lg:gap-14">
           <div>
             <IoMdChatbubbles className="text-xl text-secondary-100 lg:text-[2.5rem]" />
           </div>
