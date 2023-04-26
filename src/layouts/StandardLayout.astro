@@ -41,7 +41,7 @@ const { title, description } = Astro.props;
     }
   }
 
-  @media only screen and (min-resolution: 120dpi) {
+  @media only screen and (min-resolution: 120dpi) and (min-width: 800px) {
     :root {
       font-size: 80%; /* or any smaller font size you prefer */
     }
