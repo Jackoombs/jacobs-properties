@@ -32,7 +32,7 @@ export default function Form({ setIsOpen }: Props) {
       setSubmitState("loading");
       try {
         const res = await axios.post(
-          "https://jacobs-server.onrender.com/integrated/earlybird",
+          import.meta.env.PUBLIC_SERVER_URL + "form/earlybird",
           data
         );
         setCurrentStep((curr) => curr + 1);

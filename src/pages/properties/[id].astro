@@ -20,11 +20,11 @@ import MiscSection from "../../components/Layout/MiscSection.astro";
 import SharePropertyButton from "../../components/General/ShareButton";
 import PropertyListCard from "../../components/Property/PropertyListCard";
 
-const res = await fetch("https://jacobs-server.onrender.com/properties");
+const res = await fetch(import.meta.env.PUBLIC_SERVER_URL + "property");
 const properties: Property2[] = await res.json();
 
 export async function getStaticPaths() {
-  const res = await fetch("https://jacobs-server.onrender.com/properties");
+  const res = await fetch(import.meta.env.PUBLIC_SERVER_URL + "property");
   const properties: Property2[] = await res.json();
   return properties.map((property) => ({
     params: {
@@ -135,7 +135,7 @@ const shortDescription = truncateDescription(description, 20);
           {
             description && (
               <Copy
-                className="mb-3 text-ellipsis whitespace-pre-line line-clamp-3"
+                className="line-clamp-3 mb-3 text-ellipsis whitespace-pre-line"
                 size="lg"
               >
                 {description}

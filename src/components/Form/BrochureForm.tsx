@@ -53,7 +53,7 @@ export default function BrochureForm({
   const onSubmit: SubmitHandler<SchemaType> = async (data) => {
     if (downloadRef.current) {
       downloadRef.current.click();
-      axios.post("https://jacobs-server.onrender.com/brochureform", data);
+      axios.post(import.meta.env.PUBLIC_SERVER_URL + "form/brochureform", data);
     }
   };
 

@@ -23,7 +23,9 @@ import Reviews from "../components/Reviews/Reviews";
 import FAQs from "../components/FAQs/FAQs";
 import type { Property2 } from "../env";
 
-const res = await fetch(`https://jacobs-server.onrender.com/properties`);
+const res = await fetch(
+  `https://jacobs-properties-server-nest-production.up.railway.app/property`
+);
 const properties: Property2[] = await res.json();
 const salesProperties = properties.filter((p) => p.type === "selling");
 const client = "sellers";

@@ -24,7 +24,9 @@ import type { Property2 } from "../env";
 import ValuationSection from "../components/Layout/ValuationSection.astro";
 import Link from "../components/General/Link";
 
-const res = await fetch(`https://jacobs-server.onrender.com/properties`);
+const res = await fetch(
+  `https://jacobs-properties-server-nest-production.up.railway.app/property`
+);
 const properties: Property2[] = await res.json();
 const lettingsProperties = properties.filter((p) => p.type === "letting");
 

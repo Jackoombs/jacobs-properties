@@ -20,7 +20,7 @@ import type { Property2 } from "../env";
 import MiscSection from "../components/Layout/MiscSection.astro";
 import HeroSection from "../components/Layout/HeroSection.astro";
 
-const res = await fetch("https://jacobs-server.onrender.com/properties");
+const res = await fetch(import.meta.env.PUBLIC_SERVER_URL + "property");
 const properties: Property2[] = await res.json();
 const salesProperties = properties.filter((p) => p.type === "selling");
 const lettingsProperties = properties.filter((p) => p.type === "letting");

@@ -35,7 +35,7 @@ export default function Form({ address, setIsOpen, buyOrRent }: Props) {
       setSubmitState("loading");
       try {
         const res = await axios.post(
-          "https://jacobs-server.onrender.com/integrated/makeanoffer",
+          import.meta.env.PUBLIC_SERVER_URL + "form/makeanoffer",
           data
         );
         setCurrentStep((curr) => curr + 1);

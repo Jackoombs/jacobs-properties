@@ -37,7 +37,7 @@ export default function Form({ setIsOpen }: Props) {
         const formattedData = formatDates(data);
         console.log(formattedData);
         await axios.post(
-          "https://jacobs-server.onrender.com/integrated/expertvaluation",
+          import.meta.env.PUBLIC_SERVER_URL + "form/expertvaluation",
           formattedData
         );
         setCurrentStep((curr) => curr + 1);

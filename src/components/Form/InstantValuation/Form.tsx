@@ -34,7 +34,7 @@ export default function Form({ setIsOpen }: Props) {
       setSubmitState("loading");
       try {
         const res = await axios.post(
-          "https://jacobs-server.onrender.com/integrated/instantvaluation",
+          import.meta.env.PUBLIC_SERVER_URL + "form/instantvaluation",
           data
         );
         setValpalData(res.data.results);

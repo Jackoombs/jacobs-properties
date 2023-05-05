@@ -39,7 +39,7 @@ export default function Form({ price, address, setIsOpen, buyOrRent }: Props) {
       try {
         const formattedData = formatDates(data);
         const res = await axios.post(
-          "https://jacobs-server.onrender.com/integrated/bookaviewing",
+          import.meta.env.PUBLIC_SERVER_URL + "form/bookaviewing",
           formattedData
         );
         setCurrentStep((curr) => curr + 1);

@@ -4,7 +4,7 @@ import PropertySearch from "../components/PropertySearch/PropertySearch";
 import type { Property2 } from "../env";
 import type { GoogleMapProps } from "@react-google-maps/api";
 
-const res = await fetch("https://jacobs-server.onrender.com/properties");
+const res = await fetch(import.meta.env.PUBLIC_SERVER_URL + "property");
 const properties: Property2[] = await res.json();
 
 const propertiesWithLocation: Property2[] = [];

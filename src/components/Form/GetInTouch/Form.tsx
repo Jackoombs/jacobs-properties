@@ -28,7 +28,7 @@ export default function Form({ setIsOpen }: Props) {
       setSubmitState("loading");
       try {
         await axios.post(
-          "https://jacobs-server.onrender.com/integrated/getintouch",
+          import.meta.env.PUBLIC_SERVER_URL + "form/getintouch",
           data
         );
         setCurrentStep((curr) => curr + 1);
