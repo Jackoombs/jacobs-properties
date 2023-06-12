@@ -26,7 +26,6 @@ export default function Link({
   return (
     <a
       target={newTab ? "_blank" : "_self"}
-      download={download}
       className={clsx(
         "flex h-14 w-full items-center justify-center rounded-big text-[0.875rem] font-semibold uppercase tracking-[1.4px] duration-100",
         className,
