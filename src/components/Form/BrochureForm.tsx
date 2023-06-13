@@ -97,13 +97,7 @@ export default function BrochureForm({
         <Button variant="secondary" size="lg" type="submit">
           {buttonText}
         </Button>
-        <a
-          target="_blank"
-          ref={downloadRef}
-          href={href}
-          className="hidden"
-          download={isDownload}
-        ></a>
+        <a target="_blank" ref={downloadRef} href={href} className="hidden"></a>
       </form>
     </div>
   );
