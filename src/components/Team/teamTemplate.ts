@@ -42,14 +42,6 @@ export const teamTemplate: TeamCardType[] = [
     email: "iansmith@jacobs.properties",
   },
   {
-    name: "Ashlea Harrod",
-    role: "Sales Negotiator & Chain Progressor",
-    imagePath: Ashlea.src,
-    linkedInLink: "",
-    bio: "Ashlea has worked for the company for over 15 years and lives in Oakley with her husband and 3 children. She has come from a background in marketing and travel but has always had an interest in property. She is a busy mum to her family but in her spare time likes to continue to update their renovated property and plan the next family trip.",
-    email: "ashleaharrod@jacobs.properties",
-  },
-  {
     name: "Elaine Coombs",
     role: "Finance & Admin",
     imagePath: Elaine.src,
