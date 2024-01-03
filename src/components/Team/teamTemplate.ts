@@ -34,14 +34,6 @@ export const teamTemplate: TeamCardType[] = [
     email: "camerongeorge@jacobs.properties",
   },
   {
-    name: "Ian Smith",
-    role: "Property Manager",
-    imagePath: Ian.src,
-    linkedInLink: "",
-    bio: "Ian has over 30 years of experience in the industry having worked in lettings, property management and relocation. He is a natural completer finisher with exceptional attention to detail. Nothing motivates him more than seeing a job well done. Weekends are usually taken up with family and DIY but occasionally he enjoys celebrating a West Ham win.",
-    email: "iansmith@jacobs.properties",
-  },
-  {
     name: "Elaine Coombs",
     role: "Finance & Admin",
     imagePath: Elaine.src,
