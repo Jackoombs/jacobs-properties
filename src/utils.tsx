@@ -1,130 +1,133 @@
-import type { Property2 } from "./env";
-import { format, parseISO } from "date-fns";
+import type { Property2 } from './env'
+import { format, parseISO } from 'date-fns'
 
 export const priceNumberToPriceString = (number: number) => {
-  return new Intl.NumberFormat("en-GB", {
-    style: "currency",
-    currency: "GBP",
+  return new Intl.NumberFormat('en-GB', {
+    style: 'currency',
+    currency: 'GBP',
     minimumFractionDigits: 0,
-  }).format(number);
-};
+  }).format(number)
+}
 
 export const priceStringToPriceNumber = (price: string): number => {
-  return +price.split(" ")[0].replace(/[^0-9.]/g, "");
-};
+  return +price.split(' ')[0].replace(/[^0-9.]/g, '')
+}
 
 export const generatePriceOptions = (
   minPrice: number,
   maxPrice: number,
   interval: number
 ) => {
-  const values: number[] = [];
-  let currentValue = 0;
+  const values: number[] = []
+  let currentValue = 0
   while (minPrice + currentValue <= maxPrice) {
-    values.push(minPrice + currentValue);
-    currentValue += interval;
+    values.push(minPrice + currentValue)
+    currentValue += interval
   }
-  return values.map((value) => priceNumberToPriceString(value));
-};
+  return values.map((value) => priceNumberToPriceString(value))
+}
 
 export const removeArrayDuplicates = (array: string[]) => {
-  return Array.from(new Set(array));
-};
+  return Array.from(new Set(array))
+}
 
 export const getNumberFromPriceString = (
   formattedNumber: string
 ): number | undefined => {
   const unformattedNumber = formattedNumber
-    .replace(/\([^\)]*\)/, "")
-    .replace(/[^\d.]/g, "");
+    .replace(/\([^\)]*\)/, '')
+    .replace(/[^\d.]/g, '')
   if (Number.isNaN(unformattedNumber)) {
-    return undefined;
+    return undefined
   } else {
-    return +unformattedNumber;
+    return +unformattedNumber
   }
-};
+}
 
 export const toArray = <T,>(item: T | T[] | undefined): T[] | undefined => {
   if (!item) {
-    return undefined;
+    return undefined
   } else if (!Array.isArray(item)) {
-    return [item];
+    return [item]
   } else {
-    return item;
+    return item
   }
-};
+}
 
 export const getPropertyStatus = (
-  status: Property2["status"],
-  type: Property2["type"]
+  status: Property2['status'],
+  type: Property2['type']
 ) => {
   if (
-    status === "sold" ||
-    status === "exchanged" ||
-    status === "completed" ||
-    status === "soldExternally"
+    status === 'sold' ||
+    status === 'exchanged' ||
+    status === 'completed' ||
+    status === 'soldExternally'
   ) {
-    return "sold";
-  } else if (status === "forSale") {
-    return "for sale";
-  } else if (status === "underOffer" && type === "selling") {
-    return "sstc";
-  } else if (status === "reserved") {
-    return "reserved";
-  } else if (status === "toLet" || status === "tenancyCurrent") {
-    return "to let";
+    return 'sold'
+  } else if (status === 'forSale') {
+    return 'for sale'
+  } else if (status === 'underOffer' && type === 'selling') {
+    return 'sstc'
+  } else if (status === 'reserved') {
+    return 'reserved'
+  } else if (status === 'toLet' || status === 'tenancyCurrent') {
+    return 'to let'
   } else if (
-    (status === "underOffer" && type === "letting") ||
-    status === "arrangingTenancy"
+    (status === 'underOffer' && type === 'letting') ||
+    status === 'arrangingTenancy'
   ) {
-    return "let agreed";
-  } else if (status === "tenancyFinished") {
-    return "let";
+    return 'let agreed'
+  } else if (
+    status === 'tenancyFinished' ||
+    status === 'tenancyCurrentUnavailable'
+  ) {
+    return 'let'
   } else {
-    return "n/a";
+    return 'n/a'
   }
-};
+}
 
 export const getImageFileNameFromUrl = (url: string, withExt: boolean) => {
-  const regex: RegExp = /([^/]+$)/;
+  const regex: RegExp = /([^/]+$)/
 
-  const match: RegExpMatchArray | null = url.match(regex);
+  const match: RegExpMatchArray | null = url.match(regex)
 
   if (match) {
-    const fileName: string = match[1];
-    const fileNameWithoutExtension: string = fileName.split(".")[0];
-    return withExt ? fileName : fileNameWithoutExtension;
+    const fileName: string = match[1]
+    const fileNameWithoutExtension: string = fileName.split('.')[0]
+    return withExt ? fileName : fileNameWithoutExtension
   }
-};
+}
 
 export interface Data {
   dates: {
-    date: Date | "";
-    [otherFields: string]: any;
-  }[];
-  [otherFields: string]: any;
+    date: Date | ''
+    [otherFields: string]: any
+  }[]
+  [otherFields: string]: any
 }
 
 const formatDate = (date: Date) => {
-  return format(date, "iiii do MMMM yyyy");
-};
+  return format(date, 'iiii do MMMM yyyy')
+}
 
 export const formatDates = (data: Data) => {
   const formatedData = data.dates.map((date) => {
     if (!date.date) {
-      return date;
+      return date
     } else {
-      const formattedDate = formatDate(date.date);
-      return { ...date, date: formattedDate };
+      const formattedDate = formatDate(date.date)
+      return { ...date, date: formattedDate }
     }
-  });
-  return { ...data, dates: formatedData };
-};
+  })
+  return { ...data, dates: formatedData }
+}
 
 export const truncateDescription = (description: string, length: number) => {
-  const words = description.split(" ");
+  const words = description.split(' ')
   if (words.length > length) {
-    return words.slice(0, length).join(" ") + "...";
+    return words.slice(0, length).join(' ') + '...'
   }
-  return description;
-};
+  return description
+}
