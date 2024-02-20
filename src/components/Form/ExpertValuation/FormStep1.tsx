@@ -59,7 +59,7 @@ export default function FormStep1() {
                 variant="secondary"
                 colSpanFull
                 buyLabel="selling"
-                rentLabel="lenting"
+                rentLabel="letting"
               />
             )}
             name="buyOrRent"
