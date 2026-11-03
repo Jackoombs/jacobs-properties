@@ -1,195 +1,130 @@
 ---
-import Link from "../components/General/Link";
-import Copy from "../components/General/Text/Copy";
-import PageHeader from "../components/General/Text/PageHeader";
-import HeroSection from "../components/Layout/HeroSection.astro";
-import StandardLayout from "../layouts/StandardLayout.astro";
-import WhatStandFor from "../assets/images/about-us/what-stand-for.webp";
-import SectionHeader from "../components/General/Text/SectionHeader";
-import SectionLabel from "../components/General/Text/SectionLabel";
-import MiscSection from "../components/Layout/MiscSection.astro";
-import TeamSlider from "../components/Team/TeamSlider";
-import Dropdown from "../components/Dropdown/Dropdown";
-import NewsSlider from "../components/News/NewsSlider";
-import Reviews from "../components/Reviews/Reviews";
-import FAQs from "../components/FAQs/FAQs";
-import GetInTouchButton from "../components/Form/GetInTouch/Button";
-import Team from "../assets/images/team/team.webp";
-import Jon from "../assets/images/jon-coombs.png";
-import BuyerHero from "../assets/images/buyers/buyer-hero.webp";
+import { getEntry, getCollection } from "astro:content";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import { SectionHeader } from "@/components/common/Text";
+import Link from "@/components/common/Link";
+import SplitHero from "@/components/marketing/SplitHero.astro";
+import ContentSection from "@/components/marketing/ContentSection.astro";
+import WhyUsSection from "@/components/marketing/WhyUsSection.astro";
+import TeamSlider from "@/components/marketing/TeamSlider";
+import NewsSlider from "@/components/marketing/NewsSlider";
+import FaqAccordion from "@/components/marketing/FaqAccordion";
+import Reviews from "@/components/marketing/Reviews";
+import { cmsImageUrl, heroBgClass } from "@/lib/cms";
 
-const news = await Astro.glob("./news/**.md");
-const newsTemplate = news.map((post) => {
-  const { title, category, date, image } = post.frontmatter;
-  return { title, category, date, image };
-});
+const page = await getEntry("aboutPage", "content");
+if (!page) throw new Error("about-page content missing from CMS");
+const { data } = page;
+
+const teamMembers = (await getCollection("teamMembers"))
+  .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+  .map(({ data: member }) => ({
+    name: member.name,
+    role: member.role,
+    bio: member.bio,
+    image: cmsImageUrl(member.photo),
+    email: member.email,
+    linkedInUrl: member.linkedInUrl,
+  }));
+const newsArticles = (await getCollection("newsArticles"))
+  .sort((a, b) => (b.data.publishedDate ?? "").localeCompare(a.data.publishedDate ?? ""))
+  .map(({ data: article }) => ({
+    title: article.title,
+    href: `/news/${article.slug}`,
+    category: article.category,
+    publishedDate: article.publishedDate,
+    image: cmsImageUrl(article.heroImage),
+  }));
+const reviews = (await getCollection("reviews")).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+const faqs = (await getCollection("faqs")).filter((f) => f.data.featuredHome).slice(0, 5);
+
+// The original broke this heading after the first question. The CMS holds it as
+// one line, so put the break back at render time.
+const ctaHeading = data.ctaSection.heading.replace("? ", "?\n");
 ---
 
-<StandardLayout
-  title="Your Friendly Estate Agents in Basingstoke | Jacobs Properties"
-  description="We are an independent estate agent with a friendly team of property experts, who have been helping you buy, sell, let and rent property in Basingstoke since 1999."
->
-  <MiscSection
-    bgColor="bg-primary-200"
-    className="grid items-center gap-6 lg:grid-cols-[4fr_3fr] lg:gap-16"
-  >
-    <PageHeader padding="hero" className=" max-w-md lg:max-w-[56rem]"
-      >Get to know your friendly local property experts</PageHeader
-    >
-    <div class="flex flex-col">
-      <Copy size="lg" padding="hero-md"
-        >Independent and proud, we keep things local at Jacobs Properties.</Copy
-      >
-      <GetInTouchButton client:idle size="lg" variant="secondary"
-        >Get in touch</GetInTouchButton
-      >
-    </div>
-  </MiscSection>
+<StandardLayout title={data.seoTitle ?? "About Us"} description={data.seoDescription ?? ""}>
+  <SplitHero
+    layout="grid"
+    bgColor={heroBgClass(data.hero.bgVariant)}
+    heading={data.hero.heading}
+    body={data.hero.body}
+    cta={data.hero.ctaPrimaryText ? { type: "get-in-touch", text: data.hero.ctaPrimaryText } : undefined}
+  />
 
-  <HeroSection
-    disableLazy
-    bgColor="bg-white"
-    image={{
-      path: Jon.src,
-      position: true,
-      alt: "",
-      aspectRatio: "aspect-[1: 1]",
-    }}
-  >
-    <div>
-      <SectionLabel padding="hero-lg">About</SectionLabel>
-      <SectionHeader padding="hero" className="lg:max-w-lg"
-        >A Personal Pledge
-      </SectionHeader>
-      <Copy size="md" padding="hero-md" className="max-w-2xl">
-        <>
-          All estate agents will say they are friendly and fair, but when you
-          are an independent, family-run business like us, you really do take
-          pride in real feedback you receive from the community you work in, the
-          relationships you build and the referrals you get through word of
-          mouth.<br /><br />When we combine our sound knowledge of Basingstoke
-          and its surrounding areas with our expertise in property, we ensure
-          our clients have the best property experience – whether you’re a
-          seller, a first-time buyer, a landlord or a tenant. And that’s exactly
-          how we’ve established Jacobs Properties and cemented our place in
-          Basingstoke, and we don’t intend to stop.<br /><br />As the business
-          owner, you have my personal guarantee that we are focused to deliver a
-          friendly, high quality service throughout to help you reach your
-          goals.<br /><br />Jon Coombs<br />Director
-        </>
-      </Copy>
-    </div>
-  </HeroSection>
+  <ContentSection
+    label={data.personalPledge.label}
+    heading={data.personalPledge.heading}
+    body={data.personalPledge.body}
+    image={cmsImageUrl(data.personalPledge.image)}
+    imageAlt={data.personalPledge.imageAlt}
+    imageSide="right"
+    imageAspect="aspect-square"
+    eagerImage
+    labelPadding="hero-lg"
+    headingClassName="lg:max-w-lg"
+    bodySize="md"
+    bodyPadding="none"
+    bodyClassName="max-w-2xl whitespace-pre-line pb-[1.25em] last:pb-6 2xl:last:pb-7"
+  />
 
-  <HeroSection
+  <ContentSection
+    label={data.aboutCompany.label}
+    heading={data.aboutCompany.heading}
+    body={data.aboutCompany.body}
+    image={cmsImageUrl(data.aboutCompany.image)}
+    imageAlt={data.aboutCompany.imageAlt}
+    imageSide="left"
+    imageAspect="aspect-property"
     disablePt
-    disableLazy
-    bgColor="bg-white"
-    image={{
-      path: Team.src,
-      position: false,
-      alt: "",
-      aspectRatio: "aspect-[1.27: 1]",
-    }}
-  >
-    <div class="max-w-3xl 2xl:pl-20">
-      <SectionLabel padding="hero-lg">About</SectionLabel>
-      <SectionHeader padding="hero" className="lg:max-w-lg"
-        >About Jacobs Properties
-      </SectionHeader>
-      <Copy size="md" padding="hero-md">
-        <>
-          We are a local Basingstoke estate agent helping home-owners, property
-          owners, buyers and tenants with their property needs. And we do it
-          with a smile.<br /><br />Founding Director Jon Coombs entered the
-          property business in the early 90’s, initially letting and managing
-          his own portfolio of properties. Over the next 10 years Jon found
-          himself with a growing loyal customer base, most of whom are still
-          customers today.<br /><br />In 1999 the business formally established
-          as Jacob’s Properties which expanded further in 2018 after the
-          acquisition of another local agency.<br /><br />With Jon at the helm,
-          we have always been about building trust and helping people at every
-          stage of their property journey. Jacobs Properties has a warm and
-          friendly approach, something we know matters to our customers and the
-          people within the business. We support home-movers in and around
-          Basingstoke and have an office in Worting House, Church Lane.
-        </>
-      </Copy>
-    </div>
-  </HeroSection>
+    labelPadding="hero-lg"
+    headingClassName="lg:max-w-lg"
+    bodySize="md"
+    bodyPadding="none"
+    bodyClassName="pb-[1.25em] last:pb-6 2xl:last:pb-7"
+    contentClassName="max-w-3xl 2xl:pl-20"
+  />
 
-  <MiscSection bgColor="bg-primary-200">
-    <SectionHeader padding="misc"
-      >Get to know these friendly faces</SectionHeader
-    >
-    <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
-      <img
-        src={WhatStandFor.src}
-        loading="lazy"
-        class="order-1 aspect-[6/5] h-auto w-full self-center rounded-big object-cover lg:order-none"
-        alt=""
-      />
-      <Dropdown color="bg-white" client="about-us" client:idle />
-    </div>
-  </MiscSection>
-
-  <MiscSection>
-    <TeamSlider client:idle />
-    <Link
-      link="/meet-the-team"
-      type="secondary"
-      size="lg"
-      className="mx-auto mt-16">View full team</Link
-    >
-  </MiscSection>
-
-  <HeroSection
-    disablePt={true}
-    image={{
-      path: BuyerHero.src,
-      aspectRatio: "aspect-hero",
-      alt: "",
-      position: true,
-    }}
-  >
-    <div>
-      <SectionLabel padding="hero-md">About</SectionLabel>
-      <SectionHeader padding="hero">
-        <>
-          Have a question about selling your home?<br />Just want to chat about
-          property?
-        </>
-      </SectionHeader>
-      <GetInTouchButton client:idle size="lg">Get in touch</GetInTouchButton>
-    </div>
-  </HeroSection>
-
-  <MiscSection bgColor="bg-primary-200">
-    <NewsSlider
-      newsTemplate={newsTemplate}
-      title="Read the latest property news"
-      client:idle
-    />
-  </MiscSection>
-
-  <MiscSection bgColor="bg-white">
-    <SectionHeader className="lg:text-center" padding="misc">
-      This is why we do what we do
-    </SectionHeader>
-    <Reviews client:visible />
-  </MiscSection>
-
-  <MiscSection
-    className="flex flex-col gap-8 md:justify-center md:gap-16"
+  <WhyUsSection
+    heading={data.teamSectionHeading ?? "Get to know these friendly faces"}
+    image={cmsImageUrl(data.teamSectionImage)}
+    imageClass="order-1 aspect-[6/5] h-auto w-full self-center object-cover lg:order-none"
+    items={data.valueProps}
     bgColor="bg-primary-200"
-  >
-    <SectionHeader className="md:text-center"
-      >Frequently asked questions</SectionHeader
-    >
-    <FAQs maxFAQs={5} client="home" client:visible />
-    <a
-      class="max-auto text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
-      href="/faq">See All Our Faqs</a
-    >
-  </MiscSection>
+    cardBg="bg-white"
+  />
+
+  <Section>
+    <TeamSlider client:visible heading="The team behind Jacobs Property" members={teamMembers} />
+    <Link link="/meet-the-team" type="secondary" size="lg" className="mx-auto mt-16">View full team</Link>
+  </Section>
+
+  <ContentSection
+    label={data.ctaSection.label ?? "About"}
+    heading={ctaHeading}
+    body={data.ctaSection.body}
+    image={cmsImageUrl(data.ctaSection.image)}
+    imageAlt={data.ctaSection.imageAlt}
+    imageSide="right"
+    disablePt
+    headingClassName="whitespace-pre-line"
+    ctaSize="lg"
+    cta1={{ type: "get-in-touch", text: data.ctaSection.ctaText ?? "Get in touch" }}
+  />
+
+  <Section bgColor="bg-primary-200">
+    <NewsSlider client:visible heading="Read the latest property news" articles={newsArticles} />
+  </Section>
+
+  <Section>
+    <SectionHeader className="lg:text-center" padding="misc">This is why we do what we do</SectionHeader>
+    <Reviews client:visible reviews={reviews.map((r) => r.data)} />
+  </Section>
+
+  <Section bgColor="bg-primary-200" className="flex flex-col gap-8 md:justify-center md:gap-16">
+    <SectionHeader className="md:text-center">Frequently asked questions</SectionHeader>
+    <FaqAccordion client:visible faqs={faqs.map((f) => ({ id: f.id, question: f.data.question, answer: f.data.answer }))} />
+    <a class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8" href="/faq">See All Our Faqs</a>
+  </Section>
 </StandardLayout>

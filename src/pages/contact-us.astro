@@ -1,97 +1,83 @@
 ---
-import StandardLayout from "../layouts/StandardLayout.astro";
-import PageHeader from "../components/General/Text/PageHeader";
-import Copy from "../components/General/Text/Copy";
-import Link from "../components/General/Link";
-import MiscSection from "../components/Layout/MiscSection.astro";
-import HeroSection from "../components/Layout/HeroSection.astro";
-import Reviews from "../components/Reviews/Reviews";
-import WorthingHouse from "../assets/images/worting-house.webp";
-import SectionLabel from "../components/General/Text/SectionLabel";
-import SectionHeader from "../components/General/Text/SectionHeader";
-import ContactItem from "../components/General/ContactItem";
-import type { GoogleMapProps } from "@react-google-maps/api";
-import PropertyMap from "../components/Property/PropertyMap";
-import GetInTouchButton from "../components/Form/GetInTouch/Button";
+import { getEntry, getCollection } from "astro:content";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import { SectionHeader } from "@/components/common/Text";
+import Link from "@/components/common/Link";
+import ContactItem from "@/components/common/ContactItem";
+import SplitHero from "@/components/marketing/SplitHero.astro";
+import ContentSection from "@/components/marketing/ContentSection.astro";
+import Reviews from "@/components/marketing/Reviews";
+import PropertyMap from "@/components/property/PropertyMap";
+import { cmsImageUrl } from "@/lib/cms";
 
-const res = await fetch(
-  `https://maps.googleapis.com/maps/api/geocode/json?address=WortingHouse%20ChurchLane&key=${
-    import.meta.env.PUBLIC_GOOGLE_MAPS_KEY
-  }`
-);
-const data = await res.json();
-const location: GoogleMapProps["center"] | undefined = await data.results[0]
-  ?.geometry?.location;
+const page = await getEntry("contactPage", "content");
+if (!page) throw new Error("contact-page content missing from CMS");
+const { data } = page;
+
+const reviews = (await getCollection("reviews")).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+
+const branchLocation = data.mapLat && data.mapLng ? { lat: data.mapLat, lng: data.mapLng } : undefined;
+
+// The original set the address on two lines: building and street, then town and
+// postcode. The CMS holds it as one line, so break it after the second part.
+const addressParts = data.addressLine?.split(", ") ?? [];
+const addressLines =
+  addressParts.length > 2
+    ? [`${addressParts.slice(0, 2).join(", ")},`, addressParts.slice(2).join(", ")]
+    : addressParts;
 ---
 
-<StandardLayout
-  title="Send Us Your Questions | Jacobs Properties"
-  description="Have any questions about our properties? Like to find out more about our processes? Drop us a message and we'll get back to you!"
->
-  <section class="bg-primary-200 py-10 md:py-28">
-    <div
-      class="mx-auto flex w-full max-w-container-lg grid-cols-1 flex-col items-center gap-6 md:grid md:grid-cols-1/2 lg:gap-16 xl:grid-cols-[4fr_3fr]"
-    >
-      <PageHeader padding="hero" className="max-w-sm lg:max-w-[56rem]"
-        >Contact us</PageHeader
-      >
-      <div class="col-start-2 flex flex-col">
-        <Copy size="lg" padding="hero-md"
-          >Have any questions about our properties? Like to find out more about
-          our processes? Drop us a message and we'll get back to you!</Copy
-        >
-        <GetInTouchButton client:idle variant="secondary" size="lg"
-          >Get in touch</GetInTouchButton
-        >
-      </div>
-    </div>
-  </section>
+<StandardLayout title={data.seoTitle ?? "Contact Us"} description={data.seoDescription ?? ""}>
+  <SplitHero
+    heading={data.heroHeading ?? "Contact us"}
+    body={data.heroBody}
+    cta={{ type: "get-in-touch", text: "Get in touch" }}
+  />
 
-  <HeroSection
-    image={{
-      path: WorthingHouse.src,
-      position: false,
-      alt: "/",
-      aspectRatio: "aspect-hero",
-    }}
+  <ContentSection
+    label="Contact"
+    heading="Branch details"
+    image={cmsImageUrl(data.branchImage)}
+    imageAlt={data.branchImageAlt || "Worting House"}
+    imageSide="left"
+    contentClassName="max-w-3xl xl:pl-32"
   >
-    <div class="max-w-3xl xl:pl-32">
-      <SectionLabel padding="hero-md">Contact</SectionLabel>
-      <SectionHeader padding="hero">Branch details</SectionHeader>
+    <div slot="cta">
       <div class="pb-10">
-        <ContactItem className="pb-3" icon="phone" link="01256781300"
-          >01256 781300</ContactItem
-        >
-        <ContactItem className="pb-7" icon="mail" link="info@jacobs.properties"
-          >info@jacobs.properties</ContactItem
-        >
-        <ContactItem icon="pin" link="#map">
-          <>Worting House, Church Lane,<br />Basingstoke, RG23 8PY</>
-        </ContactItem>
+        {data.phone && <ContactItem className="pb-3" icon="phone" link={data.phone.replace(/\s+/g, "")}>{data.phone}</ContactItem>}
+        {data.email && <ContactItem className="pb-7" icon="mail" link={data.email}>{data.email}</ContactItem>}
+        {
+          addressLines.length > 0 && (
+            <ContactItem icon="pin" link="#map">
+              {addressLines.map((line, index) => (
+                <>
+                  {index > 0 && <br />}
+                  {line}
+                </>
+              ))}
+            </ContactItem>
+          )
+        }
       </div>
-      <Link
-        newTab
-        link="https://goo.gl/maps/4E6pRAGUoiuqaVkB6"
-        type="secondary"
-        size="lg">Get Directions</Link
-      >
+      {
+        data.directionsUrl && (
+          <Link newTab link={data.directionsUrl} type="secondary" size="lg">
+            Get Directions
+          </Link>
+        )
+      }
     </div>
-  </HeroSection>
+  </ContentSection>
 
-  <MiscSection disablePb={true} disablePt={true}>
-    <span id="map"></span>
-    <PropertyMap
-      client:idle
-      location={location}
-      markers={[location]}
-      zoom={15}
-    />
-  </MiscSection>
+  <Section disablePt disablePb>
+    <div id="map">
+      {branchLocation && <PropertyMap client:visible location={branchLocation} markers={[branchLocation]} zoom={15} />}
+    </div>
+  </Section>
 
-  <MiscSection>
-    <SectionHeader padding="misc" className="md:text-center"
-      >Hear from our customers</SectionHeader
-    >
-    <Reviews color="alt" client:visible />
-  </MiscSection>
+  <Section>
+    <SectionHeader className="md:text-center" padding="misc">Hear from our customers</SectionHeader>
+    <Reviews client:visible reviews={reviews.map((r) => r.data)} variant="alt" />
+  </Section>
 </StandardLayout>

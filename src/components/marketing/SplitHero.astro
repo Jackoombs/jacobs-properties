@@ -1,0 +1,57 @@
+---
+import Section from "@/components/common/Section.astro";
+import { PageHeader } from "@/components/common/Text";
+import Copy from "@/components/common/Copy";
+import CtaButton from "@/components/marketing/CtaButton";
+import type { Cta } from "@/lib/types";
+
+interface Props {
+  heading: string;
+  body?: string;
+  cta?: Cta;
+  bgColor?: string;
+  textColor?: string;
+  /**
+   * "stacked": stacked and centred on small screens, 1fr/2fr from md and 4fr/3fr
+   * from xl (area guides, contact, FAQ, news). "grid": one column until lg, then
+   * 4fr/3fr (about, team).
+   */
+  layout?: "stacked" | "grid";
+  /** The FAQ and news pages left the heading unpadded and unconstrained. */
+  plainHeading?: boolean;
+}
+
+const {
+  heading,
+  body,
+  cta,
+  bgColor = "bg-primary-200",
+  textColor = "text-primary-100",
+  layout = "stacked",
+  plainHeading = false,
+} = Astro.props;
+
+const stacked = layout === "stacked";
+const gridClass = stacked
+  ? "flex flex-col items-center gap-6 md:grid md:grid-cols-[1fr_2fr] lg:gap-16 xl:grid-cols-[4fr_3fr]"
+  : "grid items-center gap-6 lg:grid-cols-[4fr_3fr] lg:gap-16";
+const headingClass = plainHeading
+  ? undefined
+  : stacked
+    ? "max-w-sm lg:max-w-[56rem]"
+    : "max-w-md lg:max-w-[56rem]";
+---
+
+<!--
+  The intro banner the original used across its content pages: the heading on
+  the left, the copy and a button on the right.
+-->
+<Section bgColor={bgColor} className={gridClass}>
+  <PageHeader textColor={textColor} padding={plainHeading ? "none" : "hero"} className={headingClass}>
+    {heading}
+  </PageHeader>
+  <div class:list={["flex flex-col", stacked && "md:col-start-2"]}>
+    {body && <Copy size="lg" padding="hero-md" textColor={textColor}>{body}</Copy>}
+    {cta && <CtaButton client:load cta={cta} variant="secondary" size="lg" />}
+  </div>
+</Section>

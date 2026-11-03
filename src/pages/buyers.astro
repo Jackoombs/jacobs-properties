@@ -1,125 +1,80 @@
 ---
-import HeroSection from "../components/Layout/HeroSection.astro";
-import StandardLayout from "../layouts/StandardLayout.astro";
-import SectionLabel from "../components/General/Text/SectionLabel";
-import PageHeader from "../components/General/Text/PageHeader";
-import Copy from "../components/General/Text/Copy";
-import Link from "../components/General/Link";
-import BuyerHero from "../assets/images/buyers/buyer-hero.webp";
-import MiscSection from "../components/Layout/MiscSection.astro";
-import Display from "../components/General/Text/Display";
-import SectionHeader from "../components/General/Text/SectionHeader";
-import WhyBuy from "../assets/images/buyers/why-buy.webp";
-import Dropdown from "../components/Dropdown/Dropdown";
-import ProcessSlider from "../components/Process/ProcessSlider";
-import FAQs from "../components/FAQs/FAQs";
-import StampDutyCalc from "../components/Calculators/StampDutyCalc";
-import MortgageCalc from "../components/Calculators/MortgageCalc";
-import ValuationSection from "../components/Layout/ValuationSection.astro";
-import PropertySearchBar from "../components/General/PropertySearchBar";
-import GetInTouchButton from "../components/Form/GetInTouch/Button";
+import { getEntry, getCollection } from "astro:content";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import { SectionHeader, Display } from "@/components/common/Text";
+import PropertySearchBar from "@/components/marketing/PropertySearchBar";
+import ContentSection from "@/components/marketing/ContentSection.astro";
+import WhyUsSection from "@/components/marketing/WhyUsSection.astro";
+import ProcessSteps from "@/components/marketing/ProcessSteps";
+import FaqAccordion from "@/components/marketing/FaqAccordion";
+import ValuationSection from "@/components/marketing/ValuationSection.astro";
+import StampDutyCalc from "@/components/marketing/calculators/StampDutyCalc";
+import MortgageCalc from "@/components/marketing/calculators/MortgageCalc";
+import { cmsImageUrl } from "@/lib/cms";
 
-const client = "buyers";
+const page = await getEntry("buyersPage", "content");
+if (!page) throw new Error("buyers-page content missing from CMS");
+const { data } = page;
+
+const faqs = (await getCollection("faqs")).filter((f) => f.data.category === "buyers").slice(0, 5);
 ---
 
-<StandardLayout
-  title="Buy a Property in Basingstoke | Jacobs Properties"
-  description="Looking to buy a property in Basingstoke? Whether you’re getting on the ladder or investing in a second home, we have a wide range of properties for sale."
->
-  <HeroSection
-    disableLazy
+<StandardLayout title={data.seoTitle ?? "Buyers"} description={data.seoDescription ?? ""}>
+  <ContentSection
+    label={data.hero.label}
+    heading={data.hero.heading}
+    body={data.hero.body}
+    image={cmsImageUrl(data.hero.image)}
+    imageAlt={data.hero.imageAlt}
+    imageSide="right"
+    imageAspect="aspect-property"
+    headingSize="page"
     bgColor="bg-primary-200"
-    image={{
-      path: BuyerHero.src,
-      aspectRatio: "aspect-property",
-      alt: "Couple drinking coffee together",
-      position: true,
-    }}
-    alertBar
-  >
-    <div class="flex flex-col text-primary-100 md:max-w-xl">
-      <SectionLabel padding="hero-lg">Buyers</SectionLabel>
-      <PageHeader padding="hero">Buy a property in Basingstoke</PageHeader>
-      <Copy padding="hero-lg" size="lg">
-        <>
-          Taking your first step on the property ladder? Looking for a new
-          property to add to your portfolio? We’ve got you covered.<br /><br /> We
-          offer a wide range of properties all across Basingstoke, so whether you’re
-          looking for a charming country home or a stylish studio apartment, there’s
-          something for you here.
-        </>
-      </Copy>
-      <div
-        class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
-      >
-        <Link link="/property-search" type="primary" size="lg"
-          >Start searching</Link
-        >
-        <GetInTouchButton variant="secondary" client:idle size="lg">
-          Ask us anything
-        </GetInTouchButton>
-      </div>
-    </div>
-  </HeroSection>
+    labelPadding="hero-lg"
+    bodyPadding="hero-lg"
+    bodySize="lg"
+    contentClassName="md:max-w-xl"
+    ctaSize="lg"
+    cta2Variant="secondary"
+    cta1={{ type: "link", text: data.hero.ctaPrimaryText ?? "Start searching", link: data.hero.ctaPrimaryLink ?? "/property-search" }}
+    cta2={data.hero.ctaSecondaryText ? { type: "get-in-touch", text: data.hero.ctaSecondaryText } : undefined}
+  />
 
-  <MiscSection
-    bgColor="bg-primary-200"
-    className="flex flex-col gap-8 text-center items-center lg:gap-16"
-    disablePt={true}
-  >
+  <Section bgColor="bg-primary-200" disablePt className="flex flex-col items-center gap-8 text-center lg:gap-16">
     <Display>Find your dream home today</Display>
     <PropertySearchBar client:visible />
-  </MiscSection>
+  </Section>
 
-  <MiscSection>
-    <SectionHeader padding="misc">
-      Why buy a property with Jacobs?
-    </SectionHeader>
-    <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
-      <img
-        class="rounded-big"
-        src={WhyBuy.src}
-        alt="Woman relaxing in kitchen"
-      />
-      <Dropdown client={client} client:visible />
-    </div>
-  </MiscSection>
+  <WhyUsSection
+    heading="Why buy a property with Jacobs?"
+    image={cmsImageUrl(data.whyBuyImage)}
+    imageAlt={data.whyBuyImageAlt}
+    items={data.valueProps}
+  />
 
-  <MiscSection bgColor="bg-primary-200">
-    <ProcessSlider
-      header="8 steps to buying a home with us"
-      client={client}
-      client:idle
-    />
-  </MiscSection>
+  <Section bgColor="bg-primary-200">
+    <ProcessSteps client:visible heading="8 steps to buying a home with us" steps={data.processSteps} />
+  </Section>
 
-  <MiscSection className="flex flex-col gap-8 md:justify-center md:gap-16">
-    <SectionHeader className="md:text-center"
-      >Frequently asked questions</SectionHeader
-    >
-    <FAQs bgColor="bg-primary-200" maxFAQs={5} client={client} client:visible />
-    <a
-      class="max-auto text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
-      href="/faq">See All Our Faqs</a
-    >
-  </MiscSection>
+  <Section className="flex flex-col gap-8 md:justify-center md:gap-16">
+    <SectionHeader className="md:text-center">Frequently asked questions</SectionHeader>
+    <FaqAccordion client:visible cardBg="bg-primary-200" faqs={faqs.map((f) => ({ id: f.id, question: f.data.question, answer: f.data.answer }))} />
+    <a class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8" href="/faq">See All Our Faqs</a>
+  </Section>
 
-  <MiscSection bgColor="bg-primary-200">
+  <Section bgColor="bg-primary-200">
     <div class="grid w-full flex-col gap-6 lg:grid-cols-2 xl:gap-x-16">
       <SectionHeader>Find out how much you could borrow</SectionHeader>
-      <SectionHeader
-        >Find out how much tax you will pay for your new home
-      </SectionHeader>
+      <SectionHeader>Find out how much tax you will pay for your new home</SectionHeader>
       <StampDutyCalc client:visible />
       <MortgageCalc client:visible />
     </div>
-  </MiscSection>
+  </Section>
 
-  <ValuationSection title="Selling your property?">
-    <Copy className="lg:max-w-md xl:max-w-xl" padding="hero-md" size="lg"
-      >If you’re selling a property as well as buying a new one, we can help
-      with both. Keeping it all under one roof can save you time and make your
-      moving experience more efficient. Start with a free valuation.
-    </Copy>
-  </ValuationSection>
+  <ValuationSection
+    title={data.sellingCtaHeading ?? "Selling your property?"}
+    body={data.sellingCtaBody}
+    bodyClassName="lg:max-w-md xl:max-w-xl"
+  />
 </StandardLayout>

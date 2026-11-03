@@ -1,0 +1,276 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: "ProximaNova", ui-sans-serif, system-ui, sans-serif;
+  --font-harm: "HarmoniaSans", system-ui;
+
+  --color-primary-100: #002855;
+  --color-primary-200: #f2fbff;
+  --color-primary-300: #90a2b5;
+  --color-primary-400: #003952;
+  --color-secondary-100: #bfd730;
+  --color-placeholder: #7f93a9;
+  --color-error: #fc0d1b;
+
+  --max-width-container-lg: min(92%, 100rem);
+  --max-width-container-md: min(96%, 48.75rem);
+
+  /*
+   * Note: sm/md/lg/xl are NOT added here for padding/gap because Tailwind v4
+   * shares a single --spacing-* scale across every sizing utility (w, h,
+   * max-w, gap, p, m, ...). Adding named entries here would silently hijack
+   * unrelated utilities like max-w-md or gap-lg. Use arbitrary values
+   * (p-[2rem], gap-[5rem]) at the few call sites that need these instead.
+   */
+  --spacing-section: 6.875rem;
+
+  --aspect-hero: 14 / 11;
+  --aspect-5\/4: 5 / 4;
+  --aspect-property: 3 / 2;
+
+  --radius-big: 0.625rem;
+
+  /*
+   * 1650px, but expressed in rem to match Tailwind v4's built-in breakpoints
+   * (sm..2xl are 40rem..96rem). Tailwind emits breakpoint blocks in ascending
+   * order so wider ones win, and it can't order a px value against rem ones —
+   * as "1650px" this block landed BEFORE xl/2xl, so at >=1650px the xl rules
+   * came later and overrode every 3xl: utility. Keep this in rem.
+   */
+  --breakpoint-3xl: 103.125rem;
+
+  /* Open/close for Radix Collapsible panels, e.g. the advanced property search. */
+  --animate-collapsible-down: collapsible-down 0.4s ease-in-out;
+  --animate-collapsible-up: collapsible-up 0.4s ease-in-out;
+
+  @keyframes collapsible-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-collapsible-content-height);
+    }
+  }
+
+  @keyframes collapsible-up {
+    from {
+      height: var(--radix-collapsible-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media only screen and (min-width: 1900px) {
+  body,
+  html {
+    font-size: 0.85vw;
+  }
+}
+
+@media only screen and (min-resolution: 120dpi) and (min-width: 800px) {
+  :root {
+    font-size: 80%;
+  }
+}
+
+.overflow-really-visible {
+  overflow: visible !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .overflow-really-visible-mobile {
+    overflow: visible !important;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .lg-visible {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .lg-invisible {
+    display: none !important;
+  }
+}
+
+@font-face {
+  font-family: "ProximaNova";
+  src: url("/fonts/ProximaNova-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ProximaNova";
+  src: url("/fonts/ProximaNova-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ProximaNova";
+  src: url("/fonts/ProximaNova-Semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "ProximaNova";
+  src: url("/fonts/ProximaNova-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "HarmoniaSans";
+  src: url("/fonts/HarmoniaSansW1G-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme inline {
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #002855;
+  --card: #ffffff;
+  --card-foreground: #002855;
+  --popover: #ffffff;
+  --popover-foreground: #002855;
+  --primary: #002855;
+  --primary-foreground: #f2fbff;
+  --secondary: #bfd730;
+  --secondary-foreground: #002855;
+  --muted: #f2fbff;
+  --muted-foreground: #7f93a9;
+  --accent: #f2fbff;
+  --accent-foreground: #002855;
+  --destructive: #fc0d1b;
+  --border: #90a2b5;
+  --input: #90a2b5;
+  --ring: #90a2b5;
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+
+  /*
+   * Tailwind v4 dropped Preflight's default `cursor: pointer` on buttons/
+   * selects (it now defers to the browser default, "cursor: default", on the
+   * theory that disabled buttons shouldn't look clickable). Restoring the
+   * old v3 behavior globally rather than sprinkling cursor-pointer everywhere.
+   */
+  button:not(:disabled),
+  select:not(:disabled),
+  [role="button"]:not([data-disabled]):not(:disabled) {
+    cursor: pointer;
+  }
+}

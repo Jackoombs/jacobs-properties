@@ -1,0 +1,58 @@
+---
+import { PageHeader } from "@/components/common/Text";
+import Copy from "@/components/common/Copy";
+import CtaButton from "@/components/marketing/CtaButton";
+import HeroSlideshow, { type HeroSlide } from "@/components/marketing/HeroSlideshow";
+import type { Cta } from "@/lib/types";
+
+interface Props {
+  heading: string;
+  body?: string;
+  image?: string;
+  imageAlt?: string;
+  /** Rotating backgrounds. Falls back to the static `image` when empty. */
+  slides?: HeroSlide[];
+  cta1?: Cta;
+  cta2?: Cta;
+}
+
+const { heading, body, image, imageAlt = "", slides = [], cta1, cta2 } = Astro.props;
+---
+
+<!--
+  A three-row grid, as in the original: the copy sits in the middle row, which
+  centres it on large screens and, with a flexible top row, drops it toward the
+  bottom on phones. The slideshow's dots take the last row.
+-->
+<section
+  class="relative grid h-[100svh] w-full grid-rows-[1fr_auto_auto] overflow-hidden bg-primary-100 lg:grid-rows-[1fr_auto_1fr]"
+>
+  {
+    slides.length > 0 ? (
+      <HeroSlideshow client:load slides={slides} />
+    ) : (
+      image && (
+        <>
+          {/* Top-anchored like the original banner, so the crop eats into the
+             bottom of the shot rather than cutting the roofline off the top. */}
+          <img src={image} alt={imageAlt} class="absolute inset-0 h-full w-full object-cover object-top" />
+          <div class="pointer-events-none absolute inset-0 bg-black/25" />
+        </>
+      )
+    )
+  }
+  <div class="relative row-start-2 mx-auto w-full max-w-container-lg self-center pb-6 lg:pb-0">
+    <div class="mx-auto flex flex-col text-white md:mx-0 md:max-w-[40rem] xl:max-w-[48rem]">
+      <PageHeader textColor="text-white" padding="hero">{heading}</PageHeader>
+      {body && <Copy size="lg" textColor="text-white" padding="hero-lg" className="md:max-w-xl">{body}</Copy>}
+      {
+        (cta1 || cta2) && (
+          <div class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start">
+            {cta1 && <CtaButton client:load cta={cta1} variant="white" size="lg" />}
+            {cta2 && <CtaButton client:load cta={cta2} variant="secondary" size="lg" />}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

@@ -1,231 +1,112 @@
 ---
-import StandardLayout from "../layouts/StandardLayout.astro";
-import HeroSection from "../components/Layout/HeroSection.astro";
-import MiscSection from "../components/Layout/MiscSection.astro";
-import GetInTouchButton from "../components/Form/GetInTouch/Button";
-import ExpertValuationButton from "../components/Form/ExpertValuation/Button";
-import FirstTime from "../assets/images/landlords/first-time-3.webp";
-import LandlordHero from "../assets/images/landlords/landlord-hero.webp";
-import WhyLet from "../assets/images/landlords/why-let.webp";
-import LetOnly from "../assets/images/landlords/let-only.webp";
-import Home3 from "../assets/images/home/home_3.webp";
-import Stats from "../components/Stats/Stats";
-import Dropdown from "../components/Dropdown/Dropdown";
-import SectionLabel from "../components/General/Text/SectionLabel";
-import SectionHeader from "../components/General/Text/SectionHeader";
-import PageHeader from "../components/General/Text/PageHeader";
-import Copy from "../components/General/Text/Copy";
-import ProcessSlider from "../components/Process/ProcessSlider";
-import BrochureForm from "../components/Form/BrochureForm";
-import PropertySlider from "../components/Property/PropertySlider";
-import Reviews from "../components/Reviews/Reviews";
-import FAQs from "../components/FAQs/FAQs";
-import type { Property2 } from "../env";
-import ValuationSection from "../components/Layout/ValuationSection.astro";
-import Link from "../components/General/Link";
+import { getEntry, getCollection } from "astro:content";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import { SectionHeader } from "@/components/common/Text";
+import ContentSection from "@/components/marketing/ContentSection.astro";
+import WhyUsSection from "@/components/marketing/WhyUsSection.astro";
+import ProcessSteps from "@/components/marketing/ProcessSteps";
+import FaqAccordion from "@/components/marketing/FaqAccordion";
+import Reviews from "@/components/marketing/Reviews";
+import PropertyCard from "@/components/property/PropertyCard";
+import { cmsImageUrl } from "@/lib/cms";
 
-const res = await fetch(
-  `https://jacobs-properties-server-nest-production.up.railway.app/property`
-);
-const properties: Property2[] = await res.json();
-const lettingsProperties = properties.filter((p) => p.type === "letting");
+const page = await getEntry("landlordsPage", "content");
+if (!page) throw new Error("landlords-page content missing from CMS");
+const { data } = page;
 
-const client = "landlords";
+const faqs = (await getCollection("faqs")).filter((f) => f.data.category === "landlords").slice(0, 5);
+const reviews = (await getCollection("reviews")).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+const lettingProperties = (await getCollection("properties")).filter((p) => p.data.marketingMode === "letting").slice(0, 3);
 ---
 
-<StandardLayout
-  title="Let Your Property in Basingstoke | Jacobs Properties"
-  description="Letting your property in Basingstoke? Our friendly letting agents can take the hassle out of renting out your property. Learn more about our landlord services."
->
-  <main>
-    <HeroSection
-      disableLazy
-      bgColor="bg-primary-200"
-      image={{
-        path: LandlordHero.src,
-        aspectRatio: "aspect-property",
-        alt: "",
-        position: true,
-      }}
-    >
-      <div class="flex flex-col text-primary-100">
-        <SectionLabel padding="hero-lg">Landlords</SectionLabel>
-        <PageHeader className="md:max-w-xl" padding="hero"
-          >Let your property in Basingstoke</PageHeader
-        >
-        <Copy className="md:max-w-2xl" padding="hero-lg" size="lg"
-          >At Jacobs Properties, we pride ourselves on delivering a first class
-          lettings service with a personal touch. From rental valuation and
-          finding the right tenant, to property management and portfolio
-          expansion, we’ll keep it seamless.</Copy
-        >
-        <div
-          class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
-        >
-          <GetInTouchButton client:idle size="lg">
-            Get in Touch
-          </GetInTouchButton>
-          <ExpertValuationButton client:idle size="lg" variant="secondary">
-            Book rental valuation
-          </ExpertValuationButton>
+<StandardLayout title={data.seoTitle ?? "Landlords"} description={data.seoDescription ?? ""}>
+  <ContentSection
+    label={data.hero.label}
+    heading={data.hero.heading}
+    body={data.hero.body}
+    image={cmsImageUrl(data.hero.image)}
+    imageAlt={data.hero.imageAlt}
+    imageSide="right"
+    bgColor="bg-primary-200"
+    cta1={{ type: "get-in-touch", text: data.hero.ctaPrimaryText ?? "Get in Touch" }}
+    cta2={{ type: "expert-valuation", text: data.hero.ctaSecondaryText ?? "Book rental valuation" }}
+  />
+
+  <WhyUsSection
+    heading="Four reasons you should let with us"
+    image={cmsImageUrl(data.whyLetImage)}
+    imageAlt={data.whyLetImageAlt}
+    items={data.valueProps}
+  />
+
+  <ContentSection
+    label={data.fullyManaged.label}
+    heading={data.fullyManaged.heading}
+    body={data.fullyManaged.body}
+    image={cmsImageUrl(data.fullyManaged.image)}
+    imageAlt={data.fullyManaged.imageAlt}
+    imageSide="right"
+    bgColor="bg-primary-200"
+    cta1={{ type: "get-in-touch", text: "Get in touch" }}
+    cta2={{ type: "link", text: "Letting Fees", link: "/Jacobs Properties Landord Fees.pdf", newTab: true }}
+  />
+
+  <ContentSection
+    label={data.letOnly.label}
+    heading={data.letOnly.heading}
+    body={data.letOnly.body}
+    image={cmsImageUrl(data.letOnly.image)}
+    imageAlt={data.letOnly.imageAlt}
+    imageSide="left"
+    cta1={{ type: "get-in-touch", text: "Get in touch" }}
+    cta2={{ type: "link", text: "Letting Fees", link: "/Jacobs Properties Landord Fees.pdf", newTab: true }}
+  />
+
+  <Section bgColor="bg-primary-200">
+    <ProcessSteps client:visible heading="Our lettings process at a glance" steps={data.processSteps} />
+  </Section>
+
+  <Section>
+    <SectionHeader className="lg:text-center" padding="misc">Frequently asked questions</SectionHeader>
+    <div class="flex w-full flex-col gap-8 lg:items-center lg:gap-16">
+      <FaqAccordion client:visible cardBg="bg-primary-200" faqs={faqs.map((f) => ({ id: f.id, question: f.data.question, answer: f.data.answer }))} />
+      <a class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8" href="/faq">See All Our Faqs</a>
+    </div>
+  </Section>
+
+  <ContentSection
+    heading="Want to sell your home instead?"
+    body="If you're thinking of selling as well as letting, we can help with both — start with a free valuation."
+    cta1={{ type: "link", text: "Get a free valuation", link: "/valuation" }}
+    bgColor="bg-primary-200"
+  />
+
+  <ContentSection
+    label={data.brochureCta.label}
+    heading={data.brochureCta.heading}
+    body={data.brochureCta.body}
+    image={cmsImageUrl(data.brochureCta.image)}
+    imageAlt={data.brochureCta.imageAlt}
+    imageSide="right"
+    cta1={{ type: "brochure", text: "Download the guide", buyOrRent: "rent", pdfUrl: "/Jacobs properties - Guide To Letting.pdf" }}
+  />
+
+  <Section bgColor="bg-primary-200">
+    <SectionHeader padding="misc">Happy agents make happy customers</SectionHeader>
+    <Reviews client:visible reviews={reviews.map((r) => r.data)} />
+  </Section>
+
+  {
+    lettingProperties.length > 0 && (
+      <Section>
+        <SectionHeader padding="misc">Success! We've just let these properties!</SectionHeader>
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {lettingProperties.map((property) => (
+            <PropertyCard client:visible property={property.data} />
+          ))}
         </div>
-      </div>
-    </HeroSection>
-
-    <MiscSection bgColor="bg-white">
-      <Stats statType="letting" client:visible />
-    </MiscSection>
-
-    <MiscSection bgColor="bg-primary-200">
-      <SectionHeader padding="misc"
-        >Four reasons you should let with us</SectionHeader
-      >
-      <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
-        <img class="rounded-big" src={WhyLet.src} alt="" />
-        <Dropdown color="bg-white" client={client} client:visible />
-      </div>
-    </MiscSection>
-
-    <HeroSection
-      image={{
-        path: Home3.src,
-        aspectRatio: "aspect-hero",
-        alt: "",
-        position: false,
-      }}
-    >
-      <div class="lg:max-w-xl 2xl:pl-20">
-        <SectionLabel padding="hero-md">Landlords</SectionLabel>
-        <SectionHeader padding="hero" className="lg:max-w-lg"
-          >Fully managed</SectionHeader
-        >
-        <Copy size="lg" padding="hero-md"
-          >Don’t have the time or resources to manage your lettings? We do!
-          Choose the Fully Managed option and let us look after the entire
-          running of your rental property, or your portfolio of properties.</Copy
-        >
-        <div
-          class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
-        >
-          <GetInTouchButton client:load size="md" variant="secondary"
-            >Get in touch</GetInTouchButton
-          >
-          <Link
-            size="md"
-            link="/Jacobs Properties Landord Fees.pdf"
-            type="primary"
-            newTab
-            download
-          >
-            Letting Fees
-          </Link>
-        </div>
-      </div>
-    </HeroSection>
-
-    <HeroSection
-      disablePt={true}
-      image={{
-        path: LetOnly.src,
-        aspectRatio: "aspect-hero",
-        alt: "",
-        position: true,
-      }}
-    >
-      <div class="md:max-w-lg">
-        <SectionLabel padding="hero-md">Landlords</SectionLabel>
-        <SectionHeader padding="hero" className="lg:max-w-lg"
-          >Let Only</SectionHeader
-        >
-        <Copy size="lg" padding="hero-md"
-          >If you’re a landlord who is experienced in the day-to-day running of
-          your lettings but need some help with finding the right tenant, then
-          this is the ideal service for you.</Copy
-        >
-        <div
-          class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
-        >
-          <GetInTouchButton client:load size="md" variant="secondary"
-            >Get in touch</GetInTouchButton
-          >
-          <Link
-            size="md"
-            link="/Jacobs Properties Landord Fees.pdf"
-            type="primary"
-            newTab
-            download
-          >
-            Letting Fees
-          </Link>
-        </div>
-      </div>
-    </HeroSection>
-
-    <MiscSection bgColor="bg-primary-200">
-      <ProcessSlider
-        client={client}
-        header="Our lettings process at a glance"
-        client:idle
-      />
-    </MiscSection>
-
-    <MiscSection className="flex flex-col gap-8 md:justify-center md:gap-16">
-      <SectionHeader className="md:text-center"
-        >Frequently asked questions</SectionHeader
-      >
-      <FAQs
-        bgColor="bg-primary-200"
-        maxFAQs={5}
-        client={client}
-        client:visible
-      />
-      <a
-        class="max-auto text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
-        href="/faq">See All Our Faqs</a
-      >
-    </MiscSection>
-
-    <ValuationSection title="Want to sell your home instead?" />
-
-    <HeroSection
-      bgColor="bg-primary-200"
-      image={{
-        path: FirstTime.src,
-        aspectRatio: "aspect-hero",
-        alt: "",
-        position: true,
-      }}
-    >
-      <div class="flex flex-col lg:max-w-xl lg:justify-center">
-        <SectionLabel className="pb-3">Lettings Brochure</SectionLabel>
-        <SectionHeader className="pb-4">Free Landlord Guide</SectionHeader>
-        <Copy className="pb-5 max-w-md" size="md"
-          >A comprehensive Guide for landlords helping you understand the steps
-          involved in the lettings process and ways you can maximise the return
-          from your property investment.</Copy
-        >
-        <BrochureForm
-          buttonText="Download Guide"
-          isDownload
-          href="/Jacobs properties - Guide To Letting.pdf"
-          client:visible
-        />
-      </div>
-    </HeroSection>
-
-    <MiscSection>
-      <SectionHeader className="md:text-center" padding="misc"
-        >Happy agents make happy customers</SectionHeader
-      >
-      <Reviews client:visible />
-    </MiscSection>
-
-    <MiscSection bgColor="bg-primary-200">
-      <PropertySlider
-        client:idle
-        header="Success! We’ve just let these properties!"
-        properties={lettingsProperties}
-      />
-    </MiscSection>
-  </main>
+      </Section>
+    )
+  }
 </StandardLayout>

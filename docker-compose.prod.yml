@@ -1,0 +1,37 @@
+services:
+  web:
+    build:
+      context: .
+      # host.docker.internal lets the build container reach an API running on
+      # the host (e.g. `bun run dev` in ../jacobs-properties-api on :3000).
+      # Deliberately NOT reusing .env's PUBLIC_SERVER_URL here — that value is
+      # "localhost:3000" for host-side `bun run dev`, which inside the build
+      # container resolves to the container itself, not your host, and the
+      # build fails with "Unable to connect". Override via
+      # DOCKER_PUBLIC_SERVER_URL (in .env or the shell) to point at a real
+      # deployed API instead.
+      args:
+        PUBLIC_SERVER_URL: ${DOCKER_PUBLIC_SERVER_URL:-http://host.docker.internal:3000/}
+        PUBLIC_GOOGLE_MAPS_KEY: ${PUBLIC_GOOGLE_MAPS_KEY}
+        PUBLIC_CMS_URL: ${DOCKER_PUBLIC_CMS_URL:-http://host.docker.internal:1337/}
+      extra_hosts:
+        # host.docker.internal is automatic on Docker Desktop (Mac/Windows);
+        # this makes it resolve on native Linux Docker too.
+        - "host.docker.internal:host-gateway"
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+# Production-shaped run: static build baked into the image, no hot reload, no
+# bind mounts — matches what actually deploys. For local iteration with hot
+# reload instead, use docker-compose.yml (`bun run docker:dev`).
+#
+# To test against the sibling jacobs-properties-api running locally in Docker
+# too: that build-time fetch can't reach a container that compose hasn't
+# started yet (build happens before `depends_on` ordering kicks in), so it's
+# a two-step dance rather than a single `docker compose -f docker-compose.prod.yml up --build`:
+#
+#   1. cd ../jacobs-properties-api && docker compose up -d --build
+#   2. docker compose -f docker-compose.prod.yml build   (host.docker.internal:3000
+#      now reaches it, since that API container publishes 3000 to the host)
+#   3. docker compose -f docker-compose.prod.yml up

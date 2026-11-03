@@ -1,47 +1,15 @@
 ---
-import StandardLayout from "../layouts/StandardLayout.astro";
-import PropertySearch from "../components/PropertySearch/PropertySearch";
-import type { Property2 } from "../env";
-import type { GoogleMapProps } from "@react-google-maps/api";
+import { getCollection } from "astro:content";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import PropertySearch from "@/components/property-search/PropertySearch";
+import { BASINGSTOKE_CENTER } from "@/lib/constants";
 
-const res = await fetch(import.meta.env.PUBLIC_SERVER_URL + "property");
-const properties: Property2[] = await res.json();
-
-const propertiesWithLocation: Property2[] = [];
-for (const property of properties) {
-  try {
-    const res2 = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${
-        property.address1
-      }%20${property.address2}&key=${import.meta.env.PUBLIC_GOOGLE_MAPS_KEY}`
-    );
-    const data = await res2.json();
-    const location: GoogleMapProps["center"] | undefined =
-      data.results[0]?.geometry?.location;
-    propertiesWithLocation.push({ ...property, location: location });
-  } catch (error) {
-    console.error(error);
-  }
-  await new Promise((resolve) => setTimeout(resolve, 200));
-}
-
-const res3 = await fetch(
-  `https://maps.googleapis.com/maps/api/geocode/json?address=Basingstoke&key=${
-    import.meta.env.PUBLIC_GOOGLE_MAPS_KEY
-  }`
-);
-const data = await res3.json();
-const center: GoogleMapProps["center"] | undefined =
-  data.results[0]?.geometry?.location;
+const properties = await getCollection("properties");
 ---
 
 <StandardLayout
   title="Search Properties for Sale and to Let in Basingstoke | Jacobs Properties"
   description="Search properties for sale in Basingstoke with Jacobs Properties. Our local estate agents are here to help you find your dream home."
 >
-  <PropertySearch
-    center={center}
-    properties={propertiesWithLocation}
-    client:load
-  />
+  <PropertySearch client:load properties={properties.map((p) => p.data)} center={BASINGSTOKE_CENTER} />
 </StandardLayout>

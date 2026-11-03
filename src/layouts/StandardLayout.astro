@@ -1,12 +1,16 @@
 ---
-import Header from "../components/Header/Header.astro";
-import Footer from "../components/Footer/Footer.astro";
+import Header from "@/components/site/Header.astro";
+import Footer from "@/components/site/Footer.astro";
+import "@/styles/global.css";
 
 export interface Props {
   title: string;
   description: string;
+  /** Overlays the header on the page and makes it transparent at the top of
+   *  the scroll, to blend into a full-bleed hero. See Header.astro. */
+  headerOverlay?: boolean;
 }
-const { title, description } = Astro.props;
+const { title, description, headerOverlay = false } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -23,94 +27,8 @@ const { title, description } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="min-h-[100svh]">
-    <Header />
+    <Header overlay={headerOverlay} />
     <slot />
     <Footer />
   </body>
 </html>
-
-<style is:global>
-  html {
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  @media only screen and (min-width: 1900px) {
-    body,
-    html {
-      font-size: 0.85vw;
-    }
-  }
-
-  @media only screen and (min-resolution: 120dpi) and (min-width: 800px) {
-    :root {
-      font-size: 80%; /* or any smaller font size you prefer */
-    }
-  }
-
-  .overflow-really-visible {
-    overflow: visible !important;
-  }
-
-  @media only screen and (max-width: 768px) {
-    .overflow-really-visible-mobile {
-      overflow: visible !important;
-    }
-  }
-
-  .swiper-same-height {
-    height: auto !important;
-  }
-
-  .swiper-fit-content {
-    flex-shrink: 100 !important;
-    width: 100% !important;
-  }
-
-  @media only screen and (max-width: 1024px) {
-    .lg-visible {
-      display: none !important;
-    }
-  }
-
-  @media only screen and (min-width: 1024px) {
-    .lg-invisible {
-      display: none !important;
-    }
-  }
-
-  @font-face {
-    font-family: "ProximaNova";
-    src: url("/fonts/ProximaNova-Regular.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "ProximaNova";
-    src: url("/fonts/ProximaNova-Medium.woff2") format("woff2");
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "ProximaNova";
-    src: url("/fonts/ProximaNova-Semibold.woff2") format("woff2");
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "ProximaNova";
-    src: url("/fonts/ProximaNova-Bold.woff2") format("woff2");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "HarmoniaSans";
-    src: url("/fonts/HarmoniaSansW1G-Regular.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
-</style>

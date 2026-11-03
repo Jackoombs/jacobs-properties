@@ -1,39 +1,42 @@
 ---
-import StandardLayout from "../layouts/StandardLayout.astro";
-import PageHeader from "../components/General/Text/PageHeader";
-import Copy from "../components/General/Text/Copy";
-import Link from "../components/General/Link";
-import MiscSection from "../components/Layout/MiscSection.astro";
-import TeamGrid from "../components/Team/TeamGrid";
-import Reviews from "../components/Reviews/Reviews";
+import { getEntry, getCollection } from "astro:content";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import SplitHero from "@/components/marketing/SplitHero.astro";
+import TeamGrid from "@/components/marketing/TeamGrid";
+import Reviews from "@/components/marketing/Reviews";
+import { cmsImageUrl } from "@/lib/cms";
+
+const page = await getEntry("teamPage", "content");
+if (!page) throw new Error("team-page content missing from CMS");
+const { data } = page;
+
+const teamMembers = (await getCollection("teamMembers"))
+  .sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0))
+  .map(({ data: member }) => ({
+    name: member.name,
+    role: member.role,
+    bio: member.bio,
+    image: cmsImageUrl(member.photo),
+    email: member.email,
+    linkedInUrl: member.linkedInUrl,
+  }));
+const reviews = (await getCollection("reviews")).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 ---
 
-<StandardLayout
-  title="Meet the Jacobs Properties Team | Jacobs Properties"
-  description="Get to know the friendly and experienced team at Jacobs Properties, your trusted local estate agents in Basingstoke. Our dedicated professionals are passionate about property and are here to help you with all of your buying, selling, and renting needs. Learn more about each team member and their expertise."
->
-  <section class="bg-primary-200 py-10 md:py-28">
-    <div
-      class="mx-auto grid w-full max-w-container-lg items-center gap-6 lg:grid-cols-[4fr_3fr] lg:gap-16"
-    >
-      <PageHeader padding="hero" className=" max-w-md lg:max-w-[56rem]"
-        >Meet your team of local property experts</PageHeader
-      >
-      <div class="flex flex-col">
-        <Copy size="lg" padding="hero-md"
-          >Independent and proud, we keep things local at Jacobs Properties.</Copy
-        >
-        <Link client:idle link="/" type="secondary" size="lg">Get in touch</Link
-        >
-      </div>
-    </div>
-  </section>
+<StandardLayout title={data.seoTitle ?? "Meet the Team"} description={data.seoDescription ?? ""}>
+  <SplitHero
+    layout="grid"
+    heading={data.heroHeading ?? "Meet your team of local property experts"}
+    body={data.heroBody}
+    cta={{ type: "get-in-touch", text: "Get in touch" }}
+  />
 
-  <MiscSection>
-    <TeamGrid client:load />
-  </MiscSection>
+  <Section>
+    <TeamGrid client:visible members={teamMembers} />
+  </Section>
 
-  <MiscSection disablePt={true}>
-    <Reviews client:visible color="alt" />
-  </MiscSection>
+  <Section disablePt>
+    <Reviews client:visible reviews={reviews.map((r) => r.data)} variant="alt" />
+  </Section>
 </StandardLayout>

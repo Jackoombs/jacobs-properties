@@ -1,0 +1,156 @@
+---
+import Section from "@/components/common/Section.astro";
+import { SectionLabel, SectionHeader, PageHeader, Display } from "@/components/common/Text";
+import Copy from "@/components/common/Copy";
+import CtaButton from "@/components/marketing/CtaButton";
+import type { Cta } from "@/lib/types";
+
+interface Props {
+  label?: string;
+  heading: string;
+  body?: string;
+  image?: string;
+  imageAlt?: string;
+  imageSide?: "left" | "right";
+  /** "page" renders an h1 at the original PageHeader scale — use it for the
+   *  one hero block at the top of a page, not for mid-page sections. */
+  headingSize?: "display" | "header" | "page";
+  /** Aspect class for the image. The original used aspect-hero (14/11) for
+   *  most content blocks and aspect-property (3/2) for page heroes. */
+  imageAspect?: string;
+  /** Loads the image eagerly instead of lazily. For a hero above the fold,
+   *  where lazy loading only delays the largest paint (the original's
+   *  disableLazy). */
+  eagerImage?: boolean;
+  bgColor?: string;
+  disablePb?: boolean;
+  disablePt?: boolean;
+  cta1?: Cta;
+  cta2?: Cta;
+  cta1Variant?: CtaVariant;
+  cta2Variant?: CtaVariant;
+  ctaSize?: "default" | "sm" | "md" | "lg";
+  /** Body type scale. "md" is the tighter setting the original used on the
+   *  home page; leading is 1.25 either way, so this also drives line spacing. */
+  bodySize?: "sm" | "md" | "lg";
+  labelPadding?: "none" | "hero-md" | "hero-lg";
+  bodyPadding?: "none" | "hero-md" | "hero-lg";
+  headingPadding?: "none" | "hero" | "misc";
+  labelClassName?: string;
+  /** Extra classes for each body paragraph — usually a max-width, which the
+   *  original set per section to stop long copy running the full column. */
+  bodyClassName?: string;
+  /** Extra classes for the whole text column (the original capped its hero
+   *  columns at md:max-w-xl rather than letting them fill the grid track). */
+  contentClassName?: string;
+  /** Extra classes for the heading — the original narrowed a few of them
+   *  independently of the column. */
+  headingClassName?: string;
+}
+
+type CtaVariant = "primary" | "secondary" | "white" | "transparent-white" | "transparent-blue";
+
+const {
+  label,
+  heading,
+  body,
+  image,
+  imageAlt = "",
+  imageSide = "right",
+  headingSize = "header",
+  imageAspect = "aspect-hero",
+  eagerImage = false,
+  bgColor = "bg-white",
+  disablePb = false,
+  disablePt = false,
+  cta1,
+  cta2,
+  cta1Variant = "primary",
+  cta2Variant = "transparent-blue",
+  ctaSize = "md",
+  bodySize = "lg",
+  labelPadding = "hero-md",
+  bodyPadding = "hero-md",
+  headingPadding = "hero",
+  labelClassName,
+  bodyClassName,
+  contentClassName,
+  headingClassName,
+} = Astro.props;
+---
+
+<Section bgColor={bgColor} disablePb={disablePb} disablePt={disablePt}>
+  <div class="grid items-center gap-6 lg:grid-cols-2 lg:gap-16">
+    {
+      image && imageSide === "left" && (
+        <img
+          src={image}
+          alt={imageAlt}
+          loading={eagerImage ? "eager" : "lazy"}
+          class:list={["order-1 h-auto w-full rounded-big object-cover", imageAspect]}
+        />
+      )
+    }
+    <div
+      class:list={[
+        "order-2 flex flex-col text-primary-100",
+        !image && "lg:col-span-2 lg:mx-auto lg:max-w-2xl lg:text-center",
+        contentClassName,
+      ]}
+    >
+      {
+        label && (
+          <SectionLabel padding={labelPadding} className={labelClassName}>
+            {label}
+          </SectionLabel>
+        )
+      }
+      {
+        headingSize === "display" ? (
+          <Display className={`pb-3 ${headingClassName ?? ""}`}>{heading}</Display>
+        ) : headingSize === "page" ? (
+          <PageHeader padding={headingPadding === "misc" ? "none" : headingPadding} className={headingClassName}>
+            {heading}
+          </PageHeader>
+        ) : (
+          <SectionHeader padding={headingPadding} className={headingClassName}>
+            {heading}
+          </SectionHeader>
+        )
+      }
+      {
+        body &&
+          body
+            .split("\n\n")
+            .map((paragraph) => (
+              <Copy size={bodySize} padding={bodyPadding} className={bodyClassName}>
+                {paragraph}
+              </Copy>
+            ))
+      }
+      {
+        (cta1 || cta2) && (
+          <div class="flex flex-col gap-3 md:flex-row">
+            {cta1 && <CtaButton client:load cta={cta1} variant={cta1Variant} size={ctaSize} />}
+            {cta2 && <CtaButton client:load cta={cta2} variant={cta2Variant} size={ctaSize} />}
+          </div>
+        )
+      }
+      {/* For sections whose call to action is a form rather than a button. */}
+      <slot name="cta" />
+    </div>
+    {
+      image && imageSide === "right" && (
+        <img
+          src={image}
+          alt={imageAlt}
+          loading={eagerImage ? "eager" : "lazy"}
+          class:list={[
+            "order-1 h-auto w-full justify-self-end rounded-big object-cover lg:order-2",
+            imageAspect,
+          ]}
+        />
+      )
+    }
+  </div>
+</Section>

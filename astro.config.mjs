@@ -1,21 +1,23 @@
-import { defineConfig } from "astro/config";
+// @ts-check
+import { defineConfig } from 'astro/config';
 
-// https://astro.build/config
-import tailwind from "@astrojs/tailwind";
+import react from '@astrojs/react';
 
-// https://astro.build/config
-import react from "@astrojs/react";
-
-// https://astro.build/config
-import image from "@astrojs/image";
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [
-    tailwind(),
-    react(),
-    image({
-      serviceEntryPoint: "@astrojs/image/sharp",
-    }),
-  ],
+  integrations: [react()],
+
+  vite: {
+    plugins: [tailwindcss()],
+    server: {
+      // Docker Desktop's bind mounts (gRPC-FUSE/VirtioFS) don't forward
+      // native filesystem change events into the container, so Vite's
+      // default watcher never sees host edits — poll instead. Only set
+      // inside the dev container (docker-compose.yml sets CONTAINER=true);
+      // host-side `astro dev` keeps the cheaper native watcher.
+      watch: process.env.CONTAINER ? { usePolling: true, interval: 300 } : undefined
+    }
+  }
 });

@@ -1,149 +1,127 @@
 ---
-import Link from "../components/General/Link";
-import Layout from "../layouts/HomeLayout.astro";
-import HomeHeader from "../components/Header/HomeHeader";
-import Banner from "../components/Home/Banner/Banner";
-import PropertySearchBar from "../components/General/PropertySearchBar";
-import Team from "../assets/images/team/team.webp";
-import FirstTime from "../assets/images/home/first-time.webp";
-import SectionLabel from "../components/General/Text/SectionLabel";
-import SectionHeader from "../components/General/Text/SectionHeader";
-import Copy from "../components/General/Text/Copy";
-import HowCanWeHelp from "../components/Home/HowCanWeHelp";
-import Video from "../components/General/Video";
-import RecentlySoldLet from "../components/Property/RecentlySoldLet";
-import Thumbnail from "../assets/images/home/thumbnail.webp";
-import Reviews from "../components/Reviews/Reviews";
-import FAQs from "../components/FAQs/FAQs";
-import Display from "../components/General/Text/Display";
-import type { Property2 } from "../env";
-import MiscSection from "../components/Layout/MiscSection.astro";
-import HeroSection from "../components/Layout/HeroSection.astro";
+import { getEntry, getCollection } from "astro:content";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import { Display, SectionHeader } from "@/components/common/Text";
+import HomeHero from "@/components/marketing/HomeHero.astro";
+import ContentSection from "@/components/marketing/ContentSection.astro";
+import AudienceCarousel from "@/components/marketing/AudienceCarousel";
+import PropertySearchBar from "@/components/marketing/PropertySearchBar";
+import FaqAccordion from "@/components/marketing/FaqAccordion";
+import Reviews from "@/components/marketing/Reviews";
+import RecentlySoldLet from "@/components/property/RecentlySoldLet";
+import { cmsImageUrl } from "@/lib/cms";
+import { isSoldOrLetStatus } from "@/lib/property-utils";
 
-const res = await fetch(import.meta.env.PUBLIC_SERVER_URL + "property");
-const properties: Property2[] = await res.json();
-const salesProperties = properties.filter((p) => p.type === "selling");
-const lettingsProperties = properties.filter((p) => p.type === "letting");
-const filteredSalesProperties = salesProperties.filter(
-  (p) => p.status !== "forSale"
-);
-const filteredLettingsProperties = lettingsProperties.filter(
-  (p) => p.status !== "toLet"
-);
+const page = await getEntry("homePage", "content");
+if (!page) throw new Error("home-page content missing from CMS");
+const { data } = page;
+
+const properties = await getCollection("properties");
+// "Recently sold/let" is anything with a deal agreed or done: an offer accepted
+// on a sale, a tenancy agreed or in place on a letting. Listings still on the
+// market and withdrawn ones are both left out.
+const soldProperties = properties
+  .filter((p) => p.data.marketingMode === "selling" && isSoldOrLetStatus(p.data.status))
+  .map((p) => p.data);
+const letProperties = properties
+  .filter((p) => p.data.marketingMode === "letting" && isSoldOrLetStatus(p.data.status))
+  .map((p) => p.data);
+const reviews = (await getCollection("reviews")).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+const faqs = (await getCollection("faqs")).filter((f) => f.data.featuredHome).slice(0, 5);
+const audienceLinks = data.audienceLinks.map((item) => ({
+  title: item.title,
+  link: item.link,
+  image: cmsImageUrl(item.image),
+}));
 ---
 
-<Layout
-  title="Jacobs Properties: The people’s estate agent in Basingstoke"
-  description="At Jacobs Properties, we put people before property. Whether you’re looking to sell, let, rent or buy a property, our reliable team of estate agents drive results and provide solutions for your property needs. "
+<StandardLayout
+  title={data.seoTitle ?? "Jacobs Properties"}
+  description={data.seoDescription ?? ""}
+  headerOverlay
 >
-  <HomeHeader client:load />
-  <main>
-    <Banner client:load />
-    <MiscSection
-      bgColor="bg-primary-200"
-      className="flex flex-col gap-8 text-center items-center lg:gap-16"
-    >
-      <Display>Your property search starts here.</Display>
-      <PropertySearchBar client:visible />
-    </MiscSection>
+  <HomeHero
+    heading={data.hero.heading}
+    body={data.hero.body}
+    image={cmsImageUrl(data.hero.image)}
+    imageAlt={data.hero.imageAlt}
+    slides={data.heroSlides.map((slide) => ({
+      src: cmsImageUrl(slide.image)!,
+      alt: slide.imageAlt,
+      focalPosition: slide.focalPosition,
+    }))}
+    cta1={{ type: "instant-valuation", text: data.hero.ctaPrimaryText ?? "Instant Valuation" }}
+    cta2={{ type: "expert-valuation", text: data.hero.ctaSecondaryText ?? "Expert Valuation" }}
+  />
 
-    <HeroSection
-      image={{
-        path: Team.src,
-        aspectRatio: "aspect-property",
-        alt: "",
-        position: true,
-      }}
-    >
-      <div class="flex flex-col md:max-w-xl md:justify-center">
-        <SectionLabel padding="hero-md">About</SectionLabel>
-        <SectionHeader padding="hero" className="md:max-w-[25rem] sm:max-w-none"
-          >We’re about people, not just property</SectionHeader
-        >
-        <Copy size="md" padding="hero-md" className="lg:max-w-lg"
-          >Meet Team Jacobs. We are a friendly and professional team of property
-          experts who put people first. Since 1999, we’ve been helping the
-          people of Basingstoke get on the property ladder, find their forever
-          home, sell up and move on, downsize, upsize, rightsize – whatever your
-          property needs, we have it covered.</Copy
-        >
-        <Link link="/about-us" type="secondary" size="lg">About us</Link>
-      </div>
-    </HeroSection>
+  <Section bgColor="bg-primary-200" className="flex flex-col items-center gap-8 text-center lg:gap-16">
+    <Display>Your property search starts here.</Display>
+    <PropertySearchBar client:visible />
+  </Section>
 
-    <MiscSection bgColor="bg-primary-200">
-      <HowCanWeHelp client:idle />
-    </MiscSection>
+  <ContentSection
+    label={data.aboutSection.label}
+    heading={data.aboutSection.heading}
+    body={data.aboutSection.body}
+    image={cmsImageUrl(data.aboutSection.image)}
+    imageAlt={data.aboutSection.imageAlt}
+    imageSide="right"
+    imageAspect="aspect-property"
+    contentClassName="md:max-w-xl md:justify-center"
+    headingClassName="md:max-w-[25rem] sm:max-w-none"
+    cta1Variant="secondary"
+    ctaSize="lg"
+    bodySize="md"
+    bodyClassName="lg:max-w-lg"
+    cta1={{ type: "link", text: data.aboutSection.ctaText ?? "About us", link: data.aboutSection.ctaLink ?? "/about-us" }}
+  />
 
-    <!-- <MiscSection>
-      <SectionHeader padding="misc" className="max-w-[17rem] sm:max-w-none"
-        >Let's put some faces to our names</SectionHeader
-      >
-      <Video
-        videoId="dQw4w9WgXcQ"
-        thumbnailPath={Thumbnail.src}
-        origin={Astro.url}
-        client:visible
-      />
-    </MiscSection> -->
+  <Section bgColor="bg-primary-200">
+    <AudienceCarousel client:visible heading="How can we Help?" links={audienceLinks} />
+  </Section>
 
-    <!-- <ValuationSection /> -->
+  {
+    (soldProperties.length > 0 || letProperties.length > 0) && (
+      <Section>
+        <RecentlySoldLet
+          client:visible
+          soldProperties={soldProperties}
+          letProperties={letProperties}
+        />
+      </Section>
+    )
+  }
 
-    <MiscSection>
-      <RecentlySoldLet
-        salesProperties={filteredSalesProperties}
-        lettingsProperties={filteredLettingsProperties}
-        client:idle
-      />
-    </MiscSection>
+  <ContentSection
+    label={data.propertyReportSection.label}
+    heading={data.propertyReportSection.heading}
+    body={data.propertyReportSection.body}
+    image={cmsImageUrl(data.propertyReportSection.image)}
+    imageAlt={data.propertyReportSection.imageAlt}
+    imageSide="right"
+    bgColor="bg-primary-200"
+    cta1Variant="secondary"
+    ctaSize="lg"
+    bodySize="md"
+    headingPadding="none"
+    headingClassName="pb-2 md:max-w-[30rem]"
+    bodyPadding="none"
+    bodyClassName="pb-5 max-w-md"
+    contentClassName="lg:max-w-xl lg:justify-center"
+    cta1={{ type: "link", text: data.propertyReportSection.ctaText ?? "Get Report", link: data.propertyReportSection.ctaLink ?? "#", newTab: true }}
+  />
 
-    <HeroSection
-      bgColor="bg-primary-200"
-      image={{
-        path: FirstTime.src,
-        aspectRatio: "aspect-hero",
-        alt: "",
-        position: true,
-      }}
-    >
-      <div class="flex flex-col lg:max-w-xl lg:justify-center">
-        <SectionLabel padding="hero-md">Property Report</SectionLabel>
-        <SectionHeader className="pb-2 md:max-w-[30rem]"
-          >Get your free home property report...</SectionHeader
-        >
-        <Copy className="pb-5 max-w-md" size="md"
-          >This report is worth £19.95 and includes a valuation of your property
-          plus ALL recent house sales near you. Join the thousands of homeowners
-          who have obtained their property report</Copy
-        >
-        <Link
-          type="secondary"
-          newTab
-          size="lg"
-          link="https://insights.street.co.uk/l/b06fde34-9b04-4ea7-8190-947bbc2fd15f/property-search"
-          >Get Report</Link
-        >
-      </div>
-    </HeroSection>
-  </main>
+  <Section>
+    <SectionHeader padding="misc" className="lg:text-center">This is why people love us</SectionHeader>
+    <Reviews client:visible reviews={reviews.map((r) => r.data)} />
+  </Section>
 
-  <MiscSection>
-    <SectionHeader className="lg:text-center" padding="misc"
-      >This is why people love us</SectionHeader
-    >
-    <Reviews client:visible />
-  </MiscSection>
-
-  <MiscSection bgColor="bg-primary-200">
-    <SectionHeader className="lg:text-center" padding="misc"
-      >Frequently asked questions</SectionHeader
-    >
+  <Section bgColor="bg-primary-200">
+    <SectionHeader className="lg:text-center" padding="misc">Frequently asked questions</SectionHeader>
     <div class="flex w-full flex-col gap-8 lg:items-center lg:gap-16">
-      <FAQs maxFAQs={5} client="home" client:visible />
-      <a
-        class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
-        href="/faq">See All Our Faqs</a
-      >
+      <FaqAccordion client:visible faqs={faqs.map((f) => ({ id: f.id, question: f.data.question, answer: f.data.answer }))} />
+      <a class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8" href="/faq">See All Our Faqs</a>
     </div>
-  </MiscSection>
-</Layout>
+  </Section>
+</StandardLayout>

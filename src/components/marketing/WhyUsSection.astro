@@ -1,0 +1,40 @@
+---
+import Section from "@/components/common/Section.astro";
+import { SectionHeader } from "@/components/common/Text";
+import ValueProps from "@/components/marketing/ValueProps";
+
+interface ValueProp {
+  reason: string;
+  text: string;
+}
+
+interface Props {
+  heading: string;
+  image?: string;
+  imageAlt?: string;
+  items: ValueProp[];
+  bgColor?: string;
+  /** Card colour. The original flipped this against the section background:
+   *  primary-200 cards on a white section, white cards on a primary-200 one. */
+  cardBg?: string;
+  imageClass?: string;
+}
+
+const {
+  heading,
+  image,
+  imageAlt = "",
+  items,
+  bgColor = "bg-white",
+  cardBg = "bg-primary-200",
+  imageClass = "",
+} = Astro.props;
+---
+
+<Section bgColor={bgColor}>
+  <SectionHeader padding="misc">{heading}</SectionHeader>
+  <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
+    {image && <img class:list={["rounded-big", imageClass]} src={image} alt={imageAlt} loading="lazy" />}
+    <ValueProps client:visible items={items} cardBg={cardBg} />
+  </div>
+</Section>

@@ -1,0 +1,103 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import { Display } from "@/components/common/Text";
+import Copy from "@/components/common/Copy";
+import ContentSection from "@/components/marketing/ContentSection.astro";
+import AudienceCarousel from "@/components/marketing/AudienceCarousel";
+import Stats from "@/components/marketing/Stats";
+import ValuationSection from "@/components/marketing/ValuationSection.astro";
+import { cmsImageUrl } from "@/lib/cms";
+
+export async function getStaticPaths() {
+  const guides = await getCollection("areaGuides");
+  // A guide with no sections has no page yet; the index shows it as an unlinked tile.
+  return guides
+    .filter((guide) => guide.data.sections.length > 0)
+    .map((guide) => ({
+      params: { slug: guide.data.slug },
+      props: { guide },
+    }));
+}
+
+const { guide } = Astro.props;
+const { data } = guide;
+
+// "How can we Help?" is the home page's audience block; it has no copy of its own here.
+const home = await getEntry("homePage", "content");
+const audienceLinks = (home?.data.audienceLinks ?? []).map((item) => ({
+  title: item.title,
+  link: item.link,
+  image: cmsImageUrl(item.image),
+}));
+---
+
+<StandardLayout title={data.seoTitle ?? data.name} description={data.seoDescription ?? ""}>
+  <ContentSection
+    label="Area Guides"
+    heading={`Welcome to ${data.name}`}
+    body={data.heroIntro}
+    image={cmsImageUrl(data.heroImage)}
+    imageAlt={data.heroImageAlt}
+    imageSide="right"
+    imageAspect="aspect-property"
+    eagerImage
+    headingSize="page"
+    bgColor="bg-primary-200"
+    labelPadding="hero-lg"
+    bodyPadding="none"
+    bodyClassName="max-w-[38rem] pb-[1.25em] last:pb-0"
+  />
+
+  {
+    data.summary && (
+      <Section className="flex flex-col items-center gap-8">
+        <Display>{`A local guide to ${data.name}`}</Display>
+        <Copy size="lg" className="max-w-4xl text-center">
+          {data.summary}
+        </Copy>
+      </Section>
+    )
+  }
+
+  {
+    data.sections.map((section, index) => {
+      const imageLeft = index % 2 === 0;
+      // The original set every second block in smaller, narrower type.
+      const compact = index % 2 === 1;
+      // Same-coloured blocks share one gap rather than doubling it up, hence disablePt.
+      return (
+        <ContentSection
+          label={section.label}
+          heading={section.title}
+          body={section.body}
+          image={cmsImageUrl(section.image)}
+          imageAlt={section.imageAlt}
+          imageSide={imageLeft ? "left" : "right"}
+          bgColor="bg-primary-200"
+          disablePt={index > 0}
+          bodyPadding="none"
+          bodySize={compact ? "md" : "lg"}
+          bodyClassName={compact ? "max-w-[35rem]" : "max-w-[38rem]"}
+          contentClassName={imageLeft ? "max-w-3xl 2xl:pl-20" : undefined}
+        />
+      );
+    })
+  }
+
+  <Section bgColor="bg-primary-200">
+    <AudienceCarousel client:visible heading="How can we Help?" links={audienceLinks} />
+  </Section>
+
+  <Section>
+    <Stats client:visible statType="selling" />
+  </Section>
+
+  <ValuationSection
+    title="Find out how much your property is worth"
+    tagline=""
+    headingClassName="lg:max-w-lg"
+    reverseButtons
+  />
+</StandardLayout>

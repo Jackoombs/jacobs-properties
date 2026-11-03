@@ -1,91 +1,72 @@
 ---
-import HeroSection from "../components/Layout/HeroSection.astro";
-import MiscSection from "../components/Layout/MiscSection.astro";
-import ExpertValuationButton from "../components/Form/ExpertValuation/Button";
-import Copy from "../components/General/Text/Copy";
-import PageHeader from "../components/General/Text/PageHeader";
-import StandardLayout from "../layouts/StandardLayout.astro";
-import ValuationLink from "../components/General/ValuationLink";
-import SectionHeader from "../components/General/Text/SectionHeader";
-import WhyValue from "../assets/images/valuation/why-value.webp";
-import ReadyToSell from "../assets/images/valuation/ready-to-sell.webp";
-import Dropdown from "../components/Dropdown/Dropdown";
-import SectionLabel from "../components/General/Text/SectionLabel";
-import Reviews from "../components/Reviews/Reviews";
+import { getEntry, getCollection } from "astro:content";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import { PageHeader, SectionHeader } from "@/components/common/Text";
+import Copy from "@/components/common/Copy";
+import ContentSection from "@/components/marketing/ContentSection.astro";
+import WhyUsSection from "@/components/marketing/WhyUsSection.astro";
+import ValuationLink from "@/components/marketing/ValuationLink";
+import Reviews from "@/components/marketing/Reviews";
+import { cmsImageUrl } from "@/lib/cms";
 
-const client = "valuation";
+const page = await getEntry("valuationPage", "content");
+if (!page) throw new Error("valuation-page content missing from CMS");
+const { data } = page;
+
+const reviews = (await getCollection("reviews")).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+
+// The original broke this heading after the question. The CMS holds it as one
+// line, so put the break back at render time.
+const readyToSellHeading = data.readyToSell.heading.replace("? ", "?\n");
 ---
 
-<StandardLayout
-  title="Find Out How Much Your Property Is Worth | Jacobs Properties"
-  description="Ready to sell your home in Basingstoke? First, you need to know its true value. Get an instant valuation or book an in-person valuation with us today, it's FREE!"
->
-  <MiscSection
-    bgColor="bg-primary-100"
-    className="grid gap-6 lg:grid-cols-2 xl:gap-16"
-  >
+<StandardLayout title={data.seoTitle ?? "Valuation"} description={data.seoDescription ?? ""}>
+  <Section bgColor="bg-primary-100" className="grid gap-6 lg:grid-cols-2 xl:gap-16">
     <div class="flex max-w-[45.5rem] flex-col justify-center">
-      <PageHeader textColor="text-white" padding="hero"
-        >Find out how much your property is worth
+      <PageHeader textColor="text-white" padding="hero">
+        {data.heroHeading ?? "Find out how much your property is worth"}
       </PageHeader>
-      <Copy size="lg" textColor="text-white"
-        >Selling your home? The first step is determining its current value. Our
-        friendly team of property experts offer a free, no-obligation valuation
-        service that will give you the best idea of how much your home is worth.</Copy
-      >
+      {data.heroBody && <Copy size="lg" textColor="text-white">{data.heroBody}</Copy>}
     </div>
     <div class="flex flex-col gap-10 xl:gap-16">
       <ValuationLink
         client:idle
+        valuationType="expert"
         backgroundColor="bg-white"
         className="max-w-[16rem] sm:max-w-[36rem]"
-        valuationType="expert"
-        >Book an in-person valuation at a time that suits you.</ValuationLink
       >
-      <ValuationLink
-        client:idle
-        backgroundColor="bg-secondary-100"
-        valuationType="instant"
-        >Get a free and instant estimate of your home’s value in just a few
-        clicks.</ValuationLink
-      >
+        Book an in-person valuation at a time that suits you.
+      </ValuationLink>
+      <ValuationLink client:idle valuationType="instant" backgroundColor="bg-secondary-100">
+        Get a free and instant estimate of your home’s value in just a few clicks.
+      </ValuationLink>
     </div>
-  </MiscSection>
+  </Section>
 
-  <MiscSection>
-    <SectionHeader padding="misc"
-      >Why choose us to value your home?</SectionHeader
-    >
-    <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
-      <img class="rounded-big" src={WhyValue.src} alt="" />
-      <Dropdown client={client} client:visible />
-    </div>
-  </MiscSection>
+  <WhyUsSection
+    heading="Why choose us to value your home?"
+    image={cmsImageUrl(data.whyValueImage)}
+    imageAlt={data.whyValueImageAlt}
+    items={data.valueProps}
+  />
 
-  <HeroSection
+  <ContentSection
+    label={data.readyToSell.label}
+    heading={readyToSellHeading}
+    image={cmsImageUrl(data.readyToSell.image)}
+    imageAlt={data.readyToSell.imageAlt}
+    imageSide="right"
     bgColor="bg-primary-200"
-    image={{
-      path: ReadyToSell.src,
-      alt: "",
-      aspectRatio: "aspect-hero",
-      position: true,
-    }}
-  >
-    <div class="max-w-2xl md:max-w-lg">
-      <SectionLabel padding="hero-md">Valuation</SectionLabel>
-      <SectionHeader padding="hero">
-        <>Ready To Sell?<br />Take the next step here</>
-      </SectionHeader>
-      <ExpertValuationButton client:visible variant="secondary" size="lg">
-        Request a valuation
-      </ExpertValuationButton>
-    </div>
-  </HeroSection>
+    contentClassName="max-w-2xl md:max-w-lg"
+    headingClassName="whitespace-pre-line"
+    ctaSize="lg"
+    cta1Variant="secondary"
+    cta1={{ type: "expert-valuation", text: data.readyToSell.ctaText ?? "Request a valuation" }}
+  />
 
-  <MiscSection bgColor="bg-white">
-    <SectionHeader className="lg:text-center" padding="misc">
-      Our customers said
-    </SectionHeader>
-    <Reviews client:visible />
-  </MiscSection>
+  <Section>
+    <SectionHeader className="lg:text-center" padding="misc">Our customers said</SectionHeader>
+    <Reviews client:visible reviews={reviews.map((r) => r.data)} />
+  </Section>
 </StandardLayout>

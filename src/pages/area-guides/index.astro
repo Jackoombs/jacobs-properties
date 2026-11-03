@@ -1,83 +1,53 @@
 ---
-import StandardLayout from "../../layouts/StandardLayout.astro";
-import PageHeader from "../../components/General/Text/PageHeader";
-import Copy from "../../components/General/Text/Copy";
-import Link from "../../components/General/Link";
-import MiscSection from "../../components/Layout/MiscSection.astro";
-import SectionHeader from "../../components/General/Text/SectionHeader";
-import SectionLabel from "../../components/General/Text/SectionLabel";
-import Reviews from "../../components/Reviews/Reviews";
-import ValuationHero from "../../assets/images/valuation-hero.webp";
+import { getEntry, getCollection } from "astro:content";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import { SectionHeader } from "@/components/common/Text";
+import SplitHero from "@/components/marketing/SplitHero.astro";
+import Reviews from "@/components/marketing/Reviews";
+import { cmsImageUrl } from "@/lib/cms";
+
+const page = await getEntry("areaGuidesPage", "content");
+if (!page) throw new Error("area-guides-page content missing from CMS");
+const { data } = page;
+
+const guides = await getCollection("areaGuides");
+const reviews = (await getCollection("reviews")).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 ---
 
-<StandardLayout
-  title="Local Property Guides for Surrounding Areas | Jacobs Properties"
-  description="Looking to buy a property in Basingstoke or the surrounding areas. Check out our local guides to find out about the local community, transport, amenities, etc."
->
-  <section class="bg-primary-200 py-10 md:py-28">
-    <div
-      class="mx-auto flex w-full max-w-container-lg grid-cols-1 flex-col items-center gap-6 md:grid md:grid-cols-1/2 lg:gap-16 xl:grid-cols-[4fr_3fr]"
-    >
-      <PageHeader padding="hero" className="max-w-sm lg:max-w-[56rem]"
-        >Area guides</PageHeader
-      >
-      <div class="col-start-2 flex flex-col">
-        <Copy size="lg" padding="hero-md"
-          >Looking to buy a property in Basingstoke or the surrounding areas.
-          Check out our local guides to find out about the local community,
-          transport, amenities, etc</Copy
-        >
-        <Link link="/" type="secondary" size="lg">Get in touch</Link>
-      </div>
-    </div>
-  </section>
+<StandardLayout title={data.seoTitle ?? "Area Guides"} description={data.seoDescription ?? ""}>
+  <SplitHero
+    heading={data.heroHeading ?? "Area guides"}
+    body={data.heroBody}
+    cta={{ type: "get-in-touch", text: "Get in touch" }}
+  />
 
-  <MiscSection className="grid lg:grid-cols-2 gap-6 lg:gap-16" disablePb={true}>
-    <a
-      href="/area-guides/basingstoke"
-      class="basingstoke relative aspect-property w-full rounded-big bg-cover bg-center"
-    >
-      <div
-        class="absolute bottom-0 mt-auto flex h-full max-h-14 w-full items-center rounded-b-big bg-[#001129] bg-opacity-[0.95] duration-300 ease-in-out md:max-h-24"
-      >
-        <SectionHeader className="pl-10" textColor="text-white"
-          >Basingstoke</SectionHeader
-        >
-      </div>
-    </a>
-    <div
-      class="oakley relative aspect-property w-full rounded-big bg-cover bg-center"
-    >
-      <div
-        class="absolute bottom-0 mt-auto flex h-full max-h-14 w-full items-center rounded-b-big bg-[#001129] bg-opacity-[0.95] duration-300 ease-in-out md:max-h-24"
-      >
-        <SectionHeader className="pl-10" textColor="text-white"
-          >Oakley</SectionHeader
-        >
-      </div>
-    </div>
-  </MiscSection>
+  <Section className="grid gap-6 lg:grid-cols-2 lg:gap-16" disablePb>
+    {
+      guides.map((guide) => {
+        // A guide with no sections has no page yet (see [slug].astro), so its
+        // tile is shown but not linked, as Oakley was in the original.
+        const hasPage = guide.data.sections.length > 0;
+        const Tile = hasPage ? "a" : "div";
+        const image = cmsImageUrl(guide.data.heroImage);
+        return (
+          <Tile
+            href={hasPage ? `/area-guides/${guide.data.slug}` : undefined}
+            class="group relative block aspect-property w-full rounded-big bg-primary-200"
+          >
+            {image && <img src={image} alt="" loading="lazy" class="absolute inset-0 h-full w-full rounded-big object-cover" />}
+            {/* A name bar along the foot of the photo that swells to cover it on hover. */}
+            <div class="absolute bottom-0 flex h-full max-h-14 w-full items-center rounded-b-big bg-[#001129]/95 transition-[max-height,border-radius] duration-300 ease-in-out group-hover:max-h-full group-hover:rounded-t-big md:max-h-24">
+              <SectionHeader className="pl-10" textColor="text-white">{guide.data.name}</SectionHeader>
+            </div>
+          </Tile>
+        );
+      })
+    }
+  </Section>
 
-  <MiscSection>
-    <SectionHeader padding="misc" className="md:text-center"
-      >Hear from our customers</SectionHeader
-    >
-    <Reviews color="alt" client:visible />
-  </MiscSection>
+  <Section>
+    <SectionHeader className="md:text-center" padding="misc">Hear from our customers</SectionHeader>
+    <Reviews client:visible reviews={reviews.map((r) => r.data)} variant="alt" />
+  </Section>
 </StandardLayout>
-
-<style>
-  .basingstoke {
-    background-image: url("../../assets/images/area-guides/basingstoke.webp");
-  }
-  .oakley {
-    background-image: url("../../assets/images/area-guides/oakley.webp");
-  }
-
-  .basingstoke:hover *,
-  .oakley:hover * {
-    max-height: 100%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-  }
-</style>

@@ -1,73 +1,71 @@
 ---
-import StandardLayout from "../layouts/StandardLayout.astro";
-import PageHeader from "../components/General/Text/PageHeader";
-import MiscSection from "../components/Layout/MiscSection.astro";
-import SectionHeader from "../components/General/Text/SectionHeader";
-import SectionLabel from "../components/General/Text/SectionLabel";
-import Copy from "../components/General/Text/Copy";
-import Link from "../components/General/Link";
-import FAQList from "../components/FAQs/FAQList";
-import ValuationHero from "../assets/images/valuation-hero.webp";
-import Reviews from "../components/Reviews/Reviews";
+import { getEntry, getCollection } from "astro:content";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import { SectionHeader } from "@/components/common/Text";
+import Copy from "@/components/common/Copy";
+import SplitHero from "@/components/marketing/SplitHero.astro";
+import FaqPageList from "@/components/marketing/FaqPageList";
+import ValuationSection from "@/components/marketing/ValuationSection.astro";
+import Reviews from "@/components/marketing/Reviews";
+import { cmsImageUrl } from "@/lib/cms";
+
+const page = await getEntry("faqPage", "content");
+if (!page) throw new Error("faq-page content missing from CMS");
+const { data } = page;
+
+const faqs = (await getCollection("faqs")).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+const reviews = (await getCollection("reviews")).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+
+// The banner copy quotes the branch phone number in bold. Take it from the
+// contact page so the two never drift, and make it a tap-to-call link.
+const contact = await getEntry("contactPage", "content");
+const phone = contact?.data.phone;
+const [beforePhone, afterPhone] =
+  phone && data.ctaBody?.includes(phone) ? data.ctaBody.split(phone) : [data.ctaBody, undefined];
 ---
 
-<StandardLayout
-  title="Frequently Asked Questions | Local Estate Agents in Basingstoke | Jacobs Properties"
-  description="Have questions about buying, selling, or renting property in Basingstoke? See our Frequently Asked Questions for helpful answers and insights from our experienced estate agents at Jacobs Properties. We've compiled a list of common questions and answers to help you make informed decisions about your property needs."
->
-  <MiscSection
+<StandardLayout title={data.seoTitle ?? "FAQs"} description={data.seoDescription ?? ""}>
+  <SplitHero
     bgColor="bg-primary-100"
-    className="flex flex-col md:grid grid-cols-1 items-center gap-6 md:grid-cols-1/2 lg:gap-16 xl:grid-cols-[4fr_3fr]"
-  >
-    <PageHeader textColor="text-white"
-      >Frequently asked questions at Jacobs</PageHeader
-    >
-    <div class="col-start-2 flex flex-col">
-      <Copy textColor="text-white" size="lg" padding="hero-md"
-        >Independent and proud, we keep things simple at Jacobs Properties.</Copy
-      >
-      <Link link="/" type="secondary" size="lg">Get in touch</Link>
-    </div>
-  </MiscSection>
+    textColor="text-white"
+    plainHeading
+    heading={data.heroHeading ?? "Frequently asked questions at Jacobs"}
+    body={data.heroBody}
+    cta={{ type: "get-in-touch", text: "Get in touch" }}
+  />
 
-  <MiscSection>
-    <FAQList client:load />
-  </MiscSection>
+  <Section>
+    <FaqPageList client:load faqs={faqs.map((f) => ({ id: f.id, question: f.data.question, answer: f.data.answer, category: f.data.category }))} />
+  </Section>
 
-  <section
-    class="relative flex flex-col justify-center gap-6 bg-secondary-100 pb-10 lg:aspect-[12/5] lg:pb-0"
+  <ValuationSection
+    label="Get in touch"
+    title={data.ctaHeading ?? "Not found what you’re looking for?"}
+    tagline=""
+    headingClassName="lg:max-w-lg"
+    image={cmsImageUrl(data.ctaImage)}
+    reverseButtons
   >
-    <img
-      loading="lazy"
-      class="right-0 top-0 mx-auto aspect-[6/5] h-auto w-full object-cover object-left lg:absolute lg:order-1 lg:w-[50vw]"
-      src={ValuationHero.src}
-      alt=""
-    />
-    <div class="mx-auto w-full max-w-container-lg">
-      <div class="flex flex-1 flex-col lg:justify-center">
-        <SectionLabel padding="hero-md">Get in touch</SectionLabel>
-        <SectionHeader className="lg:max-w-lg" padding="hero"
-          >Not found what you’re looking for?</SectionHeader
-        >
-        <Copy className="lg:max-w-md xl:max-w-xl" padding="hero-md" size="lg">
-          <>
-            If none of our FAQ have answered your questions, get in touch on
-            <strong class="font-semibold">01256 781300</strong> or fill out the form
-            below by clicking get in touch.
-          </>
+    {
+      beforePhone && (
+        <Copy size="lg" padding="hero-md" className="lg:max-w-md xl:max-w-xl">
+          {beforePhone}
+          {afterPhone !== undefined && (
+            <>
+              <a href={`tel:${phone?.replace(/\s+/g, "")}`} class="font-semibold">
+                {phone}
+              </a>
+              {afterPhone}
+            </>
+          )}
         </Copy>
-        <div class="flex flex-col gap-3 md:flex-row">
-          <Link link="/" type="white" size="lg">Instant Valuation</Link>
-          <Link link="/" type="primary" size="lg">Expert Valuation</Link>
-        </div>
-      </div>
-    </div>
-  </section>
+      )
+    }
+  </ValuationSection>
 
-  <MiscSection>
-    <SectionHeader padding="misc" className="md:text-center"
-      >Hear from our customers</SectionHeader
-    >
-    <Reviews color="alt" client:visible />
-  </MiscSection>
+  <Section>
+    <SectionHeader className="md:text-center" padding="misc">Hear from our customers</SectionHeader>
+    <Reviews client:visible reviews={reviews.map((r) => r.data)} variant="alt" />
+  </Section>
 </StandardLayout>

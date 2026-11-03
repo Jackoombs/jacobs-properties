@@ -1,22 +1,16 @@
 ---
-import StandardLayout from "../layouts/StandardLayout.astro";
-import MiscSection from "../components/Layout/MiscSection.astro";
-import PageHeader from "../components/General/Text/PageHeader";
-import Copy from "../components/General/Text/Copy";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import { PageHeader } from "@/components/common/Text";
+import Copy from "@/components/common/Copy";
 ---
 
 <StandardLayout
   title="Page Not Found | Jacobs Properties"
   description="Oops! We can't seem to find the page you're looking for. Please contact Jacobs Properties, your trusted local estate agents in Basingstoke, for assistance."
 >
-  <MiscSection bgColor="bg-primary-200">
-    <div
-      class="justify mx-auto flex max-w-container-lg flex-col items-center justify-center gap-6 text-center"
-    >
-      <PageHeader>404 Page not found</PageHeader>
-      <Copy size="lg"
-        >Oops! We can't seem to find the page you're looking for.</Copy
-      >
-    </div>
-  </MiscSection>
+  <Section bgColor="bg-primary-200" className="flex flex-col items-center justify-center gap-6 text-center">
+    <PageHeader>404 Page not found</PageHeader>
+    <Copy size="lg">Oops! We can't seem to find the page you're looking for.</Copy>
+  </Section>
 </StandardLayout>

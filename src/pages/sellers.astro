@@ -1,201 +1,131 @@
 ---
-import StandardLayout from "../layouts/StandardLayout.astro";
-import HeroSection from "../components/Layout/HeroSection.astro";
-import MiscSection from "../components/Layout/MiscSection.astro";
-import Link from "../components/General/Link";
-import InstantValuationButton from "../components/Form/InstantValuation/Button";
-import ExpertValuationButton from "../components/Form/ExpertValuation/Button";
-import FirstTime from "../assets/images/sellers/first-time-2.webp";
-import SellerHero from "../assets/images/sellers/seller-hero.webp";
-import WhySell from "../assets/images/sellers/why-sell.webp";
-import ProvenRecipe from "../assets/images/sellers/proven-recipe.webp";
-import Stats from "../components/Stats/Stats";
-import Dropdown from "../components/Dropdown/Dropdown";
-import SectionLabel from "../components/General/Text/SectionLabel";
-import SectionHeader from "../components/General/Text/SectionHeader";
-import PageHeader from "../components/General/Text/PageHeader";
-import Copy from "../components/General/Text/Copy";
-import Display from "../components/General/Text/Display";
-import ProcessSlider from "../components/Process/ProcessSlider";
-import BrochureForm from "../components/Form/BrochureForm";
-import PropertySlider from "../components/Property/PropertySlider";
-import Reviews from "../components/Reviews/Reviews";
-import FAQs from "../components/FAQs/FAQs";
-import type { Property2 } from "../env";
+import { getEntry, getCollection } from "astro:content";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import { SectionHeader, Display } from "@/components/common/Text";
+import ContentSection from "@/components/marketing/ContentSection.astro";
+import WhyUsSection from "@/components/marketing/WhyUsSection.astro";
+import ProcessSteps from "@/components/marketing/ProcessSteps";
+import FaqAccordion from "@/components/marketing/FaqAccordion";
+import Reviews from "@/components/marketing/Reviews";
+import Stats from "@/components/marketing/Stats";
+import PropertyCarousel from "@/components/property/PropertyCarousel";
+import InlineBrochureForm from "@/components/forms/brochure/InlineBrochureForm";
+import { cmsImageUrl } from "@/lib/cms";
 
-const res = await fetch(
-  `https://jacobs-properties-server-nest-production.up.railway.app/property`
-);
-const properties: Property2[] = await res.json();
-const salesProperties = properties.filter((p) => p.type === "selling");
-const client = "sellers";
+const page = await getEntry("sellersPage", "content");
+if (!page) throw new Error("sellers-page content missing from CMS");
+const { data } = page;
+
+const faqs = (await getCollection("faqs")).filter((f) => f.data.category === "sellers").slice(0, 5);
+const reviews = (await getCollection("reviews")).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+const sellingProperties = (await getCollection("properties"))
+  .filter((p) => p.data.marketingMode === "selling")
+  .map((p) => p.data);
 ---
 
-<StandardLayout
-  title="Sell Your Property in Basingstoke | Jacobs Properties"
-  description="Ready to sell your home? Talk to our team of friendly local estate agents, who specialise in selling property in Basingstoke quickly and efficiently."
->
-  <main>
-    <HeroSection
-      disableLazy
-      bgColor="bg-primary-200"
-      image={{
-        path: SellerHero.src,
-        aspectRatio: "aspect-property",
-        alt: "",
-        position: true,
-      }}
-      alertBar
+<StandardLayout title={data.seoTitle ?? "Sellers"} description={data.seoDescription ?? ""}>
+  <ContentSection
+    label={data.hero.label}
+    heading={data.hero.heading}
+    body={data.hero.body}
+    image={cmsImageUrl(data.hero.image)}
+    imageAlt={data.hero.imageAlt}
+    imageSide="right"
+    imageAspect="aspect-property"
+    headingSize="page"
+    bgColor="bg-primary-200"
+    labelPadding="hero-lg"
+    bodyPadding="hero-lg"
+    bodySize="lg"
+    contentClassName="md:max-w-lg"
+    ctaSize="lg"
+    cta2Variant="secondary"
+    cta1={{ type: "instant-valuation", text: data.hero.ctaPrimaryText ?? "Instant Valuation" }}
+    cta2={{ type: "expert-valuation", text: data.hero.ctaSecondaryText ?? "Expert Valuation" }}
+  />
+
+  <Section className="flex flex-col gap-8 lg:items-center lg:text-center">
+    <Display>{data.missionHeading}</Display>
+    <h3
+      class="max-w-xl text-[1.5rem] font-semibold leading-7 text-primary-100 lg:max-w-[51rem] lg:text-[2rem] lg:leading-10"
     >
-      <div class="flex flex-col text-primary-100 md:max-w-lg">
-        <SectionLabel padding="hero-lg">Sellers</SectionLabel>
-        <PageHeader padding="hero">Sell your home in Basingstoke</PageHeader>
-        <Copy padding="hero-lg" size="lg"
-          >There’s a lot to consider when selling your home, that’s why you need
-          a reliable estate agent by your side. Our people-focused agents are
-          here to help.</Copy
-        >
-        <div
-          class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
-        >
-          <InstantValuationButton client:visible size="lg">
-            Instant Valuation
-          </InstantValuationButton>
-          <ExpertValuationButton client:visible size="lg" variant="secondary">
-            Expert Valuation
-          </ExpertValuationButton>
-        </div>
-      </div>
-    </HeroSection>
-    <!-- <section class="bg-primary-200 py-10 md:py-28">
-      <div
-        class="mx-auto grid max-w-container-lg items-center gap-7 lg:grid-cols-2"
-      >
-        <img
-          class="aspect-[1.42_/_1] h-auto w-full self-center rounded-big object-cover object-left lg:order-1"
-          src={SellerHero.src}
-          alt=""
-        />
-      </div>
-    </section> -->
+      {data.missionSubheading}
+    </h3>
+  </Section>
 
-    <MiscSection
-      className="flex max-w-container-lg flex-col gap-8 lg:items-center lg:text-center"
-    >
-      <Display>On a mission to sell your home.</Display>
-      <h3
-        class="max-w-xl text-[1.5rem] font-semibold leading-7 text-primary-100 lg:max-w-[51rem] lg:text-[2rem] lg:leading-10"
-      >
-        Our focus is to get a broader exposure for your property, negotiate a
-        better deal and make sure the process is smooth and stress free all the
-        way.
-      </h3>
-    </MiscSection>
+  <WhyUsSection
+    heading="Why sell your home with us"
+    image={cmsImageUrl(data.whySellImage)}
+    imageAlt={data.whySellImageAlt}
+    items={data.valueProps}
+    bgColor="bg-primary-200"
+    cardBg="bg-white"
+  />
 
-    <MiscSection bgColor="bg-primary-200">
-      <SectionHeader padding="misc">Why sell your home with us</SectionHeader>
-      <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
-        <img class="rounded-big" src={WhySell.src} alt="" />
-        <Dropdown color="bg-white" client={client} client:visible />
-      </div>
-    </MiscSection>
+  <Section>
+    <Stats client:visible statType="selling" />
+  </Section>
 
-    <MiscSection bgColor="bg-white">
-      <Stats statType="selling" client:visible />
-    </MiscSection>
+  <Section bgColor="bg-primary-200">
+    <ProcessSteps client:visible heading="Our selling process at a glance" steps={data.processSteps} />
+  </Section>
 
-    <MiscSection bgColor="bg-primary-200">
-      <ProcessSlider
-        client={client}
-        header="Our selling process at a glance"
-        client:idle
-      />
-    </MiscSection>
+  <ContentSection
+    label={data.provenRecipe.label}
+    heading={data.provenRecipe.heading}
+    body={data.provenRecipe.body}
+    image={cmsImageUrl(data.provenRecipe.image)}
+    imageAlt={data.provenRecipe.imageAlt}
+    imageSide="left"
+    contentClassName="max-w-2xl 2xl:pl-20"
+    headingClassName="lg:max-w-lg"
+  />
 
-    <HeroSection
-      image={{
-        path: ProvenRecipe.src,
-        aspectRatio: "aspect-hero",
-        alt: "",
-        position: false,
-      }}
-    >
-      <div class="max-w-2xl 2xl:pl-20">
-        <SectionLabel padding="hero-md">About</SectionLabel>
-        <SectionHeader padding="hero" className="lg:max-w-lg"
-          >Proven recipe to sell your home for the best price</SectionHeader
-        >
-        <Copy size="lg" padding="hero-md"
-          >We don’t just take a few pictures and stick your property on
-          Rightmove. That’s simply not our style. And it won’t help you achieve
-          the best sale price for your home. We bring the story of your property
-          to life and design a winning strategy to really make your home stand
-          out. Then, we implement a custom marketing plan across a wide variety
-          of the latest technologies including social, online, in print, direct
-          mail and in person. We like to get to know you and your property.
-          Trust us, this makes a difference to the final outcome and the price
-          you can achieve when selling your home.</Copy
-        >
-      </div>
-    </HeroSection>
+  <ContentSection
+    label={data.brochureCta.label}
+    heading={data.brochureCta.heading}
+    body={data.brochureCta.body}
+    image={cmsImageUrl(data.brochureCta.image)}
+    imageAlt={data.brochureCta.imageAlt}
+    imageSide="right"
+    bgColor="bg-primary-200"
+    bodySize="md"
+    labelPadding="none"
+    labelClassName="pb-3"
+    headingPadding="none"
+    headingClassName="pb-4"
+    bodyPadding="none"
+    bodyClassName="pb-5"
+    contentClassName="lg:max-w-xl lg:justify-center"
+  >
+    <InlineBrochureForm
+      client:visible
+      slot="cta"
+      buyOrRent="buy"
+      pdfUrl="/Jacobs properties - Guide To Selling.pdf"
+      buttonText="Download Guide"
+    />
+  </ContentSection>
 
-    <HeroSection
-      bgColor="bg-primary-200"
-      image={{
-        path: FirstTime.src,
-        aspectRatio: "aspect-hero",
-        alt: "",
-        position: true,
-      }}
-    >
-      <div class="flex flex-col lg:max-w-xl lg:justify-center">
-        <SectionLabel className="pb-3">Sales Brochure</SectionLabel>
-        <SectionHeader className="pb-4">Free Selling Guide</SectionHeader>
-        <Copy className="pb-5" size="md"
-          >Thinking of selling? Download our free Selling Guide for useful
-          advice on how to achieve the best price for your property and what’s
-          involved in selling.</Copy
-        >
-        <BrochureForm
-          isDownload
-          buttonText="Download Guide"
-          href="/Jacobs properties - Guide To Selling.pdf"
-          client:visible
-        />
-      </div>
-    </HeroSection>
+  <Section>
+    <PropertyCarousel
+      client:visible
+      heading="Your property could be one of them"
+      properties={sellingProperties}
+    />
+  </Section>
 
-    <MiscSection>
-      <PropertySlider
-        client:idle
-        header="Your property could be one of them"
-        properties={salesProperties}
-      />
-    </MiscSection>
+  <Section bgColor="bg-primary-200">
+    <SectionHeader className="lg:text-center" padding="misc">Hear from our customers</SectionHeader>
+    <Reviews client:visible reviews={reviews.map((r) => r.data)} />
+  </Section>
 
-    <MiscSection bgColor="bg-primary-200">
-      <SectionHeader className="lg:text-center" padding="misc"
-        >Hear from our customers</SectionHeader
-      >
-      <Reviews client:visible />
-    </MiscSection>
-
-    <MiscSection>
-      <SectionHeader className="lg:text-center" padding="misc"
-        >Frequently asked questions</SectionHeader
-      >
-      <div class="flex w-full flex-col gap-8 lg:items-center lg:gap-16">
-        <FAQs
-          bgColor="bg-primary-200"
-          maxFAQs={5}
-          client={client}
-          client:visible
-        />
-        <a
-          class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
-          href="/faq">See All Our Faqs</a
-        >
-      </div>
-    </MiscSection>
-  </main>
+  <Section>
+    <SectionHeader className="lg:text-center" padding="misc">Frequently asked questions</SectionHeader>
+    <div class="flex w-full flex-col gap-8 lg:items-center lg:gap-16">
+      <FaqAccordion client:visible cardBg="bg-primary-200" faqs={faqs.map((f) => ({ id: f.id, question: f.data.question, answer: f.data.answer }))} />
+      <a class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8" href="/faq">See All Our Faqs</a>
+    </div>
+  </Section>
 </StandardLayout>

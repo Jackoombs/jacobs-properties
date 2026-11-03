@@ -1,0 +1,64 @@
+services:
+  web:
+    build:
+      context: .
+      # Stops at the "deps" stage (bun install only) — the nginx/static-build
+      # stages aren't needed for dev, and rebuilding the image here means
+      # dependency changes (package.json/bun.lock), not source changes.
+      target: deps
+    env_file:
+      - .env
+    environment:
+      # Tells astro.config.mjs to switch Vite's watcher to polling — see the
+      # comment there for why (Docker Desktop bind mounts don't forward
+      # native filesystem events).
+      CONTAINER: "true"
+      # astro dev fetches the property list at server-start (and whenever
+      # content.config.ts or its deps change), so this only needs to be
+      # reachable at container RUNTIME now, not at image build time. Same
+      # host.docker.internal reasoning as docker-compose.prod.yml: .env's
+      # PUBLIC_SERVER_URL is "localhost:3000" for host-side `bun run dev`,
+      # which inside this container means the container itself. Override via
+      # DOCKER_PUBLIC_SERVER_URL (in .env or the shell) for a different API.
+      PUBLIC_SERVER_URL: ${DOCKER_PUBLIC_SERVER_URL:-http://host.docker.internal:3000/}
+      # Same reasoning as PUBLIC_SERVER_URL above: .env's PUBLIC_CMS_URL is
+      # "localhost:1337" for host-side `bun run dev`, which inside this
+      # container means the container itself, not wherever Strapi is running.
+      # Override via DOCKER_PUBLIC_CMS_URL for a different CMS.
+      PUBLIC_CMS_URL: ${DOCKER_PUBLIC_CMS_URL:-http://host.docker.internal:1337/}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "4321:4321"
+    volumes:
+      # Source is bind-mounted so host edits reach the container without a
+      # rebuild — astro dev's own file watcher picks them up. New
+      # dependencies (package.json/bun.lock) still need a rebuild: run
+      # `bun run docker:dev` again (add --build if compose reuses a stale
+      # image).
+      - .:/app
+      # ...but node_modules and .astro stay container-owned: node_modules
+      # was installed for Linux inside the image (this project uses sharp,
+      # which has native bindings — a Windows/Mac host's node_modules
+      # wouldn't run here), and .astro is a generated cache with no reason to
+      # leak onto the host. These anonymous volumes shadow those subpaths so
+      # the bind mount above doesn't overwrite them.
+      - /app/node_modules
+      - /app/.astro
+    # /app/.astro is an anonymous volume that outlives the container, and
+    # astro records the running dev server's PID in .astro/dev.json. A hard
+    # stop leaves that file behind; on the next start PIDs begin from 1 again,
+    # so the recorded PID matches a live process (often this very one) and
+    # astro refuses to boot with "Another astro dev server is already
+    # running". `--force` is worse here, not better: it kills the recorded
+    # PID, which is itself, so the container SIGTERMs in a restart loop.
+    # Deleting just the record sidesteps both, and keeps the rest of .astro
+    # (content cache, generated types) so startup stays fast.
+    command:
+      ["sh", "-c", "rm -f /app/.astro/dev.json && exec bun run dev -- --host 0.0.0.0"]
+    restart: unless-stopped
+
+# For a production-shaped run (static build baked into the image, no hot
+# reload, matches what actually deploys), use docker-compose.prod.yml instead:
+#   docker compose -f docker-compose.prod.yml up --build
+# or: bun run docker:prod

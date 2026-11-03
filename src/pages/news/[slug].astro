@@ -1,0 +1,82 @@
+---
+import { getCollection } from "astro:content";
+import { marked } from "marked";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import { SectionHeader } from "@/components/common/Text";
+import ContentSection from "@/components/marketing/ContentSection.astro";
+import ShareButton from "@/components/property/ShareButton";
+import NewsSlider from "@/components/marketing/NewsSlider";
+import Reviews from "@/components/marketing/Reviews";
+import { cmsImageUrl } from "@/lib/cms";
+
+export async function getStaticPaths() {
+  const articles = await getCollection("newsArticles");
+  return articles.map((article) => ({
+    params: { slug: article.data.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { data } = article;
+
+const bodyHtml = marked.parse(data.body, { async: false }) as string;
+
+// The rest of the news goes in the slider below the article, newest first.
+const otherArticles = (await getCollection("newsArticles"))
+  .filter((other) => other.data.slug !== data.slug)
+  .sort((a, b) => (b.data.publishedDate ?? "").localeCompare(a.data.publishedDate ?? ""))
+  .map(({ data: other }) => ({
+    title: other.title,
+    href: `/news/${other.slug}`,
+    category: other.category,
+    publishedDate: other.publishedDate,
+    image: cmsImageUrl(other.heroImage),
+  }));
+const reviews = (await getCollection("reviews")).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+---
+
+<StandardLayout title={data.seoTitle ?? data.title} description={data.seoDescription ?? data.excerpt ?? ""}>
+  <ContentSection
+    label={data.category}
+    heading={data.title}
+    body={data.excerpt}
+    image={cmsImageUrl(data.heroImage)}
+    imageAlt={data.heroImage?.alternativeText}
+    imageSide="right"
+    imageAspect="aspect-property"
+    eagerImage
+    headingSize="page"
+    bgColor="bg-primary-200"
+    labelPadding="hero-lg"
+    bodyPadding="hero-lg"
+    bodyClassName="md:max-w-2xl"
+  >
+    <ShareButton client:idle slot="cta" name="article" variant="secondary" size="md">Share Article</ShareButton>
+  </ContentSection>
+
+  <Section>
+    <div class="mx-auto max-w-5xl text-primary-100">
+      <hr class="border-primary-100" />
+      {/* Article type is set here rather than globally: the markdown body has no classes of its own. */}
+      <div
+        class="[&_a]:underline [&_a]:underline-offset-4 [&_h2]:pb-[0.6rem] [&_h2]:pt-[1.4rem] [&_h2]:text-[2rem] [&_h2]:font-semibold [&_h3]:pb-[0.6rem] [&_h3]:pt-[1.4rem] [&_h3]:text-[2rem] [&_h3]:font-semibold [&_h4]:pb-[0.4rem] [&_h4]:text-[1.5rem] [&_h4]:font-semibold [&_ol]:list-decimal [&_ol]:pl-8 [&_ul]:list-disc [&_ul]:pl-8"
+        set:html={bodyHtml}
+      />
+    </div>
+  </Section>
+
+  {
+    otherArticles.length > 0 && (
+      <Section bgColor="bg-primary-200">
+        <NewsSlider client:visible heading="Read the latest property news" articles={otherArticles} />
+      </Section>
+    )
+  }
+
+  <Section>
+    <SectionHeader className="md:text-center" padding="misc">Hear from our customers</SectionHeader>
+    <Reviews client:visible reviews={reviews.map((r) => r.data)} variant="alt" />
+  </Section>
+</StandardLayout>

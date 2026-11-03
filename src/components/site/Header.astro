@@ -1,0 +1,173 @@
+---
+import LogoBlue from "@/assets/header/logo_blue.svg";
+import LogoGreen from "@/assets/header/logo_green.svg";
+import Link from "@/components/common/Link";
+import ContactBtn from "@/components/site/ContactBtn";
+import SiteMenu from "@/components/site/SiteMenu";
+
+export interface Props {
+  /**
+   * Overlays the header on top of the page rather than sitting above it, and
+   * makes it transparent while the user is scrolled to the top so it blends
+   * into a full-bleed hero. Used by the home page. Once scrolled past 100px it
+   * drops back to the normal solid-white header.
+   */
+  overlay?: boolean;
+}
+
+const { overlay = false } = Astro.props;
+---
+
+<header
+  data-overlay={overlay ? "true" : undefined}
+  data-at-top={overlay ? "true" : undefined}
+  class:list={[
+    "group/header top-0 z-40 flex w-full flex-col items-center bg-white leading-[1.1] text-primary-100 duration-100",
+    overlay ? "fixed" : "sticky",
+    // `--menu-bar-bg` recolours SiteMenu's hamburger bars from here, since that
+    // island can't see the scroll state the header owns.
+    overlay &&
+      "data-[at-top=true]:bg-transparent data-[at-top=true]:text-white data-[at-top=true]:[--menu-bar-bg:#ffffff]",
+  ]}
+>
+  <a
+    id="header-target"
+    href="/valuation"
+    class:list={[
+      "flex h-12 w-full items-center justify-center bg-secondary-100 duration-100 md:hidden",
+      overlay && "group-data-[at-top=true]/header:bg-primary-100",
+    ]}
+  >
+    <p
+      class:list={[
+        "text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100",
+        overlay && "group-data-[at-top=true]/header:text-white",
+      ]}
+    >
+      Book a Valuation
+    </p>
+  </a>
+
+  <div
+    class:list={[
+      "flex h-[5.625rem] w-full max-w-container-lg items-center justify-between text-xs font-semibold uppercase lg:h-[7.75rem]",
+      overlay &&
+        "group-data-[at-top=true]/header:h-[6.75rem] lg:group-data-[at-top=true]/header:h-[8rem] 2xl:group-data-[at-top=true]/header:h-[10.5rem]",
+    ]}
+  >
+    <a
+      class:list={[
+        "flex items-center self-end pb-2",
+        overlay && "group-data-[at-top=true]/header:pb-0",
+      ]}
+      href="/"
+    >
+      <img
+        class:list={[
+          "h-auto w-[9rem] aspect-[2.1] object-cover lg:w-[12rem]",
+          overlay && "group-data-[at-top=true]/header:hidden",
+        ]}
+        src={LogoBlue.src}
+        alt="Jacobs Properties Logo"
+      />
+      {
+        overlay && (
+          <img
+            class="hidden h-auto w-[10.625rem] aspect-[2.1] object-cover group-data-[at-top=true]/header:block lg:w-[12rem] 2xl:w-[16.25rem]"
+            src={LogoGreen.src}
+            alt="Jacobs Properties Logo"
+          />
+        )
+      }
+    </a>
+    <div class="flex items-center gap-6 2xl:gap-[3rem]">
+      <nav class="hidden xl:block">
+        <ul class="flex items-center gap-6 text-[0.875rem] font-semibold tracking-[1.4px] 2xl:gap-[3rem]">
+          <li class="hover:text-secondary-100">
+            <a class="rounded-big py-3 leading-[1.1] duration-100" href="/buyers">Buyers</a>
+          </li>
+          <li class="hover:text-secondary-100">
+            <a class="rounded-big py-3 leading-[1.1] duration-100" href="/sellers">Sellers</a>
+          </li>
+          <li class="hover:text-secondary-100">
+            <a class="rounded-big py-3 leading-[1.1] duration-100" href="/landlords">Landlords</a>
+          </li>
+          <li class="hover:text-secondary-100">
+            <a class="rounded-big py-3 leading-[1.1] duration-100" href="/tenants">Tenants</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="hidden items-center gap-4 md:flex">
+        {/* Both variants are rendered and swapped with CSS: these are static
+            (non-hydrated) React components, so their `type` can't change on
+            scroll, and their hover styles are too different to override. */}
+        <Link
+          link="/property-search"
+          type="transparent-blue"
+          size="lg"
+          className={overlay ? "group-data-[at-top=true]/header:hidden" : undefined}
+        >
+          Property Search
+        </Link>
+        {
+          overlay && (
+            <Link
+              link="/property-search"
+              type="transparent-white"
+              size="lg"
+              className="hidden group-data-[at-top=true]/header:flex"
+            >
+              Property Search
+            </Link>
+          )
+        }
+        <Link link="/valuation" type="secondary" size="lg">Book a valuation</Link>
+      </div>
+      <div
+        class:list={[
+          "flex items-center gap-6 text-primary-100",
+          overlay && "group-data-[at-top=true]/header:text-white",
+        ]}
+      >
+        <ContactBtn />
+        <SiteMenu client:idle />
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>("header");
+  const banner = document.getElementById("header-target");
+  const isOverlay = header?.dataset.overlay === "true";
+
+  function showBanner(show: boolean) {
+    banner?.classList.toggle("hidden", !show);
+    banner?.classList.toggle("flex", show);
+  }
+
+  if (isOverlay) {
+    // Transparent-over-hero mode: 100px in both directions, so the header and
+    // the mobile banner flip together as one state change.
+    let atTop: boolean | null = null;
+    const update = () => {
+      const next = window.scrollY <= 100;
+      if (next === atTop) return;
+      atTop = next;
+      header!.dataset.atTop = String(next);
+      showBanner(next);
+    };
+    update();
+    document.addEventListener("scroll", update, { passive: true });
+  } else {
+    document.addEventListener(
+      "scroll",
+      () => {
+        const scrollPos = window.scrollY;
+        if (scrollPos > 100) showBanner(false);
+        else if (scrollPos === 0) showBanner(true);
+      },
+      { passive: true },
+    );
+  }
+</script>

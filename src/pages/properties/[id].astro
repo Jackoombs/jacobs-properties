@@ -1,143 +1,86 @@
 ---
-import ImageSlider from "../../components/ImageCarousel/ImageSlider";
-import Link from "../../components/General/Link";
-import Copy from "../../components/General/Text/Copy";
-import SectionHeader from "../../components/General/Text/SectionHeader";
-import PropertyDetails from "../../components/PropertyDetails/PropertyDetails";
-import StandardLayout from "../../layouts/StandardLayout.astro";
-import BookAViewingButton from "../../components/Form/BookAViewing/Button";
-import type { Property2 } from "../../env";
-import type { GoogleMapProps } from "@react-google-maps/api";
-import StampDutyCalc from "../../components/Calculators/StampDutyCalc";
-import MortgageCalc from "../../components/Calculators/MortgageCalc";
-import PropertySlider from "../../components/Property/PropertySlider";
-import {
-  getPropertyStatus,
-  priceNumberToPriceString,
-  truncateDescription,
-} from "../../utils";
-import MiscSection from "../../components/Layout/MiscSection.astro";
-import SharePropertyButton from "../../components/General/ShareButton";
-import PropertyListCard from "../../components/Property/PropertyListCard";
-
-const res = await fetch(import.meta.env.PUBLIC_SERVER_URL + "property");
-const properties: Property2[] = await res.json();
+import { getCollection, type CollectionEntry } from "astro:content";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import { SectionHeader } from "@/components/common/Text";
+import Copy from "@/components/common/Copy";
+import ImageCarousel from "@/components/property/ImageCarousel";
+import PropertyDetails from "@/components/property/PropertyDetails";
+import PropertyCarousel from "@/components/property/PropertyCarousel";
+import { BedsBaths, StatusBadge } from "@/components/property/PropertyFacts";
+import BookAViewingButton from "@/components/forms/book-a-viewing/BookAViewingButton";
+import ShareButton from "@/components/property/ShareButton";
+import StampDutyCalc from "@/components/marketing/calculators/StampDutyCalc";
+import MortgageCalc from "@/components/marketing/calculators/MortgageCalc";
+import { priceNumberToPriceString, toLatLng, truncateDescription } from "@/lib/property-utils";
 
 export async function getStaticPaths() {
-  const res = await fetch(import.meta.env.PUBLIC_SERVER_URL + "property");
-  const properties: Property2[] = await res.json();
-  return properties.map((property) => ({
-    params: {
-      id: property.id,
-    },
-    props: {
-      property,
-    },
+  const properties = await getCollection("properties");
+  return properties.map((entry) => ({
+    params: { id: entry.id },
+    props: { property: entry.data, allProperties: properties.map((p) => p.data) },
   }));
 }
 
-let {
+type Props = {
+  property: CollectionEntry<"properties">["data"];
+  allProperties: CollectionEntry<"properties">["data"][];
+};
+
+const { property, allProperties } = Astro.props;
+const {
   id,
-  type,
-  status,
+  marketingMode,
+  statusLabel,
   description,
   address1,
   address2,
-  postcode,
+  publicAddress,
   price,
   bedrooms,
   bathrooms,
-  receptions,
   images,
   floorplan,
   epc,
-  created,
   virtualTour,
   brochure,
-}: Property2 = Astro.props.property;
+  location,
+} = property;
 
-const res2 = await fetch(
-  `https://maps.googleapis.com/maps/api/geocode/json?address=${address1}%20${address2}&key=${
-    import.meta.env.PUBLIC_GOOGLE_MAPS_KEY
-  }`
-);
-const data = await res2.json();
-const location: GoogleMapProps["center"] | undefined =
-  data.results[0]?.geometry?.location;
-
+const displayAddress = address1 && address2 ? `${address1}, ${address2}` : publicAddress ?? "";
 const priceString = priceNumberToPriceString(price);
+const shortDescription = truncateDescription(description || "", 20);
 
-const findSimilarllyPricedProperties = (propertyList: Property2[]) => {
-  propertyList.sort((a, b) => {
-    const priceA = price;
-    const priceB = price;
-    const differenceA = priceA > price ? priceA - price : price - priceA;
-    const differenceB = priceB > price ? priceB - price : price - priceB;
-
-    return differenceA > differenceB ? 1 : -1;
-  });
-
-  return propertyList.splice(0, 10);
-};
-
-const similarPropertiesFilteredSorted = findSimilarllyPricedProperties(
-  properties.filter((p) => {
-    if (p.type === type && p.id !== id) {
-      return true;
-    } else {
-      return false;
-    }
-  })
-);
-
-const shortDescription = truncateDescription(description, 20);
+const similarProperties = allProperties
+  .filter((p) => p.marketingMode === marketingMode && p.id !== id)
+  .sort((a, b) => Math.abs(a.price - price) - Math.abs(b.price - price))
+  .slice(0, 10);
 ---
 
 <StandardLayout
-  title={`${address1}, ${address2} | Property Details | Jacobs Properties`}
-  description={`Discover more about ${address1}, ${address2}. Our experienced estate agents provide detailed property information and are here to help you find your dream home. ${shortDescription}`}
+  title={`${displayAddress} | Property Details | Jacobs Properties`}
+  description={`Discover more about ${displayAddress}. Our experienced estate agents provide detailed property information and are here to help you find your dream home. ${shortDescription}`}
 >
   <section class="py-10 md:pb-28">
-    <div
-      class="mx-auto flex w-full max-w-container-lg flex-col gap-4 xl:flex-row xl:justify-between xl:gap-16"
-    >
-      <ImageSlider client:load {...{images, id}} />
+    <div class="mx-auto flex w-full max-w-container-lg flex-col gap-4 xl:flex-row xl:justify-between xl:gap-16">
+      <ImageCarousel client:load images={images} />
       <div class="grid flex-1 sm:max-w-[34rem] xl:grid-rows-[1fr_auto_1fr]">
         <a
+          href="/property-search"
           class="hidden w-max pb-6 text-[0.75rem] font-semibold uppercase leading-[1.1] tracking-[2.8px] text-primary-100 duration-100 hover:text-secondary-100 lg:text-[0.875rem] xl:block"
-          href="">Back to properties</a
         >
+          Back to properties
+        </a>
         <div class="flex flex-col gap-2 lg:gap-5">
-          <p
-            class="mb-2 flex h-10 w-max items-center justify-center rounded-md bg-secondary-100 px-7 text-[0.875rem] font-semibold uppercase tracking-[1.4px] text-primary-100 duration-100 lg:h-14"
-          >
-            {getPropertyStatus(status, type)}
-          </p>
-          <ul class="flex gap-7 text-primary-100">
-            <li
-              class="text-[0.875rem] font-semibold uppercase tracking-[1.4px]"
-            >
-              {`${bedrooms} Bed`}
-            </li>
-            <div class="h-3 self-center border-l-2 border-secondary-100"></div>
-            <li
-              class="text-[0.875rem] font-semibold uppercase tracking-[1.4px]"
-            >
-              {`${bathrooms} Bath`}
-            </li>
-          </ul>
+          <StatusBadge label={statusLabel} />
+          <BedsBaths bedrooms={bedrooms} bathrooms={bathrooms} />
           <div class="pb-4 lg:pb-0">
-            <SectionHeader className={"lg:pb-2"}
-              >{`${address1}, ${address2}`}</SectionHeader
-            >
-            <SectionHeader>{priceString}</SectionHeader>
+            <SectionHeader as="h1" className="lg:pb-2">{displayAddress}</SectionHeader>
+            <SectionHeader as="p">{priceString}</SectionHeader>
           </div>
           {
             description && (
-              <Copy
-                className="line-clamp-3 mb-3 text-ellipsis whitespace-pre-line"
-                size="lg"
-              >
+              <Copy className="mb-3 line-clamp-3 text-ellipsis whitespace-pre-line" size="lg">
                 {description}
               </Copy>
             )
@@ -145,18 +88,15 @@ const shortDescription = truncateDescription(description, 20);
           <div class="flex flex-col gap-3 sm:flex-row">
             <BookAViewingButton
               client:idle
-              price={priceString}
-              address={`${address1}, ${address2}`}
               size="lg"
-              buyOrRent={type === "letting" ? "rent" : "buy"}
-              >Book a viewing
-            </BookAViewingButton>
-            <SharePropertyButton
-              name="property"
-              size="lg"
-              variant="secondary"
-              client:idle>Share Property</SharePropertyButton
+              price={price}
+              address={displayAddress}
+              propertyId={id}
+              buyOrRent={marketingMode === "letting" ? "rent" : "buy"}
             >
+              Book a viewing
+            </BookAViewingButton>
+            <ShareButton client:idle name="property" size="lg" variant="secondary">Share Property</ShareButton>
           </div>
         </div>
       </div>
@@ -164,36 +104,29 @@ const shortDescription = truncateDescription(description, 20);
   </section>
 
   <PropertyDetails
-    details={{
-      description,
-      floorplan,
-      epc,
-      virtualTour,
-      images,
-    }}
-    location={location}
-    address={`${address1},${address2}`}
-    price={priceString}
-    id={id}
-    type={type}
     client:visible
+    details={{ description: description || "", floorplan, epc, images, virtualTour }}
+    location={toLatLng(location)}
+    address={displayAddress}
+    price={price}
+    id={id}
+    brochure={brochure}
+    marketingMode={marketingMode}
   />
 
-  <MiscSection>
-    <SectionHeader padding="misc"
-      >Try one of our useful calculators…
-    </SectionHeader>
+  <Section>
+    <SectionHeader padding="misc">Try one of our useful calculators…</SectionHeader>
     <div class="flex w-full flex-col gap-7 lg:flex-row xl:gap-16">
       <StampDutyCalc client:visible />
       <MortgageCalc client:visible />
     </div>
-  </MiscSection>
+  </Section>
 
-  <MiscSection bgColor="bg-primary-200" overflowVisible={false}>
-    <PropertySlider
-      client:idle
-      header="Similar Properties"
-      properties={similarPropertiesFilteredSorted}
-    />
-  </MiscSection>
+  {
+    similarProperties.length > 0 && (
+      <Section bgColor="bg-primary-200">
+        <PropertyCarousel client:idle heading="Similar Properties" properties={similarProperties} />
+      </Section>
+    )
+  }
 </StandardLayout>

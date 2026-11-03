@@ -1,173 +1,110 @@
 ---
-import HeroSection from "../components/Layout/HeroSection.astro";
-import MiscSection from "../components/Layout/MiscSection.astro";
-import StandardLayout from "../layouts/StandardLayout.astro";
-import SectionLabel from "../components/General/Text/SectionLabel";
-import SectionHeader from "../components/General/Text/SectionHeader";
-import Display from "../components/General/Text/Display";
-import PageHeader from "../components/General/Text/PageHeader";
-import Copy from "../components/General/Text/Copy";
-import Link from "../components/General/Link";
-import Dropdown from "../components/Dropdown/Dropdown";
-import TenantsHero from "../assets/images/tenants/tenants-hero.webp";
-import WhyRent from "../assets/images/tenants/why-rent.webp";
-import ReportRepair from "../assets/images/tenants/report-repair.webp";
-import StandardsRegulation from "../assets/images/tenants/standards-regulations.webp";
-import QuesitonRenting from "../assets/images/tenants/question-renting.webp";
-import FAQs from "../components/FAQs/FAQs";
-import ProcessSlider from "../components/Process/ProcessSlider";
-import Reviews from "../components/Reviews/Reviews";
-import PropertySearchBar from "../components/General/PropertySearchBar";
-import GetInTouchButton from "../components/Form/GetInTouch/Button";
-import Valuation from "../assets/images/valuation.webp";
+import { getEntry, getCollection } from "astro:content";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import { SectionHeader, Display } from "@/components/common/Text";
+import PropertySearchBar from "@/components/marketing/PropertySearchBar";
+import ContentSection from "@/components/marketing/ContentSection.astro";
+import WhyUsSection from "@/components/marketing/WhyUsSection.astro";
+import ProcessSteps from "@/components/marketing/ProcessSteps";
+import FaqAccordion from "@/components/marketing/FaqAccordion";
+import Reviews from "@/components/marketing/Reviews";
+import { cmsImageUrl } from "@/lib/cms";
 
-const client = "tenants";
+const page = await getEntry("tenantsPage", "content");
+if (!page) throw new Error("tenants-page content missing from CMS");
+const { data } = page;
+
+const faqs = (await getCollection("faqs")).filter((f) => f.data.category === "tenants").slice(0, 5);
+const reviews = (await getCollection("reviews")).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 ---
 
-<StandardLayout
-  title="Rent a property in Basingstoke | Jacobs Properties"
-  description="Looking for a house or flat to rent in Basingstoke? Talk to our team of letting agents today to find out how we can help you find the perfect rental property."
->
-  <HeroSection
+<StandardLayout title={data.seoTitle ?? "Tenants"} description={data.seoDescription ?? ""}>
+  <ContentSection
+    label={data.hero.label}
+    heading={data.hero.heading}
+    body={data.hero.body}
+    image={cmsImageUrl(data.hero.image)}
+    imageAlt={data.hero.imageAlt}
+    imageSide="right"
+    imageAspect="aspect-property"
+    eagerImage
+    headingSize="page"
     bgColor="bg-primary-200"
-    disableLazy
-    image={{
-      path: TenantsHero.src,
-      alt: "",
-      aspectRatio: "aspect-property",
-      position: true,
-    }}
-  >
-    <div class="flex flex-col text-primary-100 md:max-w-xl">
-      <SectionLabel padding="hero-lg">Tenants</SectionLabel>
-      <PageHeader padding="hero">Rent a property in Basingstoke</PageHeader>
-      <Copy padding="hero-lg" size="lg">
-        <>
-          Jacobs Properties is our name, high-quality rental properties is our
-          game. Whether you’re new to Basingstoke or a local looking for a
-          change, our letting agents can help you find the perfect rental home.
-        </>
-      </Copy>
-      <div
-        class="flex flex-col items-center justify-center gap-3 md:flex-row md:justify-start"
-      >
-        <GetInTouchButton client:idle size="lg">Get in touch</GetInTouchButton>
-        <Link link="/contact-us" type="secondary" size="lg"
-          >Report a repair</Link
-        >
-      </div>
-    </div>
-  </HeroSection>
+    labelPadding="hero-lg"
+    bodyPadding="hero-lg"
+    bodySize="lg"
+    contentClassName="md:max-w-xl"
+    ctaSize="lg"
+    cta2Variant="secondary"
+    cta1={{ type: "get-in-touch", text: data.hero.ctaPrimaryText ?? "Get in touch" }}
+    cta2={{ type: "link", text: data.hero.ctaSecondaryText ?? "Report a repair", link: data.hero.ctaSecondaryLink ?? "/contact-us" }}
+  />
 
-  <MiscSection
-    bgColor="bg-primary-200"
-    className="flex flex-col gap-8 text-center items-center lg:gap-16"
-    disablePt={true}
-  >
+  <Section bgColor="bg-primary-200" disablePt className="flex flex-col items-center gap-8 text-center lg:gap-16">
     <Display>Find a rental property here</Display>
-    <PropertySearchBar client:visible />
-  </MiscSection>
+    <PropertySearchBar client:visible defaultMode="rent" />
+  </Section>
 
-  <MiscSection>
-    <SectionHeader padding="misc">Why rent with us?</SectionHeader>
-    <div class="grid gap-6 lg:grid-cols-2 lg:gap-16">
-      <img
-        class="aspect-[1.2/1] w-full rounded-big object-cover"
-        src={Valuation.src}
-        alt=""
-      />
-      <Dropdown client={client} client:visible />
+  <WhyUsSection
+    heading="Why rent with us?"
+    image={cmsImageUrl(data.whyRentImage)}
+    imageAlt={data.whyRentImageAlt}
+    imageClass="aspect-[1.2/1] w-full object-cover"
+    items={data.valueProps}
+  />
+
+  <Section bgColor="bg-primary-200">
+    <SectionHeader className="md:text-center" padding="misc">Frequently asked questions</SectionHeader>
+    <div class="flex w-full flex-col gap-8 lg:items-center lg:gap-16">
+      <FaqAccordion client:visible faqs={faqs.map((f) => ({ id: f.id, question: f.data.question, answer: f.data.answer }))} />
+      <a class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8" href="/faq">See All Our Faqs</a>
     </div>
-  </MiscSection>
+  </Section>
 
-  <MiscSection bgColor="bg-primary-200">
-    <SectionHeader className="md:text-center" padding="misc"
-      >Frequently asked questions</SectionHeader
-    >
-    <FAQs client={client} maxFAQs={5} client:visible />
-    <a
-      class="text-xs font-semibold uppercase tracking-[1.2px] text-primary-100 underline decoration-secondary-100 decoration-2 underline-offset-4 lg:text-center lg:text-[0.875rem] lg:underline-offset-8"
-      href="/faq">See All Our Faqs</a
-    >
-  </MiscSection>
+  <Section>
+    <ProcessSteps client:visible heading="Renting with us is easy – here’s how" steps={data.processSteps} />
+  </Section>
 
-  <MiscSection>
-    <ProcessSlider
-      header="Renting with us is easy – here’s how"
-      client={client}
-      client:idle
-    />
-  </MiscSection>
-
-  <HeroSection
+  <ContentSection
+    label={data.reportRepair.label}
+    heading={data.reportRepair.heading}
+    body={data.reportRepair.body}
+    image={cmsImageUrl(data.reportRepair.image)}
+    imageAlt={data.reportRepair.imageAlt}
+    imageSide="right"
     bgColor="bg-primary-200"
-    image={{
-      path: ReportRepair.src,
-      alt: "Plumber fixing a sink",
-      aspectRatio: "aspect-hero",
-      position: true,
-    }}
-  >
-    <div class="max-w-2xl md:max-w-lg">
-      <SectionLabel padding="hero-md">Tenants</SectionLabel>
-      <SectionHeader padding="hero">Report a repair</SectionHeader>
-      <Copy size="lg" padding="hero-md"
-        >Any damages or issues with your rental property should be reported so
-        that they can be repaired. We offer 24/7 support and a member of our
-        in-house maintenance team will attend to your query as quickly as
-        possible.</Copy
-      >
-    </div>
-  </HeroSection>
+    contentClassName="max-w-2xl md:max-w-lg"
+  />
 
-  <HeroSection
+  <ContentSection
+    label={data.standardsRegulations.label}
+    heading={data.standardsRegulations.heading}
+    body={data.standardsRegulations.body}
+    image={cmsImageUrl(data.standardsRegulations.image)}
+    imageAlt={data.standardsRegulations.imageAlt}
+    imageSide="left"
+    bgColor="bg-primary-200"
     disablePt
     disablePb
-    bgColor="bg-primary-200"
-    image={{
-      path: StandardsRegulation.src,
-      alt: "Pen pointing at sheet of regulations",
-      aspectRatio: "aspect-hero",
-      position: false,
-    }}
-  >
-    <div class="max-w-2xl lg:max-w-xl 2xl:pl-20">
-      <SectionLabel padding="hero-md">Tenants</SectionLabel>
-      <SectionHeader padding="hero">Standards and regulations</SectionHeader>
-      <Copy size="lg" padding="hero-md"
-        >As one of our tenants, you can rest assured that we’re fully compliant
-        with all lettings legislation which governs every task that we undertake
-        on your landlord’s behalf. From safeguarding your deposit to ensuring
-        the property undergoes an annual gas safety check, you’re protected from
-        every angle.</Copy
-      >
-    </div>
-  </HeroSection>
+    contentClassName="max-w-2xl lg:max-w-xl 2xl:pl-20"
+  />
 
-  <HeroSection
+  <ContentSection
+    label={data.questionRenting.label}
+    heading={data.questionRenting.heading}
+    image={cmsImageUrl(data.questionRenting.image)}
+    imageAlt={data.questionRenting.imageAlt}
+    imageSide="right"
     bgColor="bg-primary-200"
-    image={{
-      path: QuesitonRenting.src,
-      alt: "Pen pointing at sheet of regulations",
-      aspectRatio: "aspect-hero",
-      position: true,
-    }}
-  >
-    <div class="max-w-2xl lg:max-w-xl">
-      <SectionLabel padding="hero-md">Tenants</SectionLabel>
-      <SectionHeader padding="hero"
-        >Have a question about renting?</SectionHeader
-      >
-      <GetInTouchButton variant="secondary" client:idle size="lg"
-        >Ask us now</GetInTouchButton
-      >
-    </div>
-  </HeroSection>
+    contentClassName="max-w-2xl lg:max-w-xl"
+    ctaSize="lg"
+    cta1Variant="secondary"
+    cta1={{ type: "get-in-touch", text: data.questionRenting.ctaText ?? "Ask us now" }}
+  />
 
-  <MiscSection>
-    <SectionHeader className="lg:text-center" padding="misc">
-      Our customers are the best
-    </SectionHeader>
-    <Reviews color="alt" client:visible />
-  </MiscSection>
+  <Section>
+    <SectionHeader className="lg:text-center" padding="misc">Our customers are the best</SectionHeader>
+    <Reviews client:visible variant="alt" reviews={reviews.map((r) => r.data)} />
+  </Section>
 </StandardLayout>

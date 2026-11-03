@@ -1,50 +1,46 @@
 ---
-import PageHeader from "../../components/General/Text/PageHeader";
-import SectionHeader from "../../components/General/Text/SectionHeader";
-import MiscSection from "../../components/Layout/MiscSection.astro";
-import StandardLayout from "../../layouts/StandardLayout.astro";
-import Copy from "../../components/General/Text/Copy";
-import Link from "../../components/General/Link";
-import NewsGrid from "../../components/News/NewsGrid";
-import Reviews from "../../components/Reviews/Reviews";
-import ValuationSection from "../../components/Layout/ValuationSection.astro";
+import { getEntry, getCollection } from "astro:content";
+import StandardLayout from "@/layouts/StandardLayout.astro";
+import Section from "@/components/common/Section.astro";
+import { SectionHeader } from "@/components/common/Text";
+import SplitHero from "@/components/marketing/SplitHero.astro";
+import NewsGrid from "@/components/marketing/NewsGrid";
+import ValuationSection from "@/components/marketing/ValuationSection.astro";
+import Reviews from "@/components/marketing/Reviews";
+import { cmsImageUrl } from "@/lib/cms";
 
-const news = await Astro.glob("./**.md");
+const page = await getEntry("newsPage", "content");
+if (!page) throw new Error("news-page content missing from CMS");
+const { data } = page;
 
-const newsTemplate = news.map((post) => {
-  const { title, category, date, image } = post.frontmatter;
-  console.log(post.frontmatter);
-  return { title, category, date, image };
-});
+const articles = (await getCollection("newsArticles"))
+  .sort((a, b) => (b.data.publishedDate ?? "").localeCompare(a.data.publishedDate ?? ""))
+  .map(({ data: article }) => ({
+    title: article.title,
+    href: `/news/${article.slug}`,
+    category: article.category,
+    publishedDate: article.publishedDate,
+    image: cmsImageUrl(article.heroImage),
+  }));
+const reviews = (await getCollection("reviews")).sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 ---
 
-<StandardLayout
-  title="News and Insights in and around Basingstoke | Jacobs Properties"
-  description="Stay up-to-date with the latest news and insights from Jacobs Properties, your trusted local estate agents in Basingstoke. Explore our blog posts and discover helpful tips and advice for buying, selling, and renting property"
->
-  <MiscSection
-    bgColor="bg-primary-200"
-    className="flex flex-col md:grid grid-cols-1 items-center gap-6 md:grid-cols-1/2 lg:gap-16 xl:grid-cols-[4fr_3fr]"
-  >
-    <PageHeader>Latest industry news</PageHeader>
-    <div class="col-start-2 flex flex-col">
-      <Copy size="lg" padding="hero-md"
-        >Keep up to date with the latest property updates.</Copy
-      >
-      <Link link="/" type="secondary" size="lg">Get in touch</Link>
-    </div>
-  </MiscSection>
+<StandardLayout title={data.seoTitle ?? "News"} description={data.seoDescription ?? ""}>
+  <SplitHero
+    plainHeading
+    heading={data.heroHeading ?? "Latest industry news"}
+    body={data.heroBody}
+    cta={{ type: "get-in-touch", text: "Get in touch" }}
+  />
 
-  <MiscSection>
-    <NewsGrid client:load newsTemplate={newsTemplate} />
-  </MiscSection>
+  <Section>
+    <NewsGrid client:visible articles={articles} />
+  </Section>
 
   <ValuationSection title="Ready to sell your home?" />
 
-  <MiscSection>
-    <SectionHeader className="md:text-center" padding="misc"
-      >Hear from our customers</SectionHeader
-    >
-    <Reviews client:visible color="alt" />
-  </MiscSection>
+  <Section>
+    <SectionHeader className="md:text-center" padding="misc">Hear from our customers</SectionHeader>
+    <Reviews client:visible reviews={reviews.map((r) => r.data)} variant="alt" />
+  </Section>
 </StandardLayout>
