@@ -16,6 +16,8 @@ import { cn } from "@/lib/utils";
 interface FormValues {
   buyOrRent: "buy" | "rent";
   postcode: string;
+  /** One-line address, set when the visitor picks one from the address finder. */
+  address?: string;
   houseNumber: string;
   houseName: string;
   apartment: string;

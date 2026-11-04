@@ -41,7 +41,7 @@ function FieldError({ name }: { name: string }) {
   return <p className="pt-1 text-xs text-error">{String(message)}</p>
 }
 
-const inputClass =
+export const inputClass =
   'flex h-16 w-full items-center rounded-big border border-primary-100 bg-transparent px-5 py-0 text-primary-100 placeholder:text-placeholder focus:outline-none md:text-base lg:min-w-[11.5rem] aria-invalid:border-error'
 
 export function TextField({

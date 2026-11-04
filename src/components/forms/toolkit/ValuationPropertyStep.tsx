@@ -1,6 +1,6 @@
 import FieldGrid from "@/components/forms/toolkit/FieldGrid";
 import { BuyRentToggleField, POSTCODE_PATTERN, TextField } from "@/components/forms/toolkit/fields";
-import { SearchIcon } from "@/components/common/FilledIcons";
+import PostcodeAddressLookup from "@/components/forms/toolkit/PostcodeAddressLookup";
 import { SectionHeader } from "@/components/common/Text";
 import Copy from "@/components/common/Copy";
 
@@ -10,7 +10,7 @@ export default function ValuationPropertyStep() {
     <>
       <div className="text-center">
         <SectionHeader className="w-full pb-3">Your property</SectionHeader>
-        <Copy size="lg">Select your valuation type and property.</Copy>
+        <Copy size="lg">Select your valuation type and find your property.</Copy>
       </div>
       <FieldGrid>
         <div className="col-span-full max-w-[20rem] justify-self-center">
@@ -21,25 +21,18 @@ export default function ValuationPropertyStep() {
             rentLabel="renting"
           />
         </div>
-        <TextField
-          name="postcode"
-          label="Postcode"
-          placeholder="Enter postcode"
-          hideLabel
-          colSpanFull
-          required
-          pattern={{ value: POSTCODE_PATTERN, message: "Please enter a valid postcode" }}
-          trailingIcon={<SearchIcon className="size-6" />}
-        />
+        <PostcodeAddressLookup />
       </FieldGrid>
     </>
   );
 }
 
 /**
- * The address parts the valuation service uses, as plain inputs (there is no
- * address lookup to fill them in). Shown on both valuation forms' "Property
- * details" step, above the bedrooms and property type fields.
+ * The address parts the valuation service uses. Filled in by the address
+ * finder on the first step when the visitor picks an address, and left
+ * editable so they can correct it or type it in when the lookup can't help.
+ * Shown on both valuation forms' "Property details" step, above the bedrooms
+ * and property type fields.
  */
 export function ValuationAddressFields() {
   return (
